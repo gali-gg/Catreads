@@ -1,4 +1,4 @@
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Link, Navigate, useNavigate } from "react-router-dom";
 import HomePage from './screens/HomePage';
 import MyBooksPage from './screens/MyBooksPage';
 import AboutUsPage from './screens/AboutUsPage';
@@ -29,20 +29,26 @@ import Header from './assets/components/Header';
 
 function App() {
   //temporary solution
-  const [userLogged, setUserLogged] = useState(true);
+  const [userLogged, setUserLogged] = useState(false);
+  const navigate = useNavigate();
 
+  const handleLogIn =  () => {
+    setUserLogged(true);
+    navigate("/home");
+  }
+  
   return (
-    
+
     <>
-      <Header />
+      {userLogged && <Header />}
 
       <Routes>
         {!userLogged && (
           <>
           <Route path='/' element={<LandingPage/>} />
           <Route path='/home' element={<LandingPage/>} />
-          <Route path='/sign-in' element={<LogInPage/>} />
-          <Route path='/sign-up' element={<RegisterPage/>} />
+          <Route path='/sign-in' element={<LogInPage onLogin={handleLogIn}/>} />
+          <Route path='/sign-up' element={<RegisterPage onRegister={handleLogIn}/>} />
           </>
         )}
         {userLogged && (
