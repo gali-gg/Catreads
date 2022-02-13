@@ -26,6 +26,7 @@ import BookPage from './screens/BookPage';
 import AuthorPage from './screens/AuthorPage';
 import FriendProfilePage from './screens/FriendProfilePage';
 import Header from './assets/components/Header';
+import Footer from './assets/components/Footer';
 
 function App() {
   //temporary solution
@@ -39,7 +40,7 @@ function App() {
 
   return (
     <>
-      {userLogged && <Header />}
+      {userLogged && <> <Header /> <Footer /> </>}
 
       <Routes>
         {!userLogged && (

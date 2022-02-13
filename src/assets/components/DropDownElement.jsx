@@ -4,15 +4,13 @@ import { makeStyles } from '@mui/styles';
 import { Stack } from '@mui/material';
 
 const useStyles = makeStyles({
-    notClickedButton: {
-      borderRadius: 0,
-      background: "none",
-      color: "#382110",
-      textTransform: "none",
-      padding: '15px 5px',
+    link: {
+        fontSize: "0.9em",
+        textDecoration: 'inherit',
+        color : "inherit",
+        textTransform: "none",
           '&:hover': {
-              background: "#382110",
-              color: "white"
+            textDecoration : "underline",
           },
     },
 });
