@@ -9,6 +9,7 @@ import Stack from '@mui/material/Stack';
 import { userManager } from "../model/UserManagerService";
 import { useState } from 'react';
 import GoodReadsLogo from "../assets/components/GoodReadsLogo";
+import GoodLink from "../assets/components/GoodLink";
 
 export default function RegisterPage(props) {
   const [name, setName] = useState("");
@@ -36,7 +37,7 @@ export default function RegisterPage(props) {
 
   return (
     <div className={styles.signUpBackground}>
-    <GoodReadsLogo className={styles.logo}/>
+    <GoodReadsLogo className={styles.logo} height="40px"/>
       <Box
         sx={{
           display: "flex",
@@ -52,18 +53,18 @@ export default function RegisterPage(props) {
         <Paper elevation={2}>
 
         <Stack spacing={2}>
-        <Typography variant="h4" gutterBottom component="div">
+        <Typography variant="h5" gutterBottom component="div" className="meriB grBrown">
               Sign up for GoodReads
          </Typography>
           <Box>
           <Typography variant="subtitle2" gutterBottom component="div">
               Name
             </Typography>
-            <TextField id="outlined-basic" variant="outlined" size="small" value={name} onInput={handleNameInput}/>
+            <TextField id="outlined-basic" variant="outlined" size="small" placeholder="Name" value={name} onInput={handleNameInput}/>
             <Typography variant="subtitle2" gutterBottom component="div">
               Email
             </Typography>
-            <TextField id="outlined-basic" variant="outlined" type="email" size="small" value={username} onInput={handleUsernameInput}/>
+            <TextField id="outlined-basic" variant="outlined" type="email" size="small" placeholder="you@yours.com" value={username} onInput={handleUsernameInput}/>
             <Typography variant="subtitle2" gutterBottom component="div">
               Password
             </Typography>
@@ -73,6 +74,12 @@ export default function RegisterPage(props) {
           <Button variant="outlined" size="large" onClick={handleRegAttempt}>
             Sign up
           </Button>
+          <Box>
+            <span className="latoR grBlack" style={{fontSize: "12px"}}>
+              Already a memeber?
+            </span>
+            <GoodLink titleText="Sign in" classes="latoR grGreen" size="12px" to="/sign-in" />
+          </Box>
           </Stack>
         </Paper>
         <div className={styles.footerBackground} style={{padding: 0}}>

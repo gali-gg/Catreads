@@ -2,3 +2,39 @@
     background-color: #f4f1ea;
     padding: 0;
 }
+
+.grGreen {
+    color: #00635D !important;
+}
+
+.grBrown {
+    color: #382110 !important;
+}
+
+.grBlack {
+    color: #333;
+}
+
+.latoR {
+    font-family: "Lato Regular" !important;
+}
+
+.latoB {
+    font-family: "Lato Bold" !important;
+}
+
+.latoI {
+    font-family: "Lato Italic" !important;
+}
+
+.meriR {
+    font-family: "Merriweather Regular" !important;
+}
+
+.meriB {
+    font-family: "Merriweather Bold" !important;
+}
+
+.meriI {
+    font-family: "Merriweather Italic" !important;
+}
