@@ -1,0 +1,71 @@
+.btn {
+    background-color: white;
+    width: 300px;
+    font-size: 14px;
+    font-family: "Lato Regular";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+}
+
+.btn:hover {
+    cursor: pointer;
+}
+
+.facebookIcon {
+    width: 21px;
+    height: 21px;
+    background-image: url("../../images/facebook_logo.svg");
+    background-size: contain;
+}
+
+.appleIcon{
+    width: 31px;
+    height: 31px;
+    background-image: url("../../images/apple_logo.svg");
+    background-size: contain;
+}
+
+.googleIcon {
+    width: 24px;
+    height: 24px;
+    background-image: url("../../images/google_logo.svg");
+    background-size: contain;
+}
+
+.amazonIcon {
+    width: 21px;
+    height: 21px;
+    background-image: url("../../images/amazon_logo.svg");
+    background-size: contain;
+}
+
+.facebook {
+    background-color: #3b5998;
+    border: 1px solid #3b5998;
+    border-radius: 3px;
+    color: white;
+}
+
+.facebook:hover {
+    background-color: #3b5898e8;
+}
+
+.amazon {
+    background-color: #f5d47a;
+    border: 1px solid #B38B22;
+    border-radius: 3px;
+    color: black;
+}
+
+.amazon:hover {
+    background-color: #f5bc7a;;
+}
+
+.apple, .google {
+    border: 1px solid black;
+    border-radius: 3px;
+    color: black;
+}

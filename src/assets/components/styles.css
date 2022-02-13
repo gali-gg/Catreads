@@ -3,12 +3,19 @@
     padding: 0;
 }
 
+.grLight {
+    color: #aaa;
+}
 .grGreen {
     color: #00635D !important;
 }
 
 .grBrown {
     color: #382110 !important;
+}
+
+.grGrey {
+    color: #767676;
 }
 
 .grBlack {

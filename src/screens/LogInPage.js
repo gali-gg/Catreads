@@ -11,6 +11,10 @@ import styles from "./loginRegister.module.css";
 import GoodReadsLogo from "../assets/components/GoodReadsLogo";
 import GoodLink from "../assets/components/GoodLink";
 import "../assets/components/styles.css";
+import FooterCopy from "../assets/components/FooterCopy";
+import Container from '@mui/material/Container';
+import GoodButton from "../assets/components/GoodButton";
+import SocialLoginButton from "../assets/components/SocialLoginButton";
 
 export default function LogInPage(props) {
   const [username, setUsername] = useState("");
@@ -32,7 +36,7 @@ export default function LogInPage(props) {
 
   return (
     <div className={styles.signUpBackground}>
-      <GoodReadsLogo className={styles.logo} height="40px" />
+      <GoodReadsLogo className={styles.logo} height="30px" />
       <Box
         sx={{
           display: "flex",
@@ -40,41 +44,56 @@ export default function LogInPage(props) {
           "& > :not(style)": {
             m: "auto",
             mt: "20px",
-            padding: 10,
+            mb: 5
           },
           justifyContent: "space-between"
         }}
       >
-        <Paper elevation={2}>
-
-        <Stack spacing={2}>
-        <Typography variant="h5" gutterBottom component="div" className="meriB grBrown">
+        <Paper elevation={2} sx={{paddingTop: 3, paddingBottom: 3, paddingLeft: 5, paddingRight: 5, width: "600px", boxSizing: "border-box"}}>
+        <Stack spacing={2} sx={{alignItems: "center"}}>
+        <Typography variant="h6" gutterBottom component="div" className="meriB grBrown" textAlign="center">
               Sign in to GoodReads
          </Typography>
-          <Box>
-            <Typography variant="subtitle2" gutterBottom component="div">
-              Email
+          <Stack spacing={2} >
+            <SocialLoginButton type="facebook"/>
+            <SocialLoginButton type="amazon"/>
+            <SocialLoginButton type="apple"/>
+            <SocialLoginButton type="google"/>
+          </Stack>
+          <Stack spacing={1}>
+            <div>
+            <Typography variant="subtitle2" gutterBottom component="div" className="latoB grBlack">
+              Email address
             </Typography>
-            <TextField id="outlined-basic" type="email" variant="outlined" size="small" placeholder="you@yours.com" value={username} onInput={handleUsernameInput}/>
-            <Typography variant="subtitle2" gutterBottom component="div">
+            <TextField id="outlined-basic" type="email" variant="outlined" size="small" placeholder="you@yours.com" value={username} onInput={handleUsernameInput} style={{width: "300px"}}/>
+            </div>
+            <div>
+            <Typography variant="subtitle2" gutterBottom component="div" className="latoB grBlack">
               Password
             </Typography>
-            <TextField id="outlined-basic" variant="outlined" size="small" type="password" value={password} onInput={handlePasswordInput}/>
-          </Box>
-            <Button variant="outlined" size="large" onClick={handleLogAttempt}>
-              Sign In
-            </Button>
-            <Box>
-            <span className="latoR grBlack" style={{fontSize: "12px"}}>
+            <TextField id="outlined-basic" variant="outlined" size="small" type="password" value={password} onInput={handlePasswordInput} style={{width: "300px"}}/>
+            </div>
+          </Stack>
+          <Box>
+            <GoodButton title="Sign in" onClick={handleLogAttempt} padding="12px 24px" style={{marginRight: "20px"}}/>
+            <GoodLink titleText="Forgot password" classes="latoR grGreen" size="13px" />
+            </Box>
+            <Box sx={{textAlign: "center"}}>
+            <span className="latoR grBlack" style={{fontSize: "12px", marginRight: "10px"}}>
               Not a memeber?
             </span>
             <GoodLink titleText="Sign up" classes="latoR grGreen" size="12px" to="/sign-up" />
           </Box>
           </Stack>
         </Paper>
-        <div className={styles.footerBackground} style={{padding: 0}}>
-        </div>
       </Box>
+      <div className={styles.footer}>
+        <Box className={styles.footerText}>
+          <FooterCopy />
+        </Box>
+        <div className={styles.footerBackground} style={{padding: 0}}>
+          </div>
+      </div>
     </div>
   );
 }
