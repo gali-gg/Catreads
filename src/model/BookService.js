@@ -1,5 +1,9 @@
+//import { v4 as uuidv4 } from 'uuid';
+
 export default class Book {
-constructor({title, author, illustrator, translator, cover, genres, status, description, similarBooks, quotes}) {
+constructor({uuid, title, author, illustrator, translator, cover, genres, status, description, similarBooks, quotes}) {
+        //this.uuid = uuidv4();
+        this.uuid = uuid;
         this.title = title;
         this.author = author;
         this.illustrator = illustrator || null;
