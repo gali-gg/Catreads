@@ -13,3 +13,9 @@
     bottom: 0;
     box-sizing: border-box;
 }
+
+.logo {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+}

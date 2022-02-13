@@ -8,6 +8,7 @@ import Button from "@mui/material/Button";
 import Stack from '@mui/material/Stack';
 import { userManager } from "../model/UserManagerService";
 import { useState } from 'react';
+import GoodReadsLogo from "../assets/components/GoodReadsLogo";
 
 export default function RegisterPage(props) {
   const [name, setName] = useState("");
@@ -34,9 +35,9 @@ export default function RegisterPage(props) {
   }
 
   return (
-    <>
+    <div className={styles.signUpBackground}>
+    <GoodReadsLogo className={styles.logo}/>
       <Box
-        className={styles.signUpBackground}
         sx={{
           display: "flex",
           flexWrap: "wrap",
@@ -47,6 +48,7 @@ export default function RegisterPage(props) {
           },
         }}
       >
+
         <Paper elevation={2}>
 
         <Stack spacing={2}>
@@ -76,8 +78,6 @@ export default function RegisterPage(props) {
         <div className={styles.footerBackground} style={{padding: 0}}>
         </div>
       </Box>
-
-
-    </>
+      </div>
   );
 }

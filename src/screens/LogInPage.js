@@ -8,7 +8,7 @@ import Stack from '@mui/material/Stack';
 import { userManager } from "../model/UserManagerService";
 import { useState } from 'react';
 import styles from "./loginRegister.module.css";
-import logo from "../assets/images/goodreads-logo.jpg";
+import GoodReadsLogo from "../assets/components/GoodReadsLogo";
 
 export default function LogInPage(props) {
   const [username, setUsername] = useState("");
@@ -29,9 +29,9 @@ export default function LogInPage(props) {
   }
 
   return (
-    <>
+    <div className={styles.signUpBackground}>
+      <GoodReadsLogo className={styles.logo} />
       <Box
-        className={styles.signUpBackground}
         sx={{
           display: "flex",
           flexWrap: "wrap",
@@ -67,6 +67,6 @@ export default function LogInPage(props) {
         <div className={styles.footerBackground} style={{padding: 0}}>
         </div>
       </Box>
-    </>
+    </div>
   );
 }

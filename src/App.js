@@ -29,22 +29,22 @@ import Header from './assets/components/Header';
 
 function App() {
   //temporary solution
-  const [userLogged, setUserLogged] = useState(false);
+  const [userLogged, setUserLogged] = useState(Boolean(localStorage.loggedUser));
   const navigate = useNavigate();
 
   const handleLogIn =  () => {
     setUserLogged(true);
     navigate("/home");
   }
-  
+
   return (
     <>
       {userLogged && <Header />}
 
-      
       <Routes>
         {!userLogged && (
           <>
+          {console.log(userLogged)}
           <Route path='/' element={<LandingPage/>} />
           <Route path='/home' element={<LandingPage/>} />
           <Route path='/sign-in' element={<LogInPage onLogin={handleLogIn}/>} />
@@ -53,6 +53,7 @@ function App() {
         )}
         {userLogged && (
           <>
+          {console.log(userLogged)}
           <Route path='/' element={<HomePage/>} />
           <Route path='/home' element={<HomePage/>} />
           <Route path='/myBooks' element={<MyBooksPage/>} />

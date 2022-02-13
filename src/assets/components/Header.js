@@ -5,6 +5,7 @@ import NavButton from './NavButton.js'
 import DropDownMenu from "./DropDownMenu.js";
 import Stack from '@mui/material/Stack';
 import StyledRouterLink from './StyledRouterLink';
+import GoodReadsLogo from './GoodReadsLogo';
 
 
 const browseHrefs = [
@@ -36,7 +37,7 @@ export default function Header(){
             alignItems="center"
             spacing={2}
         >
-            <img src="https://s.gr-assets.com/assets/layout/header/goodreads_logo.svg" height={50} width={140} alt="goodreads-logo"></img>
+           <GoodReadsLogo height="50px" width="140px"/>
             <nav>
                 <NavButton><StyledRouterLink href="/home" title="Home" /></NavButton>
                 <NavButton><StyledRouterLink href="/myBooks" title="My Books" /></NavButton>
