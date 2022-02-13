@@ -1,9 +1,25 @@
 import * as React from 'react';
 import StyledRouterLink from './StyledRouterLink';
+import { makeStyles } from '@mui/styles';
 import { Stack } from '@mui/material';
+
+const useStyles = makeStyles({
+    notClickedButton: {
+      borderRadius: 0,
+      background: "none",
+      color: "#382110",
+      textTransform: "none",
+      padding: '15px 5px',
+          '&:hover': {
+              background: "#382110",
+              color: "white"
+          },
+    },
+});
 
 export default function BoxFlex(props){
     let bgColor = props.bgColor;
+    const classes = useStyles();
     return(
         <Stack
             direction = "column"
@@ -15,9 +31,10 @@ export default function BoxFlex(props){
         >
             {props.hrefs.map(link => (
                 <StyledRouterLink 
-                     key={link} 
-                     title={link} 
-                     href={"/"+link.toLowerCase()} 
+                    className = {classes.link}
+                    key={link} 
+                    title={link} 
+                    href={"/"+link.toLowerCase()} 
                 />
             ))}
         </Stack>

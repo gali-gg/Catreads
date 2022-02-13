@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 const useStyles = makeStyles({
     button: {
         borderRadius: 0,
-        padding: '10px',
+        padding: '15px 5px',
         color: "#382110",
         background: "none",
             '&:hover': {

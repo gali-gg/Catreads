@@ -26,8 +26,6 @@ import BookPage from './screens/BookPage';
 import AuthorPage from './screens/AuthorPage';
 import FriendProfilePage from './screens/FriendProfilePage';
 import Header from './assets/components/Header';
-import authors from "./data/authors";
-import Author from "./model/AuthorService";
 
 function App() {
   //temporary solution
@@ -46,7 +44,6 @@ function App() {
       <Routes>
         {!userLogged && (
           <>
-          
           <Route path='/' element={<LandingPage/>} />
           <Route path='/home' element={<LandingPage/>} />
           <Route path='/sign-in' element={<LogInPage onLogin={handleLogIn}/>} />
@@ -55,7 +52,6 @@ function App() {
         )}
         {userLogged && (
           <>
-          {console.log(authors.map(book => new Author(book)))}
           <Route path='/' element={<HomePage/>} />
           <Route path='/home' element={<HomePage/>} />
           <Route path='/myBooks' element={<MyBooksPage/>} />

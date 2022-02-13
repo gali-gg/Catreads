@@ -1,8 +1,8 @@
 import * as React from 'react';
 import "./styles.css";
-import SearchBox from './SearchBox.js'
-import NavButton from './NavButton.js'
-import DropDownMenu from "./DropDownMenu.js";
+import SearchBox from './SearchBox'
+import NavButton from './NavButton'
+import DropDownMenu from "./DropDownMenu";
 import Stack from '@mui/material/Stack';
 import StyledRouterLink from './StyledRouterLink';
 import GoodReadsLogo from './GoodReadsLogo';
@@ -28,6 +28,27 @@ const communityHrefs = [
     "Creative Writing",
     "People"
 ];
+
+const profileHrefsFirst = [
+    "MIRELA",
+    "Profile",
+    "Friends",
+    "Groups",
+    "Discussions",
+    "Comments",
+    "Reading Challenge",
+    "Kindle Notes & Highlights",
+    "Quotes",
+    'Favorite genres',
+    "Friends’ recommendations",
+];
+
+const profileHrefsSecond = [
+    "Account settings",
+    "Help",
+    "Sign out",
+];
+
 export default function Header(){
     return (
         <Stack
@@ -50,7 +71,13 @@ export default function Header(){
                 <NavButton src="https://s.gr-assets.com/assets/layout/header/icn_nav_discussions.svg"></NavButton>
                 <NavButton src="https://s.gr-assets.com/assets/layout/header/icn_nav_msgs.svg"></NavButton>
                 <NavButton src="https://s.gr-assets.com/assets/layout/header/icn_nav_friend.svg"></NavButton>
-                <NavButton src="https://s.gr-assets.com/assets/nophoto/user/u_60x60-267f0ca0ea48fd3acfd44b95afa64f01.png"></NavButton>
+                <DropDownMenu 
+                    src="https://s.gr-assets.com/assets/nophoto/user/u_60x60-267f0ca0ea48fd3acfd44b95afa64f01.png" 
+                    hrefs={profileHrefsFirst} 
+                    hrefsSecond={profileHrefsSecond}
+                >
+                </DropDownMenu>
+                
             </ul>
         </Stack>
     )
