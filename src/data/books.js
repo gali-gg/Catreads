@@ -1,12 +1,19 @@
 
 const books = [
     {
+        uuid : "d7232086-db81-4961-a72b-a46a714b07ac",
         title : "Harry Potter and the Sorcerer's Stone",
-        author : "J.K. Rowling",
+        author : 1,
         illustrator : "",
         translator : "",
         cover : "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1474154022l/3._SY475_.jpg",
-        genres : [],
+        genres : [
+            1,
+            2,
+            6,
+            3,
+            5,
+        ],
         status : {
             rating : 4.48,
             ratingsCount : 8307272,
@@ -17,11 +24,19 @@ const books = [
         quotes : []
     },
     {
+        uuid : "644e1feb-8c55-4045-a8d5-a1a28d96fbd3",
         title : "Harry Potter and the Chamber of Secrets",
-        author : "J.K. Rowling",
+        author : 1,
         illustrator : "Mary GrandPré",
         cover : "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1474169725l/15881._SY475_.jpg",
-        genres : [],
+        genres : [
+            1,
+            2,
+            6,
+            4,
+            3,
+            5,
+        ],
         status : {
             rating : 4.43,
             ratingsCount : 3202296,
@@ -32,11 +47,19 @@ const books = [
         quotes : []
     },
     {
+        uuid : "5577d693-005f-4b40-8a9a-0a911b301f91",
         title : "Harry Potter and the Prisoner of Azkaban",
-        author : "J.K. Rowling",
+        author : 1,
         illustrator : "Mary GrandPré",
         cover : "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1630547330l/5._SY475_.jpg",
-        genres : [],
+        genres : [
+            1,
+            2,
+            6,
+            4,
+            3,
+            5,
+        ],
         status : {
             rating : 4.58,
             ratingsCount : 3353059,
@@ -47,11 +70,19 @@ const books = [
         quotes : []
     },
     {
+        uuid : "aa88aa51-239b-45db-a884-fe6fb1ddfb3b",
         title : "Harry Potter and the Goblet of Fire",
-        author : "J.K. Rowling",
+        author : 1,
         illustrator : "Mary GrandPré",
         cover : "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1554006152l/6.jpg",
-        genres : [],
+        genres : [
+            1,
+            2,
+            6,
+            4,
+            3,
+            5,
+        ],
         status : {
             rating : 4.57,
             ratingsCount : 2997320,
@@ -62,26 +93,49 @@ const books = [
         quotes : []
     },
     {
+        uuid: "9be7b8d5-6c64-455f-b1cd-27d1c0951bc5",
         title : "Harry Potter and the Goblet of Fire",
-        author : "J.K. Rowling",
+        author : 1,
         illustrator : "Mary GrandPré",
         cover : "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1546910265l/2.jpg",
-        genres : [],
+        genres : [
+            1,
+            2,
+            6,
+            4,
+            3,
+            5,
+        ],
         status : {
             rating : 4.50,
             ratingsCount : 2874324,
             reviewsCount : 50244 ,
         },
         description : "There is a door at the end of a silent corridor. And it’s haunting Harry Pottter’s dreams. Why else would he be waking in the middle of the night, screaming in terror? \n Harry has a lot on his mind for this, his fifth year at Hogwarts: a Defense Against the Dark Arts teacher with a personality like poisoned honey; a big surprise on the Gryffindor Quidditch team; and the looming terror of the Ordinary Wizarding Level exams. But all these things pale next to the growing threat of He-Who-Must-Not-Be-Named - a threat that neither the magical government nor the authorities at Hogwarts can stop. \n As the grasp of darkness tightens, Harry must discover the true depth and strength of his friends, the importance of boundless loyalty, and the shocking price of unbearable sacrifice. \n His fate depends on them all.",
-        similarBooks : [],
+        similarBooks : [
+            1,
+            2,
+            6,
+            4,
+            3,
+            5,
+        ],
         quotes : []
     },
     {
+        uuid : "77662cfa-679d-4a4c-8b6d-63ca3586bea8",
         title : "Harry Potter and the Half-Blood Prince",
-        author : "J.K. Rowling",
+        author : 1,
         illustrator : "Mary GrandPré",
         cover : "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1587697303l/1._SX318_.jpg",
-        genres : [],
+        genres : [
+            1,
+            2,
+            6,
+            4,
+            3,
+            5,
+        ],
         status : {
             rating : 4.57,
             ratingsCount : 2784425,
@@ -92,10 +146,18 @@ const books = [
         quotes : []
     },
     {
+        uuid : "bb457f0a-f16f-4aa3-b559-8e2fe00b3e6b",
         title : "Harry Potter and the Deathly Hallows",
-        author : "J.K. Rowling",
+        author : 1,
         cover : "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1474171184l/136251._SY475_.jpg",
-        genres : [],
+        genres : [
+            1,
+            2,
+            6,
+            4,
+            3,
+            5,
+        ],
         status : {
             rating : 4.62,
             ratingsCount : 3187029,
@@ -106,11 +168,16 @@ const books = [
         quotes : []
     },
     {
+        uuid : "dcdf5516-0151-463e-809d-252498d9af8d",
         title : "Everything, Everything",
-        author : "Nicola Yoon",
+        author : 2,
         illustrator : "David Yoon",
         cover : "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1450515891l/18692431._SY475_.jpg",
-        genres : [],
+        genres : [
+            6,
+            7,
+            2
+        ],
         status : {
             rating : 4.02,
             ratingsCount : 494930,
@@ -121,10 +188,16 @@ const books = [
         quotes : []
     },
     {
+        uuid : "847d1ddc-443e-4854-90e9-a0c3a8ebe444",
         title : "The Fault in Our Stars",
-        author : "John Green",
+        author : 3,
         cover : "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1632632557l/11870085.jpg",
-        genres : [],
+        genres : [
+            6,
+            7,
+            2,
+            15
+        ],
         status : {
             rating : 4.17,
             ratingsCount : 4212889,
@@ -135,11 +208,19 @@ const books = [
         quotes : []
     },
     {
+        uuid : "0caaf715-9b15-4087-b87e-60f3b5ec3b6c",
         title : "The Little Prince",
-        author : "Antoine de Saint-Exupéry",
+        author : 4,
         translator : "Richard Howard",
         cover : "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1367545443l/157993.jpg",
-        genres : [],
+        genres : [
+            1,
+            2,
+            3,
+            5,
+            6,
+            9
+        ],
         status : {
             rating : 4.31,
             ratingsCount : 1674359,
