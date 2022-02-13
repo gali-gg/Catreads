@@ -1,15 +1,15 @@
 export default class Book {
-    constructor(title, author, illustrator, translator, cover, genres, ratingDetails, description, similarBooks, quotes) {
+constructor({title, author, illustrator, translator, cover, genres, status, description, similarBooks, quotes}) {
         this.title = title;
         this.author = author;
-        this.illustrator = illustrator || null,
-        this.translator = translator || null,
+        this.illustrator = illustrator || null;
+        this.translator = translator || null;
         this.cover = cover;
         this.genres = genres;
         this.status = {
-            rating : ratingDetails.rating,
-            ratingCount : ratingDetails.ratingCount,
-            reviewsCount : ratingDetails.reviewsCount
+            rating : status.rating,
+            ratingsCount : status.ratingsCount,
+            reviewsCount : status.reviewsCount,
         }
         this.description = description;
         this.similarBooks = similarBooks;

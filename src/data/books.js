@@ -3,6 +3,8 @@ const books = [
     {
         title : "Harry Potter and the Sorcerer's Stone",
         author : "J.K. Rowling",
+        illustrator : "",
+        translator : "",
         cover : "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1474154022l/3._SY475_.jpg",
         genres : [],
         status : {
