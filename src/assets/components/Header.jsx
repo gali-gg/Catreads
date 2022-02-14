@@ -59,8 +59,9 @@ export const Header =  React.memo(function Header (props){
                 justifyContent="center"
                 alignItems="center"
                 spacing={2}
+                sx={{ borderBottom: "2px solid #ddd", maxHeight: "50px" }}
             >
-               <GoodReadsLogo height="50px" width="140px"/>
+               <GoodReadsLogo  width="140px"/>
                 <nav>
                     <NavButton><StyledRouterLink href="/home" title="Home" /></NavButton>
                     <NavButton><StyledRouterLink href="/myBooks" title="My Books" /></NavButton>

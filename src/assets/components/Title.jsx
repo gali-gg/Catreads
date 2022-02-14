@@ -14,6 +14,9 @@ export default function Title(props){
     const classes = useStyles();
 
     return (
-        <p className={`${props.className || classes.title} latoB grGrey`}>{props.title}</p>
+        <p 
+            className={`${props.className || classes.title} latoB grGrey`} 
+            style={{color: props.color}}
+        >{props.title}</p>
     );
 }
