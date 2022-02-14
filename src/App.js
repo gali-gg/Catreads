@@ -4,7 +4,7 @@ import MyBooksPage from './screens/MyBooksPage';
 import AboutUsPage from './screens/AboutUsPage';
 import ErrorPage from './screens/ErrorPage';
 import LandingPage from './screens/LandingPage';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import GenresPage from './screens/GenresPage';
 import LogInPage from './screens/LogInPage';
 import RegisterPage from './screens/RegisterPage';
@@ -25,8 +25,9 @@ import SearchResultsPage from './screens/SearchResultsPage';
 import BookPage from './screens/BookPage';
 import AuthorPage from './screens/AuthorPage';
 import FriendProfilePage from './screens/FriendProfilePage';
-import Header from './assets/components/Header';
-import Footer from './assets/components/Footer';
+import {Header} from './assets/components/Header';
+import {Footer} from './assets/components/Footer';
+import Main from "./Main";
 
 function App() {
   //temporary solution
@@ -37,52 +38,15 @@ function App() {
     setUserLogged(true);
     navigate("/home");
   }
+  // useEffect(() => {return (<Header/>)}, [userLogged]);
+
 
   return (
     <>
-      {userLogged && <> <Header /> <Footer /> </>}
 
-      <Routes>
-        {!userLogged && (
-          <>
-          <Route path='/' element={<LandingPage/>} />
-          <Route path='/home' element={<LandingPage/>} />
-          <Route path='/sign-in' element={<LogInPage onLogin={handleLogIn}/>} />
-          <Route path='/sign-up' element={<RegisterPage onRegister={handleLogIn}/>} />
-          </>
-        )}
-        {userLogged && (
-          <>
-          <Route path='/' element={<HomePage/>} />
-          <Route path='/home' element={<HomePage/>} />
-          <Route path='/myBooks' element={<MyBooksPage/>} />
-          <Route path='/recommendations' element={<RecommendationsPage/>} />
-          <Route path='/lists' element={<ListopiaPage/>} />
-          <Route path='/explore' element={<ExplorePage/>} />
-          <Route path='/news' element={<NewsPage/>} />
-          <Route path='/quotes' element={<QuotesPage/>} />
-          <Route path='/genres' element={<GenresPage/>} />
-          <Route path='/genres/:gname' element={<GenresPage/>} />
-          <Route path='/user' element={<ProfilePage/>} />
-          <Route path='/user/discussions' element={<DiscussionsPage/>} />
-          <Route path='/user/discussions/:discId' element={<DiscussionsPage/>} />
-          <Route path='/user/friends' element={<FriendsPage/>} />
-          <Route path='/user/friends/:friendId' element={<FriendProfilePage/>} />
-          <Route path='/user/comments' element={<UserCommentsPage/>} />
-          <Route path='/user/quotes' element={<UserQuotesPage/>} />
-          <Route path='/user/favoriteGenres' element={<FavoriteGenresPage/>} />
-          <Route path='/user/settings' element={<UserSettingsPage/>} />
-          <Route path='/user/messages' element={<MessagesPage/>} />
-
-          <Route path='/search' element={<SearchResultsPage/>} />
-          <Route path='/books/:bookId' element={<BookPage/>} />
-          {/* <Route path='/review/new/:bookId' element={<WriteReviewPage/>} /> */}
-          <Route path='/authors/:authorName' element={<AuthorPage/>} />
-          </>
-        )}
-        <Route path='/aboutUs' element={<AboutUsPage/>} />
-        <Route path="*" element={<ErrorPage/>}/>
-      </Routes>
+      {userLogged && <Header logged={userLogged}/>}
+      <Main logged={userLogged} handle={handleLogIn}/>
+      <Footer direction="horizontal"/>
     </>
   );
 }

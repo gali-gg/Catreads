@@ -1,5 +1,6 @@
 import { Stack } from "@mui/material";
 import ListEl from "./ListEl";
+import React from "react";
 
 const companyHrefs = [
     "About us",
@@ -31,20 +32,25 @@ const mediaHrefs = [
     "Mobile version",
 ] ;
 
-export default function Footer(){
-    return (
-        <Stack direction="row" sx={{ 
-            padding: "10px 0 60px 0",
-            justifyContent : "space-around",
-            alignItems: "flex-start",
-            background: "#F9F8F4",
-        }}>
-            <Stack direction="row" spacing={6}>
-                <ListEl hrefs={companyHrefs} title="Company" direction="column"></ListEl>
-                <ListEl hrefs={workHrefs} title="Work with us" direction="column"></ListEl>
-                <ListEl icons={connectIconHrefs} title="Conect" direction="row"></ListEl>
+export const Footer = React.memo(function Footer(props){
+    if(props.direction === "horizontal"){
+        return (
+            <Stack direction="row" sx={{
+                padding: "10px 0 60px 0",
+                justifyContent : "space-around",
+                alignItems: "flex-start",
+                background: "#F9F8F4",
+            }}>
+                <Stack direction="row" spacing={6}>
+                    <ListEl hrefs={companyHrefs} title="Company" direction="column"></ListEl>
+                    <ListEl hrefs={workHrefs} title="Work with us" direction="column"></ListEl>
+                    <ListEl icons={connectIconHrefs} title="Conect" direction="row"></ListEl>
+                </Stack>
+                    <ListEl icons={mediaIconsHrefs} hrefs={mediaHrefs} direction="column"></ListEl>
             </Stack>
-                <ListEl icons={mediaIconsHrefs} hrefs={mediaHrefs} direction="column"></ListEl>
-        </Stack>
-    )
-}
+        )
+    }
+    else {
+        return null;
+    }
+});

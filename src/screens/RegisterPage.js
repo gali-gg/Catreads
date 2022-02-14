@@ -4,7 +4,6 @@ import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
 import Stack from '@mui/material/Stack';
 import { userManager } from "../model/UserManagerService";
 import { useState } from 'react';
