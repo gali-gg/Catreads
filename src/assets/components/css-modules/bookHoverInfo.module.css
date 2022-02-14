@@ -1,0 +1,19 @@
+.container {
+    background-color: white;
+    border: 5px solid #aaa;
+    border-radius: 5px;
+    width: 350px;
+    position: absolute;
+    left: calc(100% + 5px);
+    top: 0;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+.description {
+
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}

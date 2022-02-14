@@ -1,0 +1,28 @@
+.sideList {
+    list-style: none;
+    width: 250px;
+    padding: 0;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid #BBB596;
+}
+
+.mainContent {
+    display: flex;
+    gap: 20px;
+    justify-content: space-evenly;
+    align-items:flex-start;
+}
+
+.pageHeading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.headingSide {
+    display: flex;
+    gap: 15px;
+}

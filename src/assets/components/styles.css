@@ -4,7 +4,7 @@
 }
 
 .grLight {
-    color: #aaa;
+    color: #aaa !important;
 }
 .grGreen {
     color: #00635D !important;
@@ -15,11 +15,11 @@
 }
 
 .grGrey {
-    color: #767676;
+    color: #767676 !important;
 }
 
 .grBlack {
-    color: #333;
+    color: #333 !important;
 }
 
 .latoR {
