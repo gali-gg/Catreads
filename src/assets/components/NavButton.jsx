@@ -7,7 +7,7 @@ const useStyles = makeStyles({
     button: {
         borderRadius: 0,
         letterSpacing: "0em",
-        padding: '15px 5px',
+        padding: '10px 5px',
         color: "#382110",
         fontSize: "1em",
         background: "none",
@@ -29,7 +29,7 @@ const useStyles = makeStyles({
 export default function NavButton(props){
     const classes = useStyles();
     return (
-        <Button className={`${classes.button} latoR`} onClick={props.onClick}>
+        <Button className={`${classes.button} latoR`} onClick={props.onClick} disableRipple>
             {props.children}
             <img className={classes.icon} src={props.src}></img>
         </Button>

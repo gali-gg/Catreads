@@ -14,7 +14,7 @@ const useStyles = makeStyles({
     background: "none",
     color: "#382110",
     textTransform: "none",
-    padding: '15px 5px',
+    padding: '11px 5px',
         '&:hover': {
             background: "#382110",
             color: "white"
@@ -26,7 +26,7 @@ const useStyles = makeStyles({
     color: "white",
     borderRadius: 0,
     textTransform: "none",
-    padding: '15px 5px',
+    padding: '11px 5px',
   },
   icon:{
     height: 30,
@@ -59,11 +59,13 @@ export default function BasicMenu(props) {
           aria-haspopup="true"
           aria-expanded={open ? 'true' : undefined}
           onClick={handleClick}
+          disableRipple
         >
           {props.title  || (<img src={props.src} className={classes.icon}></img>)}
         </Button>
 
       <Menu
+        style={{padding:0}}
         id="basic-menu"
         anchorEl={anchorEl}
         open={open}
@@ -80,7 +82,7 @@ export default function BasicMenu(props) {
           horizontal: side ,
         }}
       >
-        <Stack direction={props.hrefsSecond ? "column" : "row"}>
+        <Stack  direction={props.hrefsSecond ? "column" : "row"}>
             <DropDownElement hrefs={props.hrefs} userName={props.userName}/>
             {props.hrefsLeftSide && (
               <SubDownMenu orientation="vertical" bgColor="#F6F6F6" hrefs={props.hrefs} />

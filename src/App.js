@@ -28,6 +28,7 @@ import FriendProfilePage from './screens/FriendProfilePage';
 import {Header} from './assets/components/Header';
 import {Footer} from './assets/components/Footer';
 import Main from "./Main";
+import BlueBanner from "./assets/components/BlueBanner";
 
 function App() {
   //temporary solution
@@ -44,7 +45,7 @@ function App() {
   return (
     <>
 
-      {userLogged && <Header logged={userLogged}/>}
+      {userLogged && <> <BlueBanner/> <Header logged={userLogged}/> </>}
       <Main logged={userLogged} handle={handleLogIn}/>
       <Footer direction="horizontal"/>
     </>
