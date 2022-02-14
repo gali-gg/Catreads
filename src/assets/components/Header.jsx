@@ -6,6 +6,8 @@ import DropDownMenu from "./DropDownMenu";
 import Stack from '@mui/material/Stack';
 import StyledRouterLink from './StyledRouterLink';
 import GoodReadsLogo from './GoodReadsLogo';
+import { userManager } from "../../model/UserManagerService";
+
 
 
 const browseHrefs = [
@@ -30,7 +32,6 @@ const communityHrefs = [
 ];
 
 const profileHrefsFirst = [
-    "MIRELA",
     "Profile",
     "Friends",
     "Groups",
@@ -48,6 +49,7 @@ const profileHrefsSecond = [
     "Help",
     "Sign out",
 ];
+
 
 export default function Header(){
     return (
@@ -73,11 +75,11 @@ export default function Header(){
                 <NavButton src="https://s.gr-assets.com/assets/layout/header/icn_nav_friend.svg"></NavButton>
                 <DropDownMenu 
                     src="https://s.gr-assets.com/assets/nophoto/user/u_60x60-267f0ca0ea48fd3acfd44b95afa64f01.png" 
+                    userName={userManager.returnLoggedUserName()}
                     hrefs={profileHrefsFirst} 
                     hrefsSecond={profileHrefsSecond}
                 >
                 </DropDownMenu>
-                
             </ul>
         </Stack>
     )

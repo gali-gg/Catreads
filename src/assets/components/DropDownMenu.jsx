@@ -5,9 +5,11 @@ import DropDownElement from './DropDownElement';
 import { makeStyles } from '@mui/styles';
 import { Stack } from '@mui/material';
 import SubDownMenu from './SubDownMenu';
+import "./styles.css";
 
 const useStyles = makeStyles({
   notClickedButton: {
+    fontSize: "1em",
     borderRadius: 0,
     background: "none",
     color: "#382110",
@@ -19,6 +21,7 @@ const useStyles = makeStyles({
         },
   },
   clickedButton: {
+    fontSize: "1em",
     background: "#382110",
     color: "white",
     borderRadius: 0,
@@ -29,6 +32,7 @@ const useStyles = makeStyles({
     height: 30,
     border: "none",
     borderRadius: "25px",
+    padding: 0,
     background: "none"
   },
 });
@@ -49,7 +53,7 @@ export default function BasicMenu(props) {
   return (
     <>
         <Button
-          className = {anchorEl ? classes.clickedButton :  classes.notClickedButton  }
+          className = {`${anchorEl ? classes.clickedButton :  classes.notClickedButton} latoR`}
           id="basic-button"
           aria-controls={open ? 'basic-menu' : undefined}
           aria-haspopup="true"
@@ -77,7 +81,7 @@ export default function BasicMenu(props) {
         }}
       >
         <Stack direction={props.hrefsSecond ? "column" : "row"}>
-            <DropDownElement hrefs={props.hrefs} />
+            <DropDownElement hrefs={props.hrefs} userName={props.userName}/>
             {props.hrefsLeftSide && (
               <SubDownMenu orientation="vertical" bgColor="#F6F6F6" hrefs={props.hrefs} />
             )}

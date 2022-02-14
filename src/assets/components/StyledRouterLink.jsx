@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Link } from "react-router-dom";
 import { makeStyles } from '@mui/styles';
+import "./styles.css";
 
 
 const useStyles = makeStyles({
@@ -16,7 +17,7 @@ export default function StyledRouterLink(props){
 
     return(
         <Link 
-            className={props.className || classes.link}
+            className={`${props.className || classes.link} latoR`}
             to={props.href}
         >
             {props.title}

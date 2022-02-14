@@ -1,10 +1,12 @@
 import * as React from 'react';
 import { makeStyles } from '@mui/styles';
 import Button from '@mui/material/Button';
+import "./styles.css";
 
 const useStyles = makeStyles({
     button: {
         borderRadius: 0,
+        letterSpacing: "0em",
         padding: '15px 5px',
         color: "#382110",
         fontSize: "1em",
@@ -15,7 +17,7 @@ const useStyles = makeStyles({
             },
     },
     icon:{
-        height: 30,
+        height: "30px",
         border: "none",
         borderRadius: "25px",
         background: "none"
@@ -27,7 +29,7 @@ const useStyles = makeStyles({
 export default function NavButton(props){
     const classes = useStyles();
     return (
-        <Button className={classes.button} onClick={props.onClick}>
+        <Button className={`${classes.button} latoR`} onClick={props.onClick}>
             {props.children}
             <img className={classes.icon} src={props.src}></img>
         </Button>

@@ -45,6 +45,12 @@ class UserManager {
         }
         return false;
     }
+
+    returnLoggedUserName (){
+        let username = localStorage.getItem("loggedUser");
+        let user = this.users.filter(user => user.username === username)[0];
+        return user.details.names.first;
+    }
     //needs more functions
 }
 

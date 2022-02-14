@@ -1,7 +1,9 @@
 import * as React from 'react';
 import StyledRouterLink from './StyledRouterLink';
+import Title from './Title';
 import { makeStyles } from '@mui/styles';
 import { Stack } from '@mui/material';
+import "./styles.css";
 
 const useStyles = makeStyles({
     link: {
@@ -13,6 +15,10 @@ const useStyles = makeStyles({
             textDecoration : "underline",
           },
     },
+    title: {
+        margin:0,
+        textTransform: "uppercase",
+    }
 });
 
 export default function BoxFlex(props){
@@ -26,10 +32,11 @@ export default function BoxFlex(props){
                 padding: "5px 10px 20px 10px",
                 background: bgColor
             }}
-        >
+        >   
+            {props.userName && <Title title={props.userName}  className ={`${classes.title} latoR`}></Title>}
             {props.hrefs.map(link => (
                 <StyledRouterLink 
-                    className = {classes.link}
+                    className = {`${classes.link} latoR`}
                     key={link} 
                     title={link} 
                     href={"/"+link.toLowerCase()} 

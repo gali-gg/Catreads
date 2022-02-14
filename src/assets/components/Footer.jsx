@@ -27,7 +27,6 @@ const mediaIconsHrefs = [
     "https://s.gr-assets.com/assets/app/badge-android-desktop-home-0f517cbae4d56c88a128d27a7bea1118.png",
 ];
 const mediaHrefs = [
-    "© 2022 Goodreads, Inc.",
     "Mobile version",
 ] ;
 
@@ -44,7 +43,7 @@ export default function Footer(){
                 <ListEl hrefs={workHrefs} title="Work with us" direction="column"></ListEl>
                 <ListEl icons={connectIconHrefs} title="Conect" direction="row"></ListEl>
             </Stack>
-                <ListEl icons={mediaIconsHrefs} hrefs={mediaHrefs} direction="column"></ListEl>
+                <ListEl icons={mediaIconsHrefs} hrefs={mediaHrefs} copyRight={true} direction="column"></ListEl>
         </Stack>
     )
 }
