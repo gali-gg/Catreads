@@ -71,13 +71,14 @@ export default function Header(){
                 <NavButton src="https://s.gr-assets.com/assets/layout/header/icn_nav_discussions.svg"></NavButton>
                 <NavButton src="https://s.gr-assets.com/assets/layout/header/icn_nav_msgs.svg"></NavButton>
                 <NavButton src="https://s.gr-assets.com/assets/layout/header/icn_nav_friend.svg"></NavButton>
-                <DropDownMenu 
-                    src="https://s.gr-assets.com/assets/nophoto/user/u_60x60-267f0ca0ea48fd3acfd44b95afa64f01.png" 
-                    hrefs={profileHrefsFirst} 
+                <DropDownMenu
+                    src="https://s.gr-assets.com/assets/nophoto/user/u_60x60-267f0ca0ea48fd3acfd44b95afa64f01.png"
+                    hrefs={profileHrefsFirst}
                     hrefsSecond={profileHrefsSecond}
+                    side="right"
                 >
                 </DropDownMenu>
-                
+
             </ul>
         </Stack>
     )

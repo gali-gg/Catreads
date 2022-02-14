@@ -44,7 +44,7 @@ export default function BasicMenu(props) {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  //let side = props.hrefsSecond ? 'right' : 'left';
+  let side = props.side || "left";
 
   return (
     <>
@@ -58,7 +58,7 @@ export default function BasicMenu(props) {
         >
           {props.title  || (<img src={props.src} className={classes.icon}></img>)}
         </Button>
-      
+
       <Menu
         id="basic-menu"
         anchorEl={anchorEl}
@@ -69,11 +69,11 @@ export default function BasicMenu(props) {
         }}
         anchorOrigin={{
           vertical: 'bottom',
-          horizontal: 'left',
+          horizontal: side,
         }}
         transformOrigin={{
           vertical: 'top',
-          horizontal: 'left' ,
+          horizontal: side ,
         }}
       >
         <Stack direction={props.hrefsSecond ? "column" : "row"}>
