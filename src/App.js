@@ -44,10 +44,9 @@ function App() {
 
   return (
     <>
-
       {userLogged && <> <BlueBanner/> <Header logged={userLogged}/> </>}
       <Main logged={userLogged} handle={handleLogIn}/>
-      <Footer direction="horizontal"/>
+      {userLogged && <Footer direction="horizontal"/>}
     </>
   );
 }

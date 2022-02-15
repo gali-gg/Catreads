@@ -12,7 +12,7 @@ export default function MyBooksTableRow (props) {
                 {/* {props.cover} */}
                 <GoodBookCover height="100px" book={book}></GoodBookCover>
             </td>
-            <td>{book.title}</td>
+            <td><GoodLink to={`/books/${book.title}`} titleText={book.title} titleInfo={book.title} classes="latoR grGreen" style={{textAlign: "left"}}></GoodLink></td>
             <td>{props.authorName}</td>
             <td>{book.status.rating}</td>
             <td>
