@@ -16,7 +16,7 @@
 }
 
 .grGrey {
-    color: #767676 !important;
+    color: #767676;
 }
 
 .grBlack {
@@ -45,4 +45,24 @@
 
 .meriI {
     font-family: "Merriweather Italic" !important;
+}
+
+.f-1{
+    font-size: 1em;
+}
+
+.f-09{
+    font-size: 0.9em;
+}
+
+.f-08{
+    font-size: 0.8em;
+}
+
+.text-left{
+    text-align: left;
+}
+
+.text-center{
+    text-align: center;
 }

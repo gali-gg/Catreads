@@ -21,13 +21,12 @@ const useStyles = makeStyles({
     }
 });
 
-
 export default function ListEl(props){
     const classes = useStyles();
 
     return(
         <Stack direction="column">
-            <Title title={props.title}></Title>
+            <Title title={props.title} color={props.titleColor}></Title>
             
             <Stack direction="row" sx={{mb: "10px"}}>
                 {props.icons && props.icons.map(icon => (

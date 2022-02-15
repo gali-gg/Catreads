@@ -1,4 +1,3 @@
-import Container from '@mui/material/Container';
 import Stack from '@mui/material/Stack';
 import { makeStyles } from '@mui/styles';
 import GoodLink from './GoodLink';
@@ -18,7 +17,7 @@ const BorderLinearProgress = styled(LinearProgress)(() => ({
   },
 }));
 
-const ColorButton = styled(Button)(({ }) => ({
+const ColorButton = styled(Button)(() => ({
     color: "#32362D",
     backgroundColor: "#fcd567",
     textAlign: "center",
@@ -111,7 +110,7 @@ export default function TextImageContainer(props){
                                 {props.subSubTitle}
                             </span>
                         )}
-                        <ColorButton className={"latoB"}> 
+                        <ColorButton className={"latoB"} disableRipple> 
                             {props.button}
                         </ColorButton>
 

@@ -46,7 +46,7 @@ function App() {
     <>
       {userLogged && <> <BlueBanner/> <Header logged={userLogged}/> </>}
       <Main logged={userLogged} handle={handleLogIn}/>
-      {userLogged && <Footer direction="horizontal"/>}
+      {userLogged && <Footer direction="row"/>}
     </>
   );
 }
