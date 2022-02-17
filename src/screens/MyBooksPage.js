@@ -49,11 +49,10 @@ export default function MyBooksPage () {
                     <li><GoodLink size={fontSize} titleText="Find Duplicates" classes="latoR grGreen"></GoodLink></li>
                     <li><GoodLink size={fontSize} titleText="Widgets" classes="latoR grGreen"></GoodLink></li>
                     <li><GoodLink size={fontSize} titleText="Import and export" classes="latoR grGreen"></GoodLink></li>
-
-
                 </ul>
-            <table>
-                <thead>
+            <table className="text-left">
+                <thead >
+                    <tr>
                     <th>
                         <GoodLink titleText="cover" classes="latoB grBrown"/>
                     </th>
@@ -64,7 +63,7 @@ export default function MyBooksPage () {
                         <GoodLink titleText="author" classes="latoB grBrown"/>
                     </th>
                     <th>
-                        <GoodLink titleText="avg rating" classes="latoB grBrown"/>
+                        <GoodLink titleText="avg rating" classes="latoB grBrown text-left"/>
                     </th>
                     <th>
                         <GoodLink titleText="rating" classes="latoB grBrown"/>
@@ -82,9 +81,11 @@ export default function MyBooksPage () {
                     </th>
                     <th>
                     </th>
+                    </tr>
                 </thead>
+                <tbody>
                 {books.map(book => {
-                        return <MyBooksTableRow
+                        return <MyBooksTableRow key={book.uuid}
                             book={book}
                             authorName = {authorManager.getNameById(book.author)}
                             userRating = {Math.ceil(Math.random()*5)}
@@ -94,6 +95,7 @@ export default function MyBooksPage () {
                         ></MyBooksTableRow>
 
                     })}
+                </tbody>
             </table>
             </div>
         </Container>

@@ -1,16 +1,17 @@
 import Rating from "./GoodRating";
 import GoodLink from "./GoodLink";
-import x from "../images/X.png"
+import x from "../images/X.png";
 import GoodBookCover from "./GoodBookCover";
 import "./styles.css";
+import { Divider } from "@mui/material";
 
 export default function MyBooksTableRow (props) {
     const book = props.book;
     return (
-        <tr style={{textAlign: "left", verticalAlign: "top"}}>
+        <>
+        <tr style={{textAlign: "left", verticalAlign: "top"}} >
             <td>
-                {/* {props.cover} */}
-                <GoodBookCover height="100px" book={book}></GoodBookCover>
+                <GoodBookCover height="80px" book={book}></GoodBookCover>
             </td>
             <td><GoodLink to={`/books/${book.title}`} titleText={book.title} titleInfo={book.title} classes="latoR grGreen" style={{textAlign: "left"}}></GoodLink></td>
             <td>{props.authorName}</td>
@@ -32,10 +33,16 @@ export default function MyBooksTableRow (props) {
                 <GoodLink titleText="view" classes="latoR grGreen"></GoodLink>
             </td>
             <td>
-                <button onClick={props.onClick} styles={{all: "unset"}}>
+                <div onClick={props.onClick} styles={{all: "unset"}}>
                     <img src={x} alt="remove-book" />
-                </button>
+                </div>
             </td>
         </tr>
+        <tr>
+            <td colSpan="10">
+                <Divider></Divider>
+            </td>
+        </tr>
+        </>
     )
 }
