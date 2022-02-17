@@ -6,6 +6,8 @@ const useStyles = makeStyles({
         fontSize: "0.9em",
         textTransform: "uppercase",
         margin: "5px 0",
+        color: "#767676",
+        fontFamily: "Lato Bold",
     },
 });
 
@@ -14,9 +16,9 @@ export default function Title(props){
     const classes = useStyles();
 
     return (
-        <p 
-            className={`${props.className || classes.title} latoB grGrey`} 
+        <span 
+            className={`${props.className || classes.title}`} 
             style={{color: props.color}}
-        >{props.title}</p>
+        >{props.title}</span>
     );
 }

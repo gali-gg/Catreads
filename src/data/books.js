@@ -94,7 +94,7 @@ const books = [
     },
     {
         uuid: "9be7b8d5-6c64-455f-b1cd-27d1c0951bc5",
-        title : "Harry Potter and the Goblet of Fire",
+        title : "Harry Potter and the Order of the Phoenix",
         author : 1,
         illustrator : "Mary GrandPré",
         cover : "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1546910265l/2.jpg",

@@ -16,7 +16,7 @@
 }
 
 .grGrey {
-    color: #767676;
+    color: #767676 !important;
 }
 
 .grBlack {
@@ -51,6 +51,14 @@
     font-size: 1em;
 }
 
+.f-11{
+    font-size: 1.1em;
+}
+
+.f-095{
+    font-size: 0.95em;
+}
+
 .f-09{
     font-size: 0.9em;
 }
@@ -65,4 +73,8 @@
 
 .text-center{
     text-align: center;
+}
+
+.text-upper{
+    text-transform: uppercase;
 }

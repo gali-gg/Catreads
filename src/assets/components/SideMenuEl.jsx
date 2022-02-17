@@ -17,7 +17,7 @@ export default function SideMenuEl(props){
                     {props.text && <p>{props.text}</p>}
                     </Stack>
                 }
-                {props.searchBox && (<SearchBox></SearchBox>)}
+                {props.searchBox && (<SearchBox width="250px"></SearchBox>)}
 
                 {props.hrefs && (
                     <Stack direction="row" spacing={1}>
