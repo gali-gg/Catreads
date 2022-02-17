@@ -8,8 +8,6 @@ import StyledRouterLink from './StyledRouterLink';
 import GoodReadsLogo from './GoodReadsLogo';
 import { userManager } from "../../model/UserManagerService";
 
-
-
 const browseHrefs = [
     "Recommendations",
     "Choice Awards",
@@ -62,12 +60,12 @@ export const Header =  React.memo(function Header (props){
                 sx={{ borderBottom: "2px solid #ddd", maxHeight: "50px" }}
             >
                <GoodReadsLogo  width="140px"/>
-                <nav>
+                <Stack direction="row" spacing={2}>
                     <NavButton><StyledRouterLink href="/home" title="Home" /></NavButton>
                     <NavButton><StyledRouterLink href="/myBooks" title="My Books" /></NavButton>
                     <DropDownMenu title="Browse" hrefs={browseHrefs} hrefsLeftSide={true}></DropDownMenu>
                     <DropDownMenu title="Community" hrefs={communityHrefs}></DropDownMenu>
-                </nav>
+                </Stack>
                 <SearchBox></SearchBox>
                 <ul>
                     <NavButton src="https://s.gr-assets.com/assets/layout/header/icn_nav_notifications.svg"></NavButton>

@@ -1,6 +1,5 @@
 import { makeStyles } from '@mui/styles';
  import React, { useState } from 'react';
-import CssBaseline from '@mui/material/CssBaseline';
 import Stack from '@mui/material/Stack';
 import Container from '@mui/material/Container';
 import SideMenuEl from '../assets/components/SideMenuEl';
@@ -16,10 +15,9 @@ import GoodLink from '../assets/components/GoodLink';
 
 const useStyles = makeStyles({
     main: {
-    background: "#F9F7F4",
-    paddingTop: "10px"
+        background: "#F9F7F4",
+        paddingTop: "10px"
     }
-
 });
 
 
@@ -35,9 +33,7 @@ export default function HomePage () {
 
   return (
     <div className={classes.main}>
-        <React.Fragment>
-        <CssBaseline />
-        <Container maxWidth="lg">
+        <Container sx={{maxWidth: "1220px"}} style={{padding:0}}>
             <Stack direction="row" style={{padding:0}} spacing={2}>
                 <Stack style={{paddingRight:"5px", width: "25%"}}>
                         <SideMenuEl 
@@ -116,7 +112,7 @@ export default function HomePage () {
                     <span className="latoR grBlack f-09 text-center">No More Updates</span>
                 </Stack>
                 
-                <Container maxWidth="xs" sx={{width: "30%"}}>
+                <Container maxWidth="xs" sx={{width: "29%"}}>
                         <SideMenuImageEl 
                             color="#32362D"
                             width="300px"
@@ -134,7 +130,6 @@ export default function HomePage () {
                 </Container>
             </Stack>
         </Container>
-        </React.Fragment>
     </div>
   );
 }
