@@ -45,7 +45,6 @@ const useStyles = makeStyles({
 export default function RecommendBookLayout(props){
     const classes = useStyles();
     let author = authors.filter(author => author.uuid === props.book.author)[0].name;
-    console.log(author);
     return (
         <>
             <p className="latoR f-09 grBrown" style={{margin:"5px 0"}}>Because you enjoyed <strong>{props.secondBook}:</strong></p>

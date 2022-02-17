@@ -15,19 +15,38 @@ import FooterCopy from "../assets/components/FooterCopy";
 import Container from '@mui/material/Container';
 import GoodButton from "../assets/components/GoodButton";
 import SocialLoginButton from "../assets/components/SocialLoginButton";
+import { getFromStorageAndParse } from "../utility";
+import { useDispatch } from "react-redux";
+import { loginAction } from "../redux/actions/userAction";
+import { useNavigate } from "react-router-dom";
 
 export default function LogInPage(props) {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  //need to add error component
+  const [errorIsVisible, setErrorIsVisible] = useState(false);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleLogAttempt = () => {
-    if(userManager.login(username, password)){
-      props.onLogin();
+    const users = getFromStorageAndParse("users");
+    const authenticate =  (email, password) => users.some(user => user.email === email && user.password === password);
+  
+    if(authenticate(email, password)){
+      setErrorIsVisible(false);
+      const user = users.find(user => user.email === email);
+      dispatch(loginAction(user));
+      navigate("/");
+    } 
+
+    else {
+      setErrorIsVisible(true);
     }
   }
 
-  const handleUsernameInput = (e) => {
-    setUsername(e.target.value.trim());
+  const handleEmailInput = (e) => {
+    setEmail(e.target.value.trim());
   }
 
   const handlePasswordInput = (e) => {
@@ -65,7 +84,7 @@ export default function LogInPage(props) {
             <Typography variant="subtitle2" gutterBottom component="div" className="latoB grBlack">
               Email address
             </Typography>
-            <TextField id="outlined-basic" type="email" variant="outlined" size="small" placeholder="you@yours.com" value={username} onInput={handleUsernameInput} style={{width: "300px"}}/>
+            <TextField id="outlined-basic" type="email" variant="outlined" size="small" placeholder="you@yours.com" value={email} onInput={handleEmailInput} style={{width: "300px"}}/>
             </div>
             <div>
             <Typography variant="subtitle2" gutterBottom component="div" className="latoB grBlack">

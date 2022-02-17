@@ -6,7 +6,9 @@ import DropDownMenu from "./DropDownMenu";
 import Stack from '@mui/material/Stack';
 import StyledRouterLink from './StyledRouterLink';
 import GoodReadsLogo from './GoodReadsLogo';
-import { userManager } from "../../model/UserManagerService";
+import {useSelector, useDispatch} from 'react-redux'
+import store from '../../redux/store';
+import * as userAction from "../../redux/actions/userAction"
 
 const browseHrefs = [
     "Recommendations",
@@ -48,7 +50,8 @@ const profileHrefsSecond = [
     "Sign out",
 ];
 
-export const Header =  React.memo(function Header (props){
+export const Header = function Header (props){
+    const name = useSelector(state => state.userData.name.first);
     if(props.logged){
         return (
             <Stack
@@ -74,7 +77,7 @@ export const Header =  React.memo(function Header (props){
                     <NavButton src="https://s.gr-assets.com/assets/layout/header/icn_nav_friend.svg"></NavButton>
                     <DropDownMenu
                         src="https://s.gr-assets.com/assets/nophoto/user/u_60x60-267f0ca0ea48fd3acfd44b95afa64f01.png"
-                        userName={userManager.returnLoggedUserName()}
+                        userName={name}
                         hrefs={profileHrefsFirst}
                         hrefsSecond={profileHrefsSecond}
                         side="right"
@@ -88,4 +91,4 @@ export const Header =  React.memo(function Header (props){
     else {
         return null;
     }
-});
+};
