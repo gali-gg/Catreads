@@ -6,49 +6,9 @@ import DropDownMenu from "./DropDownMenu";
 import Stack from '@mui/material/Stack';
 import StyledRouterLink from './StyledRouterLink';
 import GoodReadsLogo from './GoodReadsLogo';
-import {useSelector, useDispatch} from 'react-redux'
-import store from '../../redux/store';
-import * as userAction from "../../redux/actions/userAction"
+import {useSelector} from 'react-redux';
+import { browseHrefs, communityHrefs, profileHrefsFirst, profileHrefsSecond } from '../../data/hrefs';
 
-const browseHrefs = [
-    "Recommendations",
-    "Choice Awards",
-    "Giveaways",
-    "New Releases",
-    "Lists",
-    "Explore",
-    "News & Interviews"
-];
-
-const communityHrefs = [
-    "Groups",
-    "Discussions",
-    "Quotes",
-    "Ask the Author",
-    "Trivia",
-    "Quizzes",
-    "Creative Writing",
-    "People"
-];
-
-const profileHrefsFirst = [
-    "Profile",
-    "Friends",
-    "Groups",
-    "Discussions",
-    "Comments",
-    "Reading Challenge",
-    "Kindle Notes & Highlights",
-    "Quotes",
-    'Favorite genres',
-    "Friends’ recommendations",
-];
-
-const profileHrefsSecond = [
-    "Account settings",
-    "Help",
-    "Sign out",
-];
 
 export const Header = function Header (props){
     const name = useSelector(state => state.userData.name.first);
@@ -83,7 +43,6 @@ export const Header = function Header (props){
                         side="right"
                     >
                     </DropDownMenu>
-
                 </ul>
             </Stack>
         )

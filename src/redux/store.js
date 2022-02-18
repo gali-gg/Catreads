@@ -1,11 +1,11 @@
-import { createStore, applyMiddleware, compose  } from 'redux';
+import { createStore } from 'redux';
 import { combineReducers } from 'redux';
 import { shelfReducer } from './reducers/shelfReducer';
 import { userReducer } from './reducers/userReducer';
 
 const rootReducer = combineReducers({
     userData : userReducer,
-    //shelves : shelfReducer,
+    shelves : shelfReducer,
 });
 
 const store = createStore(
