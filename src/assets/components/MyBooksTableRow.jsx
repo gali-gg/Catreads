@@ -4,6 +4,7 @@ import x from "../images/X.png";
 import GoodBookCover from "./GoodBookCover";
 import "./styles.css";
 import { Divider } from "@mui/material";
+import GoodRating from "./GoodRating";
 
 export default function MyBooksTableRow (props) {
     const book = props.book;
@@ -17,7 +18,7 @@ export default function MyBooksTableRow (props) {
             <td>{props.authorName}</td>
             <td>{book.status.rating}</td>
             <td>
-                <Rating rating={props.userRating} size="small" />
+                <GoodRating rating={props.userRating} size="small" />
             </td>
             <td>
                 {props.shelves.map(shelf => <GoodLink titleText={shelf} classes="latoR grGreen"/>)}

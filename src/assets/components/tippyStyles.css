@@ -1,0 +1,29 @@
+.tippy-box[data-theme~=goodreads] {
+    background-color: #d6d0c4;
+    /* border: 5px solid #d6d0c4; */
+    border-radius: 5px;
+    box-sizing: border-box;
+    color: black;
+    min-width: 380px;
+    align-items: center;
+}
+
+.tippy-box[data-theme~=goodreads]>.tippy-content {
+    padding: 5px;
+}
+
+.tippy-box[data-theme~=goodreads][data-placement^='top']>.tippy-arrow::before {
+    border-top-color: #d6d0c4;
+}
+
+.tippy-box[data-theme~=goodreads][data-placement^='bottom']>.tippy-arrow::before {
+    border-bottom-color: #d6d0c4;
+}
+
+.tippy-box[data-theme~=goodreads][data-placement^='left']>.tippy-arrow::before {
+    border-left-color: #d6d0c4;
+}
+
+.tippy-box[data-theme~=goodreads][data-placement^='right']>.tippy-arrow::before {
+    border-right-color: #d6d0c4;
+}

@@ -88,7 +88,7 @@ export default function MyBooksPage () {
                         return <MyBooksTableRow key={book.uuid}
                             book={book}
                             authorName = {authorManager.getNameById(book.author)}
-                            userRating = {Math.ceil(Math.random()*5)}
+                            userRating = {Math.random()*6}
                             dateRead = "Feb 12, 2022"
                             dateAdded = "Feb 10, 2022"
                             shelves={["to-read", "best-books"]}

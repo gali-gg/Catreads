@@ -1,35 +1,39 @@
 import { useState } from "react";
 import BookHoverInfo from "./BookHoverInfo";
 import { authorManager } from "../../model/AuthorManagerService";
+import Tippy from "@tippyjs/react";
+import 'tippy.js/dist/tippy.css';
+import "./tippyStyles.css";
 
 export default function GoodBookCover(props) {
-  const [isVisible, setIsVisible] = useState(false);
-
-  const handleHover = () => {
-    setIsVisible(!isVisible);
-  }
-
   return (
-    <div style={{position: "relative"}}>
-      <img
-        src={props.book.cover}
-        alt={`${props.book.title}-cover`}
-        width={props.width || "auto"}
-        height={props.height || "auto"}
-        onClick={props.onClick}
-        onMouseEnter={handleHover}
-        // onMouseLeave={handleHover}
-      />
-      {isVisible && (
+    <Tippy
+      className="tippy-box"
+      theme="goodreads"
+      interactive={true}
+      placement={props.tippyPlacement || "auto-start"}
+      position="left"
+      arrow={true}
+      delay={[200, 0]}
+      offset={[0, 15]}
+      animation={false}
+      content={
         <BookHoverInfo
-        onMouseLeave={handleHover}
           title={props.book.title}
           author={authorManager.getNameById(props.book.author)}
           rating={props.book.status.rating}
           ratingsCount={props.book.status.ratingsCount}
           description={props.book.description}
         />
-      )}
-    </div>
+      }
+    >
+      <img
+        src={props.book.cover}
+        alt={`${props.book.title}-cover`}
+        width={props.width || "auto"}
+        height={props.height || "auto"}
+        onClick={props.onClick}
+      />
+    </Tippy>
   );
 }

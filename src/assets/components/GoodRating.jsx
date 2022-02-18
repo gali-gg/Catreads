@@ -7,12 +7,8 @@ export default function GoodRating(props) {
   const [value, setValue] = React.useState(props.rating);
 
   return (
-    <Box
-      sx={{
-        '& > legend': { mt: 2 },
-      }}
-    >
       <Rating
+        precision={0.5}
         name={props.name || "simple-controlled"}
         value={value}
         defaultValue={0}
@@ -24,6 +20,5 @@ export default function GoodRating(props) {
           }
         }}
       />
-    </Box>
     )
 }

@@ -1,20 +1,32 @@
 .container {
     background-color: white;
-    border: 5px solid #aaa;
     border-radius: 5px;
-    width: 350px;
-    position: absolute;
-    left: calc(100% + 5px);
-    top: 0;
-    padding: 15px;
+    padding: 10px;
     box-sizing: border-box;
-    z-index: 100;
+    text-align: left;
 }
 
 .description {
-
     display: -webkit-box;
     -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
     overflow: hidden;
+}
+
+.bottom, .top {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 5px;
+    margin: 5px 0;
+}
+
+.bottom {
+    gap: 20px;
+}
+
+.title {
+    margin: 0;
+    margin-bottom: 10px;
+    text-align: left;
 }
