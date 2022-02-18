@@ -1,13 +1,9 @@
-import Header from "./assets/components/Header";
-import Footer from "./assets/components/Footer";
-import { useEffect } from "react";
-import { Routes, Route, Link, Navigate, useNavigate } from "react-router-dom";
+import { Routes, Route} from "react-router-dom";
 import HomePage from './screens/HomePage';
 import MyBooksPage from './screens/MyBooksPage';
 import AboutUsPage from './screens/AboutUsPage';
 import ErrorPage from './screens/ErrorPage';
 import LandingPage from './screens/LandingPage';
-import { useState } from 'react';
 import GenresPage from './screens/GenresPage';
 import LogInPage from './screens/LogInPage';
 import RegisterPage from './screens/RegisterPage';
@@ -28,20 +24,25 @@ import SearchResultsPage from './screens/SearchResultsPage';
 import BookPage from './screens/BookPage';
 import AuthorPage from './screens/AuthorPage';
 import FriendProfilePage from './screens/FriendProfilePage';
+import { useSelector } from "react-redux";
 
 export default function Main (props) {
+  const logged = useSelector(state => state.userData.logged);
+
   return (
         <>
       <Routes>
-        {!props.logged && (
+        {!logged && (
           <>
           <Route path='/' element={<LandingPage/>} />
           <Route path='/home' element={<LandingPage/>} />
-          <Route path='/sign-in' element={<LogInPage onLogin={props.handle}/>} />
+          {/* <Route path='/sign-in' element={<LogInPage onLogin={props.handle}/>} />
+          <Route path='/sign-up' element={<RegisterPage onRegister={props.handle}/>} /> */}
+          <Route path='/sign-in' element={<LogInPage />} />
           <Route path='/sign-up' element={<RegisterPage onRegister={props.handle}/>} />
           </>
         )}
-        {props.logged && (
+        {logged && (
           <>
           <Route path='/' element={<HomePage/>}/>
           <Route path='/home' element={<HomePage/>} />

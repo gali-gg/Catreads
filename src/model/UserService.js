@@ -1,8 +1,11 @@
+import { v4 as uuidv4 } from 'uuid';
+
 export default class User {
-    constructor(username, password, profilePicture, detailsObj = {}, faveGenresArr = []) {
-        this.username = username;
+    constructor(email, password, profilePicture, detailsObj = {}, faveGenresArr = []) {
+        this.id = uuidv4();
+        this.email = email;
         this.password = password;
-        this.profilePicture = profilePicture || "https://s.gr-assets.com/assets/nophoto/user/u_225x300-c928cbb998d4ac6dd1f0f66f31f74b81.png";
+        this.avatar = profilePicture || "https://s.gr-assets.com/assets/nophoto/user/u_225x300-c928cbb998d4ac6dd1f0f66f31f74b81.png";
         this.details = {
             birthday: detailsObj.birthday || null,
             names: {
@@ -15,11 +18,8 @@ export default class User {
             country: detailsObj.country || null,
             website: detailsObj.website || null
         }
-        this.favorites = {
-            books: [],
-            genres: faveGenresArr,
-            authors: []
-        }
+        this.favouriteGenres = faveGenresArr;
+        this.ratedBooks = [];
         this.savedQuotes = [];
         this.groups = [];
         this.friends = [];
