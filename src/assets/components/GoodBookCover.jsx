@@ -12,7 +12,6 @@ export default function GoodBookCover(props) {
       theme="goodreads"
       interactive={true}
       placement={props.tippyPlacement || "auto-start"}
-      position="left"
       arrow={true}
       delay={[200, 0]}
       offset={[0, 15]}

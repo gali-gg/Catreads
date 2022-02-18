@@ -21,7 +21,7 @@ export default function MyBooksTableRow (props) {
                 <GoodRating rating={props.userRating} size="small" />
             </td>
             <td>
-                {props.shelves.map(shelf => <GoodLink titleText={shelf} classes="latoR grGreen"/>)}
+                {props.shelves.map((shelf, index) => <GoodLink key={`shelf${index}`} titleText={shelf} classes="latoR grGreen"/>)}
             </td>
             <td>
                 {props.dateRead}
