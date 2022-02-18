@@ -30,18 +30,26 @@ export default function LogInPage(props) {
   const navigate = useNavigate();
 
   const handleLogAttempt = () => {
-    const users = getFromStorageAndParse("users");
-    const authenticate =  (email, password) => users.some(user => user.email === email && user.password === password);
-  
-    if(authenticate(email, password)){
-      setErrorIsVisible(false);
-      const user = users.find(user => user.email === email);
-      dispatch(loginAction(user));
-      navigate("/");
-    } 
+    const form = document.getElementById("login-form");
+    let formIsValid = form.checkValidity();
 
+    if(formIsValid){
+      const users = getFromStorageAndParse("users");
+      const authenticate =  (email, password) => users.some(user => user.email === email && user.password === password);
+
+      if(authenticate(email, password)){
+        setErrorIsVisible(false);
+        const user = users.find(user => user.email === email);
+        dispatch(loginAction(user));
+        navigate("/");
+      }
+
+      else {
+        setErrorIsVisible(true);
+      }
+    }
     else {
-      setErrorIsVisible(true);
+      form.reportValidity();
     }
   }
 
@@ -79,6 +87,7 @@ export default function LogInPage(props) {
             <SocialLoginButton type="apple"/>
             <SocialLoginButton type="google"/>
           </Stack>
+          <form id="login-form">
           <Stack spacing={1}>
             <div>
             <Typography variant="subtitle2" gutterBottom component="div" className="latoB grBlack">
@@ -93,6 +102,7 @@ export default function LogInPage(props) {
             <TextField id="outlined-basic" variant="outlined" size="small" type="password" value={password} onInput={handlePasswordInput} style={{width: "300px"}}/>
             </div>
           </Stack>
+          </form>
           <Box>
             <GoodButton title="Sign in" onClick={handleLogAttempt} padding="12px 24px" style={{marginRight: "20px"}}/>
             <GoodLink titleText="Forgot password" classes="latoR grGreen" size="13px" />

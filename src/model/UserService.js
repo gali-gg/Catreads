@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
 
 export default class User {
-    constructor(email, password, profilePicture, detailsObj = {}, faveGenresArr = []) {
+    constructor(email, password, detailsObj = {}, profilePicture, faveGenresArr = []) {
         this.id = uuidv4();
         this.email = email;
         this.password = password;

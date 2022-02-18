@@ -8,7 +8,7 @@ class UserManager {
             this.users = getFromStorageAndParse("users");
         }
         else {
-            this.users.push(new User("test", "test", null, {name: "Harry Potter"}, ["mystery", "fiction", "romance"]));
+            this.users.push(new User("test@test", "test", {name: "Harry Potter"}, null, ["mystery", "fiction", "romance"]));
             setStorage("users", this.users);
         }
     }

@@ -12,18 +12,35 @@ import GoodLink from "../assets/components/GoodLink";
 import GoodButton from "../assets/components/GoodButton";
 import FooterCopy from "../assets/components/FooterCopy";
 import SocialLoginButton from "../assets/components/SocialLoginButton";
+import { useDispatch } from "react-redux";
+import * as userActions from "../redux/actions/userAction"
+import { getFromStorageAndParse, setStorage } from "../utility";
+import User from "../model/UserService";
+import { useNavigate } from "react-router-dom";
 
 export default function RegisterPage(props) {
   const [name, setName] = useState("");
-  const [username, setUsername] = useState("");
+  const [email, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const handleRegAttempt = () => {
-    if(name && username && password){
-      if(userManager.register(username, password, name)){
-        userManager.login(username, password)
-        props.onRegister();
+    const form = document.getElementById("register-form");
+    let formIsValid = form.checkValidity();
+    if(formIsValid && name && email && password){
+      const users = getFromStorageAndParse("users");
+      const userNameFree = !users.some(user => user.email === email);
+      if(userNameFree){
+        const user = new User(email, password, {name});
+        users.push(user);
+        setStorage("users", users);
+        dispatch(userActions.loginAction(user));
+        navigate("/");
       }
+    } else {
+      form.reportValidity();
     }
   }
 
@@ -31,7 +48,7 @@ export default function RegisterPage(props) {
     setName(e.target.value);
   }
 
-  const handleUsernameInput = (e) => {
+  const handleEmailInput = (e) => {
     setUsername(e.target.value.trim());
   }
 
@@ -68,6 +85,7 @@ export default function RegisterPage(props) {
             <SocialLoginButton type="amazon"/>
             <SocialLoginButton type="apple"/>
           </Stack>
+          <form id="register-form">
           <Stack spacing={1}>
           <div>
           <Typography variant="subtitle2" gutterBottom component="div" className="latoB grBlack">
@@ -79,7 +97,7 @@ export default function RegisterPage(props) {
             <Typography variant="subtitle2" gutterBottom component="div" className="latoB grBlack">
               Email address
             </Typography>
-            <TextField id="outlined-basic" variant="outlined" type="email" size="small" placeholder="you@yours.com" value={username} onInput={handleUsernameInput} style={{width: "300px"}}/>
+            <TextField id="outlined-basic" variant="outlined" type="email" size="small" placeholder="you@yours.com" value={email} onInput={handleEmailInput} style={{width: "300px"}}/>
             </div>
             <div>
             <Typography variant="subtitle2" gutterBottom component="div" className="latoB grBlack">
@@ -88,7 +106,7 @@ export default function RegisterPage(props) {
             <TextField id="outlined-basic" variant="outlined" size="small" type="password" value={password} onInput={handlePasswordInput} style={{width: "300px"}}/>
             </div>
             </Stack>
-
+            </form>
           <Box style={{marginBottom: "10px"}}>
           <GoodButton title="Sign up" onClick={handleRegAttempt} padding="12px 24px" style={{marginRight: "20px"}}/>
             <span className="latoR grBlack" style={{fontSize: "12px", marginRight: "10px"}}>
