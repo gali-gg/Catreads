@@ -30,7 +30,7 @@ export default function ListEl(props){
             
             <Stack direction="row" sx={{mb: "10px"}}>
                 {props.icons && props.icons.map(icon => (
-                    <img key={icon} src={icon} className={classes.icon}></img>   
+                    <img key={icon} src={icon} className={classes.icon} alt="icon"></img>   
                 ))}
             </Stack>
 
@@ -39,9 +39,9 @@ export default function ListEl(props){
             <Stack direction={props.direction}>
                 {props.hrefs && props.hrefs.map(href => (
                     <StyledRouterLink 
-                        key={href} 
-                        title={href} 
-                        href={"/" + href.toLowerCase()} 
+                        key={href.title} 
+                        title={href.title} 
+                        href={href.href || ""} 
                         className={classes.link}>
                     </StyledRouterLink>
                 ))}

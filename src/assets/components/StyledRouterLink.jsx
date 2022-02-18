@@ -18,7 +18,7 @@ export default function StyledRouterLink(props){
     return(
         <Link 
             className={`${props.className || classes.link} latoR`}
-            to={props.href}
+            to={props.href} onClick={props.onClick}
         >
             {props.title}
         </Link>

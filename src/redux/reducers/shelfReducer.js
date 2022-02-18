@@ -1,19 +1,10 @@
-import { v4 as uuidv4 } from 'uuid';
-import { ADD_BOOK_TO_SHELF, ADD_SHELF, DELETE_SHELF, EDIT_SHELF } from "../actions/shelfAction";
+import { ADD_BOOK_TO_SHELF, ADD_SHELF, DELETE_SHELF, REMOVE_BOOK_FROM_SHELF } from '../actions/shelfAction';
 
 const INITIAL_STATE = {
-    wantToRead: {
-        id: 1, 
-        books: []
-    },
-    currentlyReading: {
-        id: 2, 
-        books: []
-    },
-    read: {
-        id: 3, 
-        books: []
-    },
+    wantToRead: [],
+    currentlyReading:[],
+    read: [],
+    userShelves: []
 };
 
 export const shelfReducer = (state = INITIAL_STATE, action) => {
@@ -21,25 +12,39 @@ export const shelfReducer = (state = INITIAL_STATE, action) => {
         case ADD_SHELF:
             return {
                 ...state, 
-                userShelf : {
-                    id: uuidv4(),
-                    books: []
-                },
+                [action.payload.name] : []
             };
-            /*
+            
         case ADD_BOOK_TO_SHELF:
+            let shelf = action.payload.name;
+            let newShelfBooks = state[shelf].some( book => book.uuid === action.payload.uuid) 
+                ? 
+                   state[shelf]
+                :
+                    [...state[shelf], action.payload.book]
             return{
-
-            };
-        case EDIT_SHELF:
-            return {
                 ...state,
+                [shelf]: newShelfBooks
+            };
+        
+        case REMOVE_BOOK_FROM_SHELF:
+            return{
+                ...state,
+                [action.payload.name]: state[action.payload.name].filter( book => book.uuid !== action.payload.uuid)
                 
             };
         case DELETE_SHELF:
+            let deletedShelfName = action.payload.name;
+        
+            if( deletedShelfName !== "wantToRead" && 
+                deletedShelfName !== "currentlyReading" && 
+                deletedShelfName !== "read"){
+                    delete state[action.payload.name];
+                }
+
             return {
-                ...state.filter(state => state.id !== action.payload),
-            };*/
+                ... state
+            };
         default: return state;
     }
 };

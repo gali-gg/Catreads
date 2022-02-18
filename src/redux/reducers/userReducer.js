@@ -24,7 +24,7 @@ export const userReducer = (state = INITIAL_STATE, action) => {
         case LOGOUT:
             return {
                 ...state,
-                logged: true,
+                logged: false,
                 id: null,
                 name: null,
                 avatar: null,
