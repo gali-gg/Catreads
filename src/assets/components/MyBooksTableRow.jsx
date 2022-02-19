@@ -1,10 +1,10 @@
-import Rating from "./GoodRating";
 import GoodLink from "./GoodLink";
 import x from "../images/X.png";
 import GoodBookCover from "./GoodBookCover";
 import "./styles.css";
 import { Divider } from "@mui/material";
 import GoodRating from "./GoodRating";
+import BookReviewModal from "./BookReviewModal";
 
 export default function MyBooksTableRow (props) {
     const book = props.book;
@@ -30,7 +30,14 @@ export default function MyBooksTableRow (props) {
                 {props.dateAdded}
             </td>
             <td>
-                <GoodLink titleText="edit" classes="latoR grGreen"></GoodLink>
+                <BookReviewModal
+                    type="link"
+                    clickTitle="edit"
+                    rating={props.userRating}
+                    cover={book.cover}
+                    title={book.title}
+                    author={props.authorName}
+                ></BookReviewModal>
                 <GoodLink titleText="view" classes="latoR grGreen"></GoodLink>
             </td>
             <td>
