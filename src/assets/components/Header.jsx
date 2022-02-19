@@ -9,7 +9,6 @@ import GoodReadsLogo from './GoodReadsLogo';
 import {useSelector} from 'react-redux';
 import { browseHrefs, communityHrefs, profileHrefsFirst, profileHrefsSecond } from '../../data/hrefs';
 
-
 export const Header = function Header (props){
     const name = useSelector(state => state.userData.name.first);
     if(props.logged){

@@ -12,6 +12,9 @@ import NewsPost from '../assets/components/NewsPost';
 import Title from '../assets/components/Title';
 import settingsIcon from "../assets/images/icon_settings.svg";
 import GoodLink from '../assets/components/GoodLink';
+import {useSelector, useDispatch} from 'react-redux';
+import {addBookToShelf} from '../redux/actions/shelfAction';
+import SideMenuImagesMosaic from '../assets/components/SideMenuImagesMosaic';
 
 const useStyles = makeStyles({
     main: {
@@ -21,15 +24,25 @@ const useStyles = makeStyles({
 });
 
 
-export default function HomePage () {
-    const classes = useStyles();
-
+export default function HomePage() {
+    const dispatch = useDispatch();
+    const shelves = useSelector(state => state.shelves);
+    let shelvesStatus = [];
+    for(let shelf in shelves){
+        shelvesStatus.push({title : shelf, num: shelves[shelf].length});
+    }
+    const handleAddBookToShelfWantToRead = (book) => {
+        dispatch(addBookToShelf("Want to Read", book));
+        setBook(chooseBook());
+    };
     const chooseBook = () => books[Math.ceil(Math.random()*8)];
     const [book, setBook] = useState(chooseBook());
 
     const handleNewBook = () => {
         setBook(chooseBook());
     }
+    
+    const classes = useStyles();
 
   return (
     <div className={classes.main}>
@@ -42,6 +55,7 @@ export default function HomePage () {
                             text="What are you reading?"
                             searchBox={true}
                             hrefs={[ "Recommendations", "General update"]}
+                            divider={true}
                         />
                         <SideMenuImageEl 
                             textStaus={true}
@@ -55,28 +69,24 @@ export default function HomePage () {
                             subTitle="reading challenge"
                             imgSrc="https://s.gr-assets.com/assets/challenges/yearly/img_RCBook-626ef5100b911207af0c4d84f02df03a.svg"
                         />
-                        <SideMenuEl 
-                            title="want to read" 
-                            imgSrc="https://s.gr-assets.com/assets/react_components/shelf_display/icn_default_wtr_leftrail-62c079d4573e5db15651d273fc72d1d2.svg"
-                            text="What do you want to read next?"
-                            hrefs={["Recommendations"]}
-                        />
+                        {shelves["Want to Read"].length === 0
+                            ? 
+                                (<SideMenuEl 
+                                    title="want to read" 
+                                    imgSrc="https://s.gr-assets.com/assets/react_components/shelf_display/icn_default_wtr_leftrail-62c079d4573e5db15651d273fc72d1d2.svg"
+                                    text="What do you want to read next?"
+                                    divider={true}
+                                    hrefs={["Recommendations"]}
+                                />)
+                            :   (<SideMenuImagesMosaic
+                                title="want to read" 
+                                href="View all books"
+                                />)
+                        }       
                         <SideMenuEl 
                             title="bookshelves" 
                             divider={false}
-                            status={[{
-                                title: "Want to Read",
-                                num: 0,
-                            },{
-                                title: "Currently Reading",
-                                num : 2,
-                            },{
-                            title: "Read",
-                            num : 26,
-                            },{
-                                title:"User Shelf",
-                                num : 1,
-                            }]}
+                            status={shelvesStatus}
                         />
                 </Stack>
                 
@@ -125,7 +135,12 @@ export default function HomePage () {
                             button="See the Winners"
                             status="4,756,261 Votes Cast"
                         />
-                        <RecommendBookLayout handleNewBook={handleNewBook} book={book} secondBook={chooseBook().title} />
+                        <RecommendBookLayout 
+                            title="Recommendation"
+                            handleNewBook={handleNewBook} 
+                            book={book} 
+                            handleClick={()=>handleAddBookToShelfWantToRead(book)}
+                        />
                         <Footer direction="row" width="100%" titleColor="#382110"></Footer>
                 </Container>
             </Stack>

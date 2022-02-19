@@ -1,10 +1,9 @@
 import { ADD_BOOK_TO_SHELF, ADD_SHELF, DELETE_SHELF, REMOVE_BOOK_FROM_SHELF } from '../actions/shelfAction';
 
 const INITIAL_STATE = {
-    wantToRead: [],
-    currentlyReading:[],
-    read: [],
-    userShelves: []
+    "Want to Read": [],
+    "Currently Reading":[],
+    "Read": [],
 };
 
 export const shelfReducer = (state = INITIAL_STATE, action) => {
@@ -36,14 +35,14 @@ export const shelfReducer = (state = INITIAL_STATE, action) => {
         case DELETE_SHELF:
             let deletedShelfName = action.payload.name;
         
-            if( deletedShelfName !== "wantToRead" && 
-                deletedShelfName !== "currentlyReading" && 
-                deletedShelfName !== "read"){
+            if( deletedShelfName !== "Want to Read" && 
+                deletedShelfName !== "Currently Reading" && 
+                deletedShelfName !== "Read"){
                     delete state[action.payload.name];
                 }
 
             return {
-                ... state
+                ...state
             };
         default: return state;
     }

@@ -3,6 +3,7 @@ import "./styles.css";
 
 const useStyles = makeStyles({
     title: {
+        display : "inline-block",
         fontSize: "0.9em",
         textTransform: "uppercase",
         margin: "5px 0",
