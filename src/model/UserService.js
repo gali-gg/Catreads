@@ -5,7 +5,7 @@ export default class User {
         this.id = uuidv4();
         this.email = email;
         this.password = password;
-        this.avatar = profilePicture || "https://s.gr-assets.com/assets/nophoto/user/u_225x300-c928cbb998d4ac6dd1f0f66f31f74b81.png";
+        this.avatar = profilePicture || "https://s.gr-assets.com/assets/nophoto/user/u_60x60-267f0ca0ea48fd3acfd44b95afa64f01.png";
         this.details = {
             birthday: detailsObj.birthday || null,
             names: {

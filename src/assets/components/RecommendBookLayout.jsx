@@ -1,15 +1,18 @@
 import Stack from '@mui/material/Stack';
 import authors from "../../data/authors";
 import "./styles.css";
-import GoodRating from './GoodRating';
 import GoodLink from './GoodLink';
 import { makeStyles } from '@mui/styles';
 import { Button, Divider, Rating } from '@mui/material';
 import IconCaretRight from "../images/icon_caret_right.svg";
+import Title from './Title';
 
 
 
 const useStyles = makeStyles({
+    title:{
+        textTransform: "uppercase",
+    },
     container:{
         display: "flex",
         flexDirection: "column",
@@ -40,6 +43,7 @@ const useStyles = makeStyles({
         color: "grey"
     }
 
+
 });
 
 export default function RecommendBookLayout(props){
@@ -47,7 +51,8 @@ export default function RecommendBookLayout(props){
     let author = authors.filter(author => author.uuid === props.book.author)[0].name;
     return (
         <>
-            <p className="latoR f-09 grBrown" style={{margin:"5px 0"}}>Because you enjoyed <strong>{props.secondBook}:</strong></p>
+            <Title title={props.title} className={`${classes.title} latoB grBrown f-09`}></Title>
+            <p></p>
             <Stack direction="row" spacing={2}>
                 <img height="160" src={props.book.cover} alt={`${props.book.title}-img`} />
                <Stack direction="row">
@@ -58,7 +63,7 @@ export default function RecommendBookLayout(props){
                             <Rating name="read-only" size="small" value={Math.floor(props.book.status.rating)} readOnly/>
                             <span className={classes.littleRatingText}>{props.book.status.rating}</span>
                         </div>
-                        <Button className={classes.button} disableRipple>
+                        <Button className={classes.button} onClick={props.handleClick} disableRipple>
                             Want to Read
                         </Button>
                     </div>
