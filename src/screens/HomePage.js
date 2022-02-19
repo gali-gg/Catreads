@@ -112,7 +112,7 @@ export default function HomePage() {
                         links={["Like", "Comment"]}
                     />
                     <Post 
-                        profileImg="https://images.gr-assets.com/authors/1610567480p5/7353006.jpg"
+                        profileImg={"https://images.gr-assets.com/authors/1610567480p5/7353006.jpg"}
                         name="Nicola Yoon"
                         postText="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget nibh ante. Fusce ut ultricies urna. Sed purus quam, cursus vel arcu id, cursus pretium sem."
                         date="26 April"

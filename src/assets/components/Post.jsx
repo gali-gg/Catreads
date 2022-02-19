@@ -3,7 +3,7 @@ import Title from "./Title";
 import { makeStyles } from '@mui/styles';
 import GoodLink from "./GoodLink";
 import "./styles.css";
-
+import store from "../../redux/store";
 
 const useStyles = makeStyles({
     container: {
@@ -28,10 +28,6 @@ const useStyles = makeStyles({
         paddingLeft: "10px",
     },
     userAvatar:{
-        backgroundImage: "url('https://s.gr-assets.com/assets/nophoto/user/u_60x60-267f0ca0ea48fd3acfd44b95afa64f01.png')",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-        backgroundSize:"cover",
         height: "32px",
         width: "35px",
         borderRadius: "50%",
@@ -75,7 +71,7 @@ export default function Post(props){
                     justifyContent="center"
                     alignItems="center"
                 >
-                    <span className={classes.userAvatar} />
+                    <img src={store.getState().userData.avatar} className={classes.userAvatar} alt="avatar"/>
                     <textarea
                         placeholder="Write a comment ..." 
                         className={`${classes.comments} latoR f-095`}
