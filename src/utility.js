@@ -10,4 +10,12 @@ function setStorage (key, data) {
     }
 }
 
-export {getFromStorageAndParse, setStorage};
+function debounce (func, delay) {
+    let timerID;
+    return function (...args){
+        clearTimeout(timerID);
+        timerID = setTimeout(func, delay, ...args);
+    }
+}
+
+export {getFromStorageAndParse, setStorage, debounce};

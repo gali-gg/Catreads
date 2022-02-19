@@ -26,3 +26,22 @@ hr {
     display: flex;
     gap: 15px;
 }
+
+.searchInput {
+    border: none;
+    border: #DCD6CC 1px solid;
+    border-radius: 3px;
+    min-width: 150px;
+    padding: 5px;
+}
+
+.searchBox {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.searchImg {
+    position: relative;
+    right: 20px;
+}
