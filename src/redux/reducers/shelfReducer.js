@@ -1,9 +1,19 @@
 import { ADD_BOOK_TO_SHELF, ADD_SHELF, DELETE_SHELF, REMOVE_BOOK_FROM_SHELF } from '../actions/shelfAction';
 
 const INITIAL_STATE = {
-    "Want to Read": [],
-    "Currently Reading":[],
-    "Read": [],
+    wantToRead:{
+        name: "Want to Read",
+        books: []
+    },
+    currentlyReading:{
+        name: "Currently Reading",
+        books: [],
+    },
+    read:{
+        name: "Read",
+        books: [],
+    },
+    userShelves: []
 };
 
 export const shelfReducer = (state = INITIAL_STATE, action) => {
@@ -11,36 +21,49 @@ export const shelfReducer = (state = INITIAL_STATE, action) => {
         case ADD_SHELF:
             return {
                 ...state, 
-                [action.payload.name] : []
+                userShelves : [...state.userShelves, 
+                    {
+                    name: action.payload.name,
+                    books: [],
+                    }
+                ]
             };
-            
+           
         case ADD_BOOK_TO_SHELF:
-            let shelf = action.payload.name;
-            let newShelfBooks = state[shelf].some( book => book.uuid === action.payload.uuid) 
+            let shelf;
+            if(action.payload.isUserShelf){
+                shelf = state.userShelves.filter(shelf => shelf.name === action.payload.name)[0];
+            }else{
+                shelf = state[action.payload.name];
+            }
+
+            shelf.books = shelf.books.some( book => book.uuid === action.payload.uuid) 
                 ? 
-                   state[shelf]
+                   shelf.books
                 :
-                    [...state[shelf], action.payload.book]
+                    [...shelf.books, action.payload.book]
             return{
                 ...state,
-                [shelf]: newShelfBooks
             };
         
         case REMOVE_BOOK_FROM_SHELF:
+            let bookShelf;
+            if(action.payload.isUserShelf){
+                bookShelf = state.userShelves.filter(shelf => shelf.name === action.payload.name)[0];
+            }else{
+                bookShelf = state[action.payload.name];
+            }
+
+            bookShelf.books = bookShelf.books.filter( book => book.uuid !== action.payload.uuid) 
             return{
                 ...state,
-                [action.payload.name]: state[action.payload.name].filter( book => book.uuid !== action.payload.uuid)
-                
             };
-        case DELETE_SHELF:
-            let deletedShelfName = action.payload.name;
-        
-            if( deletedShelfName !== "Want to Read" && 
-                deletedShelfName !== "Currently Reading" && 
-                deletedShelfName !== "Read"){
-                    delete state[action.payload.name];
-                }
 
+        case DELETE_SHELF:
+            let deletedShelfName = state.userShelves.filter(shelf => shelf.name === action.payload.name)[0];
+            let indexOfDeletedShelf = state.userShelves.indexOf(deletedShelfName);
+            
+            state.userShelves.splice(indexOfDeletedShelf);
             return {
                 ...state
             };

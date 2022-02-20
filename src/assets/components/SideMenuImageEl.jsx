@@ -77,7 +77,7 @@ export default function SideMenuImageEl(props){
     const classes = useStyles();
 
     const shelves = useSelector(state => state.shelves);
-    let readBooks = shelves["Read"].length;
+    let readBooks = shelves.read.books.length;
     let percentOfCompletedChallenge = readBooks > 10 ? 100 : Math.ceil(readBooks/10*100);
 
     return (

@@ -9,8 +9,6 @@ import books from '../data/books'
 import SideMenulist from '../assets/components/SideMenuList';
 import { v4 as uuidv4 } from 'uuid';
 
-
-
 const useStyles = makeStyles({
   bigTitle: {
       fontSize: "1.3em",

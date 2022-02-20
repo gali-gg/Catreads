@@ -23,22 +23,32 @@ const useStyles = makeStyles({
     }
 });
 
-
 export default function HomePage() {
     const dispatch = useDispatch();
-    const posts = useSelector(state => state.posts.posts);
+    //const posts = useSelector(state => state.posts.posts);
     const shelves = useSelector(state => state.shelves);
+    
     let shelvesStatus = [];
     for(let shelf in shelves){
-        shelvesStatus.push({title : shelf, num: shelves[shelf].length});
+        if(shelf === 'userShelves'){
+            shelves[shelf].forEach(userShelf => {
+                if(userShelf){
+                    shelvesStatus.push({title:userShelf.name, num: userShelf.books.length})
+                }
+            })
+            continue;
+        }
+        shelvesStatus.push({title: shelves[shelf].name, num: shelves[shelf].books.length})
     }
+
     const handleAddBookToShelfWantToRead = (book) => {
-        dispatch(addBookToShelf("Want to Read", book));
+        dispatch(addBookToShelf(false, "wantToRead", book));
         setBook(chooseBook());
     };
+
     const chooseBook = () => {
         let book = books[Math.ceil(Math.random()*books.length-1)];
-        if(shelves["Want to Read"].some(readBook => readBook.uuid === book.uuid)){
+        if(shelves.wantToRead.books.some(readBook => readBook.uuid === book.uuid)){
             return chooseBook();
         }
         return book;
@@ -76,7 +86,7 @@ export default function HomePage() {
                             subTitle="reading challenge"
                             imgSrc="https://s.gr-assets.com/assets/challenges/yearly/img_RCBook-626ef5100b911207af0c4d84f02df03a.svg"
                         />
-                        {shelves["Want to Read"].length === 0
+                        {shelves.wantToRead.books.length === 0
                             ? 
                                 (<SideMenuEl 
                                     title="want to read" 
@@ -113,14 +123,14 @@ export default function HomePage() {
                         </Stack>
                     </Stack>
                     {
-                        posts.map(post => 
+                      /*  posts.map(post => 
                             (<Post 
                                 key={post.id}
                                 author={post.userId}
                                 postText={post.body}
                                 likes={`${Math.ceil(Math.random()*200)} likes`}
                             />)
-                        )
+                        )*/
                     }
                     <span className="latoR grBlack f-09 text-center">No More Updates</span>
                 </Stack>

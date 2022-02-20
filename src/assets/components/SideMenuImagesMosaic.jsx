@@ -22,12 +22,12 @@ const useStyles = makeStyles({
 export default function SideMenuImagesMosaic(props){
     const shelves = useSelector(state => state.shelves);
     const classes = useStyles();
-    let wantToReadLength = shelves["Want to Read"].length;
+    let wantToReadLength = shelves.wantToRead.books.length;
     let books = [];
     if(wantToReadLength <= 6){
-        books = shelves["Want to Read"];
+        books = shelves.wantToRead.books;
     }else{
-        books = shelves["Want to Read"].slice(wantToReadLength-6);
+        books = shelves.wantToRead.books.slice(wantToReadLength-6);
     }
 
     return (

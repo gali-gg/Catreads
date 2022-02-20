@@ -3,10 +3,11 @@ export const DELETE_SHELF = "DELETE_SHELF";
 export const ADD_BOOK_TO_SHELF = "ADD_BOOK_TO_SHELF";
 export const REMOVE_BOOK_FROM_SHELF = "REMOVE_BOOK_FROM_SHELF";
 
-export const addBookToShelf = (name, book) => {
+export const addBookToShelf = (isUserShelf, name, book) => {
     return {
         type: ADD_BOOK_TO_SHELF,
         payload: {
+            isUserShelf : isUserShelf,
             name: name,
             book : book,
             uuid : book.uuid
@@ -23,10 +24,11 @@ export const addShelf = (name) => {
     }
 }
 
-export const removeBookFromShelf = (name, uuid) => {
+export const removeBookFromShelf = (isUserShelf, name, uuid) => {
     return {
         type: REMOVE_BOOK_FROM_SHELF,
         payload: {
+            isUserShelf,
             name,
             uuid
         }
