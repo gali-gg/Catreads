@@ -1,4 +1,3 @@
-import { useState } from "react";
 import BookHoverInfo from "./BookHoverInfo";
 import { authorManager } from "../../model/AuthorManagerService";
 import Tippy from "@tippyjs/react";

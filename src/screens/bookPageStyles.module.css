@@ -1,0 +1,25 @@
+.cover {
+    width: 150px;
+}
+
+.description {
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.descriptionAuthor {
+    display: -webkit-box;
+    -webkit-line-clamp: 10;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.main {
+    width: 70%;
+}
+
+.aside {
+    width: 30%;
+}
