@@ -23,25 +23,42 @@ const useStyles = makeStyles({
     }
 });
 
-
 export default function HomePage() {
     const dispatch = useDispatch();
+    //const posts = useSelector(state => state.posts.posts);
     const shelves = useSelector(state => state.shelves);
+    
     let shelvesStatus = [];
     for(let shelf in shelves){
-        shelvesStatus.push({title : shelf, num: shelves[shelf].length});
+        if(shelf === 'userShelves'){
+            shelves[shelf].forEach(userShelf => {
+                if(userShelf){
+                    shelvesStatus.push({title:userShelf.name, num: userShelf.books.length})
+                }
+            })
+            continue;
+        }
+        shelvesStatus.push({title: shelves[shelf].name, num: shelves[shelf].books.length})
     }
+
     const handleAddBookToShelfWantToRead = (book) => {
-        dispatch(addBookToShelf("Want to Read", book));
+        dispatch(addBookToShelf(false, "wantToRead", book));
         setBook(chooseBook());
     };
-    const chooseBook = () => books[Math.ceil(Math.random()*8)];
+
+    const chooseBook = () => {
+        let book = books[Math.ceil(Math.random()*books.length-1)];
+        if(shelves.wantToRead.books.some(readBook => readBook.uuid === book.uuid)){
+            return chooseBook();
+        }
+        return book;
+    };
     const [book, setBook] = useState(chooseBook());
 
     const handleNewBook = () => {
         setBook(chooseBook());
     }
-    
+
     const classes = useStyles();
 
   return (
@@ -69,7 +86,7 @@ export default function HomePage() {
                             subTitle="reading challenge"
                             imgSrc="https://s.gr-assets.com/assets/challenges/yearly/img_RCBook-626ef5100b911207af0c4d84f02df03a.svg"
                         />
-                        {shelves["Want to Read"].length === 0
+                        {shelves.wantToRead.books.length === 0
                             ? 
                                 (<SideMenuEl 
                                     title="want to read" 
@@ -78,9 +95,11 @@ export default function HomePage() {
                                     divider={true}
                                     hrefs={["Recommendations"]}
                                 />)
-                            :   (<SideMenuImagesMosaic
-                                title="want to read" 
-                                href="View all books"
+                            :   
+                                (<SideMenuImagesMosaic
+                                    title="want to read" 
+                                    href="View all books"
+                                    to="/myBooks"
                                 />)
                         }       
                         <SideMenuEl 
@@ -103,22 +122,16 @@ export default function HomePage() {
                             <GoodLink titleText="Customize" classes="grGrey f-095"/>
                         </Stack>
                     </Stack>
-                    <Post 
-                        profileImg="https://images.gr-assets.com/authors/1596216614p5/1077326.jpg"
-                        name="J.K. Rowling"
-                        postText="Sed condimentum fringilla consectetur. Vivamus eu orci quis elit imperdiet pretium. Morbi vel odio viverra, efficitur odio interdum <3"
-                        date="12 May"
-                        likes="Yali and 117 other people liked this"
-                        links={["Like", "Comment"]}
-                    />
-                    <Post 
-                        profileImg={"https://images.gr-assets.com/authors/1610567480p5/7353006.jpg"}
-                        name="Nicola Yoon"
-                        postText="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget nibh ante. Fusce ut ultricies urna. Sed purus quam, cursus vel arcu id, cursus pretium sem."
-                        date="26 April"
-                        likes="Many and 826 other people liked this"
-                        links={["Like", "Comment"]}
-                    />
+                    {
+                      /*  posts.map(post => 
+                            (<Post 
+                                key={post.id}
+                                author={post.userId}
+                                postText={post.body}
+                                likes={`${Math.ceil(Math.random()*200)} likes`}
+                            />)
+                        )*/
+                    }
                     <span className="latoR grBlack f-09 text-center">No More Updates</span>
                 </Stack>
                 

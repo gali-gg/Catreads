@@ -54,7 +54,7 @@ export default function RecommendBookLayout(props){
             <Title title={props.title} className={`${classes.title} latoB grBrown f-09`}></Title>
             <p></p>
             <Stack direction="row" spacing={2}>
-                <img height="160" src={props.book.cover} alt={`${props.book.title}-img`} />
+                <img width="100" src={props.book.cover} alt={`${props.book.title}-img`} />
                <Stack direction="row">
                 <div className={classes.container}>
                         <span className="meriB f-09 grBrown" >{props.book.title}</span>

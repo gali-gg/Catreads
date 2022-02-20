@@ -60,9 +60,29 @@ const genres = [
         genre :  "Horror",
     },
     {
-        uuid : 15,
+        uuid : 16,
         genre :  "Drama",
-    }
+    },
+    {
+        uuid : 17,
+        genre :  "Animals",
+    },
+    {
+        uuid : 18,
+        genre :  "Autobiography",
+    },
+    {
+        uuid : 19,
+        genre :  "Biography",
+    },
+    {
+        uuid : 20,
+        genre :  "Humor",
+    },
+    {
+        uuid : 21,
+        genre :  "Comics",
+    } 
 ];
 
 export default genres;

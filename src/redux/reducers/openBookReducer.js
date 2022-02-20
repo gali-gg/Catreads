@@ -7,7 +7,7 @@ const INITIAL_STATE = {
     description: null,
     author: null,
     rating: null,
-    comments: [],
+    reviews: [],
     similarBooks: [],
     genres: [],
 };
@@ -22,7 +22,7 @@ export const openBookReducer = (state = INITIAL_STATE, action) => {
                 description: action.payload.description,
                 author: action.payload.author,
                 rating: action.payload.rating,
-                comments: [],
+                reviews: [],
                 similarBooks: [],
                 genres: [],
             };
