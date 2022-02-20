@@ -2,19 +2,37 @@ import { Container } from "@mui/material";
 import GoodLink from "../assets/components/GoodLink";
 import "../assets/components/styles.css"
 import books from "../data/books.js";
-import MyBooksTableRow from "../assets/components/MyBooksTableRow";
-import {authorManager} from "../model/AuthorManagerService";
 import GoodButton from "../assets/components/GoodButton";
 import styles from "./myBooksStyles.module.css"
+import MyBooksTable from "../assets/components/MyBooksTable";
+import { useState } from "react";
+import { debounce } from "../utility";
+import icon from "../assets/images/search-icon-small.png";
 
 export default function MyBooksPage () {
+    const [listBooks, setListBooks] = useState(books);
+
+    const handleSearch = debounce((e) => {
+        let searchString = e.target.value.trim().toLowerCase();
+        if(searchString){
+            let filteredBooks = listBooks.filter(book => book.title.toLowerCase().includes(searchString));
+            setListBooks(filteredBooks);
+        }
+        else {
+            setListBooks(books);
+        }
+    }, 300);
+
     const fontSize = "1em";
     return (
         <Container maxWidth="lg" sx={{mt: 2, mb: 5}}>
             <div className={styles.pageHeading}>
                 <GoodLink size="1.5em" titleText="My Books" classes="meriB grGreen"></GoodLink>
                 <div className={styles.headingSide}>
-                <input type="search" placeholder="Search books"/>
+                <div className={styles.searchBox}>
+                <input className={styles.searchInput} type="search" placeholder="Search books" onInput={handleSearch}/>
+                <img className={styles.searchImg} src={icon} alt=""/>
+                </div>
                 <GoodLink titleText="Batch Edit" classes="latoR grGreen"></GoodLink>
                 <GoodLink titleText="Settings" classes="latoR grGreen"></GoodLink>
                 <GoodLink titleText="Stats" classes="latoR grGreen"></GoodLink>
@@ -50,55 +68,8 @@ export default function MyBooksPage () {
                     <li><GoodLink size={fontSize} titleText="Widgets" classes="latoR grGreen"></GoodLink></li>
                     <li><GoodLink size={fontSize} titleText="Import and export" classes="latoR grGreen"></GoodLink></li>
                 </ul>
-            <table className="text-left">
-                <thead >
-                    <tr>
-                    <th>
-                        <GoodLink titleText="cover" classes="latoB grBrown"/>
-                    </th>
-                    <th>
-                        <GoodLink titleText="title" classes="latoB grBrown"/>
-                    </th>
-                    <th>
-                        <GoodLink titleText="author" classes="latoB grBrown"/>
-                    </th>
-                    <th>
-                        <GoodLink titleText="avg rating" classes="latoB grBrown text-left"/>
-                    </th>
-                    <th>
-                        <GoodLink titleText="rating" classes="latoB grBrown"/>
-                    </th>
-                    <th>
-                        <GoodLink titleText="shelves" classes="latoB grBrown"/>
-                    </th>
-                    <th>
-                        <GoodLink titleText="date read" classes="latoB grBrown"/>
-                    </th>
-                    <th>
-                        <GoodLink titleText="date added" classes="latoB grBrown"/>
-                    </th>
-                    <th>
-                    </th>
-                    <th>
-                    </th>
-                    </tr>
-                </thead>
-                <tbody>
-                {books.map(book => {
-                        return <MyBooksTableRow key={book.uuid}
-                            book={book}
-                            authorName = {authorManager.getNameById(book.author)}
-                            userRating = {Math.random()*6}
-                            dateRead = "Feb 12, 2022"
-                            dateAdded = "Feb 10, 2022"
-                            shelves={["to-read", "best-books"]}
-                        ></MyBooksTableRow>
-
-                    })}
-                </tbody>
-            </table>
-            </div>
-        </Container>
-
+                <MyBooksTable books={listBooks}></MyBooksTable>
+                </div>
+                </Container>
     )
 }
