@@ -4,6 +4,7 @@ import { makeStyles } from '@mui/styles';
 import GoodLink from "./GoodLink";
 import "./styles.css";
 import store from "../../redux/store";
+import authors from "../../data/authors";
 
 const useStyles = makeStyles({
     container: {
@@ -42,21 +43,22 @@ const useStyles = makeStyles({
 });
 
 export default function Post(props){
+    let author = authors.filter(author => author.uuid === props.author)[0];
+    const links = ["Like", "Comment"]
     const classes = useStyles();
 
     return(
         <Stack sx={{border:"1px solid #ddd"}}>
             <Stack direction="column" className={classes.container} spacing={1}>
-                <img src={props.profileImg} alt={`${props.title}-img`} className={classes.authorImg}/>
+                <img src={author.profileImage} alt={`${props.title}-img`} className={classes.authorImg}/>
                 <Stack justifyContent="space-between" direction="row" alignItems="center">
-                    <Title title={props.name} className="latoB f-09" />
-                    <GoodLink titleText={props.date} classes="latoR f-08 grGrey" />
+                    <Title title={author.name} className="latoB f-09" />
                 </Stack>
                 <span className="latoR f-09 grBrown">
                     {props.postText}
                 </span>
                 <Stack direction="row" spacing={1}>
-                    {props.links.map(link => (
+                    {links.map(link => (
                         <GoodLink titleText={link} key={link} classes="grGreen latoR f-095" />
                     ))}
                 </Stack>

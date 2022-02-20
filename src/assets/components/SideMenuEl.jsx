@@ -35,8 +35,9 @@ export default function SideMenuEl(props){
                         ))}
                     </Stack>
                 )}
+
             </Stack>
-            {props.divider &&  <Divider />}
+            {props.divider && <Divider />}
         </>
     )
 };
