@@ -3,6 +3,7 @@ import GoodRating from "./GoodRating"
 import styles from "./css-modules/bookHoverInfo.module.css"
 import { useEffect, useState } from "react";
 import { Rating } from "@mui/material";
+import { formatNumber } from "../../utility";
 
 export default function BookHoverInfo (props) {
     const [descClass, setDescClass] = useState(styles.description);
@@ -28,7 +29,7 @@ export default function BookHoverInfo (props) {
                 <div className={`${styles.top} grGrey f-08`}>
                     <Rating precision={0.5} name="read-only" size="small" value={props.rating} readOnly />
                     {props.rating} avg rating - &nbsp;
-                    {props.ratingsCount} ratings - published &nbsp;
+                    {formatNumber(props.ratingsCount)} ratings - published&nbsp;
                     {props.published || "n/a"}
                 </div>
 

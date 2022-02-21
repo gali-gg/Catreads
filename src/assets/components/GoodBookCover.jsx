@@ -1,4 +1,3 @@
-import { useState } from "react";
 import BookHoverInfo from "./BookHoverInfo";
 import { authorManager } from "../../model/AuthorManagerService";
 import Tippy from "@tippyjs/react";
@@ -23,6 +22,7 @@ export default function GoodBookCover(props) {
           rating={props.book.status.rating}
           ratingsCount={props.book.status.ratingsCount}
           description={props.book.description}
+          published={props.book.published.year}
         />
       }
     >

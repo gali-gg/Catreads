@@ -8,6 +8,7 @@ const books = [
             "day": "1st",
             "month": "November",
             "year": 2003,
+            "publisher": "Scholastic Inc"
         },
         "cover" : "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1474154022l/3._SY475_.jpg",
         "genres" : [
@@ -36,6 +37,7 @@ const books = [
             "day": "2nd",
             "month": "June",
             "year": 1999,
+            "publisher": "Arthur A. Levine Books"
         },
         "cover" : "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1474169725l/15881._SY475_.jpg",
         "genres" : [
@@ -65,6 +67,7 @@ const books = [
             "day": "1st",
             "month": "May",
             "year": 2004,
+            "publisher": "Scholastic Inc."
         },
         "cover" : "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1630547330l/5._SY475_.jpg",
         "genres" : [
@@ -94,6 +97,7 @@ const books = [
             "day": "28th",
             "month": "September",
             "year": 2002,
+            "publisher": "Scholastic"
         },
         "cover" : "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1554006152l/6.jpg",
         "genres" : [
@@ -123,6 +127,7 @@ const books = [
             "day": "10th",
             "month": "September",
             "year": 2004,
+            "publisher": "Scholastic Inc."
         },
         "cover" : "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1546910265l/2.jpg",
         "genres" : [
@@ -159,6 +164,7 @@ const books = [
             "day": "16th",
             "month": "September",
             "year": 2006,
+            "publisher": "Scholastic Inc."
         },
         "cover" : "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1587697303l/1._SX318_.jpg",
         "genres" : [
@@ -187,6 +193,7 @@ const books = [
             "day": "21st",
             "month": "July",
             "year": 2007,
+            "publisher": "Arthur A. Levine Books"
         },
         "cover" : "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1474171184l/136251._SY475_.jpg",
         "genres" : [
@@ -215,6 +222,7 @@ const books = [
             "day": "1st",
             "month": "September",
             "year": 2015,
+            "publisher": "Delacorte Books for Young Readers"
         },
         "illustrator" : "David Yoon",
         "cover" : "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1450515891l/18692431._SY475_.jpg",
@@ -241,6 +249,7 @@ const books = [
             "day": "10th",
             "month": "January",
             "year": 2012,
+            "publisher": "Dutton Books"
         },
         "cover" : "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1632632557l/11870085.jpg",
         "genres" : [
@@ -267,6 +276,7 @@ const books = [
             "day": "29th",
             "month": "June",
             "year": 2000,
+            "publisher": "Harcourt, Inc."
         },
         "translator" : "Richard Howard",
         "cover" : "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1367545443l/157993.jpg",
@@ -296,6 +306,7 @@ const books = [
             "day": "24th",
             "month": "September",
             "year": 2008,
+            "publisher": "Grand Central Publishing"
         },
         "cover" : "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1398144610l/3257136.jpg",
         "genres" : [
@@ -322,6 +333,7 @@ const books = [
             "day": "9th",
             "month": "October",
             "year": 2012,
+            "publisher": "Andrews McMeel Publishing"
         },
         "cover" : "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1461518764l/15799936._SX318_.jpg",
         "genres" : [
@@ -348,6 +360,7 @@ const books = [
             "day": "1st",
             "month": "March",
             "year": 2012,
+            "publisher": "Hodder & Stoughton"
         },
         "cover" : "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1331779332l/12394068.jpg",
         "genres" : [
@@ -373,6 +386,7 @@ const books = [
             "day": "3rd",
             "month": "Sertember",
             "year": 2013,
+            "publisher": "Hodder & Stoughton"
         },
         "cover" : "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1370531891l/18043373.jpg",
         "genres" : [
@@ -398,6 +412,7 @@ const books = [
             "day": "20th",
             "month": "Sertember",
             "year": 2018,
+            "publisher": "Picador"
         },
         "cover" : "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1542377525l/40740914._SY475_.jpg",
         "genres" : [
@@ -423,6 +438,7 @@ const books = [
             "day": "28th",
             "month": "January",
             "year": 2014,
+            "publisher": "New Directions"
         },
         "cover" : "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1363582979l/17574849.jpg",
         "genres" : [
@@ -448,6 +464,7 @@ const books = [
             "day": "30th",
             "month": "September",
             "year": 2008,
+            "publisher": "HarperCollins"
         },
         "cover" : "https://images-na.ssl-images-amazon.com/images/I/9187i0VJ70L.jpg",
         "genres" : [
