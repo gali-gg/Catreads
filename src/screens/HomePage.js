@@ -27,7 +27,7 @@ export default function HomePage() {
     const dispatch = useDispatch();
     //const posts = useSelector(state => state.posts.posts);
     const shelves = useSelector(state => state.shelves);
-    
+
     let shelvesStatus = [];
     for(let shelf in shelves){
         if(shelf === 'userShelves'){
@@ -42,7 +42,7 @@ export default function HomePage() {
     }
 
     const handleAddBookToShelfWantToRead = (book) => {
-        dispatch(addBookToShelf(false, "wantToRead", book));
+        dispatch(addBookToShelf(false, "Want to Read", book));
         setBook(chooseBook());
     };
 
@@ -66,15 +66,15 @@ export default function HomePage() {
         <Container sx={{maxWidth: "1220px"}} style={{padding:0}}>
             <Stack direction="row" style={{padding:0}} spacing={2}>
                 <Stack style={{paddingRight:"5px", width: "25%"}}>
-                        <SideMenuEl 
-                            title="currently reading" 
+                        <SideMenuEl
+                            title="currently reading"
                             imgSrc="https://s.gr-assets.com/assets/react_components/currently_reading/icn_default_CR_ltrail-16f28d39654104ceb329648a474943eb.svg"
                             text="What are you reading?"
                             searchBox={true}
                             hrefs={[ "Recommendations", "General update"]}
                             divider={true}
                         />
-                        <SideMenuImageEl 
+                        <SideMenuImageEl
                             textStaus={true}
                             width="35%"
                             imgHeight="30"
@@ -87,30 +87,30 @@ export default function HomePage() {
                             imgSrc="https://s.gr-assets.com/assets/challenges/yearly/img_RCBook-626ef5100b911207af0c4d84f02df03a.svg"
                         />
                         {shelves.wantToRead.books.length === 0
-                            ? 
-                                (<SideMenuEl 
-                                    title="want to read" 
+                            ?
+                                (<SideMenuEl
+                                    title="want to read"
                                     imgSrc="https://s.gr-assets.com/assets/react_components/shelf_display/icn_default_wtr_leftrail-62c079d4573e5db15651d273fc72d1d2.svg"
                                     text="What do you want to read next?"
                                     divider={true}
                                     hrefs={["Recommendations"]}
                                 />)
-                            :   
+                            :
                                 (<SideMenuImagesMosaic
-                                    title="want to read" 
+                                    title="want to read"
                                     href="View all books"
                                     to="/myBooks"
                                 />)
-                        }       
-                        <SideMenuEl 
-                            title="bookshelves" 
+                        }
+                        <SideMenuEl
+                            title="bookshelves"
                             divider={false}
                             status={shelvesStatus}
                         />
                 </Stack>
-                
+
                 <Stack sx={{width: "45%"}} spacing={2}>
-                    <NewsPost 
+                    <NewsPost
                         src="https://images.gr-assets.com/misc/1643153495-1643153495_goodreads_misc.png"
                         title="Celebrate Romance Week on Goodreads!"
                         subTitle="Be our Valentine with these sweet and sexy reads."
@@ -123,8 +123,8 @@ export default function HomePage() {
                         </Stack>
                     </Stack>
                     {
-                      /*  posts.map(post => 
-                            (<Post 
+                      /*  posts.map(post =>
+                            (<Post
                                 key={post.id}
                                 author={post.userId}
                                 postText={post.body}
@@ -134,9 +134,9 @@ export default function HomePage() {
                     }
                     <span className="latoR grBlack f-09 text-center">No More Updates</span>
                 </Stack>
-                
+
                 <Container maxWidth="xs" sx={{width: "29%"}}>
-                        <SideMenuImageEl 
+                        <SideMenuImageEl
                             color="#32362D"
                             width="300px"
                             imgHeight="175"
@@ -148,10 +148,10 @@ export default function HomePage() {
                             button="See the Winners"
                             status="4,756,261 Votes Cast"
                         />
-                        <RecommendBookLayout 
+                        <RecommendBookLayout
                             title="Recommendation"
-                            handleNewBook={handleNewBook} 
-                            book={book} 
+                            handleNewBook={handleNewBook}
+                            book={book}
                             handleClick={()=>handleAddBookToShelfWantToRead(book)}
                         />
                         <Footer direction="row" width="100%" titleColor="#382110"></Footer>

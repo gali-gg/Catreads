@@ -1,7 +1,6 @@
 import { Container } from "@mui/material";
 import GoodLink from "../assets/components/GoodLink";
-import "../assets/components/styles.css"
-import books from "../data/books.js";
+import "../assets/components/styles.css";
 import GoodButton from "../assets/components/GoodButton";
 import styles from "./myBooksStyles.module.css"
 import MyBooksTable from "../assets/components/MyBooksTable";
@@ -15,23 +14,31 @@ export default function MyBooksPage () {
     const dispatch = useDispatch();
 
     let allBooks = useSelector(state => {
+        let {userShelves, ...regularShelves} = state.shelves;
+
         let allBooks = [];
-        for (let key in state.shelves) {
-            allBooks.push(...state.shelves[key]);
+
+        for (let key in regularShelves) {
+            allBooks.push(...regularShelves[key].books);
         }
+
+        userShelves.forEach(shelf => {
+            allBooks.push(shelf.books);
+        });
+
         return _.uniqBy(allBooks, "uuid");
     }, shallowEqual);
 
     let wantToReadBooks = useSelector(state => {
-        return state.shelves["Want to Read"];
+        return state.shelves.wantToRead.books;
     }, shallowEqual);
 
     let currentlyReadingBooks = useSelector(state => {
-        return state.shelves["Currently Reading"];
+        return state.shelves.currentlyReading.books;
     }, shallowEqual);
 
     let readBooks = useSelector(state => {
-        return state.shelves["Read"];
+        return state.shelves.read.books;
     }, shallowEqual);
 
     const [listBooks, setListBooks] = useState(allBooks);
@@ -65,14 +72,16 @@ export default function MyBooksPage () {
         return shelfName;
     }
 
+    const [isSearching, setIsSearching] = useState(false);
     const handleSearch = debounce((e) => {
+        setIsSearching(true);
         let booksToSearch = getSelectedBooks(isSelected);
         let searchString = e.target.value.trim().toLowerCase();
         if (searchString) {
             let filteredBooks = booksToSearch.filter(book => book.title.toLowerCase().includes(searchString));
             setListBooks(filteredBooks);
         } else {
-            setListBooks(booksToSearch);
+            setIsSearching(false);
         }
     }, 300);
 
@@ -91,7 +100,6 @@ export default function MyBooksPage () {
         isSelectedCopy[keyName] = true;
 
         setIsSelected(isSelectedCopy);
-        setListBooks(getSelectedBooks(isSelectedCopy));
         setShelfName(getSelectedShelfName(isSelectedCopy));
     }
 
@@ -149,7 +157,7 @@ export default function MyBooksPage () {
                     <li><GoodLink size={fontSize} titleText="Widgets" classes="latoR grGreen"></GoodLink></li>
                     <li><GoodLink size={fontSize} titleText="Import and export" classes="latoR grGreen"></GoodLink></li>
                 </ul>
-                <MyBooksTable books={listBooks} shelfName={shelfName}></MyBooksTable>
+                <MyBooksTable books={isSearching ? listBooks : getSelectedBooks(isSelected)} shelfName={shelfName}></MyBooksTable>
                 </div>
                 </Container>
     )

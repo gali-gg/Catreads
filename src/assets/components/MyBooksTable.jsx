@@ -53,11 +53,11 @@ export default function MyBooksTable (props) {
                     shelves={["to-read", "best-books"]}
                     onRemove={() => {
                         if(props.shelfName === "All"){
-                            dispatch(removeBookFromShelf("Want to Read", book.uuid));
-                            dispatch(removeBookFromShelf("Currently Reading", book.uuid));
-                            dispatch(removeBookFromShelf("Read", book.uuid));
+                            dispatch(removeBookFromShelf(false, "Want to Read", book.uuid));
+                            dispatch(removeBookFromShelf(false, "Currently Reading", book.uuid));
+                            dispatch(removeBookFromShelf(false, "Read", book.uuid));
                         } else {
-                            dispatch(removeBookFromShelf(props.shelfName, book.uuid));
+                            dispatch(removeBookFromShelf(false, props.shelfName, book.uuid));
                         }
                     }}
                 ></MyBooksTableRow>
