@@ -9,6 +9,7 @@ import { useState } from "react";
 import GoodLink from "../assets/components/GoodLink.jsx";
 import GoodButton from "../assets/components/GoodButton.jsx";
 import AuthorInfoBox from "../assets/components/AuthorInfoBox.jsx";
+import { formatNumber } from "../utility.js";
 
 export default function BookPage(props) {
   const params = useParams();
@@ -71,11 +72,11 @@ export default function BookPage(props) {
                   {book.status.rating}
                   <GoodLink
                     classes="latoR grGreen"
-                    titleText={`${book.status.ratingsCount} ratings`}
+                    titleText={`${formatNumber(book.status.ratingsCount)} ratings`}
                   ></GoodLink>
                   <GoodLink
                     classes="latoR grGreen"
-                    titleText={`${book.status.reviewsCount} reviews`}
+                    titleText={`${formatNumber(book.status.reviewsCount)} reviews`}
                   ></GoodLink>
                 </Stack>
                 <span className={`${descClass} meriR f-1`}>
@@ -95,7 +96,7 @@ export default function BookPage(props) {
                 </Stack>
                 <Divider></Divider>
                 <span className="latoR grGrey f-09">
-                  Published {book.published?.date || "n/a"} by{" "}
+                  Published {(`${book.published?.month} ${book.published?.day} ${book.published?.year}`) || "n/a"} by{" "}
                   {book.published?.publisher || "Unknown"}
                 </span>
               </div>
