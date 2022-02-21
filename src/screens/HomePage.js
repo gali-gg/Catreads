@@ -7,7 +7,6 @@ import SideMenuImageEl from '../assets/components/SideMenuImageEl';
 import books from '../data/books';
 import RecommendBookLayout from '../assets/components/RecommendBookLayout';
 import { Footer } from '../assets/components/Footer';
-import Post from '../assets/components/Post';
 import NewsPost from '../assets/components/NewsPost';
 import Title from '../assets/components/Title';
 import settingsIcon from "../assets/images/icon_settings.svg";
@@ -15,6 +14,7 @@ import GoodLink from '../assets/components/GoodLink';
 import {useSelector, useDispatch} from 'react-redux';
 import {addBookToShelf} from '../redux/actions/shelfAction';
 import SideMenuImagesMosaic from '../assets/components/SideMenuImagesMosaic';
+import {PostsLayout} from '../assets/components/PostsLayout';
 
 const useStyles = makeStyles({
     main: {
@@ -64,7 +64,7 @@ export default function HomePage() {
   return (
     <div className={classes.main}>
         <Container sx={{maxWidth: "1220px"}} style={{padding:0}}>
-            <Stack direction="row" style={{padding:0}} spacing={2}>
+            <Stack direction="row" style={{padding:0}}>
                 <Stack style={{paddingRight:"5px", width: "25%"}}>
                         <SideMenuEl 
                             title="currently reading" 
@@ -109,33 +109,24 @@ export default function HomePage() {
                         />
                 </Stack>
                 
-                <Stack sx={{width: "45%"}} spacing={2}>
-                    <NewsPost 
+                <Stack sx={{width: "40%"}} spacing={2}>
+                    <NewsPost
                         src="https://images.gr-assets.com/misc/1643153495-1643153495_goodreads_misc.png"
                         title="Celebrate Romance Week on Goodreads!"
                         subTitle="Be our Valentine with these sweet and sexy reads."
                     />
-                    <Stack direction="row" justifyContent="space-between" alignItems="center">
+                    <Stack style={{paddingLeft: "25px"}} direction="row" justifyContent="space-between" alignItems="center">
                         <Title title="Updates" className="grBlack text-upper f-095 latoB"/>
                         <Stack direction="row" alignItems="center" sx={{gap:"3px"}}>
                             <img src={settingsIcon} height="15" alt="settings-icon" />
                             <GoodLink titleText="Customize" classes="grGrey f-095"/>
                         </Stack>
                     </Stack>
-                    {
-                      /*  posts.map(post => 
-                            (<Post 
-                                key={post.id}
-                                author={post.userId}
-                                postText={post.body}
-                                likes={`${Math.ceil(Math.random()*200)} likes`}
-                            />)
-                        )*/
-                    }
-                    <span className="latoR grBlack f-09 text-center">No More Updates</span>
+                    <PostsLayout style={{zIndex: 1000}}/>
+                    
                 </Stack>
                 
-                <Container maxWidth="xs" sx={{width: "29%"}}>
+                <Stack sx={{width: "29%", ml: "20px"}}>
                         <SideMenuImageEl 
                             color="#32362D"
                             width="300px"
@@ -155,7 +146,7 @@ export default function HomePage() {
                             handleClick={()=>handleAddBookToShelfWantToRead(book)}
                         />
                         <Footer direction="row" width="100%" titleColor="#382110"></Footer>
-                </Container>
+                </Stack>
             </Stack>
         </Container>
     </div>

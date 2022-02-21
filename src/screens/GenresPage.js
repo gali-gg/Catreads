@@ -1,10 +1,10 @@
 import { Autocomplete, Container, Stack } from '@mui/material';
-import React from 'react'
+import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import Title from '../assets/components/Title';
 import { makeStyles } from '@mui/styles';
 import genres from '../data/genres';
-import GenreContainer from '../assets/components/GenreContainer';
+import {GenreContainer} from '../assets/components/GenreContainer';
 import books from '../data/books'
 import SideMenulist from '../assets/components/SideMenuList';
 import { v4 as uuidv4 } from 'uuid';
@@ -12,7 +12,7 @@ import { v4 as uuidv4 } from 'uuid';
 const useStyles = makeStyles({
   bigTitle: {
       fontSize: "1.3em",
-      margin: "0 0  20px 100px"
+      margin: "0 0  20px 80px"
   },
   searchContainer: {
     borderRadius: "3px",
@@ -75,22 +75,22 @@ export default function GenresPage() {
                 className={`${classes.input} latoR`}
                 id="input-search-genres"
                 options={allGenres}
-                renderInput={(params) => (
-                  <div ref={params.InputProps.ref}>
-                    <input type="text" {...params.inputProps} placeholder="Find a genre by name"/>
-                  </div>
-                )}
+                renderInput={(params) => {
+                  return (
+                    <div ref={params.InputProps.ref}>
+                      <input type="text" {...params.inputProps} placeholder="Find a genre by name"/>
+                    </div>
+                  )
+                }}
               />
             </label>
                 <button className={`${classes.button} latoR f-09 grBrown`}>Find Genre</button>
               </Stack>
 
               {genres.map(genre => 
-                (genreBooks(genre) && <GenreContainer 
-                  key={uuidv4()}
-                  genre={genre.genre} 
-                  books={genreBooks(genre) }
-                />))}
+                (genreBooks(genre) && 
+                    <GenreContainer key={uuidv4()} genre={genre.genre} books={genreBooks(genre) }/>
+                ))}
 
             </Stack>
             <Stack spacing={3}>
