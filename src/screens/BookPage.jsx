@@ -67,7 +67,13 @@ export default function BookPage(props) {
   const handleAddReview = () => {
     setReviewBody("");
 
-    dispatch(addReviewAction(userID, reviewBody, 3));
+    dispatch(addReviewAction(userID, reviewBody, userRating));
+  }
+
+  const [userRating, setUserRating] = useState(0);
+
+  const handleRatingChange = (e) => {
+    setUserRating(e.target.value);
   }
 
   return (
@@ -142,12 +148,20 @@ export default function BookPage(props) {
         </Stack>
 
         <Stack>
+          <p>How many stars?</p>
+          <select value={userRating} onChange={handleRatingChange}>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
           <textarea placeholder="Write review..." value={reviewBody} onInput={handleReviewInput}>
           </textarea>
           <button onClick={handleAddReview}>Post</button>
 
           <Divider></Divider>
-          {reviews.map(review => <BookReview review={review}></BookReview>)}
+          {reviews.map(review => <BookReview rating={userRating} review={review}></BookReview>)}
 
         </Stack>
 

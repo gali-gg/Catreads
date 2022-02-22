@@ -1,5 +1,6 @@
 import { useDispatch } from "react-redux";
 import { removeReviewAction } from "../../redux/actions/openBookAction";
+import GoodRating from "./GoodRating";
 
 export default function BookReview (props){
     const dispatch = useDispatch();
@@ -12,6 +13,7 @@ export default function BookReview (props){
 
     return (
         <>
+        <GoodRating rating={props.review.rating} size="small"></GoodRating>
         <p>{props.review.body}</p>
         <div id={props.review.id} onClick={handleRemoveReview}>remove review</div>
         </>
