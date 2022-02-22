@@ -1,6 +1,5 @@
 import { applyMiddleware, compose, createStore } from 'redux';
 import { combineReducers } from 'redux';
-import { postReducer } from './reducers/postReducer';
 import thunk from 'redux-thunk'
 import { shelfReducer } from './reducers/shelfReducer';
 import { userReducer } from './reducers/userReducer';
@@ -9,7 +8,6 @@ import {openBookReducer} from "./reducers/openBookReducer";
 const rootReducer = combineReducers({
     userData : userReducer,
     shelves : shelfReducer,
-    posts : postReducer,
     openBook : openBookReducer
 });
 

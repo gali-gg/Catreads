@@ -5,6 +5,7 @@ import GoodLink from "./GoodLink";
 import "./styles.css";
 import store from "../../redux/store";
 import authors from "../../data/authors";
+import { useState } from "react";
 
 const useStyles = makeStyles({
     container: {
@@ -44,7 +45,18 @@ const useStyles = makeStyles({
 
 export default function Post(props){
     let author = authors.filter(author => author.uuid === props.author)[0];
-    const links = ["Like", "Comment"]
+    const [likes, setLikes] = useState(props.likes);
+    const [isLiked, setIsLiked] = useState(false);
+
+    const handleLike = () => {
+        if(!isLiked){
+            setLikes(likes+1);
+            setIsLiked(true);
+        }else{
+            setLikes(likes-1);
+            setIsLiked(false);
+        }
+    }
     const classes = useStyles();
 
     return(
@@ -58,13 +70,12 @@ export default function Post(props){
                     {props.postText}
                 </span>
                 <Stack direction="row" spacing={1}>
-                    {links.map(link => (
-                        <GoodLink titleText={link} key={link} classes="grGreen latoR f-095" />
-                    ))}
+                        <GoodLink onClick={handleLike} titleText={isLiked ? "Unlike" : "Like"} key={"like"} classes="grGreen latoR f-095" />
+                        <GoodLink titleText={"Comment"} key={"comment"} classes="grGreen latoR f-095" />
                 </Stack>
             </Stack>
             <Stack className={classes.likesContainer} spacing={0}>
-                <GoodLink titleText={props.likes} classes={`${classes.link} grBrown latoR f-09`}></GoodLink>
+                <GoodLink titleText={likes +  " likes"} classes={`${classes.link} grBrown latoR f-09`}></GoodLink>
                 <Divider></Divider>
                 <Stack 
                     sx={{p:"10px"}} 

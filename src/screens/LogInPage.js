@@ -19,7 +19,6 @@ import { getFromStorageAndParse } from "../utility";
 import { useDispatch } from "react-redux";
 import { loginAction } from "../redux/actions/userAction";
 import { useNavigate } from "react-router-dom";
-import { loadPosts } from "../redux/actions/postAction";
 
 export default function LogInPage(props) {
   const [email, setEmail] = useState("");
@@ -41,7 +40,6 @@ export default function LogInPage(props) {
       if(authenticate(email, password)){
         setErrorIsVisible(false);
         const user = users.find(user => user.email === email);
-        dispatch(loadPosts());
         dispatch(loginAction(user));
         navigate("/");
       }

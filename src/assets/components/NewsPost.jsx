@@ -7,6 +7,7 @@ import "./styles.css";
 
 const useStyles = makeStyles({
     container: {
+        marginLeft: "25px",
         border: "1px solid #ddd",
         background: "white",
     },
