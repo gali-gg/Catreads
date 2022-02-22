@@ -18,9 +18,14 @@ export default function GenreTitle(props){
 
     return(
         <>
-            <Stack direction="row" justifyContent="spaceBetween" alignItems="center" spacing={16}>
+            <Stack 
+                direction="row" 
+                justifyContent="flex-start"
+                alignItems="center" 
+                spacing={props.together ? 1 : 16}
+            >
                 <Title title={props.title} className={`${classes.title} latoB f-08 grBrown`} />
-                {props.link && <GoodLink classes="latoR grGrey f-08" titleText={props.link} />}
+                {props.link && <GoodLink classes="latoR grGrey f-08" titleText={props.link} to={props.to || ""}/>}
             </Stack>
             <Divider className={classes.divider}/>
         </>

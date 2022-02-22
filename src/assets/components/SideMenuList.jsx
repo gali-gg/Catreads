@@ -2,7 +2,6 @@ import { Stack } from "@mui/material";
 import GenreTitle from "./GenreTitle";
 import { makeStyles } from "@mui/styles";
 import GoodLink from "./GoodLink";
-import genres from "../../data/genres";
 
 const useStyles = makeStyles({
     downLink: {

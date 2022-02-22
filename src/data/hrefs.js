@@ -52,6 +52,7 @@ export const communityHrefs = [
 export const profileHrefsFirst = [
     {
         title : "Profile",
+        href : "/user" 
     },
     {
         title : "Friends",
