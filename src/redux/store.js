@@ -5,12 +5,18 @@ import { shelfReducer } from './reducers/shelfReducer';
 import { userReducer } from './reducers/userReducer';
 import {openBookReducer} from "./reducers/openBookReducer";
 import { reviewsReducer } from './reducers/reviewsReducer';
+import { allGenresReducer } from './reducers/allGenresReducer';
+import { allAuthorsReducer } from './reducers/allAuthorsReducer';
+import { allBooksReducer } from './reducers/allBooksReducer';
 
 const rootReducer = combineReducers({
     userData : userReducer,
     shelves : shelfReducer,
     openBook : openBookReducer,
-    reviews: reviewsReducer
+    reviews: reviewsReducer,
+    genres: allGenresReducer,
+    authors: allAuthorsReducer,
+    books: allBooksReducer
 });
 
 const store = createStore(

@@ -19,6 +19,9 @@ import { getFromStorageAndParse } from "../utility";
 import { useDispatch } from "react-redux";
 import { loginAction } from "../redux/actions/userAction";
 import { useNavigate } from "react-router-dom";
+import { loadAllBooksAction } from "../redux/actions/allBooksAction";
+import { loadGenresAction } from "../redux/actions/allGenresAction";
+import { loadAuthorsAction } from "../redux/actions/allAuthorsAction";
 
 export default function LogInPage(props) {
   const [email, setEmail] = useState("");
@@ -41,6 +44,9 @@ export default function LogInPage(props) {
         setErrorIsVisible(false);
         const user = users.find(user => user.email === email);
         dispatch(loginAction(user));
+        dispatch(loadAllBooksAction());
+        dispatch(loadGenresAction());
+        dispatch(loadAuthorsAction());
         navigate("/");
       }
 
