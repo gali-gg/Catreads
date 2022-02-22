@@ -64,7 +64,7 @@ export default function ProfilePage() {
         </Stack>
         <Stack style={{ width: "350px" }}>
           <Stack direction="row" justifyContent="flex-start" alignItems="center" spacing={1}>
-            <Title title={user.name} className={`${classes.titleName} meriB grBrown`} />
+            <Title title={user.name.first} className={`${classes.titleName} meriB grBrown`} />
             <GoodLink titleText="(edit profile)" classes={`${classes.littleLink} grGreen latoB`} />
           </Stack>
           <Divider />
@@ -77,7 +77,7 @@ export default function ProfilePage() {
         </Stack>
       </Stack>
       <Stack spacing={1} >
-        <GenreTitle title={`${user.name}\`s favourite books`} ></GenreTitle>
+        <GenreTitle title={`${user.name.first}\`s favourite books`} ></GenreTitle>
         <Stack direction="row" spacing={1}>
           {shelves.read.books.map(book =>
             <img src={book.cover} alt={book.title} key={book.uuid} height="100px" />
@@ -89,7 +89,7 @@ export default function ProfilePage() {
       </Stack>
 
       <Stack spacing={1}>
-        <GenreTitle title={`${user.name}\`s bookshelves`} ></GenreTitle>
+        <GenreTitle title={`${user.name.first}\`s bookshelves`} ></GenreTitle>
         <Stack direction="row" spacing={4} flexWrap="wrap">
           {
             shelvesNames.map(shelfName =>
@@ -119,7 +119,7 @@ export default function ProfilePage() {
       </Stack>
 
       <Stack spacing={1}>
-        <GenreTitle title={`${user.name} is currently reading`} ></GenreTitle>
+        <GenreTitle title={`${user.name.first} is currently reading`} ></GenreTitle>
         {shelves.currentlyReading.books.map(book =>
           <UserBooksLayout
             key={`${book.uuid}-cr`}
@@ -130,7 +130,7 @@ export default function ProfilePage() {
       </Stack>
 
       <Stack spacing={1}>
-        <GenreTitle title={`${user.name} recent updates`} ></GenreTitle>
+        <GenreTitle title={`${user.name.first} recent updates`} ></GenreTitle>
         {shelves.read.books.map(book =>
           <UserBooksLayout
             key={`${book.uuid}-r`}

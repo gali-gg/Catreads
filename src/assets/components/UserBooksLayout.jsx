@@ -76,7 +76,7 @@ export default function UserBooksLayout(props) {
                     <StyledRouterLink
                         className={`${classes.links} latoB f-09 grGreen`}
                         href="/user"
-                        title={user.name}
+                        title={user.name.first}
                     />
                     <span className="latoR f-08">{props.doing}</span>
                 </Stack>
