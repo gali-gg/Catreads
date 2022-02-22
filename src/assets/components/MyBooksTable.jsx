@@ -30,12 +30,12 @@ export default function MyBooksTable (props) {
             <th>
                 <GoodLink titleText="shelves" classes="latoB grBrown"/>
             </th>
-            <th>
+            {/* <th>
                 <GoodLink titleText="date read" classes="latoB grBrown"/>
             </th>
             <th>
                 <GoodLink titleText="date added" classes="latoB grBrown"/>
-            </th>
+            </th> */}
             <th>
             </th>
             <th>

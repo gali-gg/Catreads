@@ -1,4 +1,4 @@
-import { Divider, Paper } from "@mui/material";
+import { Divider, Paper, Rating } from "@mui/material";
 import Modal from "@mui/material/Modal";
 import { useState } from "react";
 import GoodButton from "./GoodButton";
@@ -6,6 +6,10 @@ import GoodLink from "./GoodLink";
 import GoodRating from "./GoodRating";
 import "./styles.css";
 import x from "../images/X.png";
+import { useDispatch, useSelector } from "react-redux";
+import { addBookToShelf } from "../../redux/actions/shelfAction";
+import { addReviewAction, loadBookAction } from "../../redux/actions/openBookAction";
+import authors from "../../data/authors.js"
 
 const paperStyle = {
   position: "absolute",
@@ -40,6 +44,8 @@ const dFlex = {
 };
 
 export default function BookReviewModal(props) {
+  const dispatch = useDispatch();
+  const userID = useSelector(state => state.userData.id);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
@@ -50,6 +56,31 @@ export default function BookReviewModal(props) {
   const [rating, setRating] = useState(props.rating);
   const handleClearRating = () => {
     setRating(0);
+  }
+
+  const handleChangeRating = (ratingValue) => {
+    setRating(ratingValue);
+  }
+
+  const[shelfName, setShelfName] = useState("");
+  const handleSelectShelf = (e) => {
+    let name = e.target.value;
+    setShelfName(name);
+}
+
+  const [reviewBody, setReviewBody] = useState("");
+  const handleReviewBodyInput = (e) => {
+    setReviewBody(e.target.value);
+  }
+
+  //TODO get author from authors slice
+  const author = authors.find(author => author.uuid === props.book.author);
+  const handlePostReview = () => {
+    dispatch(loadBookAction(props.book, author));
+    if(shelfName){
+      dispatch(addBookToShelf(false, shelfName, props.book));
+    }
+    dispatch(addReviewAction(userID, reviewBody, rating));
   }
 
   return (
@@ -96,16 +127,18 @@ export default function BookReviewModal(props) {
             <div style={sectionStyle}>
               <div style={{...dFlex, marginBottom: "10px"}}>
                 My rating:
-                <GoodRating size="small" rating={rating}></GoodRating>
+                <GoodRating size="small" rating={rating} onRating={handleChangeRating}></GoodRating>
+                {/* <Rating></Rating> */}
                 <span className="grGrey f-08 latoR" style={{cursor: "pointer"}} onClick={handleClearRating}>Clear</span>
               </div>
 
               <div style={dFlex}>
                 Bookshelves/tags:
-                <select>
-                  <option>Want to read</option>
-                  <option>Currently reading</option>
-                  <option>Read</option>
+                <select onChange={handleSelectShelf}>
+                        <option value="">Add to shelf</option>
+                        <option value={"Read"}>Read</option>
+                        <option value={"Currently Reading"}>Currently reading</option>
+                        <option value={"Want to Read"}>Want to read</option>
                 </select>
               </div>
             </div>
@@ -114,13 +147,15 @@ export default function BookReviewModal(props) {
             <div style={sectionStyle}>
               <p>What did you think?</p>
               <textarea
+                value={reviewBody}
+                onInput={handleReviewBodyInput}
                 rows="12"
                 placeholder="Enter your review (optional)"
                 style={{ width: "100%" }}
               ></textarea>
             </div>
             <Divider></Divider>
-            <div style={sectionStyle}>
+            {/* <div style={sectionStyle}>
               <div>
                 <span className="latoB">Dates read</span>
                 <br />
@@ -149,10 +184,10 @@ export default function BookReviewModal(props) {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
 
-            <Divider></Divider>
-            <GoodButton title="Post" fontSize="0.95em" style={sectionStyle}></GoodButton>
+            {/* <Divider></Divider> */}
+            <GoodButton title="Post" fontSize="0.95em" style={sectionStyle} onClick={handlePostReview}></GoodButton>
           </div>
         </Paper>
       </Modal>

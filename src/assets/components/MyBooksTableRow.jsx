@@ -25,12 +25,12 @@ export default function MyBooksTableRow (props) {
             <td>
                 {props.shelves.map((shelf, index) => <GoodLink key={`shelf${index}`} titleText={shelf} classes="latoR grGreen"/>)}
             </td>
-            <td>
+            {/* <td>
                 {props.dateRead}
             </td>
             <td>
                 {props.dateAdded}
-            </td>
+            </td> */}
             <td>
                 <BookReviewModal
                     type="link"
@@ -39,8 +39,9 @@ export default function MyBooksTableRow (props) {
                     cover={book.cover}
                     title={book.title}
                     author={props.authorName}
+                    book={book}
                 ></BookReviewModal>
-                <GoodLink titleText="view" classes="latoR grGreen"></GoodLink>
+                {/* <GoodLink titleText="view" classes="latoR grGreen"></GoodLink> */}
             </td>
             <td>
                 <div onClick={props.onRemove}>

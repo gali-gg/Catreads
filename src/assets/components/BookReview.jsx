@@ -1,3 +1,4 @@
+import { Rating } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { removeReviewAction } from "../../redux/actions/openBookAction";
 import GoodRating from "./GoodRating";
@@ -13,7 +14,8 @@ export default function BookReview (props){
 
     return (
         <>
-        <GoodRating rating={props.review.rating} size="small"></GoodRating>
+        <Rating value={props.review.rating} size="small" name="read-only" readOnly></Rating>
+        <p>{props.review.rating}</p>
         <p>{props.review.body}</p>
         <div id={props.review.id} onClick={handleRemoveReview}>remove review</div>
         </>

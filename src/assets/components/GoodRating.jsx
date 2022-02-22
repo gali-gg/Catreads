@@ -6,7 +6,21 @@ import {useState} from "react";
 export default function GoodRating(props) {
   // size prop can be small medium or large
   const [value, setValue] = useState(props.rating);
-  // console.log("rendering with value: ", value);
+
+  React.useEffect (() => {
+    setValue(props.rating);
+  }, [props]);
+
+  React.useEffect(() =>{
+    if(props.onRating){
+      props.onRating(value);
+    }
+  }, [value]);
+
+  const handleChangeValue = (ev, newValue) => {
+    setValue(newValue);
+  }
+
   return (
       <Rating
         precision={0.5}
@@ -14,12 +28,8 @@ export default function GoodRating(props) {
         value={value}
         defaultValue={0}
         size={props.size}
-        onChange={(event, newValue) => {
-          setValue(newValue);
-          if(props.onRating){
-            props.onRating();
-          }
-        }}
+        readOnly={props.name === "read-only" ? true : false}
+        onChange={handleChangeValue}
       />
     )
 }
