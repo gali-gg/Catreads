@@ -10,11 +10,13 @@ import { useEffect, useState } from "react";
 import GoodLink from "../assets/components/GoodLink.jsx";
 import GoodButton from "../assets/components/GoodButton.jsx";
 import AuthorInfoBox from "../assets/components/AuthorInfoBox.jsx";
-import { formatNumber } from "../utility.js";
+import { formatNumber, getRatingsStats } from "../utility.js";
 import { useSelect } from "@mui/base";
 import { useDispatch, useSelector } from "react-redux";
-import { addReviewAction, loadBookAction, removeReviewAction } from "../redux/actions/openBookAction.js";
+import { loadBookAction } from "../redux/actions/openBookAction.js";
+import { addReviewAction, removeReviewAction } from "../redux/actions/reviewsActions.js";
 import BookReview from "../assets/components/BookReview.jsx";
+import {v4 as uuidv4} from "uuid";
 
 export default function BookPage(props) {
   const params = useParams();
@@ -23,6 +25,11 @@ export default function BookPage(props) {
   const bookObj = allBooks.find((book) => book.uuid === bookId);
   const authorObj = authors.find(author => author.uuid === bookObj.author);
   const similarBooksArr = [];
+
+  const reviews = useSelector(state => {
+    return state.reviews.reviews.filter(review => review.bookID === bookId);
+  });
+  const ratingStats = getRatingsStats(reviews);
 
   const userID = useSelector(state => state.userData.id);
 
@@ -56,7 +63,7 @@ export default function BookPage(props) {
     }
   };
 
-  const reviews = useSelector(state => state.openBook.reviews);
+
   const [reviewBody, setReviewBody] = useState("");
 
   const handleReviewInput = (e) => {
@@ -67,7 +74,7 @@ export default function BookPage(props) {
   const handleAddReview = () => {
     setReviewBody("");
     setUserRating(0);
-    dispatch(addReviewAction(userID, reviewBody, userRating));
+    dispatch(addReviewAction(uuidv4(), userID, params.bookId, userRating, reviewBody));
   }
 
   const [userRating, setUserRating] = useState(0);
@@ -100,6 +107,7 @@ export default function BookPage(props) {
                 titleText={book.author.name}
                 classes="meriR grBrown"
               ></GoodLink>
+              {/* //TODO make ratings component ot function */}
               <Stack
                 direction="row"
                 gap={1}
@@ -110,17 +118,17 @@ export default function BookPage(props) {
                   precision={0.5}
                   name="read-only"
                   size="small"
-                  value={book.status.rating}
+                  value={ratingStats.rating}
                   readOnly
                 />
-                {book.status.rating}
+                {ratingStats.rating}
                 <GoodLink
                   classes="latoR grGreen"
-                  titleText={`${formatNumber(book.status.ratingsCount)} ratings`}
+                  titleText={`${formatNumber(ratingStats.ratingsCount)} ratings`}
                 ></GoodLink>
                 <GoodLink
                   classes="latoR grGreen"
-                  titleText={`${formatNumber(book.status.reviewsCount)} reviews`}
+                  titleText={`${formatNumber(ratingStats.reviewsCount)} reviews`}
                 ></GoodLink>
               </Stack>
               <span className={`${descClass} meriR f-1`}>

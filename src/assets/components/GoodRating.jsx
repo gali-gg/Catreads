@@ -5,10 +5,11 @@ import {useState} from "react";
 
 export default function GoodRating(props) {
   // size prop can be small medium or large
-  const [value, setValue] = useState(props.rating);
+  let initialValue = props.rating ?? 0;
+  const [value, setValue] = useState(initialValue);
 
   React.useEffect (() => {
-    setValue(props.rating);
+    setValue(initialValue);
   }, [props]);
 
   React.useEffect(() =>{

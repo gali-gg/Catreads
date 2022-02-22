@@ -1,6 +1,6 @@
 import { Rating } from "@mui/material";
 import { useDispatch } from "react-redux";
-import { removeReviewAction } from "../../redux/actions/openBookAction";
+import { removeReviewAction } from "../../redux/actions/reviewsActions";
 import GoodRating from "./GoodRating";
 
 export default function BookReview (props){
@@ -8,7 +8,6 @@ export default function BookReview (props){
 
     const handleRemoveReview = (e) => {
         let reviewID = e.target.id;
-        console.log(reviewID);
         dispatch(removeReviewAction(reviewID));
     }
 

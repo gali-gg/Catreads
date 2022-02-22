@@ -8,8 +8,10 @@ import "./styles.css";
 import x from "../images/X.png";
 import { useDispatch, useSelector } from "react-redux";
 import { addBookToShelf } from "../../redux/actions/shelfAction";
-import { addReviewAction, loadBookAction } from "../../redux/actions/openBookAction";
-import authors from "../../data/authors.js"
+import { loadBookAction } from "../../redux/actions/openBookAction";
+import { addReviewAction } from "../../redux/actions/reviewsActions";
+import authors from "../../data/authors.js";
+import {v4 as uuidv4} from "uuid";
 
 const paperStyle = {
   position: "absolute",
@@ -73,14 +75,12 @@ export default function BookReviewModal(props) {
     setReviewBody(e.target.value);
   }
 
-  //TODO get author from authors slice
-  const author = authors.find(author => author.uuid === props.book.author);
   const handlePostReview = () => {
-    dispatch(loadBookAction(props.book, author));
     if(shelfName){
       dispatch(addBookToShelf(false, shelfName, props.book));
     }
-    dispatch(addReviewAction(userID, reviewBody, rating));
+    dispatch(addReviewAction(uuidv4(), userID, props.book.uuid, rating, reviewBody));
+    handleClose();
   }
 
   return (

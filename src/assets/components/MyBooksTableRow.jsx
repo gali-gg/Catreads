@@ -6,10 +6,25 @@ import { Divider } from "@mui/material";
 import GoodRating from "./GoodRating";
 import BookReviewModal from "./BookReviewModal";
 import {useNavigate} from "react-router-dom";
+import {useSelector} from "react-redux";
 
 export default function MyBooksTableRow (props) {
     const navigate = useNavigate()
     const book = props.book;
+
+    let userRating = useSelector(state =>  {
+        if(state.reviews.reviews.length){
+            let review = state.reviews.reviews.find(review => {
+                let correctSender = review.senderID === props.userID;
+                let correctBook = review.bookID === book.uuid
+
+                return correctSender && correctBook;
+            });
+            let rating = review ? review.rating : null;
+
+            return rating;
+        }
+    });
     return (
         <>
         <tr style={{textAlign: "left", verticalAlign: "top"}} >
@@ -20,7 +35,7 @@ export default function MyBooksTableRow (props) {
             <td>{props.authorName}</td>
             <td>{book.status.rating}</td>
             <td>
-                <GoodRating rating={props.userRating} size="small" />
+                <GoodRating rating={userRating ?? 0} name="read-only" size="small" />
             </td>
             <td>
                 {props.shelves.map((shelf, index) => <GoodLink key={`shelf${index}`} titleText={shelf} classes="latoR grGreen"/>)}
@@ -35,7 +50,7 @@ export default function MyBooksTableRow (props) {
                 <BookReviewModal
                     type="link"
                     clickTitle="edit"
-                    rating={props.userRating}
+                    rating={userRating ?? 0}
                     cover={book.cover}
                     title={book.title}
                     author={props.authorName}

@@ -35,4 +35,23 @@ function formatNumber (number) {
     return revNumArrJoinedDeep.join(",");
 }
 
-export {getFromStorageAndParse, setStorage, debounce, formatNumber};
+function getRatingsStats (bookReviews) {
+    let reviewsCount = 0;
+    let ratingsTotal = 0;
+
+    let ratingsCount = bookReviews.length;
+
+    bookReviews.forEach(review => {
+        ratingsTotal += review.rating;
+
+        if(review.body){
+            reviewsCount++
+        }
+    })
+
+    let rating = ratingsTotal / reviewsCount;
+
+    return {rating, reviewsCount, ratingsCount}
+}
+
+export {getFromStorageAndParse, setStorage, debounce, formatNumber, getRatingsStats};

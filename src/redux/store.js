@@ -4,11 +4,13 @@ import thunk from 'redux-thunk'
 import { shelfReducer } from './reducers/shelfReducer';
 import { userReducer } from './reducers/userReducer';
 import {openBookReducer} from "./reducers/openBookReducer";
+import { reviewsReducer } from './reducers/reviewsReducer';
 
 const rootReducer = combineReducers({
     userData : userReducer,
     shelves : shelfReducer,
-    openBook : openBookReducer
+    openBook : openBookReducer,
+    reviews: reviewsReducer
 });
 
 const store = createStore(
