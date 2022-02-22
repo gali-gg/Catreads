@@ -23,6 +23,7 @@ export default function GoodBookCover(props) {
           ratingsCount={props.book.status.ratingsCount}
           description={props.book.description}
           published={props.book.published.year}
+          book={props.book}
         />
       }
     >

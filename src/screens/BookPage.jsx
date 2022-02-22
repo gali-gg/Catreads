@@ -66,7 +66,7 @@ export default function BookPage(props) {
 
   const handleAddReview = () => {
     setReviewBody("");
-
+    setUserRating(0);
     dispatch(addReviewAction(userID, reviewBody, userRating));
   }
 

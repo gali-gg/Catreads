@@ -4,10 +4,14 @@ import styles from "./css-modules/bookHoverInfo.module.css"
 import { useEffect, useState } from "react";
 import { Rating } from "@mui/material";
 import { formatNumber } from "../../utility";
+import { useDispatch } from "react-redux";
+import { addBookToShelf } from "../../redux/actions/shelfAction";
 
 export default function BookHoverInfo (props) {
+    const dispatch = useDispatch();
     const [descClass, setDescClass] = useState(styles.description);
     const [showMore, setShowMore] = useState("more");
+    // const [chosenShelfName, setChosenShelfName] = useState("");
 
     const handleShowMore= () => {
         if(descClass){
@@ -17,6 +21,12 @@ export default function BookHoverInfo (props) {
         else {
             setDescClass(styles.description);
             setShowMore("more");
+        }
+    }
+
+    const handleSelectShelf = (e) => {
+        if(e.target.value){
+            dispatch(addBookToShelf(false, e.target.value, props.book, props.book.uuid));
         }
     }
 
@@ -38,10 +48,11 @@ export default function BookHoverInfo (props) {
                 </span>
                 <GoodLink onClick={handleShowMore} titleText={showMore} classes="meriR grGreen"></GoodLink>
                 <div className={styles.bottom}>
-                    <select>
-                        <option>Read</option>
-                        <option>Currently reading</option>
-                        <option>Want to read</option>
+                    <select onChange={handleSelectShelf}>
+                        <option value="">Add to shelf</option>
+                        <option value={"Read"}>Read</option>
+                        <option value={"Currently Reading"}>Currently reading</option>
+                        <option value={"Want to Read"}>Want to read</option>
                     </select>
 
                     <span className="f-08">Rate this book</span>
