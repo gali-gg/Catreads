@@ -37,7 +37,6 @@ export default function CustomInputAutocomplete(props) {
   const authors = useSelector(state => state.authors.authors);
   const navigate = useNavigate()
 
-  console.log(authors)
   return (
     <label>
       <Autocomplete

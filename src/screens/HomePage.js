@@ -25,8 +25,7 @@ const useStyles = makeStyles({
 export default function HomePage() {
     const dispatch = useDispatch();
     const shelves = useSelector(state => state.shelves);
-    let allBooks = useSelector(state =>state.books.books) ?? [];
-    console.log(allBooks);
+    let allBooks = useSelector(state =>state.books.books);
 
     let shelvesStatus = [];
     for (let shelf in shelves) {
@@ -42,14 +41,13 @@ export default function HomePage() {
     }
 
     const handleAddBookToShelfWantToRead = (book) => {
-        dispatch(addBookToShelf(false, "Want to Read", book));
+        dispatch(addBookToShelf(false, "Want to Read", book.uuid));
         setBook(chooseBook());
     };
 
     const chooseBook = () => {
         if(allBooks.length > 0){
             let book = allBooks[Math.ceil(Math.random() * allBooks.length - 1)];
-            console.log(book)
             if (shelves.wantToRead.books.some(readBook => readBook.uuid === book.uuid)) {
                 return chooseBook();
             }

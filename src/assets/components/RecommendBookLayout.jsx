@@ -59,7 +59,6 @@ export default function RecommendBookLayout(props) {
     
     useEffect(() => {
        if(authors.length > 0){
-        console.log(author)
         setAuthor(authors.filter(author => author.uuid === props.book.author)[0].name);
        }
     }, [authors, props.book.author]);
