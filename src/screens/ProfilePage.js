@@ -9,7 +9,6 @@ import GenreTitle from "../assets/components/GenreTitle";
 import UserBooksLayout from "../assets/components/UserBooksLayout";
 
 
-
 const useStyles = makeStyles({
   container: {
     padding: "20px 0",

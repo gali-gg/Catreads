@@ -1,11 +1,13 @@
 import Stack from '@mui/material/Stack';
-import authors from "../../data/authors";
 import "./styles.css";
 import GoodLink from './GoodLink';
 import { makeStyles } from '@mui/styles';
 import { Button, Divider, Rating } from '@mui/material';
 import IconCaretRight from "../images/icon_caret_right.svg";
 import Title from './Title';
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
 
 
 const useStyles = makeStyles({
@@ -40,22 +42,43 @@ const useStyles = makeStyles({
     littleRatingText: {
         fontSize: "0.8em",
         color: "grey"
+    },
+    cover:{
+        width: "100px",
+        "&:hover":{
+            cursor: "pointer"
+        }
     }
 });
 
 export default function RecommendBookLayout(props) {
+    const navigate = useNavigate()
     const classes = useStyles();
-    let author = authors.filter(author => author.uuid === props.book.author)[0].name;
+    let authors = useSelector(state => state.authors.authors);
+    const [author, setAuthor] = useState(null);
+    
+    useEffect(() => {
+       if(authors.length > 0){
+        console.log(author)
+        setAuthor(authors.filter(author => author.uuid === props.book.author)[0].name);
+       }
+    }, [authors, props.book.author]);
+    
     return (
         <>
             <Title title={props.title} className={`${classes.title} latoB grBrown f-09`}></Title>
             <p></p>
             <Stack direction="row" spacing={2}>
-                <img width="100" src={props.book.cover} alt={`${props.book.title}-img`} />
+                <img 
+                    title={props.book.title}
+                    onClick={() => navigate(`/books/${props.book.uuid}`)} 
+                    src={props.book.cover} alt={`${props.book.title}-img`} 
+                    className={classes.cover}
+                />
                 <Stack direction="row">
                     <div className={classes.container}>
                         <span className="meriB f-09 grBrown" >{props.book.title}</span>
-                        <span className="meriR f-08 grBrown">by {author}</span>
+                        {author && <span className="meriR f-08 grBrown">by {author}</span>}
                         <div className={classes.ratingContainer}>
                             <Rating name="read-only" size="small" value={Math.floor(props.book.status.rating)} readOnly />
                             <span className={classes.littleRatingText}>{props.book.status.rating}</span>
@@ -75,10 +98,9 @@ export default function RecommendBookLayout(props) {
             </Stack>
             <p className="latoR grBrown">
                 {props.book.description.substring(0, 150)}
-                ...<GoodLink titleText="Continue Reading" classes="grGreen latoR f-09" />
+                ...<GoodLink titleText="Continue Reading" to={`/books/${props.book.uuid}`} classes="grGreen latoR f-09" />
             </p>
-            <GoodLink titleText={`View all books similar to ${props.secondBook}`} classes="text-left f-09 latoR grGreen" />
-            <Divider sx={{ p: "10px 0" }} />
+            <Divider sx={{ p: "5px 0" }} />
         </>
     );
 }

@@ -3,11 +3,10 @@ import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import Title from '../assets/components/Title';
 import { makeStyles } from '@mui/styles';
-import genres from '../data/genres';
 import {GenreContainer} from '../assets/components/GenreContainer';
-import books from '../data/books'
 import SideMenulist from '../assets/components/SideMenuList';
 import { v4 as uuidv4 } from 'uuid';
+import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles({
   bigTitle: {
@@ -45,12 +44,14 @@ const useStyles = makeStyles({
 export default function GenresPage() {
     const classes = useStyles();
     const params = useParams();
+    const allBooks = useSelector(state => state.books.books);
+    const genres = useSelector(state => state.genres.genres);
     const allGenres = genres.map(genre => genre.genre);
     const firstHalfGenres = allGenres.slice(0, Math.floor(allGenres.length/2));
     const secondHalfGenres = allGenres.slice(Math.round(allGenres.length/2), allGenres.length-1);
 
     const genreBooks = (genre) => {
-      let genreBooksData = books.filter(book => {
+      let genreBooksData = allBooks.filter(book => {
         return book.genres.some(someGenre => someGenre === genre.uuid);
       });
       let randomNum = Math.ceil(Math.random()*(genreBooksData.length-5));
