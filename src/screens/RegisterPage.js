@@ -5,7 +5,6 @@ import Paper from "@mui/material/Paper";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import Stack from '@mui/material/Stack';
-import { userManager } from "../model/UserManagerService";
 import { useState } from 'react';
 import GoodReadsLogo from "../assets/components/GoodReadsLogo";
 import GoodLink from "../assets/components/GoodLink";
@@ -17,30 +16,45 @@ import * as userActions from "../redux/actions/userAction"
 import { getFromStorageAndParse, setStorage } from "../utility";
 import User from "../model/UserService";
 import { useNavigate } from "react-router-dom";
+import * as EmailValidator from 'email-validator';
 
 export default function RegisterPage(props) {
   const [name, setName] = useState("");
-  const [email, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const [emailErrorIsVisible, setEmailErrorIsVisible] = useState(false);
+  const [passwordErrorIsVisible, setPasswordErrorIsVisible] = useState(false);
+  const [emailTakenErrorIsVisible, setEmailTakenErrorIsVisible] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleRegAttempt = () => {
-    const form = document.getElementById("register-form");
-    let formIsValid = form.checkValidity();
-    if(formIsValid && name && email && password){
+    if(EmailValidator.validate(email) && name && password){
+      setPasswordErrorIsVisible(false);
+      setEmailErrorIsVisible(false);
+      setEmailTakenErrorIsVisible(false);
       const users = getFromStorageAndParse("users");
-      const userNameFree = !users.some(user => user.email === email);
-      if(userNameFree){
-        const user = new User(email, password, {name});
-        users.push(user);
-        setStorage("users", users);
-        dispatch(userActions.loginAction(user));
-        navigate("/");
+      const emailFree = !users.some(user => user.email === email);
+      if(emailFree){
+        if(password.length > 7){
+          const user = new User(email, password, {name});
+          users.push(user);
+          setStorage("users", users);
+          dispatch(userActions.loginAction(user));
+          navigate("/");
+        }
+        else{
+          setPasswordErrorIsVisible(true);
+        }
       }
+      else {
+        setEmailTakenErrorIsVisible(true);
+      }
+
     } else {
-      form.reportValidity();
+      setEmailErrorIsVisible(true);
     }
   }
 
@@ -49,7 +63,7 @@ export default function RegisterPage(props) {
   }
 
   const handleEmailInput = (e) => {
-    setUsername(e.target.value.trim());
+    setEmail(e.target.value.trim());
   }
 
   const handlePasswordInput = (e) => {
@@ -87,6 +101,9 @@ export default function RegisterPage(props) {
           </Stack>
           <form id="register-form">
           <Stack spacing={1}>
+            {emailErrorIsVisible && <p className={styles.error}>Please enter a valid email!</p>}
+            {passwordErrorIsVisible && <p className={styles.error}>Password must be at least 8 symbols.</p>}
+            {emailTakenErrorIsVisible && <p className={styles.error}>This email is already taken!</p>}
           <div>
           <Typography variant="subtitle2" gutterBottom component="div" className="latoB grBlack">
               Name

@@ -22,26 +22,25 @@ import { useNavigate } from "react-router-dom";
 import { loadAllBooksAction } from "../redux/actions/allBooksAction";
 import { loadGenresAction } from "../redux/actions/allGenresAction";
 import { loadAuthorsAction } from "../redux/actions/allAuthorsAction";
+import * as EmailValidator from 'email-validator';
 
 export default function LogInPage(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   //need to add error component
-  const [errorIsVisible, setErrorIsVisible] = useState(false);
+  const [emailErrorIsVisible, setEmailErrorIsVisible] = useState(false);
+  const [credentialsErrorIsVisible, setCredentialsErrorIsVisible] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleLogAttempt = () => {
-    const form = document.getElementById("login-form");
-    let formIsValid = form.checkValidity();
-
-    if(formIsValid){
+    if(EmailValidator.validate(email)){
       const users = getFromStorageAndParse("users");
       const authenticate =  (email, password) => users.some(user => user.email === email && user.password === password);
 
       if(authenticate(email, password)){
-        setErrorIsVisible(false);
+        setEmailErrorIsVisible(false);
         const user = users.find(user => user.email === email);
         dispatch(loginAction(user));
         dispatch(loadAllBooksAction());
@@ -49,13 +48,14 @@ export default function LogInPage(props) {
         dispatch(loadAuthorsAction());
         navigate("/");
       }
-
       else {
-        setErrorIsVisible(true);
+        setEmailErrorIsVisible(false);
+        setCredentialsErrorIsVisible(true);
       }
     }
     else {
-      form.reportValidity();
+      setEmailErrorIsVisible(true);
+      setCredentialsErrorIsVisible(false);
     }
   }
 
@@ -95,6 +95,8 @@ export default function LogInPage(props) {
           </Stack>
           <form id="login-form">
           <Stack spacing={1}>
+              {emailErrorIsVisible && <p className={styles.error}>Please enter a valid email!</p>}
+              {credentialsErrorIsVisible && <p className={styles.error}>Wrong email/password!</p>}
             <div>
             <Typography variant="subtitle2" gutterBottom component="div" className="latoB grBlack">
               Email address

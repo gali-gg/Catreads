@@ -11,6 +11,17 @@ import "./assets/fonts/merriweather-italic.woff2";
 import "./assets/fonts/merriweather-regular.woff2";
 import { Provider } from 'react-redux';
 import store from './redux/store';
+import { getFromStorageAndParse, setStorage } from './utility';
+import User from './model/UserService';
+
+let users=[];
+if(localStorage.users){
+  users = getFromStorageAndParse("users");
+}
+else {
+  users.push(new User("test@test.com", "test", {name: "Harry Potter"}, null, [1, 5, 16]));
+  setStorage("users", users);
+}
 
 ReactDOM.render(
   <Provider store={store}>
