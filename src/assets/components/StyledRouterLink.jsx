@@ -9,7 +9,7 @@ const useStyles = makeStyles({
         textDecoration: 'inherit',
         color : "inherit",
         textTransform: "none"
-    },
+    }
 });
 
 export default function StyledRouterLink(props){

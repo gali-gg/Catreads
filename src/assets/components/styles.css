@@ -67,8 +67,16 @@
     font-size: 0.8em;
 }
 
+.f-075{
+    font-size: 0.75em;
+}
+
 .text-left{
     text-align: left;
+}
+
+.text-right{
+    text-align: right !important;
 }
 
 .text-center{

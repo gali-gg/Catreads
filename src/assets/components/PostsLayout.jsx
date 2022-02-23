@@ -51,7 +51,3 @@ export const PostsLayout = React.memo( () => {
       
     );
   });
-
-
-
-
