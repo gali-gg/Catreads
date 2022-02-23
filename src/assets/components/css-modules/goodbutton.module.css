@@ -1,11 +1,18 @@
 .btn {
-    padding: 10px;
+    padding: 12px;
     background-color: #F4F1EA;
     border: 1px solid #D6D0C4;
     border-radius: 3px;
     font-size: 16px;
+    color: #333;
 }
 
 .btn:hover {
     background-color: rgba(214, 208, 196, 0.5);
+}
+
+.buttonNormal {
+    font-size: 16px;
+    color: grey;
+    font-family: "Lato Regular";
 }

@@ -12,11 +12,10 @@ import GoodButton from "../assets/components/GoodButton";
 import FooterCopy from "../assets/components/FooterCopy";
 import SocialLoginButton from "../assets/components/SocialLoginButton";
 import { useDispatch } from "react-redux";
-import * as userActions from "../redux/actions/userAction"
-import { getFromStorageAndParse, setStorage } from "../utility";
-import User from "../model/UserService";
-import { useNavigate } from "react-router-dom";
+import { getFromStorageAndParse } from "../utility";
 import * as EmailValidator from 'email-validator';
+import SelectFavouriteGenresPage from "./SelectFavouriteGenresPage";
+import { loadGenresAction } from "../redux/actions/allGenresAction";
 
 export default function RegisterPage(props) {
   const [name, setName] = useState("");
@@ -26,24 +25,25 @@ export default function RegisterPage(props) {
   const [emailErrorIsVisible, setEmailErrorIsVisible] = useState(false);
   const [passwordErrorIsVisible, setPasswordErrorIsVisible] = useState(false);
   const [emailTakenErrorIsVisible, setEmailTakenErrorIsVisible] = useState(false);
+  const [nameErrorIsVisible, setNameErrorisVisible] = useState(false);
+
+  const [canRegister, setCanRegister] = useState(false);
 
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const handleRegAttempt = () => {
+    setPasswordErrorIsVisible(false);
+    setEmailErrorIsVisible(false);
+    setEmailTakenErrorIsVisible(false);
+    setNameErrorisVisible(false);
+
     if(EmailValidator.validate(email) && name && password){
-      setPasswordErrorIsVisible(false);
-      setEmailErrorIsVisible(false);
-      setEmailTakenErrorIsVisible(false);
       const users = getFromStorageAndParse("users");
       const emailFree = !users.some(user => user.email === email);
       if(emailFree){
         if(password.length > 7){
-          const user = new User(email, password, {name});
-          users.push(user);
-          setStorage("users", users);
-          dispatch(userActions.loginAction(user));
-          navigate("/");
+          dispatch(loadGenresAction());
+          setCanRegister(true);
         }
         else{
           setPasswordErrorIsVisible(true);
@@ -53,8 +53,11 @@ export default function RegisterPage(props) {
         setEmailTakenErrorIsVisible(true);
       }
 
-    } else {
+    } else if (name) {
       setEmailErrorIsVisible(true);
+    }
+    else {
+      setNameErrorisVisible(true);
     }
   }
 
@@ -71,7 +74,8 @@ export default function RegisterPage(props) {
   }
 
   return (
-    <div className={styles.signUpBackground}>
+    <>
+    {!canRegister && <div className={styles.signUpBackground}>
     <GoodReadsLogo className={styles.logo} height="30px"/>
       <Box
         sx={{
@@ -104,6 +108,7 @@ export default function RegisterPage(props) {
             {emailErrorIsVisible && <p className={styles.error}>Please enter a valid email!</p>}
             {passwordErrorIsVisible && <p className={styles.error}>Password must be at least 8 symbols.</p>}
             {emailTakenErrorIsVisible && <p className={styles.error}>This email is already taken!</p>}
+            {nameErrorIsVisible && <p className={styles.error}>Please enter your name.</p>}
           <div>
           <Typography variant="subtitle2" gutterBottom component="div" className="latoB grBlack">
               Name
@@ -147,7 +152,10 @@ export default function RegisterPage(props) {
         <div className={styles.footerBackground} style={{padding: 0}}>
           </div>
       </div>
-
-      </div>
+      </div>}
+      {canRegister && <SelectFavouriteGenresPage
+      userDetails={{email, password, name}}
+      ></SelectFavouriteGenresPage>}
+      </>
   );
 }

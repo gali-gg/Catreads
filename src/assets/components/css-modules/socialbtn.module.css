@@ -69,3 +69,14 @@
     border-radius: 3px;
     color: black;
 }
+
+.regular {
+    background-color: #382110;
+    border-radius: 3px;
+    border: 1px solid #382110;
+    color: white;
+}
+
+.regular:hover {
+    background-color: #58371F;
+}

@@ -1,0 +1,64 @@
+.checkBoxGrid {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 5px;
+    /* column-gap: 5px; */
+    column-width: fit-content;
+    width: fit-content;
+}
+
+.checkBoxWrapper {
+    padding: 5px;
+    background-color: #f4f1ea;
+    font-family: "Lato Regular";
+    border-radius: 3px;
+    width: 180px;
+    border: 1px solid #ddd;
+    color: #333;
+    text-align: left;
+}
+
+.container {
+    margin: 10px auto;
+    width: fit-content;
+    text-align: center;
+}
+
+.info {
+    color: #767676;
+}
+
+.button {
+    width: 100%;
+}
+
+.label {
+    margin: 0px 5px;
+}
+
+.informationBox {
+    text-align: center;
+    font-size: 0.9em;
+    background-color: rgb(206, 235, 189);
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.logo {
+    width: 180px;
+}
+
+.logoPlace {
+    align-self: baseline;
+}
+
+.header{
+    height: 60px;
+    width: 100vw;
+    position: absolute;
+    top: 0;
+    background-color: #F4F1EA;
+    border-bottom: 1px solid #ddd;
+    z-index: -10;
+}
