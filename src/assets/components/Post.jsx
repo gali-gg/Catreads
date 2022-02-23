@@ -3,9 +3,8 @@ import Title from "./Title";
 import { makeStyles } from '@mui/styles';
 import GoodLink from "./GoodLink";
 import "./styles.css";
-import store from "../../redux/store";
-import authors from "../../data/authors";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles({
     container: {
@@ -44,7 +43,16 @@ const useStyles = makeStyles({
 });
 
 export default function Post(props){
-    let author = authors.filter(author => author.uuid === props.author)[0];
+    let avatar = useSelector(state => state.userData.avatar);
+    let authors = useSelector(state => state.authors.authors);
+    const [author, setAuthor] = useState(null);
+    
+    useEffect(() => {
+       if(authors.length > 0){
+        setAuthor(authors.filter(author => author.uuid === props.author)[0]);
+       }
+    }, [authors, props.author]);
+    
     const [likes, setLikes] = useState(props.likes);
     const [isLiked, setIsLiked] = useState(false);
 
@@ -59,7 +67,7 @@ export default function Post(props){
     }
     const classes = useStyles();
 
-    return(
+    return author && (
         <Stack sx={{border:"1px solid #ddd"}}>
             <Stack direction="column" className={classes.container} spacing={1}>
                 <img src={author.profileImage} alt={`${props.title}-img`} className={classes.authorImg}/>
@@ -84,7 +92,7 @@ export default function Post(props){
                     justifyContent="center"
                     alignItems="center"
                 >
-                    <img src={store.getState().userData.avatar} className={classes.userAvatar} alt="avatar"/>
+                    <img src={avatar} className={classes.userAvatar} alt="avatar"/>
                     <textarea
                         placeholder="Write a comment ..." 
                         className={`${classes.comments} latoR f-095`}

@@ -6,6 +6,8 @@ import { Rating } from "@mui/material";
 import { formatNumber } from "../../utility";
 import { useDispatch } from "react-redux";
 import { addBookToShelf } from "../../redux/actions/shelfAction";
+import GoodGreenButton from "./GoodGreenButton"
+
 
 export default function BookHoverInfo (props) {
     const dispatch = useDispatch();
@@ -48,12 +50,13 @@ export default function BookHoverInfo (props) {
                 </span>
                 <GoodLink onClick={handleShowMore} titleText={showMore} classes="meriR grGreen"></GoodLink>
                 <div className={styles.bottom}>
-                    <select onChange={handleSelectShelf}>
+                    {/*<select onChange={handleSelectShelf}>
                         <option value="">Add to shelf</option>
                         <option value={"Read"}>Read</option>
                         <option value={"Currently Reading"}>Currently reading</option>
                         <option value={"Want to Read"}>Want to read</option>
-                    </select>
+                    </select>*/}
+                    <GoodGreenButton bookUuid={props.book.uuid} styled={false}/>
 
                     <span className="f-08">Rate this book</span>
                     <GoodRating size="small"></GoodRating>

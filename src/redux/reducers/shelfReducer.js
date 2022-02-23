@@ -39,11 +39,11 @@ export const shelfReducer = (state = INITIAL_STATE, action) => {
                 shelf = state[key];
             }
 
-            shelf.books = shelf.books.some( book => book.uuid === action.payload.uuid)
+            shelf.books = shelf.books.some( bookUuid => bookUuid === action.payload.uuid)
                 ?
                    shelf.books
                 :
-                    [...shelf.books, action.payload.book]
+                    [...shelf.books, action.payload.uuid]
             return{
                 ...state,
             };
@@ -57,7 +57,7 @@ export const shelfReducer = (state = INITIAL_STATE, action) => {
                 bookShelf = state[key];
             }
 
-            bookShelf.books = bookShelf.books.filter( book => book.uuid !== action.payload.uuid)
+            bookShelf.books = bookShelf.books.filter( bookUuid => bookUuid !== action.payload.uuid)
             return{
                 ...state,
             };

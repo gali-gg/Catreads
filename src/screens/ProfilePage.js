@@ -9,7 +9,6 @@ import GenreTitle from "../assets/components/GenreTitle";
 import UserBooksLayout from "../assets/components/UserBooksLayout";
 
 
-
 const useStyles = makeStyles({
   container: {
     padding: "20px 0",
@@ -36,6 +35,8 @@ export default function ProfilePage() {
   const user = useSelector(state => state.userData);
   const shelves = useSelector(state => state.shelves);
   const userShelves = useSelector(state => state.shelves.userShelves);
+  const allBooks = useSelector(state => state.books.books);
+  const wantToReadBooks = useSelector(state => state.shelves.wantToRead.books);
   const shelvesNames = [];
   let userShelvesNames = [];
 
@@ -50,6 +51,16 @@ export default function ProfilePage() {
     }
     shelvesNames.push({ name: shelves[shelf].name, key: shelf })
   }
+
+  const getAllBooksFromShelf = ((shelfName) => {
+    if(shelves){
+      return shelves[shelfName].books.map(shelfBook => {
+        return allBooks.filter(book => book.uuid === shelfBook)[0]
+      });
+    }else{
+      return [];
+    }
+  })
 
   return (
     <Stack className={classes.container} spacing={4}>
@@ -79,7 +90,7 @@ export default function ProfilePage() {
       <Stack spacing={1} >
         <GenreTitle title={`${user.name.first}\`s favourite books`} ></GenreTitle>
         <Stack direction="row" spacing={1}>
-          {shelves.read.books.map(book =>
+          {getAllBooksFromShelf("read").map(book =>
             <img src={book.cover} alt={book.title} key={book.uuid} height="100px" />
           ).slice(0, 7)}
         </Stack>
@@ -120,7 +131,7 @@ export default function ProfilePage() {
 
       <Stack spacing={1}>
         <GenreTitle title={`${user.name.first} is currently reading`} ></GenreTitle>
-        {shelves.currentlyReading.books.map(book =>
+        {getAllBooksFromShelf("currentlyReading").map(book =>
           <UserBooksLayout
             key={`${book.uuid}-cr`}
             doing="is currently reading"
@@ -131,14 +142,14 @@ export default function ProfilePage() {
 
       <Stack spacing={1}>
         <GenreTitle title={`${user.name.first} recent updates`} ></GenreTitle>
-        {shelves.read.books.map(book =>
+        {getAllBooksFromShelf("read").map(book =>
           <UserBooksLayout
             key={`${book.uuid}-r`}
             doing="has read"
             book={book}
           />
         )}
-        {shelves.wantToRead.books.map(book =>
+        {shelves && getAllBooksFromShelf("wantToRead").map(book =>
           <UserBooksLayout
             key={`${book.uuid}-wr`}
             doing="wants to read"

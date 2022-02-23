@@ -12,6 +12,8 @@ import _ from "lodash";
 
 export default function MyBooksPage () {
     const dispatch = useDispatch();
+    const shelves = useSelector(state => state.shelves);
+    const books = useSelector(state => state.books.books);
 
     let allBooks = useSelector(state => {
         let {userShelves, ...regularShelves} = state.shelves;
@@ -26,19 +28,8 @@ export default function MyBooksPage () {
             allBooks.push(shelf.books);
         });
 
-        return _.uniqBy(allBooks, "uuid");
-    }, shallowEqual);
-
-    let wantToReadBooks = useSelector(state => {
-        return state.shelves.wantToRead.books;
-    }, shallowEqual);
-
-    let currentlyReadingBooks = useSelector(state => {
-        return state.shelves.currentlyReading.books;
-    }, shallowEqual);
-
-    let readBooks = useSelector(state => {
-        return state.shelves.read.books;
+        let allUserBooks = allBooks.map(userBook => books.find(book => userBook === book.uuid));
+        return _.uniqBy(allUserBooks, "uuid");
     }, shallowEqual);
 
     const [listBooks, setListBooks] = useState(allBooks);
@@ -48,11 +39,11 @@ export default function MyBooksPage () {
         if (isSelectedObj.all) {
             books = allBooks;
         } else if (isSelectedObj.wantToRead) {
-            books = wantToReadBooks;
+            books = getAllBooksFromShelf("wantToRead");
         } else if (isSelectedObj.currentlyReading) {
-            books = currentlyReadingBooks;
+            books = getAllBooksFromShelf("currentlyReading");
         } else if (isSelectedObj.read) {
-            books = readBooks;
+            books = getAllBooksFromShelf("read");
         }
 
         return books;
@@ -113,6 +104,16 @@ export default function MyBooksPage () {
     const [shelfName, setShelfName] = useState("All");
 
     const fontSize = "1em";
+
+    const getAllBooksFromShelf = ((shelfName) => {
+        if(shelves){
+          return shelves[shelfName].books.map(shelfBook => {
+            return allBooks.filter(book => book.uuid === shelfBook)[0]
+          });
+        }else{
+          return [];
+        }
+    })
     return (
         <Container maxWidth="lg" sx={{mt: 2, mb: 5}}>
             <div className={styles.pageHeading}>

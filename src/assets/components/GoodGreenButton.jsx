@@ -51,6 +51,7 @@ export default function GoodGreenButton(props) {
         shelvesNames.push({ name: shelves[shelf].name, key: shelf })
     }
 
+
     const [choosenName, setChoosenName] = React.useState(shelvesNames[0].name);
 
     const handleChange = (event) => {
@@ -66,16 +67,16 @@ export default function GoodGreenButton(props) {
             if (shelf === "userShelves") {
                 continue;
             }
-            else if (shelves[shelf].books.some(book => book.uuid === props.book.uuid)) {
-                dispatch(removeBookFromShelf(false, shelves[shelf].name, props.book.uuid))
+            else if (shelves[shelf].books.some(book => book === props.bookUuid)) {
+                dispatch(removeBookFromShelf(false, shelves[shelf].name, props.bookUuid))
             }
         }
 
-        dispatch(addBookToShelf(isUserShelf, choosenShelf, props.book));
+        dispatch(addBookToShelf(isUserShelf, choosenShelf, props.bookUuid));
     };
 
 
-    return (
+    return props.styled ? (
         <div>
             <FormControl >
                 <GoodSelect
@@ -98,5 +99,18 @@ export default function GoodGreenButton(props) {
                 </GoodSelect>
             </FormControl>
         </div>
+    ) : (
+        <select value={choosenName} onChange={handleChange}>
+            {shelvesNames.map(shelfName =>
+                <option key={shelfName.name} value={shelfName.name}>
+                    {shelfName.name}
+                </option>
+            )}
+            {userShelvesNames.map((userShelfName) => (
+                <option key={userShelfName.name} value={userShelfName.name}>
+                    {userShelfName.name}
+                </option>
+            ))}
+        </select>
     );
 }

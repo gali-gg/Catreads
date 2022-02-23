@@ -1,10 +1,9 @@
 import { makeStyles } from '@mui/styles';
-import React, { useState } from 'react';
+import React, { useState , useEffect} from 'react';
 import Stack from '@mui/material/Stack';
 import Container from '@mui/material/Container';
 import SideMenuEl from '../assets/components/SideMenuEl';
 import SideMenuImageEl from '../assets/components/SideMenuImageEl';
-import books from '../data/books';
 import RecommendBookLayout from '../assets/components/RecommendBookLayout';
 import { Footer } from '../assets/components/Footer';
 import NewsPost from '../assets/components/NewsPost';
@@ -26,6 +25,7 @@ const useStyles = makeStyles({
 export default function HomePage() {
     const dispatch = useDispatch();
     const shelves = useSelector(state => state.shelves);
+    let allBooks = useSelector(state =>state.books.books);
 
     let shelvesStatus = [];
     for (let shelf in shelves) {
@@ -41,19 +41,23 @@ export default function HomePage() {
     }
 
     const handleAddBookToShelfWantToRead = (book) => {
-        dispatch(addBookToShelf(false, "Want to Read", book));
+        dispatch(addBookToShelf(false, "Want to Read", book.uuid));
         setBook(chooseBook());
     };
 
     const chooseBook = () => {
-        let book = books[Math.ceil(Math.random() * books.length - 1)];
-        if (shelves.wantToRead.books.some(readBook => readBook.uuid === book.uuid)) {
-            return chooseBook();
+        if(allBooks.length > 0){
+            let book = allBooks[Math.ceil(Math.random() * allBooks.length - 1)];
+            if (shelves.wantToRead.books.some(readBook => readBook.uuid === book.uuid)) {
+                return chooseBook();
+            }
+            return book;
         }
-        return book;
     };
-    const [book, setBook] = useState(chooseBook());
+    const [book, setBook] = useState(null);
 
+    useEffect(() => setBook(chooseBook()), [allBooks]);
+    
     const handleNewBook = () => {
         setBook(chooseBook());
     }
@@ -137,12 +141,13 @@ export default function HomePage() {
                             button="See the Winners"
                             status="4,756,261 Votes Cast"
                         />
-                        <RecommendBookLayout
-                            title="Recommendation"
-                            handleNewBook={handleNewBook}
-                            book={book}
-                            handleClick={() => handleAddBookToShelfWantToRead(book)}
-                        />
+                        {book && <RecommendBookLayout
+                                    title="Recommendation"
+                                    handleNewBook={handleNewBook}
+                                    book={book}
+                                    handleClick={() => handleAddBookToShelfWantToRead(book)}
+                                />
+                        }
                         <Footer direction="row" width="100%" titleColor="#382110"></Footer>
                     </Stack>
                 </Stack>

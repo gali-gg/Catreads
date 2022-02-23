@@ -51,13 +51,13 @@ export default function UserBooksLayout(props) {
     for (let shelf in shelves) {
         if (shelf === "userShelves") {
             shelves.userShelves.forEach(uShelf => {
-                if (uShelf.books.some(uBook => uBook.uuid === props.book.uuid)) {
+                if (uShelf.books.some(uBook => uBook === props.book.uuid)) {
                     bookShelves.push(uShelf.name);
                 }
             })
             continue;
         }
-        if (shelves[shelf].books.some(book => book.uuid === props.book.uuid)) {
+        if (shelves[shelf].books.some(book => book === props.book.uuid)) {
             bookShelves.push(shelf);
         }
     }
@@ -96,7 +96,7 @@ export default function UserBooksLayout(props) {
                 <span className={`${classes.spanDate} latoR grGrey f-1`}>Feb 21, 2022 12:43AM </span>
             </Stack>
             <Stack alignItems="center" gap={0.5}>
-                <GoodGreenButton book={props.book}></GoodGreenButton>
+                <GoodGreenButton styled={true} bookUuid={props.book.uuid}></GoodGreenButton>
                 <span className="f-08 latoR grGrey">Rate this book</span>
                 <GoodRating size="small"></GoodRating>
             </Stack>
