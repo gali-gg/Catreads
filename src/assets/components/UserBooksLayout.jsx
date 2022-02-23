@@ -9,6 +9,7 @@ import StyledRouterLink from "./StyledRouterLink";
 import GoodRating from "./GoodRating";
 import X from "../images/X.png";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 
 const useStyles = makeStyles({
@@ -38,11 +39,15 @@ const useStyles = makeStyles({
         "&:hover": {
             cursor: "pointer"
         }
+    },
+    pointer:{
+        cursor: "pointer"
     }
 });
 
 export default function UserBooksLayout(props) {
     const [isClosed, setIsClosed] = useState(false);
+    const navigate = useNavigate();
     const classes = useStyles();
     const user = useSelector(state => state.userData);
     const shelves = useSelector(state => state.shelves);
@@ -70,7 +75,14 @@ export default function UserBooksLayout(props) {
 
     return !isClosed && (
         <Stack direction="row" spacing={3} flexWrap="wrap" borderBottom="1px solid #ddd" padding="5px 0">
-            <img src={props.book.cover} alt={props.book.title} width="90" />
+            <img 
+                src={props.book.cover} 
+                alt={props.book.title} 
+                width="90"
+                className={classes.pointer} 
+                title={props.book.title}
+                onClick={() => navigate(`/books/${props.book.uuid}`)} 
+            />
             <Stack className={classes.subContainer}>
                 <Stack direction="row" alignItems="center" sx={{ gap: "5px" }}>
                     <StyledRouterLink
@@ -80,7 +92,11 @@ export default function UserBooksLayout(props) {
                     />
                     <span className="latoR f-08">{props.doing}</span>
                 </Stack>
-                <Title title={props.book.title} className="meriB grBrown" />
+                <Title 
+                    title={props.book.title} 
+                    className={`${classes.pointer} meriB grBrown`} 
+                    onClick={() => navigate(`/books/${props.book.uuid}`)}  
+                />
                 <span className="meriR f-075">by {author.name}</span>
                 <Stack direction="row" spacing={1} alignItems="center">
                     <span className="latoR f-08 grBrouwn">bookshelves: </span>

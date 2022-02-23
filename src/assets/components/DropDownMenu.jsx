@@ -30,6 +30,8 @@ const useStyles = makeStyles({
   },
   icon:{
     height: 30,
+    width: 30,
+    objectFit: "cover",
     border: "none",
     borderRadius: "25px",
     padding: 0,
