@@ -8,7 +8,6 @@ export default function MyBooksTable (props) {
     let userID = useSelector(state => state.userData.id);
     let authors = useSelector(state => state.authors.authors)
     const dispatch = useDispatch();
-    console.log(props.books);
     return (
         <div style={{minWidth: "900px", textAlign: "center"}}>
         {props.books.length > 0 ? (<table style={{width: "100%"}} className="text-left">

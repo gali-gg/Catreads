@@ -1,4 +1,5 @@
 import { RATE_BOOK, REMOVE_FAVE_GENRE, ADD_FAVE_GENRE, CHANGE_AVATAR, CHANGE_NAME, LOGIN, LOGOUT } from "../actions/userAction";
+import _ from "lodash";
 
 const INITIAL_STATE = {
     id: null,
@@ -36,21 +37,16 @@ export const userReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 name: action.payload
             }
-        
+
         case CHANGE_AVATAR:
             return {
                 ...state,
                 avatar: action.payload
             }
         case ADD_FAVE_GENRE:
-            const favourite = state.favouriteGenres.some( genre => genre.id === action.payload.id) 
-                ? 
-                   state.favouriteGenres
-                :
-                    [...state.favouriteGenres, action.payload]
             return {
                 ...state,
-                favouriteGenres : favourite
+                favouriteGenres : _.uniq([...state.favouriteGenres, ...action.payload])
             }
         case REMOVE_FAVE_GENRE:
             return {
@@ -78,7 +74,7 @@ export const userReducer = (state = INITIAL_STATE, action) => {
                     ...state.ratedBooks,
                     action.payload
                 ]
-            }   
+            }
         default:
             return state;
 

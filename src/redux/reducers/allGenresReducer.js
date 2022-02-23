@@ -9,7 +9,7 @@ export const allGenresReducer = (state = INITIAL_STATE, action) => {
         case LOAD_GENRES:
             return {
                 ...state,
-                genres: [...state.genres, ...action.payload]
+                genres: [...action.payload]
             }
         default:
             return state;

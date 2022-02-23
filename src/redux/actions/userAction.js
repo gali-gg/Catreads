@@ -44,7 +44,7 @@ export const changeAvatarAction = avatar => {
 export const addFaveGenreAction = genre => {
     return {
         type : ADD_FAVE_GENRE,
-        payload: genre
+        payload: [...genre]
     }
 }
 
