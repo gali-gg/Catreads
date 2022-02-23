@@ -13,28 +13,30 @@ const useStyles = makeStyles({
         padding: "12px 10px 10px 35px",
         position: "relative"
     },
-    likesContainer:{
+    likesContainer: {
         background: "#F3F3F3",
     },
-    authorImg:{
+    authorImg: {
         height: "50px",
         width: "50px",
+        objectFit: "cover",
         borderRadius: "50%",
         position: "absolute",
         top: "8px",
         left: "-25px",
         border: "1px solid #ddd"
     },
-    link:{
+    link: {
         paddingLeft: "10px",
     },
-    userAvatar:{
-        height: "32px",
+    userAvatar: {
+        height: "35px",
         width: "35px",
+        objectFit: "cover",
         borderRadius: "50%",
         border: "1px solid #ddd",
     },
-    comments:{
+    comments: {
         width: "95%",
         height: "22px",
         border: "1px solid #ddd",
@@ -42,35 +44,35 @@ const useStyles = makeStyles({
     }
 });
 
-export default function Post(props){
+export default function Post(props) {
     let avatar = useSelector(state => state.userData.avatar);
     let authors = useSelector(state => state.authors.authors);
     const [author, setAuthor] = useState(null);
-    
+
     useEffect(() => {
-       if(authors.length > 0){
-        setAuthor(authors.filter(author => author.uuid === props.author)[0]);
-       }
+        if (authors.length > 0) {
+            setAuthor(authors.filter(author => author.uuid === props.author)[0]);
+        }
     }, [authors, props.author]);
-    
+
     const [likes, setLikes] = useState(props.likes);
     const [isLiked, setIsLiked] = useState(false);
 
     const handleLike = () => {
-        if(!isLiked){
-            setLikes(likes+1);
+        if (!isLiked) {
+            setLikes(likes + 1);
             setIsLiked(true);
-        }else{
-            setLikes(likes-1);
+        } else {
+            setLikes(likes - 1);
             setIsLiked(false);
         }
     }
     const classes = useStyles();
 
     return author && (
-        <Stack sx={{border:"1px solid #ddd"}}>
+        <Stack sx={{ border: "1px solid #ddd" }}>
             <Stack direction="column" className={classes.container} spacing={1}>
-                <img src={author.profileImage} alt={`${props.title}-img`} className={classes.authorImg}/>
+                <img src={author.profileImage} alt={`${props.title}-img`} className={classes.authorImg} />
                 <Stack justifyContent="space-between" direction="row" alignItems="center">
                     <Title title={author.name} className="latoB f-09" />
                 </Stack>
@@ -78,23 +80,23 @@ export default function Post(props){
                     {props.postText}
                 </span>
                 <Stack direction="row" spacing={1}>
-                        <GoodLink onClick={handleLike} titleText={isLiked ? "Unlike" : "Like"} key={"like"} classes="grGreen latoR f-095" />
-                        <GoodLink titleText={"Comment"} key={"comment"} classes="grGreen latoR f-095" />
+                    <GoodLink onClick={handleLike} titleText={isLiked ? "Unlike" : "Like"} key={"like"} classes="grGreen latoR f-095" />
+                    <GoodLink titleText={"Comment"} key={"comment"} classes="grGreen latoR f-095" />
                 </Stack>
             </Stack>
             <Stack className={classes.likesContainer} spacing={0}>
-                <GoodLink titleText={likes +  " likes"} classes={`${classes.link} grBrown latoR f-09`}></GoodLink>
+                <GoodLink titleText={likes + " likes"} classes={`${classes.link} grBrown latoR f-09`}></GoodLink>
                 <Divider></Divider>
-                <Stack 
-                    sx={{p:"10px"}} 
-                    spacing={1} 
+                <Stack
+                    sx={{ p: "10px" }}
+                    spacing={1}
                     direction="row"
                     justifyContent="center"
                     alignItems="center"
                 >
-                    <img src={avatar} className={classes.userAvatar} alt="avatar"/>
+                    <img src={avatar} className={classes.userAvatar} alt="avatar" />
                     <textarea
-                        placeholder="Write a comment ..." 
+                        placeholder="Write a comment ..."
                         className={`${classes.comments} latoR f-095`}
                     />
                 </Stack>

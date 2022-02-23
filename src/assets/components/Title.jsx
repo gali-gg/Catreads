@@ -18,6 +18,7 @@ export default function Title(props){
 
     return (
         <span 
+            onClick={props.onClick}
             className={`${props.className || classes.title}`} 
             style={{color: props.color}}
         >{props.title}</span>

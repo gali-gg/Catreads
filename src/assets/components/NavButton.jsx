@@ -11,27 +11,27 @@ const useStyles = makeStyles({
         color: "#382110",
         fontSize: "1em",
         background: "none",
-            '&:hover': {
-                background: "#382110",
-                color: "white"
-            },
+        '&:hover': {
+            background: "#382110",
+            color: "white"
+        },
     },
-    icon:{
+    icon: {
         height: "30px",
         border: "none",
         borderRadius: "25px",
-        background: "none"
+        background: "none",
     }
-    
-  });
+
+});
 
 
-export default function NavButton(props){
+export default function NavButton(props) {
     const classes = useStyles();
     return (
         <Button className={`${classes.button} latoR`} onClick={props.onClick} disableRipple>
             {props.children}
-            <img className={classes.icon} src={props.src}></img>
+            {props.src && <img className={classes.icon} src={props.src} alt="icons"></img>}
         </Button>
     );
 }
