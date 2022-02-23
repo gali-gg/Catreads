@@ -36,8 +36,6 @@ export default function Main (props) {
           <>
           <Route path='/' element={<LandingPage/>} />
           <Route path='/home' element={<LandingPage/>} />
-          {/* <Route path='/sign-in' element={<LogInPage onLogin={props.handle}/>} />
-          <Route path='/sign-up' element={<RegisterPage onRegister={props.handle}/>} /> */}
           <Route path='/sign-in' element={<LogInPage />} />
           <Route path='/sign-up' element={<RegisterPage onRegister={props.handle}/>} />
           </>
