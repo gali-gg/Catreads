@@ -23,3 +23,15 @@
 .aside {
     width: 30%;
 }
+
+hr {
+    margin: 5px 0 !important;
+}
+
+h1 {
+    margin: 0 0 2px 0;
+}
+
+.authorName{
+    margin-bottom: 10px;
+}

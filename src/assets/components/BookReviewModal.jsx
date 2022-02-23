@@ -1,6 +1,6 @@
-import { Divider, Paper, Rating } from "@mui/material";
+import { Divider, Paper} from "@mui/material";
 import Modal from "@mui/material/Modal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import GoodButton from "./GoodButton";
 import GoodLink from "./GoodLink";
 import GoodRating from "./GoodRating";
@@ -8,9 +8,7 @@ import "./styles.css";
 import x from "../images/X.png";
 import { useDispatch, useSelector } from "react-redux";
 import { addBookToShelf } from "../../redux/actions/shelfAction";
-import { loadBookAction } from "../../redux/actions/openBookAction";
 import { addReviewAction } from "../../redux/actions/reviewsActions";
-import authors from "../../data/authors.js";
 import {v4 as uuidv4} from "uuid";
 
 const paperStyle = {
@@ -55,7 +53,13 @@ export default function BookReviewModal(props) {
       setOpen(false)
     };
 
-  const [rating, setRating] = useState(props.rating);
+  let initialRating = props.rating ?? 0;
+
+    useEffect(() => {
+      setRating(props.rating);
+    }, [props.rating])
+
+  const [rating, setRating] = useState(initialRating);
   const handleClearRating = () => {
     setRating(0);
   }
@@ -155,38 +159,6 @@ export default function BookReviewModal(props) {
               ></textarea>
             </div>
             <Divider></Divider>
-            {/* <div style={sectionStyle}>
-              <div>
-                <span className="latoB">Dates read</span>
-                <br />
-                <span className="latoR grGrey f-08">
-                  Rereading?
-                  <br />
-                  Now you can track all the times you have read a book. Make
-                  sure to fill in the year finished to have it added to your
-                  Reading Challenge!
-                </span>
-              </div>
-              <div style={{ ...dFlex, gap: "30px", marginTop: "10px" }}>
-                <div>
-                  Date started <span className="grLight latoR">(optional)</span>
-                  <div style={{...dFlex, marginTop: "10px"}}>
-                    <input type="date" />
-                    <GoodButton fontSize="0.95em" title="Set to today"></GoodButton>
-                  </div>
-                </div>
-                <div>
-                  Date finished&nbsp;
-                  <span className="grLight latoR">(optional)</span>
-                  <div style={{...dFlex, marginTop: "10px"}}>
-                    <input type="date"/>
-                    <GoodButton fontSize="0.95em" title="Set to today"></GoodButton>
-                  </div>
-                </div>
-              </div>
-            </div> */}
-
-            {/* <Divider></Divider> */}
             <GoodButton title="Post" fontSize="0.95em" style={sectionStyle} onClick={handlePostReview}></GoodButton>
           </div>
         </Paper>

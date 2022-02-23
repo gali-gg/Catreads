@@ -1,5 +1,4 @@
 import { useDispatch, useSelector } from "react-redux";
-import { authorManager } from "../../model/AuthorManagerService";
 import GoodLink from "./GoodLink";
 import MyBooksTableRow from "./MyBooksTableRow";
 import "./styles.css";
@@ -7,7 +6,9 @@ import { removeBookFromShelf } from "../../redux/actions/shelfAction";
 
 export default function MyBooksTable (props) {
     let userID = useSelector(state => state.userData.id);
+    let authors = useSelector(state => state.authors.authors)
     const dispatch = useDispatch();
+    console.log(props.books);
     return (
         <div style={{minWidth: "900px", textAlign: "center"}}>
         {props.books.length > 0 ? (<table style={{width: "100%"}} className="text-left">
@@ -31,12 +32,6 @@ export default function MyBooksTable (props) {
             <th>
                 <GoodLink titleText="shelves" classes="latoB grBrown"/>
             </th>
-            {/* <th>
-                <GoodLink titleText="date read" classes="latoB grBrown"/>
-            </th>
-            <th>
-                <GoodLink titleText="date added" classes="latoB grBrown"/>
-            </th> */}
             <th>
             </th>
             <th>
@@ -44,14 +39,11 @@ export default function MyBooksTable (props) {
             </tr>
         </thead>
         <tbody>
-        {props.books.map(book => {
+        {authors && props.books.map(book => {
                 return <MyBooksTableRow key={book.uuid}
                     book={book}
-                    authorName = {authorManager.getNameById(book.author)}
-                    // userRating = {Math.random()*6}
+                    authorName = {authors.find(author => author.uuid === book.author).name}
                     userID={userID}
-                    // dateRead = "Feb 12, 2022"
-                    // dateAdded = "Feb 10, 2022"
                     shelves={["to-read", "best-books"]}
                     onRemove={() => {
                         if(props.shelfName === "All"){

@@ -1,8 +1,6 @@
 import { useParams } from "react-router-dom";
 import {default as allBooks} from "../data/books.js";
 import {default as allGenres} from "../data/genres.js";
-import genres from "../data/genres.js";
-import authors from "../data/authors.js";
 import { Container, Rating, Stack, Divider } from "@mui/material";
 import styles from "./bookPageStyles.module.css";
 import "../assets/components/styles.css";
@@ -11,24 +9,27 @@ import GoodLink from "../assets/components/GoodLink.jsx";
 import GoodButton from "../assets/components/GoodButton.jsx";
 import AuthorInfoBox from "../assets/components/AuthorInfoBox.jsx";
 import { formatNumber, getRatingsStats } from "../utility.js";
-import { useSelect } from "@mui/base";
 import { useDispatch, useSelector } from "react-redux";
 import { loadBookAction } from "../redux/actions/openBookAction.js";
-import { addReviewAction, removeReviewAction } from "../redux/actions/reviewsActions.js";
-import BookReview from "../assets/components/BookReview.jsx";
-import {v4 as uuidv4} from "uuid";
+import GoodReviewsSection from "../assets/components/GoodReviewsSection.jsx";
+import BookReviewComment from "../assets/components/BookReviewComment.jsx";
 
 export default function BookPage(props) {
   const params = useParams();
   const bookId = params.bookId;
   const dispatch = useDispatch();
-  const bookObj = allBooks.find((book) => book.uuid === bookId);
-  const authorObj = authors.find(author => author.uuid === bookObj.author);
+  const bookObj = useSelector(state => state.books.books.find(book => book.uuid === bookId));
+  const authorObj = useSelector(state => {
+    if(bookObj){
+      return state.authors.authors.find(author => author.uuid === bookObj.author);
+    }
+  });
   const similarBooksArr = [];
 
   const reviews = useSelector(state => {
     return state.reviews.reviews.filter(review => review.bookID === bookId);
   });
+
   const ratingStats = getRatingsStats(reviews);
 
   const userID = useSelector(state => state.userData.id);
@@ -45,7 +46,7 @@ export default function BookPage(props) {
 
   useEffect (() => {
     dispatch(loadBookAction(bookObj, authorObj));
-  }, []);
+  }, [bookObj, authorObj]);
 
   const book = useSelector(state => state.openBook);
   const bookIsLoaded = useSelector(state => state.openBook.loaded);
@@ -62,26 +63,6 @@ export default function BookPage(props) {
       setShowMore("more");
     }
   };
-
-
-  const [reviewBody, setReviewBody] = useState("");
-
-  const handleReviewInput = (e) => {
-    let text = e.target.value;
-    setReviewBody(text);
-  }
-
-  const handleAddReview = () => {
-    setReviewBody("");
-    setUserRating(0);
-    dispatch(addReviewAction(uuidv4(), userID, params.bookId, userRating, reviewBody));
-  }
-
-  const [userRating, setUserRating] = useState(0);
-
-  const handleRatingChange = (e) => {
-    setUserRating(e.target.value);
-  }
 
   return (
     <>
@@ -102,12 +83,11 @@ export default function BookPage(props) {
               {book.title}
             </h1>
             <div>
-              by&nbsp;
+
               <GoodLink
-                titleText={book.author.name}
-                classes="meriR grBrown"
+                titleText={`by ${book.author.name}`}
+                classes={`${styles.authorName} meriR grBrown`}
               ></GoodLink>
-              {/* //TODO make ratings component ot function */}
               <Stack
                 direction="row"
                 gap={1}
@@ -156,21 +136,10 @@ export default function BookPage(props) {
         </Stack>
 
         <Stack>
-          <p>How many stars?</p>
-          <select value={userRating} onChange={handleRatingChange}>
-            <option value={0}>How many stars?</option>
-            <option value={1}>1</option>
-            <option  value={2}>2</option>
-            <option  value={3}>3</option>
-            <option  value={4}>4</option>
-            <option  value={5}>5</option>
-          </select>
-          <textarea placeholder="Write review..." value={reviewBody} onInput={handleReviewInput}>
-          </textarea>
-          <button onClick={handleAddReview}>Post</button>
-
+          <span className="latoB grBrown f-09">COMMUNITY REVIEWS</span>
           <Divider></Divider>
-          {reviews.map(review => <BookReview rating={userRating} review={review}></BookReview>)}
+          {/* {reviews.map(review => <BookReviewComment rating={userRating} review={review} name="Test" avatar="https://images.gr-assets.com/users/1307934801p2/3978225.jpg"></BookReviewComment>)} */}
+          <GoodReviewsSection reviews={reviews}></GoodReviewsSection>
 
         </Stack>
 

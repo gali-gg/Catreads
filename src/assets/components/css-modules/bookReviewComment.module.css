@@ -1,0 +1,16 @@
+.commentWrapper {
+    margin: 10px 0;
+}
+
+.reviewBody {
+    font-family: "Merriweather Regular";
+    margin: 5px 0;
+    font-size: 0.93em;
+    line-height: 22px;
+}
+
+.reviewHeaderStyles {
+    display: "flex";
+    justify-content: "space-between";
+    align-items: "center";
+  };
