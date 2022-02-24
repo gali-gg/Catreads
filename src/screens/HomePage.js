@@ -48,15 +48,22 @@ export default function HomePage() {
     const chooseBook = () => {
         if(allBooks.length > 0){
             let book = allBooks[Math.ceil(Math.random() * allBooks.length - 1)];
-            if (shelves.wantToRead.books.some(readBook => readBook.uuid === book.uuid)) {
+            if (shelves.wantToRead.books.some(readBook => readBook === book.uuid)) {
+                if(numBooks === allBooks.length){
+                    return;
+                }
                 return chooseBook();
             }
+            setNumBooks(numBooks+1);
             return book;
         }
     };
     const [book, setBook] = useState(null);
+    const [numBooks, setNumBooks] = useState(0);
 
-    useEffect(() => setBook(chooseBook()), [allBooks]);
+    useEffect(() =>{
+        setBook(chooseBook())
+    }, [allBooks]);
     
     const handleNewBook = () => {
         setBook(chooseBook());

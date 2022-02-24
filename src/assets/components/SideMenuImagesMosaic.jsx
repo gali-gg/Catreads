@@ -36,13 +36,12 @@ export default function SideMenuImagesMosaic(props){
     if(wantToReadLength <= 6){
         books = shelves.wantToRead.books.map(shelfBook => allBooks.filter(book => book.uuid === shelfBook)[0]);
     }else{
-        books = shelves.wantToRead.books.slice(wantToReadLength-6);
+        books = shelves.wantToRead.books.map(shelfBook => allBooks.filter(book => book.uuid === shelfBook)[0]).slice(wantToReadLength-6);
     }
-
     return (
         <>
             <Title title={props.title} className={`${classes.title} grBrown latoB f-095`}></Title>
-            <Stack direction="row" className={classes.container}>
+            <Stack direction="row" className={classes.container} key={Date.now()}>
             {
                 books.map(book => (
                     <img 
