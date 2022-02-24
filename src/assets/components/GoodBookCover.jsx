@@ -4,6 +4,7 @@ import 'tippy.js/dist/tippy.css';
 import "./tippyStyles.css";
 import { getRatingsStats } from "../../utility";
 import {useSelector} from "react-redux";
+import styles from "./css-modules/goodBookCoverStyles.module.css"
 
 export default function GoodBookCover(props) {
   let bookReviews = useSelector(state => state.reviews.reviews.filter(review => review.bookID === props.book.uuid));
@@ -37,6 +38,7 @@ export default function GoodBookCover(props) {
         width={props.width || "auto"}
         height={props.height || "auto"}
         onClick={props.onClick}
+        className={styles.cover}
       />
     </Tippy>
   );

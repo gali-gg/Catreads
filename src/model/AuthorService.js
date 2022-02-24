@@ -1,8 +1,24 @@
-import { v4 as uuidv4 } from 'uuid';
-
-
 export default class Author {
-    constructor( {uuid, name, isGoodReadsAuthor, profileImage, born, died, website, twitter, genres, memberSince, description, books, bookshelves = [], friends = [], currentlyReading = null, groups = [], favouriteAuthors = [], friendsComments = []}) {
+    constructor({
+        uuid,
+        name,
+        isGoodReadsAuthor,
+        profileImage,
+        born,
+        died,
+        website,
+        twitter,
+        genres,
+        memberSince,
+        description,
+        books,
+        bookshelves = [],
+        friends = [],
+        currentlyReading = null,
+        groups = [],
+        favouriteAuthors = [],
+        friendsComments = []
+    }) {
         //this.uuid = uuidv4();
         this.uuid = uuid;
         this.name = name;

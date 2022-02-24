@@ -92,6 +92,7 @@ export default function BookPage(props) {
                     src={book.cover}
                     alt={`${book.title}-cover`}
                     onClick={handleOpen}
+                    title="Enlarge cover"
                   />
                   <Modal
                     open={open}
@@ -194,6 +195,7 @@ export default function BookPage(props) {
                             key={"bookgenre" + uuidv4()}
                             titleText={genre.genre}
                             classes="grGreen latoR"
+                            to={`/genres/${genre.genre}`}
                           ></GoodLink>
                           <Divider></Divider>
                         </>
@@ -204,6 +206,7 @@ export default function BookPage(props) {
                           key={"bookgenre" + uuidv4()}
                           titleText={genre.genre}
                           classes="grGreen latoR"
+                          to={`/genres/${genre.genre}`}
                         ></GoodLink>
                       );
                     }
