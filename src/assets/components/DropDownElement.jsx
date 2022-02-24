@@ -34,6 +34,7 @@ export default function BoxFlex(props) {
 
     const handleAction = (action) => {
         dispatch(userAction.logoutAction);
+        localStorage.removeItem("loggedUser");
     }
     return (
         <Stack

@@ -12,7 +12,8 @@ import { formatNumber, getRatingsStats } from "../utility.js";
 import { useDispatch, useSelector } from "react-redux";
 import { loadBookAction } from "../redux/actions/openBookAction.js";
 import GoodReviewsSection from "../assets/components/GoodReviewsSection.jsx";
-import BookReviewComment from "../assets/components/BookReviewComment.jsx";
+import {v4 as uuidv4} from "uuid";
+import GoodGreenButton from "../assets/components/GoodGreenButton.jsx";
 
 export default function BookPage(props) {
   const params = useParams();
@@ -69,13 +70,14 @@ export default function BookPage(props) {
     {bookIsLoaded && <Container maxWidth="lg" sx={{ mt: 2, mb: 5 }}>
     <Stack direction="row" spacing={5}>
       <main className={styles.main}>
-        <Stack direction="row" spacing={3}>
-          <div>
+        <Stack direction="row" spacing={3} className={styles.topSection}>
+          <div className={styles.bookCoverContainer}>
             <img
               className={styles.cover}
               src={book.cover}
               alt={`${book.title}-cover`}
             />
+            <GoodGreenButton bookUuid={book.uuid} styled={true}></GoodGreenButton>
           </div>
 
           <Stack>
@@ -121,7 +123,7 @@ export default function BookPage(props) {
               ></GoodLink>
               <Divider></Divider>
               <span className="latoB grBrown f-09">GET A COPY</span>
-              <Stack direction="row" gap={1}>
+              <Stack direction="row" gap={1} className={styles.buttons}>
                 <GoodButton title="Amazon"></GoodButton>
                 <GoodButton title="Online Stores"></GoodButton>
                 <GoodButton title="Libraries"></GoodButton>
@@ -138,7 +140,6 @@ export default function BookPage(props) {
         <Stack>
           <span className="latoB grBrown f-09">COMMUNITY REVIEWS</span>
           <Divider></Divider>
-          {/* {reviews.map(review => <BookReviewComment rating={userRating} review={review} name="Test" avatar="https://images.gr-assets.com/users/1307934801p2/3978225.jpg"></BookReviewComment>)} */}
           <GoodReviewsSection reviews={reviews}></GoodReviewsSection>
 
         </Stack>
@@ -153,7 +154,7 @@ export default function BookPage(props) {
             if (index < selectedBookGenres.length - 1) {
               return (
                 <>
-                  <GoodLink key={"bookgenre" + index}
+                  <GoodLink key={"bookgenre"+ uuidv4()}
                     titleText={genre.genre}
                     classes="grGreen latoR"
                   ></GoodLink>
@@ -162,7 +163,7 @@ export default function BookPage(props) {
               );
             } else if (index === selectedBookGenres.length - 1) {
               return (
-                <GoodLink key={"bookgenre" + index}
+                <GoodLink key={"bookgenre" + uuidv4()}
                   titleText={genre.genre}
                   classes="grGreen latoR"
                 ></GoodLink>

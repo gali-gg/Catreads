@@ -1,54 +1,54 @@
 import { Stack } from "@mui/material";
-import { useState } from "react";
 import { useSelector } from "react-redux";
 import BookReviewModal from "./BookReviewModal";
 import GoodLink from "./GoodLink";
-import GoodRating from "./GoodRating";
 import BookReviewComment from "./BookReviewComment";
 import "./styles.css";
-import _ from "lodash"
 import { getFromStorageAndParse } from "../../utility";
+import { useNavigate } from "react-router-dom";
 
 export default function GoodReviewsSection(props) {
+  const navigate = useNavigate();
+
   let userPhoto = useSelector((state) => state.userData.avatar);
   let book = useSelector((state) => state.openBook);
   let user = useSelector(state => state.userData);
-  //   let reviews = useSelector(state => state.reviews.reviews.filter(review => review.bookID === book.id));
+  let userRating = useSelector(state => {
+    let userReview = state.reviews.reviews.find(review => review.bookID === book.uuid && review.senderID === user.id);
 
-  const [rating, setRating] = useState(0);
-
-  const handleChangeRating = (ratingValue) => {
-    setRating(ratingValue);
-  };
+    if(userReview) {
+      return userReview.rating;
+    }
+  });
 
   const getUser = (senderID) => {
     let users = getFromStorageAndParse("users");
     return users.find(user => user.id === senderID);
   }
 
+  const handleGoToProfile = () => {
+      navigate("/user");
+  }
+
   return (
     <>
-      <Stack direction="horizontal" gap={2}>
+      <Stack direction="row" gap={2}>
         <img src={userPhoto} alt="user-avatar" width="70px"></img>
         <div>
-          <h4 className="latoR f-09 grBrown">
+          <div className={`latoR f-1 grBrown`} style={{marginBottom: "5px"}}>
             <GoodLink
               classes="latoR grGreen"
-              size="0.9em"
+              size="1.1em"
               titleText={user.name.first}
+              onClick={handleGoToProfile}
             ></GoodLink>{" "}
             start your review of {book.title}
-          </h4>
-          <Stack direction="horizontal" gap={5}>
-            <GoodRating
-              size="large"
-              rating={rating}
-              onRating={handleChangeRating}
-            ></GoodRating>
+          </div>
+          <Stack direction="row" gap={5}>
             <BookReviewModal
               type="button"
               clickTitle="Write a review"
-              rating={rating}
+              rating={userRating ?? 0}
               cover={book.cover}
               title={book.title}
               author={book.author.name}
@@ -58,13 +58,8 @@ export default function GoodReviewsSection(props) {
         </div>
       </Stack>
       <Stack>
-        {[...props.reviews].map(review => <BookReviewComment review={review} name={getUser(review.senderID).details.names.first}
+        {[...props.reviews].map(review => <BookReviewComment key={review.id} review={review} name={getUser(review.senderID).details.names.first}
         avatar={getUser(review.senderID).avatar}></BookReviewComment>)}
-
-        {/* <BookReviewComment
-          review={}
-
-        ></BookReviewComment> */}
       </Stack>
     </>
   );

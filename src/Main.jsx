@@ -24,10 +24,31 @@ import SearchResultsPage from './screens/SearchResultsPage';
 import BookPage from './screens/BookPage';
 import AuthorPage from './screens/AuthorPage';
 import FriendProfilePage from './screens/FriendProfilePage';
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getFromStorageAndParse } from "./utility";
+import { loginAction } from "./redux/actions/userAction";
+import { loadAllBooksAction } from "./redux/actions/allBooksAction";
+import { loadAuthorsAction } from "./redux/actions/allAuthorsAction";
+import { loadGenresAction } from "./redux/actions/allGenresAction";
+import { loadFakeReviewsAction } from "./redux/actions/reviewsActions";
+import { useEffect } from "react";
 
 export default function Main (props) {
   const logged = useSelector(state => state.userData.logged);
+  const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   if(localStorage.getItem("users")){
+  //     let users = getFromStorageAndParse("users");
+  //     let user = users.find(user => user.id === localStorage.getItem("loggedUser"));
+
+  //     dispatch(loginAction(user));
+  //     dispatch(loadAllBooksAction());
+  //     dispatch(loadAuthorsAction());
+  //     dispatch(loadGenresAction());
+  //     dispatch(loadFakeReviewsAction());
+  //   }
+  // }, []);
 
   return (
         <>

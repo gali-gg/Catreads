@@ -28,7 +28,7 @@ export const reviewsReducer = (state = INITIAL_STATE, action) => {
         case LOAD_REVIEWS:
             return {
                 ...state,
-                reviews: [...state.reviews, ...action.payload]
+                reviews: _.uniqBy([...state.reviews, ...action.payload], "id")
             }
 
         case LIKE_REVIEW:

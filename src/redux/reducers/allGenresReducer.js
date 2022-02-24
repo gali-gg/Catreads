@@ -1,4 +1,5 @@
 import { LOAD_GENRES } from "../actions/allGenresAction";
+import _ from "lodash";
 
 const INITIAL_STATE = {
     genres: []
@@ -9,7 +10,7 @@ export const allGenresReducer = (state = INITIAL_STATE, action) => {
         case LOAD_GENRES:
             return {
                 ...state,
-                genres: [...action.payload]
+                genres: _.uniqBy([...action.payload], "uuid")
             }
         default:
             return state;

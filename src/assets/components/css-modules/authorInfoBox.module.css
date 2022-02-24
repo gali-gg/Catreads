@@ -4,3 +4,11 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
+
+.authorName {
+    margin: 5px 0;
+}
+
+.descriptionContainer {
+    margin: 5px 0;
+}

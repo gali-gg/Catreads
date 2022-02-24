@@ -70,6 +70,7 @@ export default function SelectFavouriteGenresPage(props) {
     );
     users.push(user);
     setStorage("users", users);
+    setStorage("loggedUser", user.id);
     dispatch(loginAction(user));
     dispatch(loadAllBooksAction());
     dispatch(loadGenresAction());

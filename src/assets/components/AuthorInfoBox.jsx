@@ -31,14 +31,16 @@ export default function AuthorInfoBox(props) {
       </span>
       <Divider></Divider>
       <Avatar src={author.profileImage} sx={{ width: 75, height: 75 }}></Avatar>
-      <h4 className="meriR grBrown">{author.name}</h4>
+      <div className={`${styles.authorName} meriR grBrown`}>{author.name}</div>
       <GoodButton title="Follow Author"></GoodButton>
+      <div className={styles.descriptionContainer}>
       <span className={`${descClass} meriR f-1`}>{author.description}</span>
       <GoodLink
         onClick={handleShowMore}
         titleText={showMore}
         classes="meriR grGreen"
       ></GoodLink>
+      </div>
       <div>
         <span className="latoB grBrown f-09">
           BOOKS BY {author.name.toUpperCase()}

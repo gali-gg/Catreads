@@ -29,9 +29,6 @@ export default function MyBooksTable (props) {
                 <GoodLink titleText="rating" classes="latoB grBrown"/>
             </th>
             <th>
-                <GoodLink titleText="shelves" classes="latoB grBrown"/>
-            </th>
-            <th>
             </th>
             <th>
             </th>
