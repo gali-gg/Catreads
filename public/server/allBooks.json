@@ -586,7 +586,7 @@
     {
       "uuid":"731596ca-856e-4f8d-8f2e-128b464e744a",
       "title":"Джава за всеки",
-      "author":1,
+      "author":11,
       "published":{
          "day":"",
          "month":"",
@@ -617,14 +617,14 @@
    {
       "uuid":"51e31889-6f8a-451c-b762-30c55c9b7422",
       "title":"The Lord of the Rings",
-      "author":1,
+      "author":12,
       "published":{
          "day":"12th",
          "month":"October",
          "year":2005,
          "publisher":"Houghton Mifflin Harcourt"
       },
-      "cover":"https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1492949069l/34940937._SX318_.jpg",
+      "cover":"https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1566425108l/33.jpg",
       "genres":[
          1,
          2,
