@@ -1,6 +1,6 @@
 import { Dialog, Divider, Stack } from "@mui/material";
 import { makeStyles } from '@mui/styles';
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import GoodLink from "../assets/components/GoodLink";
 import ProfileListEl from "../assets/components/ProfileListEl";
 import "../assets/components/styles.css";
@@ -25,7 +25,7 @@ const useStyles = makeStyles({
     borderRadius: "50%",
     height: "150px",
     width: "150px",
-    objectFit:"cover",
+    objectFit: "cover",
   },
   titleName: {
     fontSize: "1.4em",
@@ -74,16 +74,17 @@ export default function ProfilePage() {
     }
   })
 
-  let favouriteGenres = user.favouriteGenres.map( genre => {
-    return {title: genres.find(g => g.uuid === genre).genre}
+  let favouriteGenres = user.favouriteGenres.map(genre => {
+    return { title: genres.find(g => g.uuid === genre).genre }
   })
 
-  const handleOpenModal =() => {
+  const handleOpenModal = () => {
     setIsModalOpen(true);
   }
-  const handleCloseModal =() => {
+  const handleCloseModal = () => {
     setIsModalOpen(false);
   }
+
   return (
     <Stack direction="row" className={classes.container} spacing={3}>
       <Stack spacing={4} sx={{ minWidth: "700px" }}>
@@ -98,10 +99,10 @@ export default function ProfilePage() {
           </Stack>
           <Stack style={{ width: "100%" }}>
             <Stack direction="row" justifyContent="flex-start" alignItems="center" spacing={1}>
-              <Title 
-                title={`${user.name.first} ${user.name.last ? user.name.last : ""}`} 
+              <Title
+                title={`${user.name.first} ${user.name.last ? user.name.last : ""}`}
                 className={`${classes.titleName} meriB grBrown`} />
-              <GoodLink titleText="(edit profile)" classes={`${classes.littleLink} grGreen latoB`} onClick={handleOpenModal}/>
+              <GoodLink titleText="(edit profile)" classes={`${classes.littleLink} grGreen latoB`} onClick={handleOpenModal} />
             </Stack>
             <Dialog open={isModalOpen} onClose={handleCloseModal}>
               <ProfileModal onClose={handleCloseModal}></ProfileModal>
@@ -109,8 +110,8 @@ export default function ProfilePage() {
             <Divider />
             <table>
               <tbody>
-                <ProfileListEl title="Details" text="Radomir" />
-                <ProfileListEl title="Activity" text="Joined in February 2022" />
+                <ProfileListEl title="Details" location={true} />
+                <ProfileListEl title="Joined" date={true} />
               </tbody>
             </table>
           </Stack>

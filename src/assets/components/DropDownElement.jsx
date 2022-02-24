@@ -8,23 +8,26 @@ import { useDispatch } from 'react-redux';
 import * as userAction from "../../redux/actions/userAction"
 
 const useStyles = makeStyles({
+    container: {
+        padding: "5px 10px 20px 10px",
+    },
     link: {
         fontSize: "0.9em",
         textDecoration: 'inherit',
-        color : "inherit",
+        color: "inherit",
         textTransform: "none",
-          '&:hover': {
-            textDecoration : "underline",
+        '&:hover': {
+            textDecoration: "underline",
             cursor: "pointer"
-          },
+        },
     },
     title: {
-        margin:0,
+        margin: 0,
         textTransform: "uppercase",
     }
 });
 
-export default function BoxFlex(props){
+export default function BoxFlex(props) {
     let bgColor = props.bgColor;
     const classes = useStyles();
     const dispatch = useDispatch();
@@ -32,36 +35,35 @@ export default function BoxFlex(props){
     const handleAction = (action) => {
         dispatch(userAction.logoutAction);
     }
-    return(
+    return (
         <Stack
-            direction = "column"
+            wrap="flexWrap"
+            direction="column"
+            sx={{ background: bgColor }}
             spacing={2}
-            sx={{
-                padding: "5px 10px 20px 10px",
-                background: bgColor
-            }}
-        >   
-            {props.userName && <Title title={props.userName}  className ={`${classes.title} latoB grBrown`}></Title>}
+            className={classes.container}
+        >
+            {props.userName && <Title title={props.userName} className={`${classes.title} latoB grBrown`}></Title>}
             {props.hrefs.map(link => {
-                if (link.dispatch){
+                if (link.dispatch) {
                     return (
-                        <span 
+                        <span
                             key={link.title}
-                            className = {`${classes.link} latoR`} 
+                            className={`${classes.link} latoR`}
                             onClick={() => handleAction(link.action)}
                         >
                             {link.title}
                         </span>
                     )
                 }
-                else{
+                else {
                     return (
-                    <StyledRouterLink 
-                        className = {`${classes.link} latoR`}
-                        key={link.title} 
-                        title={link.title} 
-                        href={link.href || ""} 
-                    />
+                        <StyledRouterLink
+                            className={`${classes.link} latoR`}
+                            key={link.title}
+                            title={link.title}
+                            href={link.href || ""}
+                        />
                     )
                 }
             })}

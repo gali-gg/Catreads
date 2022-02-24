@@ -6,6 +6,7 @@ import { makeStyles } from '@mui/styles';
 import { Stack } from '@mui/material';
 import SubDownMenu from './SubDownMenu';
 import "./styles.css";
+import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles({
   notClickedButton: {
@@ -41,6 +42,8 @@ const useStyles = makeStyles({
 
 export default function BasicMenu(props) {
   const classes = useStyles();
+  const user = useSelector(state => state.userData);
+  const genres = useSelector(state => state.genres.genres);
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -51,6 +54,16 @@ export default function BasicMenu(props) {
     setAnchorEl(null);
   };
   let side = props.side || "left";
+
+  const [favGenres, setFavGenres] = React.useState(null);
+
+  React.useEffect(() => {
+    if(genres.length > 0 && user){
+      setFavGenres(user.favouriteGenres.map( genre => {
+        return {title: genres.find(g => g.uuid === genre).genre}
+      }))
+    }
+  }, [genres, user]);
 
   return (
     <>
@@ -84,10 +97,10 @@ export default function BasicMenu(props) {
           horizontal: side ,
         }}
       >
-        <Stack  direction={props.hrefsSecond ? "column" : "row"}>
+        <Stack direction={props.hrefsSecond ? "column" : "row"} wrap="flexWrap">
             <DropDownElement hrefs={props.hrefs} userName={props.userName}/>
-            {props.hrefsLeftSide && (
-              <SubDownMenu orientation="vertical" bgColor="#F6F6F6" hrefs={props.hrefs} />
+            {props.hrefsLeftSide && user && genres && favGenres &&(
+              <SubDownMenu orientation="vertical" bgColor="#F6F6F6" hrefs={favGenres} />
             )}
             {props.hrefsSecond && (
               <SubDownMenu hrefs={props.hrefsSecond} />

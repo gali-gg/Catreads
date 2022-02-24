@@ -45,10 +45,12 @@ export default function GenresPage() {
     const classes = useStyles();
     const params = useParams();
     const allBooks = useSelector(state => state.books.books);
+    const user = useSelector(state => state.userData);
     const genres = useSelector(state => state.genres.genres);
     const allGenres = genres.map(genre => genre.genre);
     const firstHalfGenres = allGenres.slice(0, Math.floor(allGenres.length/2));
     const secondHalfGenres = allGenres.slice(Math.round(allGenres.length/2), allGenres.length-1);
+    const [favouriteGenres, setFavouriteGenres] = useState(null);
 
     const genreBooks = (genre) => {
       let genreBooksData = allBooks.filter(book => {
@@ -58,6 +60,13 @@ export default function GenresPage() {
 
       return genreBooksData.length > 5 ? genreBooksData.slice(randomNum, randomNum+5) : false;
     }
+
+    React.useEffect(() => {
+      setFavouriteGenres(user.favouriteGenres.map( genre => {
+        return genres.filter(g => g.uuid === genre)[0].genre
+      }))
+    }, [genres, user]);
+    
   return (
     <>
     {params.gname &&
@@ -95,7 +104,8 @@ export default function GenresPage() {
 
             </Stack>
             <Stack spacing={3}>
-                <SideMenulist title="My favourite genres" link="edit" hrefs={allGenres.slice(0,5)}/>
+            {favouriteGenres && <SideMenulist title="My favourite genres" link="edit" hrefs={favouriteGenres}/>}
+
                 <SideMenulist 
                   title="Browse" 
                   downLink="More genres..." 

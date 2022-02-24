@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 export default class User {
     constructor(email, password, detailsObj = {}, profilePicture, faveGenresArr = []) {
         this.id = uuidv4();
+        this.joined = null;
         this.email = email;
         this.password = password;
         this.avatar = profilePicture || "https://s.gr-assets.com/assets/nophoto/user/u_60x60-267f0ca0ea48fd3acfd44b95afa64f01.png";
