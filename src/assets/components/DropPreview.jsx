@@ -26,8 +26,8 @@ const thumb = {
     borderRadius: 2,
     paddingBottom: 8,
     paddingRight: 8,
-    width: 100,
-    height: 100,
+    width: 150,
+    height: 150,
     padding: 4,
     boxSizing: 'border-box',
 };
@@ -41,13 +41,12 @@ const thumbInner = {
 const img = {
     display: 'block',
     width: 'auto',
-    height: '100%'
+    height: '100%',
 };
 
 
 export default function Previews(props) {
     const dispatch = useDispatch()
-    const userAvatar = useSelector(state => state.userData.avatar);
     const [files, setFiles] = useState([]);
     const { getRootProps, getInputProps } = useDropzone({
         accept: 'image/*',
@@ -72,12 +71,12 @@ export default function Previews(props) {
     ));
 
     useEffect(() => {
-        if(files.length > 0){
+        if(files.length > 0 && props.isSubmit){
             dispatch(changeAvatarAction(URL.createObjectURL(files[0])));
         }
         // Make sure to revoke the data uris to avoid memory leaks
         files.forEach(file => URL.revokeObjectURL(file.preview));
-    }, [files]);
+    }, [files, props.isSubmit]);
 
     return (
         

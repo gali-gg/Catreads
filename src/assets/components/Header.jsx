@@ -10,8 +10,7 @@ import {useSelector} from 'react-redux';
 import { browseHrefs, communityHrefs, profileHrefsFirst, profileHrefsSecond } from '../../data/hrefs';
 
 export const Header = function Header (props){
-    const name = useSelector(state => state.userData.name.first);
-    const avatar = useSelector(state => state.userData.avatar);
+    const user = useSelector(state => state.userData);
     if(props.logged){
         return (
             <Stack
@@ -36,8 +35,8 @@ export const Header = function Header (props){
                     <NavButton src="https://s.gr-assets.com/assets/layout/header/icn_nav_msgs.svg"></NavButton>
                     <NavButton src="https://s.gr-assets.com/assets/layout/header/icn_nav_friend.svg"></NavButton>
                     <DropDownMenu
-                        src = {avatar}
-                        userName={name}
+                        src = {user.avatar}
+                        userName={`${user.name.first} ${user.name.last ? user.name.last : ""}`}
                         hrefs={profileHrefsFirst}
                         hrefsSecond={profileHrefsSecond}
                         side="right"
