@@ -7,6 +7,7 @@ import GoodRating from "./GoodRating";
 import BookReviewComment from "./BookReviewComment";
 import "./styles.css";
 import _ from "lodash"
+import { getFromStorageAndParse } from "../../utility";
 
 export default function GoodReviewsSection(props) {
   let userPhoto = useSelector((state) => state.userData.avatar);
@@ -19,6 +20,12 @@ export default function GoodReviewsSection(props) {
   const handleChangeRating = (ratingValue) => {
     setRating(ratingValue);
   };
+
+  const getUser = (senderID) => {
+    let users = getFromStorageAndParse("users");
+    return users.find(user => user.id === senderID);
+  }
+
   return (
     <>
       <Stack direction="horizontal" gap={2}>
@@ -51,12 +58,8 @@ export default function GoodReviewsSection(props) {
         </div>
       </Stack>
       <Stack>
-        {[...props.reviews, {
-            rating: 4.5,
-            body: "When I heard the premise I expected a light robot killer story from the PoV from the robot. Probably a PI mystery kind of thing because that seems to be pretty hot right now. I can rattle off a handful of titles like this right now. So. What did I get? A fun and light robot murderer who hacks herself to have free will and she stops murdering to watch SF sitcoms instead. :) Honestly, that's pretty cool. Yeah, her official bruiser job is still there but her mechanical heart isn't really into it.",
-            date: _.now()
-        }].map(review => <BookReviewComment review={review} name="Bradley"
-        avatar="https://images.gr-assets.com/users/1508811508p2/4213258.jpg"></BookReviewComment>)}
+        {[...props.reviews].map(review => <BookReviewComment review={review} name={getUser(review.senderID).details.names.first}
+        avatar={getUser(review.senderID).avatar}></BookReviewComment>)}
 
         {/* <BookReviewComment
           review={}
