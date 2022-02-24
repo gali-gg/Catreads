@@ -48,9 +48,13 @@ function getRatingsStats (bookReviews) {
             reviewsCount++
         }
     })
-
-    let rating = ratingsTotal / reviewsCount;
-
+    let rating;
+    if(ratingsCount){
+        rating = ratingsTotal / reviewsCount;
+    }
+    else {
+        rating = 0;
+    }
     return {rating, reviewsCount, ratingsCount}
 }
 

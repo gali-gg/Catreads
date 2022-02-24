@@ -7,13 +7,15 @@ import { formatNumber } from "../../utility";
 import { useDispatch } from "react-redux";
 import { addBookToShelf } from "../../redux/actions/shelfAction";
 import GoodGreenButton from "./GoodGreenButton"
+import { useNavigate } from "react-router-dom";
+import BookReviewModal from "./BookReviewModal";
 
 
 export default function BookHoverInfo (props) {
-    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
     const [descClass, setDescClass] = useState(styles.description);
     const [showMore, setShowMore] = useState("more");
-    // const [chosenShelfName, setChosenShelfName] = useState("");
 
     const handleShowMore= () => {
         if(descClass){
@@ -26,15 +28,15 @@ export default function BookHoverInfo (props) {
         }
     }
 
-    const handleSelectShelf = (e) => {
-        if(e.target.value){
-            dispatch(addBookToShelf(false, e.target.value, props.book, props.book.uuid));
-        }
+    const handleBookTitleClick = (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        navigate(`/books/${props.book.uuid}`)
     }
 
     return (
         <div  className={styles.container} style={{backgroundColor: "white"}}>
-            <h3 className={styles.title}><GoodLink size="1em" titleText={props.title} classes="meriB grBrown"/></h3>
+            <h3 className={styles.title}><GoodLink size="1em" titleText={props.title} classes="meriB grBrown" onClick={handleBookTitleClick}/></h3>
 
             <span>by&nbsp;
                 <GoodLink titleText={props.author} classes="meriR grBrown"></GoodLink>
@@ -50,18 +52,9 @@ export default function BookHoverInfo (props) {
                 </span>
                 <GoodLink onClick={handleShowMore} titleText={showMore} classes="meriR grGreen"></GoodLink>
                 <div className={styles.bottom}>
-                    {/*<select onChange={handleSelectShelf}>
-                        <option value="">Add to shelf</option>
-                        <option value={"Read"}>Read</option>
-                        <option value={"Currently Reading"}>Currently reading</option>
-                        <option value={"Want to Read"}>Want to read</option>
-                    </select>*/}
                     <GoodGreenButton bookUuid={props.book.uuid} styled={false}/>
-
-                    <span className="f-08">Rate this book</span>
-                    <GoodRating size="small"></GoodRating>
                 </div>
             </span>
         </div>
-    )
+    );
 }
