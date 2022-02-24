@@ -4,16 +4,27 @@ import "../assets/components/styles.css";
 import GoodButton from "../assets/components/GoodButton";
 import styles from "./myBooksStyles.module.css"
 import MyBooksTable from "../assets/components/MyBooksTable";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { debounce } from "../utility";
 import icon from "../assets/images/search-icon-small.png";
-import { shallowEqual, useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import _ from "lodash";
+import AddShelfInput from "./AddShelfInput";
 
 export default function MyBooksPage () {
-    const dispatch = useDispatch();
     const shelves = useSelector(state => state.shelves);
-    const books = useSelector(state => state.books.books);
+
+    let userShelves;
+
+    for (let shelf in shelves) {
+        if (shelf === "userShelves") {
+          if (shelves[shelf].length > 0) {
+            userShelves = shelves[shelf].map(userShelf => {
+              return { name: userShelf.name, books: userShelf.books }
+            });
+          }
+        }
+    }
 
     let allBooks = useSelector(state => {
         let {userShelves, ...regularShelves} = state.shelves;
@@ -25,12 +36,12 @@ export default function MyBooksPage () {
         }
 
         userShelves.forEach(shelf => {
-            allBooks.push(shelf.books);
+            allBooks.push(...shelf.books);
         });
 
-        let allUserBooks = allBooks.map(userBook => books.find(book => userBook === book.uuid));
+        let allUserBooks = allBooks.map(bookID => state.books.books.find(book => bookID === book.uuid));
         return _.uniqBy(allUserBooks, "uuid");
-    }, shallowEqual);
+    });
 
     const [listBooks, setListBooks] = useState(allBooks);
 
@@ -46,7 +57,7 @@ export default function MyBooksPage () {
             books = getAllBooksFromShelf("read");
         }
 
-        return books;
+        return books || [];
     }
 
     function getSelectedShelfName (isSelectedObj) {
@@ -77,6 +88,7 @@ export default function MyBooksPage () {
     }, 300);
 
     const handleDisplayShelf = (e) => {
+        setUserShelfSelected(false);
         let isSelectedCopy = {
             ...isSelected
         };
@@ -106,14 +118,30 @@ export default function MyBooksPage () {
     const fontSize = "1em";
 
     const getAllBooksFromShelf = ((shelfName) => {
-        if(shelves){
+        if(shelves && allBooks){
           return shelves[shelfName].books.map(shelfBook => {
-            return allBooks.filter(book => book.uuid === shelfBook)[0]
+            return allBooks.find(book => book.uuid === shelfBook);
           });
         }else{
           return [];
         }
-    })
+    });
+
+    const [addShelfOpen, setAddShelfOpen] = useState(false);
+    const handleAddShelfClick = () => {
+        setAddShelfOpen(true);
+    }
+
+    const [userShelfSelected, setUserShelfSelected] = useState(false);
+
+    const handleDisplayUserShelfBooks = (e) => {
+        setUserShelfSelected(true);
+        let shelfName = e.target.id;
+
+        let books = userShelves.find(shelf => shelf.name === shelfName).books;
+        setListBooks(books);
+    }
+
     return (
         <Container maxWidth="lg" sx={{mt: 2, mb: 5}}>
             <div className={styles.pageHeading}>
@@ -133,12 +161,17 @@ export default function MyBooksPage () {
             <div className={styles.mainContent}>
                 <ul className={styles.sideList}>
                     <li><GoodLink size={fontSize} titleText="Bookshelves" classes="latoB grBrown"></GoodLink></li>
-                    <li><GoodLink size={fontSize} titleText="All" classes={`latoR ${isSelected.all ? "grGrey" : "grGreen"}`} id="lall" onClick={handleDisplayShelf}></GoodLink></li>
+                    <li><GoodLink size={fontSize} titleText={`All (${allBooks.length})`} classes={`latoR ${isSelected.all ? "grGrey" : "grGreen"}`} id="lall" onClick={handleDisplayShelf}></GoodLink></li>
                     <li><GoodLink size={fontSize} titleText="Read" classes={`latoR ${isSelected.read ? "grGrey" : "grGreen"}`} id="lread" onClick={handleDisplayShelf}></GoodLink></li>
                     <li><GoodLink size={fontSize} titleText="Currently Reading" classes={`latoR ${isSelected.currentlyReading ? "grGrey" : "grGreen"}`} id="lcurrentlyReading" onClick={handleDisplayShelf}></GoodLink></li>
                     <li><GoodLink size={fontSize} titleText="Want to Read" classes={`latoR ${isSelected.wantToRead ? "grGrey" : "grGreen"}`} id="lwantToRead" onClick={handleDisplayShelf}></GoodLink></li>
+
+                    {userShelves && <><hr></hr>
+                           { userShelves.map(shelf => <><GoodLink titleText={shelf.name} classes="latoR grGreen f-1" id={shelf.name} onClick={handleDisplayUserShelfBooks}></GoodLink><br></br></>)}</>
+                    }
                     <hr></hr>
-                    <GoodButton title="Add shelf" padding="5px 15px" fontSize="12px" style={{height: "30px"}}></GoodButton>
+                    <GoodButton title="Add shelf" padding="5px 15px" fontSize="12px" style={{height: "30px"}} onClick={handleAddShelfClick}></GoodButton>
+                    {addShelfOpen && <AddShelfInput/>}
                     <hr></hr>
                     <li><GoodLink size={fontSize} titleText="Your reading activity" classes="latoB grBrown"></GoodLink></li>
                     <li><GoodLink size={fontSize} titleText="Review Drafts" classes="latoR grGreen"></GoodLink></li>
@@ -158,7 +191,8 @@ export default function MyBooksPage () {
                     <li><GoodLink size={fontSize} titleText="Widgets" classes="latoR grGreen"></GoodLink></li>
                     <li><GoodLink size={fontSize} titleText="Import and export" classes="latoR grGreen"></GoodLink></li>
                 </ul>
-                <MyBooksTable books={isSearching ? listBooks : getSelectedBooks(isSelected)} shelfName={shelfName}></MyBooksTable>
+                {!userShelfSelected && <MyBooksTable books={isSearching ? listBooks : getSelectedBooks(isSelected)} shelfName={shelfName}></MyBooksTable>}
+                {userShelfSelected && <MyBooksTable books={listBooks} shelfName={shelfName}></MyBooksTable>}
                 </div>
                 </Container>
     )

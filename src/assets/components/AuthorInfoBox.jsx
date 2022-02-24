@@ -4,15 +4,15 @@ import styles from "./css-modules/authorInfoBox.module.css";
 import GoodButton from "./GoodButton";
 import GoodBookCover from "./GoodBookCover";
 import GoodLink from "./GoodLink";
-import books from "../../data/books.js";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function AuthorInfoBox(props) {
   const navigate = useNavigate();
   const author = props.author;
-  const authorBooks = books
-    .filter((book) => book.author === author.uuid)
-    .splice(0, 5);
+  const authorBooks = useSelector(state => {
+    return state.books.books.filter(book => book.author === author.uuid);
+  });
 
   const [descClass, setDescClass] = useState(styles.description);
   const [showMore, setShowMore] = useState("more");
