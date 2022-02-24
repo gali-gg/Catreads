@@ -1,4 +1,4 @@
-import { RATE_BOOK, REMOVE_FAVE_GENRE, ADD_FAVE_GENRE, CHANGE_AVATAR, CHANGE_NAME, LOGIN, LOGOUT } from "../actions/userAction";
+import { RATE_BOOK, REMOVE_FAVE_GENRE, ADD_FAVE_GENRE, CHANGE_AVATAR, CHANGE_NAME, LOGIN, LOGOUT, ADD_JOINED_DATE, ADD_LOCATION } from "../actions/userAction";
 import _ from "lodash";
 
 const INITIAL_STATE = {
@@ -7,7 +7,9 @@ const INITIAL_STATE = {
     name: null,
     avatar: null,
     favouriteGenres: [],
-    ratedBooks: []
+    ratedBooks: [],
+    joined : null,
+    location: null,
 }
 
 export const userReducer = (state = INITIAL_STATE, action) => {
@@ -74,6 +76,17 @@ export const userReducer = (state = INITIAL_STATE, action) => {
                     ...state.ratedBooks,
                     action.payload
                 ]
+            }
+        case ADD_JOINED_DATE:
+            return {
+                ...state,
+                joined: action.payload
+            }
+
+        case ADD_LOCATION:
+            return {
+                ...state,
+                location: action.payload
             }
         default:
             return state;

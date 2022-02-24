@@ -16,6 +16,8 @@ import { getFromStorageAndParse } from "../utility";
 import * as EmailValidator from 'email-validator';
 import SelectFavouriteGenresPage from "./SelectFavouriteGenresPage";
 import { loadGenresAction } from "../redux/actions/allGenresAction";
+import { addJoinedDate, addLocation } from "../redux/actions/userAction";
+import moment from "moment";
 
 export default function RegisterPage(props) {
   const [name, setName] = useState("");
@@ -43,6 +45,8 @@ export default function RegisterPage(props) {
       if(emailFree){
         if(password.length > 7){
           dispatch(loadGenresAction());
+          dispatch(addJoinedDate(moment.now()));
+          dispatch(addLocation());
           setCanRegister(true);
         }
         else{

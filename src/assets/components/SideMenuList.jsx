@@ -12,6 +12,7 @@ const useStyles = makeStyles({
 
 export default function SideMenulist(props){
     const classes = useStyles();
+
     return (
         <Stack >
             <GenreTitle title={props.title} link={props.link}/>
