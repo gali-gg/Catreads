@@ -135,5 +135,32 @@
        "books":[
           "85vgpk15-9b1k-56d7-m26s-60f3b5ec5g3w"
        ]
-    }
+    },
+    {
+      "uuid":11,
+      "name":"Красимир Стоев",
+      "profileImage":"https://media-exp1.licdn.com/dms/image/C4D03AQHl-7Lq2QEtZw/p…8080000&v=beta&t=wIhDRDxEO5BfFa-PvAjj7HpTVRL8ejAu7Zd7R9luh8U",
+      "genres":[
+         5,
+         10
+      ],
+      "description":"Красимир Стоев има 8-годишен опит в проектирането и разработването на софтуерни системи за управление и оптимизация на производствени и бизнес процеси. В момента е консултант по проектиране на индустриален софтуер и лектор в тренировъчен лагер ИТ Таланти.",
+      "books":[
+         "731596ca-856e-4f8d-8f2e-128b464e744a"
+      ]
+   },
+   {
+      "uuid":12,
+      "name":"J. R. R. Tolkien",
+      "profileImage":"https://images.gr-assets.com/authors/1622832627p8/656983.jpg",
+      "genres":[
+         1,
+         2,
+         3
+      ],
+      "description":"John Ronald Reuel Tolkien, CBE was an English writer, poet, WWI veteran (a First Lieutenant in the Lancashire Fusiliers, British Army), philologist, and university professor, best known as the author of the high fantasy classic works The Hobbit and The Lord of the Rings. Tolkien was Rawlinson and Bosworth Professor of Anglo-Saxon at Oxford from 1925 to 1945, and Merton Professor of English language and literature from 1945 to 1959. He was a close friend of C.S. Lewis. While many other authors had published works of fantasy before Tolkien, the great success of The Hobbit and The Lord of the Rings led directly to a popular resurgence of the genre. This has caused Tolkien to be popularly identified as the \"father\" of modern fantasy literature—or more precisely, high fantasy. Tolkien's writings have inspired many other works of fantasy and have had a lasting effect on the entire field.",
+      "books":[
+         "51e31889-6f8a-451c-b762-30c55c9b7422"
+      ]
+   }
  ]

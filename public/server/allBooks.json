@@ -582,5 +582,70 @@
        "reviews":[
 
        ]
-    }
+    },
+    {
+      "uuid":"731596ca-856e-4f8d-8f2e-128b464e744a",
+      "title":"Джава за всеки",
+      "author":1,
+      "published":{
+         "day":"",
+         "month":"",
+         "year":2016,
+         "publisher":"Фабер"
+      },
+      "cover":"https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1492949069l/34940937._SX318_.jpg",
+      "genres":[
+         5,
+         10
+      ],
+      "status":{
+         "rating":4.48,
+         "ratingsCount":8307272,
+         "reviewsCount":131115
+      },
+      "description":"Първата книга от поредицата „Java за всеки“ е написана по утвърдената учебна програма, по която работим в Тренировъчния лагер ИТ Таланти от началото на 2013 г. Книгата е подходяща за ученици, студенти, както и за всички, които искат да навлязат в света на програмирането. Целта на книгата е да предаде по достъпен начин основите на софтуерната разработка и да запознае читателя със стандартните похвати за решаване на проблеми и задачи по програмиране. За да я четете и да усвоите материала от нея, не е нужно да имате предварителни познания по програмиране или опит и знания в сферата на математиката и информационните технологии. Поредицата, от която се подготвят още две заглавия, се стреми да подготви читателя до ниво на младши програмист, придобил всички необходими знания за започване на работа в софтуерна компания. Познаването на материала от тази книга ще ви гарантира много стръмна крива на развитие при вашето по-нататъшно обучение в ИТ сферата. Фокусът в „Java за всеки – част 1“ е насочен към усвояване основите на програмирането и алгоритмите за сортиране. Написана е така, че да може лесно да се усвои от всеки, независимо от неговата подготовка.",
+      "similarBooks":[
+
+      ],
+      "quotes":[
+
+      ],
+      "reviews":[
+
+      ]
+   },
+   {
+      "uuid":"51e31889-6f8a-451c-b762-30c55c9b7422",
+      "title":"The Lord of the Rings",
+      "author":1,
+      "published":{
+         "day":"12th",
+         "month":"October",
+         "year":2005,
+         "publisher":"Houghton Mifflin Harcourt"
+      },
+      "cover":"https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1492949069l/34940937._SX318_.jpg",
+      "genres":[
+         1,
+         2,
+         4,
+         5,
+         6
+      ],
+      "status":{
+         "rating":4.48,
+         "ratingsCount":8307272,
+         "reviewsCount":131115
+      },
+      "description":"One Ring to rule them all, One Ring to find them, One Ring to bring them all and in the darkness bind them. In ancient times the Rings of Power were crafted by the Elven-smiths, and Sauron, the Dark Lord, forged the One Ring, filling it with his own power so that he could rule all others. But the One Ring was taken from him, and though he sought it throughout Middle-earth, it remained lost to him. After many ages it fell by chance into the hands of the hobbit Bilbo Baggins. From Sauron's fastness in the Dark Tower of Mordor, his power spread far and wide. Sauron gathered all the Great Rings to him, but always he searched for the One Ring that would complete his dominion. When Bilbo reached his eleventy-first birthday he disappeared, bequeathing to his young cousin Frodo the Ruling Ring and a perilous quest: to journey across Middle-earth, deep into the shadow of the Dark Lord, and destroy the Ring by casting it into the Cracks of Doom. The Lord of the Rings tells of the great quest undertaken by Frodo and the Fellowship of the Ring: Gandalf the Wizard; the hobbits Merry, Pippin, and Sam; Gimli the Dwarf; Legolas the Elf; Boromir of Gondor; and a tall, mysterious stranger called Strider. ",
+      "similarBooks":[
+
+      ],
+      "quotes":[
+
+      ],
+      "reviews":[
+
+      ]
+   }
  ]
