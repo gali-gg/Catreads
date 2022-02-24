@@ -5,8 +5,10 @@ import GoodButton from "./GoodButton";
 import GoodBookCover from "./GoodBookCover";
 import GoodLink from "./GoodLink";
 import books from "../../data/books.js";
+import { useNavigate } from "react-router-dom";
 
 export default function AuthorInfoBox(props) {
+  const navigate = useNavigate();
   const author = props.author;
   const authorBooks = books
     .filter((book) => book.author === author.uuid)
@@ -24,6 +26,11 @@ export default function AuthorInfoBox(props) {
       setShowMore("more");
     }
   };
+
+  const handleClickBook = (bookID) => {
+    navigate(`/books/${bookID}`);
+  }
+
   return (
     <div>
       <span className="latoB grBrown f-09">
@@ -48,7 +55,7 @@ export default function AuthorInfoBox(props) {
         <Divider></Divider>
         <Stack direction="row" gap={0.5}>
           {authorBooks.map((book, index) => {
-            return <GoodBookCover key={"bookcover" + index} book={book} width="50px" tippyPlacement="bottom-start"></GoodBookCover>;
+            return <GoodBookCover key={"bookcover" + index} book={book} width="50px" tippyPlacement="bottom-start" onClick={() => handleClickBook(book.uuid)}></GoodBookCover>;
           })}
         </Stack>
       </div>
