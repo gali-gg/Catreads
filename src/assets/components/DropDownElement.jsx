@@ -41,7 +41,7 @@ export default function BoxFlex(props){
                 background: bgColor
             }}
         >   
-            {props.userName && <Title title={props.userName}  className ={`${classes.title} latoR`}></Title>}
+            {props.userName && <Title title={props.userName}  className ={`${classes.title} latoB grBrown`}></Title>}
             {props.hrefs.map(link => {
                 if (link.dispatch){
                     return (

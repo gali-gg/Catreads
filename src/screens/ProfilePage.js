@@ -98,7 +98,9 @@ export default function ProfilePage() {
           </Stack>
           <Stack style={{ width: "100%" }}>
             <Stack direction="row" justifyContent="flex-start" alignItems="center" spacing={1}>
-              <Title title={user.name.first} className={`${classes.titleName} meriB grBrown`} />
+              <Title 
+                title={`${user.name.first} ${user.name.last ? user.name.last : ""}`} 
+                className={`${classes.titleName} meriB grBrown`} />
               <GoodLink titleText="(edit profile)" classes={`${classes.littleLink} grGreen latoB`} onClick={handleOpenModal}/>
             </Stack>
             <Dialog open={isModalOpen} onClose={handleCloseModal}>
