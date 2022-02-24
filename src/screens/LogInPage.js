@@ -23,6 +23,7 @@ import { loadAllBooksAction } from "../redux/actions/allBooksAction";
 import { loadGenresAction } from "../redux/actions/allGenresAction";
 import { loadAuthorsAction } from "../redux/actions/allAuthorsAction";
 import * as EmailValidator from 'email-validator';
+import { loadFakeReviewsAction } from "../redux/actions/reviewsActions";
 
 export default function LogInPage(props) {
   const [email, setEmail] = useState("");
@@ -36,16 +37,18 @@ export default function LogInPage(props) {
 
   const handleLogAttempt = () => {
     if(EmailValidator.validate(email)){
-      const users = getFromStorageAndParse("users");
+      let users = getFromStorageAndParse("users");
+      console.log(users);
       const authenticate =  (email, password) => users.some(user => user.email === email && user.password === password);
 
       if(authenticate(email, password)){
         setEmailErrorIsVisible(false);
-        const user = users.find(user => user.email === email);
+        let user = users.find(user => user.email === email);
         dispatch(loginAction(user));
         dispatch(loadAllBooksAction());
         dispatch(loadGenresAction());
         dispatch(loadAuthorsAction());
+        dispatch(loadFakeReviewsAction());
         navigate("/");
       }
       else {

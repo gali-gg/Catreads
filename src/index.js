@@ -19,8 +19,12 @@ if(localStorage.users){
   users = getFromStorageAndParse("users");
 }
 else {
-  users.push(new User("test@test.com", "test", {name: "Harry Potter"}, null, [1, 5, 16]));
-  setStorage("users", users);
+  fetch("server/fakeUsers.json")
+  .then(resp => resp.json())
+  .then(data => {
+    users.push(new User("test@test.com", "test", {name: "Harry Potter"}, null, [1, 5, 16]), ...data);
+    setStorage("users", users);
+  });
 }
 
 ReactDOM.render(

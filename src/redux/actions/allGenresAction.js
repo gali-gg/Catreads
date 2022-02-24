@@ -1,6 +1,6 @@
 export const LOAD_GENRES = "LOAD_GENRES";
 
-export const loadGenresAction = (genres) => {
+export const loadGenresAction = () => {
     return (dispatch) => {
         fetch("server/allGenres.json")
         .then(resp => resp.json())

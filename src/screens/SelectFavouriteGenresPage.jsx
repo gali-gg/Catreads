@@ -11,6 +11,7 @@ import logo from "../assets/images/goodreads_logo.svg";
 import { loadGenresAction } from "../redux/actions/allGenresAction";
 import { loadAuthorsAction } from "../redux/actions/allAuthorsAction";
 import { loadAllBooksAction } from "../redux/actions/allBooksAction";
+import { loadFakeReviewsAction } from "../redux/actions/reviewsActions";
 
 export default function SelectFavouriteGenresPage(props) {
   let dispatch = useDispatch();
@@ -73,6 +74,7 @@ export default function SelectFavouriteGenresPage(props) {
     dispatch(loadAllBooksAction());
     dispatch(loadGenresAction());
     dispatch(loadAuthorsAction());
+    dispatch(loadFakeReviewsAction());
     navigate("/");
   };
   return (
