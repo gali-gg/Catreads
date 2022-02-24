@@ -3,11 +3,12 @@ import Autocomplete from '@mui/material/Autocomplete';
 import "./styles.css";
 import Title from './Title';
 import authors from '../../data/authors';
-import { Stack } from '@mui/material';
+import { debounce, Stack } from '@mui/material';
 import serachIcon from "../images/icn_nav_search.svg";
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { makeStyles } from '@mui/styles';
+import {useState} from "react";
 
 
 
@@ -35,7 +36,19 @@ export default function CustomInputAutocomplete(props) {
   const classes = useStyles();
   const books = useSelector(state => state.books.books);
   const authors = useSelector(state => state.authors.authors);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+
+  const [bookResults, setBookresults] = useState([]);
+
+  const handleSearchInput = debounce((event) => {
+    let searchString = event.target.value.toLowerCase().trim();
+    if(!searchString){
+      setBookresults([]);
+      return;
+    }
+    let newBooks = books.filter(book => book.title.toLowerCase().includes(searchString));
+    setBookresults(newBooks);
+  }, 500);
 
   return (
     <label>
@@ -47,7 +60,7 @@ export default function CustomInputAutocomplete(props) {
           }
         }}
         id="custom-input-demo"
-        options={books}
+        options={bookResults}
         getOptionLabel={(option) => option.title}
         renderOption={(props, book) => (
           <Stack
@@ -64,7 +77,6 @@ export default function CustomInputAutocomplete(props) {
               spacing={1}
               key={book.uuid}
               onClick={() => {
-                console.log("click" + book.uuid);
                 navigate(`/books/${book.uuid}`)
               }} >
               <img
@@ -74,7 +86,7 @@ export default function CustomInputAutocomplete(props) {
                 alt={book.title}
               />
               <Stack direction="column" alignItems="flex-start">
-                <Title title={book.title} className="meriB grBrown f-09"></Title>
+                <Title title={book.title} className="meriB grBrown f-08"></Title>
                 <span className="meriR grBrown f-08">by {authors.find(author => author.uuid === book.author).name}</span>
               </Stack>
             </Stack>
@@ -87,6 +99,8 @@ export default function CustomInputAutocomplete(props) {
               placeholder="Search books"
               className="latoB f-1"
               {...params.inputProps}
+              onInput={(event) => {
+                handleSearchInput(event)}}
             />
             <img src={serachIcon} className={classes.searchIcon} alt="search-icon" />
           </Stack>

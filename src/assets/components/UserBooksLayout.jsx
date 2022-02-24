@@ -10,7 +10,8 @@ import GoodRating from "./GoodRating";
 import X from "../images/X.png";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import BookReviewModal from "./BookReviewModal";
+import { getRatingsStats } from "../../utility";
 
 const useStyles = makeStyles({
     subContainer: {
@@ -52,6 +53,8 @@ export default function UserBooksLayout(props) {
     const user = useSelector(state => state.userData);
     const shelves = useSelector(state => state.shelves);
     let bookShelves = [];
+    let bookReviews = useSelector(state => state.reviews.reviews.filter(review => review.bookID === props.book.uuid));
+    let bookRating = getRatingsStats(bookReviews);
 
     for (let shelf in shelves) {
         if (shelf === "userShelves") {
@@ -75,13 +78,13 @@ export default function UserBooksLayout(props) {
 
     return !isClosed && (
         <Stack direction="row" spacing={3} flexWrap="wrap" borderBottom="1px solid #ddd" padding="5px 0">
-            <img 
-                src={props.book.cover} 
-                alt={props.book.title} 
+            <img
+                src={props.book.cover}
+                alt={props.book.title}
                 width="90"
-                className={classes.pointer} 
+                className={classes.pointer}
                 title={props.book.title}
-                onClick={() => navigate(`/books/${props.book.uuid}`)} 
+                onClick={() => navigate(`/books/${props.book.uuid}`)}
             />
             <Stack className={classes.subContainer}>
                 <Stack direction="row" alignItems="center" sx={{ gap: "5px" }}>
@@ -92,10 +95,10 @@ export default function UserBooksLayout(props) {
                     />
                     <span className="latoR f-08">{props.doing}</span>
                 </Stack>
-                <Title 
-                    title={props.book.title} 
-                    className={`${classes.pointer} meriB grBrown`} 
-                    onClick={() => navigate(`/books/${props.book.uuid}`)}  
+                <Title
+                    title={props.book.title}
+                    className={`${classes.pointer} meriB grBrown`}
+                    onClick={() => navigate(`/books/${props.book.uuid}`)}
                 />
                 <span className="meriR f-075">by {author.name}</span>
                 <Stack direction="row" spacing={1} alignItems="center">
@@ -113,8 +116,7 @@ export default function UserBooksLayout(props) {
             </Stack>
             <Stack alignItems="center" gap={0.5}>
                 <GoodGreenButton styled={true} bookUuid={props.book.uuid}></GoodGreenButton>
-                <span className="f-08 latoR grGrey">Rate this book</span>
-                <GoodRating size="small"></GoodRating>
+                <BookReviewModal type="link" clickTitle="Rate this book" cover={props.book.cover} title={props.book.title} author={author.name} book={props.book} rating={bookRating.rating} className="f-08 latoR grGrey"></BookReviewModal>
             </Stack>
             <img src={X} alt="close-icon" width="10" height="10" onClick={handleClose} className={classes.X} />
         </Stack>
