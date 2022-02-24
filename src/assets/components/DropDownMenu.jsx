@@ -60,7 +60,10 @@ export default function BasicMenu(props) {
   React.useEffect(() => {
     if(genres.length > 0 && user){
       setFavGenres(user.favouriteGenres.map( genre => {
-        return {title: genres.find(g => g.uuid === genre).genre}
+        let name = genres.find(g => g.uuid === genre).genre;
+        return {
+          title: name, 
+          href: `/genres/${name}`}
       }))
     }
   }, [genres, user]);
