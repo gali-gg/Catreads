@@ -4,7 +4,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import GenreTitle from "./GenreTitle";
 import GoodBookCover from "./GoodBookCover";
-import "./styles.css";
+import "./css/styles.css";
 
 
 const useStyles = makeStyles({

@@ -3,7 +3,7 @@ import StyledRouterLink from "./StyledRouterLink";
 import { Stack } from "@mui/material";
 import FooterCopy from "./FooterCopy";
 import Title from "./Title";
-import "./styles.css";
+import "./css/styles.css";
 
 const useStyles = makeStyles({
     link: {

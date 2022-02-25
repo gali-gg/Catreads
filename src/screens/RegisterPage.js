@@ -1,5 +1,5 @@
 import * as React from "react";
-import styles from "./loginRegister.module.css";
+import styles from "./cssModules/loginRegister.module.css";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import TextField from "@mui/material/TextField";

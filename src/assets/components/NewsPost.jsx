@@ -2,7 +2,7 @@ import { Stack } from "@mui/material";
 import Title from "./Title";
 import { makeStyles } from '@mui/styles';
 import GoodLink from "./GoodLink";
-import "./styles.css";
+import "./css/styles.css";
 
 
 const useStyles = makeStyles({

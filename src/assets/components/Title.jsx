@@ -1,5 +1,5 @@
 import { makeStyles } from '@mui/styles';
-import "./styles.css";
+import "./css/styles.css";
 
 const useStyles = makeStyles({
     title: {

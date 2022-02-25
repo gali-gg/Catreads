@@ -1,5 +1,5 @@
 import Stack from '@mui/material/Stack';
-import "./styles.css";
+import "./css/styles.css";
 import GoodLink from './GoodLink';
 import { makeStyles } from '@mui/styles';
 import { Button, Divider, Rating } from '@mui/material';
@@ -8,6 +8,7 @@ import Title from './Title';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
+import { getRatingsStats } from '../../utility';
 
 
 const useStyles = makeStyles({
@@ -56,7 +57,9 @@ export default function RecommendBookLayout(props) {
     const classes = useStyles();
     let authors = useSelector(state => state.authors.authors);
     const [author, setAuthor] = useState(null);
-    
+    const bookReviews = useSelector(state => state.reviews.reviews.filter(review => review.bookID === props.book.uuid));
+    let bookRating = getRatingsStats(bookReviews);
+
     useEffect(() => {
        if(authors.length > 0){
         setAuthor(authors.filter(author => author.uuid === props.book.author)[0].name);
@@ -79,8 +82,8 @@ export default function RecommendBookLayout(props) {
                         <span className="meriB f-09 grBrown" >{props.book.title}</span>
                         {author && <span className="meriR f-08 grBrown">by {author}</span>}
                         <div className={classes.ratingContainer}>
-                            <Rating name="read-only" size="small" value={Math.floor(props.book.status.rating)} readOnly />
-                            <span className={classes.littleRatingText}>{props.book.status.rating}</span>
+                            <Rating name="read-only" size="small" value={bookRating.rating} readOnly />
+                            <span className={classes.littleRatingText}>{bookRating.rating}</span>
                         </div>
 
                         <Button className={classes.button} onClick={props.handleClick} disableRipple>

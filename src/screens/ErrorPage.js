@@ -1,5 +1,5 @@
 import { Container, Stack } from "@mui/material";
-import "../assets/components/styles.css";
+import "../assets/components/css/styles.css";
 import { makeStyles } from '@mui/styles';
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";

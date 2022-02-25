@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { makeStyles } from '@mui/styles';
 import Button from '@mui/material/Button';
-import "./styles.css";
+import "./css/styles.css";
 
 const useStyles = makeStyles({
     button: {

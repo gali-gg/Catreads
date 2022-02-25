@@ -3,7 +3,7 @@ import SearchBox from "./SearchBox";
 import GoodLink from "./GoodLink";
 import Stack from '@mui/material/Stack';
 import { Divider } from "@mui/material";
-import "./styles.css";
+import "./css/styles.css";
 
 
 export default function SideMenuEl(props){

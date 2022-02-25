@@ -1,7 +1,7 @@
 import BookHoverInfo from "./BookHoverInfo";
 import Tippy from "@tippyjs/react";
 import 'tippy.js/dist/tippy.css';
-import "./tippyStyles.css";
+import "./css/tippyStyles.css";
 import { getRatingsStats } from "../../utility";
 import {useSelector} from "react-redux";
 import styles from "./css-modules/goodBookCoverStyles.module.css"

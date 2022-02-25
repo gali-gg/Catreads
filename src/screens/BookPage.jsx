@@ -1,9 +1,7 @@
 import { useParams } from "react-router-dom";
-import {default as allBooks} from "../data/books.js";
-import {default as allGenres} from "../data/genres.js";
 import { Container, Rating, Stack, Divider, Modal, Paper } from "@mui/material";
-import styles from "./bookPageStyles.module.css";
-import "../assets/components/styles.css";
+import styles from "./cssModules/bookPageStyles.module.css";
+import "../assets/components/css/styles.css";
 import { useEffect, useState } from "react";
 import GoodLink from "../assets/components/GoodLink.jsx";
 import GoodButton from "../assets/components/GoodButton.jsx";
@@ -29,6 +27,8 @@ export default function BookPage(props) {
   const params = useParams();
   const bookId = params.bookId;
   const dispatch = useDispatch();
+  const allGenres = useSelector(state => state.genres.genres);
+  const allBooks = useSelector(state => state.books.books);
   const bookObj = useSelector(state => state.books.books.find(book => book.uuid === bookId));
   const authorObj = useSelector(state => {
     if(bookObj){

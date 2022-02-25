@@ -1,6 +1,6 @@
 import Link from '@mui/material/Link';
 import {Link as RouterLink} from "react-router-dom";
-import "./styles.css"
+import "./css/styles.css"
 
 export default function GoodLink (props) {
     return(

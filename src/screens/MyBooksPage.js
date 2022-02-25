@@ -1,8 +1,8 @@
 import { Container } from "@mui/material";
 import GoodLink from "../assets/components/GoodLink";
-import "../assets/components/styles.css";
+import "../assets/components/css/styles.css";
 import GoodButton from "../assets/components/GoodButton";
-import styles from "./myBooksStyles.module.css"
+import styles from "./cssModules/myBooksStyles.module.css"
 import MyBooksTable from "../assets/components/MyBooksTable";
 import { useState } from "react";
 import { debounce } from "../utility";

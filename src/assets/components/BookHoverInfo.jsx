@@ -1,14 +1,10 @@
 import GoodLink from "./GoodLink"
-import GoodRating from "./GoodRating"
 import styles from "./css-modules/bookHoverInfo.module.css"
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Rating } from "@mui/material";
 import { formatNumber } from "../../utility";
-import { useDispatch } from "react-redux";
-import { addBookToShelf } from "../../redux/actions/shelfAction";
 import GoodGreenButton from "./GoodGreenButton"
 import { useNavigate } from "react-router-dom";
-import BookReviewModal from "./BookReviewModal";
 
 
 export default function BookHoverInfo (props) {

@@ -1,7 +1,7 @@
 import { Divider, Stack } from "@mui/material";
 import discoverImg from "../assets/images/landing-discover.png";
-import styles from "./landingPageStyles.module.css";
-import "../assets/components/styles.css";
+import styles from "./cssModules/landingPageStyles.module.css";
+import "../assets/components/css/styles.css";
 import SocialLoginButton from "../assets/components/SocialLoginButton";
 import GoodLink from "../assets/components/GoodLink";
 import GoodReadsLogo from "../assets/components/GoodReadsLogo";

@@ -1,9 +1,8 @@
 import { Rating, Stack } from "@mui/material";
 import GoodLink from "./GoodLink";
 import styles from "./css-modules/bookReviewComment.module.css";
-import "./styles.css";
+import "./css/styles.css";
 import moment from "moment";
-import GoodButton from "./GoodButton";
 import {useState} from "react";
 import {useDispatch} from "react-redux";
 import {likeReviewAction, dislikeReviewAction} from "../../redux/actions/reviewsActions";

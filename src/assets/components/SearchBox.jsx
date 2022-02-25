@@ -1,8 +1,7 @@
 import * as React from 'react';
 import Autocomplete from '@mui/material/Autocomplete';
-import "./styles.css";
+import "./css/styles.css";
 import Title from './Title';
-import authors from '../../data/authors';
 import { debounce, Stack } from '@mui/material';
 import serachIcon from "../images/icn_nav_search.svg";
 import { useSelector } from 'react-redux';

@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import GoodLink from "./GoodLink";
 import MyBooksTableRow from "./MyBooksTableRow";
-import "./styles.css";
+import "./css/styles.css";
 import { removeBookFromShelf } from "../../redux/actions/shelfAction";
 
 export default function MyBooksTable (props) {

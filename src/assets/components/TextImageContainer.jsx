@@ -1,7 +1,7 @@
 import Stack from '@mui/material/Stack';
 import { makeStyles } from '@mui/styles';
 import GoodLink from './GoodLink';
-import "./styles.css";
+import "./css/styles.css";
 import { styled } from '@mui/material/styles';
 import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress';
 import { Button, Divider } from '@mui/material';

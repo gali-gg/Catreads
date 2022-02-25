@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
 import { changeAvatarAction } from '../../redux/actions/userAction';
-import "./styles.css";
+import "./css/styles.css";
 
 const thumbsContainer = {
     display: 'flex',

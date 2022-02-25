@@ -1,7 +1,7 @@
 import GoodLink from "./GoodLink";
 import x from "../images/X.png";
 import GoodBookCover from "./GoodBookCover";
-import "./styles.css";
+import "./css/styles.css";
 import { Divider } from "@mui/material";
 import GoodRating from "./GoodRating";
 import BookReviewModal from "./BookReviewModal";

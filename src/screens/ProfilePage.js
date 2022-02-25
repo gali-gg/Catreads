@@ -1,9 +1,9 @@
 import { Dialog, Divider, Stack } from "@mui/material";
 import { makeStyles } from '@mui/styles';
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import GoodLink from "../assets/components/GoodLink";
 import ProfileListEl from "../assets/components/ProfileListEl";
-import "../assets/components/styles.css";
+import "../assets/components/css/styles.css";
 import Title from "../assets/components/Title";
 import GenreTitle from "../assets/components/GenreTitle";
 import UserBooksLayout from "../assets/components/UserBooksLayout";

@@ -1,4 +1,4 @@
-import "./styles.css";
+import "./css/styles.css";
 import styles from "./css-modules/goodbutton.module.css"
 
 export default function GoodButton (props) {

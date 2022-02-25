@@ -1,12 +1,10 @@
 import { Stack } from "@mui/material";
 import { makeStyles } from '@mui/styles';
 import { useSelector } from "react-redux";
-import authors from "../../data/authors";
 import GoodGreenButton from "./GoodGreenButton";
-import "./styles.css";
+import "./css/styles.css";
 import Title from "./Title";
 import StyledRouterLink from "./StyledRouterLink";
-import GoodRating from "./GoodRating";
 import X from "../images/X.png";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -52,6 +50,7 @@ export default function UserBooksLayout(props) {
     const classes = useStyles();
     const user = useSelector(state => state.userData);
     const shelves = useSelector(state => state.shelves);
+    const authors = useSelector(state => state.authors.authors);
     let bookShelves = [];
     let bookReviews = useSelector(state => state.reviews.reviews.filter(review => review.bookID === props.book.uuid));
     let bookRating = getRatingsStats(bookReviews);

@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import BookReviewModal from "./BookReviewModal";
 import GoodLink from "./GoodLink";
 import BookReviewComment from "./BookReviewComment";
-import "./styles.css";
+import "./css/styles.css";
 import { getFromStorageAndParse } from "../../utility";
 import { useNavigate } from "react-router-dom";
 

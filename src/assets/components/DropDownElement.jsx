@@ -3,7 +3,7 @@ import StyledRouterLink from './StyledRouterLink';
 import Title from './Title';
 import { makeStyles } from '@mui/styles';
 import { Stack } from '@mui/material';
-import "./styles.css";
+import "./css/styles.css";
 import { useDispatch } from 'react-redux';
 import * as userAction from "../../redux/actions/userAction"
 

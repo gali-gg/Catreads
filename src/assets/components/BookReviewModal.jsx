@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import GoodButton from "./GoodButton";
 import GoodLink from "./GoodLink";
 import GoodRating from "./GoodRating";
-import "./styles.css";
+import "./css/styles.css";
 import x from "../images/X.png";
 import { useDispatch, useSelector } from "react-redux";
 import { addBookToShelf } from "../../redux/actions/shelfAction";

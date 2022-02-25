@@ -2,7 +2,7 @@ import { Stack } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Post from "./Post";
-import "./styles.css";
+import "./css/styles.css";
 
 export const PostsLayout = React.memo( () => {
   const [posts, setPosts] = useState([]);

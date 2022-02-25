@@ -1,5 +1,5 @@
 import * as React from 'react';
-import "./styles.css";
+import "./css/styles.css";
 import SearchBox from './SearchBox'
 import NavButton from './NavButton'
 import DropDownMenu from "./DropDownMenu";

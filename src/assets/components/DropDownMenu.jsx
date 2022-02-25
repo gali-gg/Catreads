@@ -5,7 +5,7 @@ import DropDownElement from './DropDownElement';
 import { makeStyles } from '@mui/styles';
 import { Stack } from '@mui/material';
 import SubDownMenu from './SubDownMenu';
-import "./styles.css";
+import "./css/styles.css";
 import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles({
@@ -79,7 +79,7 @@ export default function BasicMenu(props) {
           onClick={handleClick}
           disableRipple
         >
-          {props.title  || (<img src={props.src} className={classes.icon}></img>)}
+          {props.title  || (<img src={props.src} className={classes.icon} alt="img"></img>)}
         </Button>
 
       <Menu

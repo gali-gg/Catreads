@@ -6,7 +6,7 @@ import GoodButton from "../assets/components/GoodButton";
 import User from "../model/UserService";
 import { loginAction } from "../redux/actions/userAction";
 import { getFromStorageAndParse, setStorage } from "../utility";
-import styles from "./selectFavouriteGenres.module.css";
+import styles from "./cssModules/selectFavouriteGenres.module.css";
 import logo from "../assets/images/goodreads_logo.svg";
 import { loadGenresAction } from "../redux/actions/allGenresAction";
 import { loadAuthorsAction } from "../redux/actions/allAuthorsAction";
