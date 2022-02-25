@@ -1,4 +1,5 @@
 import { LOAD_AUTHORS } from "../actions/allAuthorsAction";
+import _ from "lodash";
 
 const INITIAL_STATE = {
     authors: []
@@ -9,7 +10,7 @@ export const allAuthorsReducer = (state = INITIAL_STATE, action) => {
         case LOAD_AUTHORS:
             return {
                 ...state,
-                authors: [...state.authors, ...action.payload]
+                authors: _.uniqBy([...state.authors, ...action.payload], "uuid")
             }
         default:
             return state;

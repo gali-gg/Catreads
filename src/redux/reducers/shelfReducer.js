@@ -22,12 +22,12 @@ export const shelfReducer = (state = INITIAL_STATE, action) => {
         case ADD_SHELF:
             return {
                 ...state,
-                userShelves : [...state.userShelves,
+                userShelves : _.uniqBy([...state.userShelves,
                     {
                     name: action.payload.name,
                     books: [],
                     }
-                ]
+                ], "name")
             };
 
         case ADD_BOOK_TO_SHELF:

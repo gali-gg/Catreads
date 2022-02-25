@@ -4,13 +4,15 @@ import styles from "./css-modules/authorInfoBox.module.css";
 import GoodButton from "./GoodButton";
 import GoodBookCover from "./GoodBookCover";
 import GoodLink from "./GoodLink";
-import books from "../../data/books.js";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function AuthorInfoBox(props) {
+  const navigate = useNavigate();
   const author = props.author;
-  const authorBooks = books
-    .filter((book) => book.author === author.uuid)
-    .splice(0, 5);
+  const authorBooks = useSelector(state => {
+    return state.books.books.filter(book => book.author === author.uuid);
+  });
 
   const [descClass, setDescClass] = useState(styles.description);
   const [showMore, setShowMore] = useState("more");
@@ -24,6 +26,11 @@ export default function AuthorInfoBox(props) {
       setShowMore("more");
     }
   };
+
+  const handleClickBook = (bookID) => {
+    navigate(`/books/${bookID}`);
+  }
+
   return (
     <div>
       <span className="latoB grBrown f-09">
@@ -31,14 +38,16 @@ export default function AuthorInfoBox(props) {
       </span>
       <Divider></Divider>
       <Avatar src={author.profileImage} sx={{ width: 75, height: 75 }}></Avatar>
-      <h4 className="meriR grBrown">{author.name}</h4>
+      <div className={`${styles.authorName} meriR grBrown`}>{author.name}</div>
       <GoodButton title="Follow Author"></GoodButton>
+      <div className={styles.descriptionContainer}>
       <span className={`${descClass} meriR f-1`}>{author.description}</span>
       <GoodLink
         onClick={handleShowMore}
         titleText={showMore}
         classes="meriR grGreen"
       ></GoodLink>
+      </div>
       <div>
         <span className="latoB grBrown f-09">
           BOOKS BY {author.name.toUpperCase()}
@@ -46,7 +55,7 @@ export default function AuthorInfoBox(props) {
         <Divider></Divider>
         <Stack direction="row" gap={0.5}>
           {authorBooks.map((book, index) => {
-            return <GoodBookCover key={"bookcover" + index} book={book} width="50px" tippyPlacement="bottom-start"></GoodBookCover>;
+            return <GoodBookCover key={"bookcover" + index} book={book} width="50px" tippyPlacement="bottom-start" onClick={() => handleClickBook(book.uuid)}></GoodBookCover>;
           })}
         </Stack>
       </div>

@@ -19,16 +19,16 @@ export default function LandingPage() {
     <>
       <div className={styles.hero}></div>
       <Stack
-        direction="horizontal"
+        direction="row"
         gap={3}
         sx={{ width: "fit-content", margin: "auto" }}
       >
         <main className={styles.main}>
           <GoodReadsLogo className={styles.logo}></GoodReadsLogo>
           <div className={styles.mainContent}>
-            <Stack direction="horizontal" gap={2}>
+            <Stack direction="row" gap={2}>
               <div className={styles.info}>
-                <p class={styles.infoHeader}>Deciding what to read next?</p>
+                <p className={styles.infoHeader}>Deciding what to read next?</p>
                 <p className={styles.infoText}>
                   You’re in the right place. Tell us what titles or genres
                   you’ve enjoyed in the past, and we’ll give you surprisingly
@@ -36,7 +36,7 @@ export default function LandingPage() {
                 </p>
               </div>
               <div className={styles.info}>
-                <p class={styles.infoHeader}>What are your friends reading?</p>
+                <p className={styles.infoHeader}>What are your friends reading?</p>
                 <p className={styles.infoText}>
                   Chances are your friends are discussing their favorite (and
                   least favorite) books on Goodreads.{" "}

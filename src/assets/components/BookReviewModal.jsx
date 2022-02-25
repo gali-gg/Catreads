@@ -49,8 +49,8 @@ export default function BookReviewModal(props) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
-      setRating(props.rating)
-      setOpen(false)
+      setRating(0);
+      setOpen(false);
     };
 
   let initialRating = props.rating ?? 0;

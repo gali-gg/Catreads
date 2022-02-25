@@ -18,6 +18,7 @@ import SelectFavouriteGenresPage from "./SelectFavouriteGenresPage";
 import { loadGenresAction } from "../redux/actions/allGenresAction";
 import { addJoinedDate, addLocation } from "../redux/actions/userAction";
 import moment from "moment";
+import { loadFakeReviewsAction } from "../redux/actions/reviewsActions";
 
 export default function RegisterPage(props) {
   const [name, setName] = useState("");
@@ -47,6 +48,7 @@ export default function RegisterPage(props) {
           dispatch(loadGenresAction());
           dispatch(addJoinedDate(moment.now()));
           dispatch(addLocation());
+          dispatch(loadFakeReviewsAction());
           setCanRegister(true);
         }
         else{

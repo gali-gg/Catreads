@@ -50,7 +50,7 @@ function getRatingsStats (bookReviews) {
     })
     let rating;
     if(ratingsCount){
-        rating = ratingsTotal / reviewsCount;
+        rating =  Math.round( (ratingsTotal / reviewsCount) * 100 + Number.EPSILON ) / 100;
     }
     else {
         rating = 0;

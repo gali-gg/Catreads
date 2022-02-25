@@ -7,10 +7,21 @@ import GoodRating from "./GoodRating";
 import BookReviewModal from "./BookReviewModal";
 import {useNavigate} from "react-router-dom";
 import {useSelector} from "react-redux";
+import { getRatingsStats } from "../../utility";
 
 export default function MyBooksTableRow (props) {
     const navigate = useNavigate()
     const book = props.book;
+
+    let bookAvgRating = useSelector(state => {
+        let reviews = state.reviews.reviews.filter(review => review.bookID === book.uuid);
+        if(reviews.length > 0){
+            return getRatingsStats(reviews).rating;
+        }
+        else {
+            return 0;
+        }
+    });
 
     let userRating = useSelector(state =>  {
         if(state.reviews.reviews.length){
@@ -27,25 +38,16 @@ export default function MyBooksTableRow (props) {
     });
     return (
         <>
-        <tr style={{textAlign: "left", verticalAlign: "top"}} >
+        <tr style={{textAlign: "left", verticalAlign: "top"}}>
             <td>
                 <GoodBookCover onClick={() => navigate(`/books/${book.uuid}`)} height="80px" book={book}></GoodBookCover>
             </td>
             <td><GoodLink to={`/books/${book.uuid}`} titleText={book.title} titleInfo={book.title} classes="latoR grGreen" style={{textAlign: "left"}}></GoodLink></td>
             <td>{props.authorName}</td>
-            <td>{book.status.rating}</td>
+            <td>{bookAvgRating}</td>
             <td>
                 <GoodRating rating={userRating ?? 0} name="read-only" size="small" />
             </td>
-            <td>
-                {props.shelves.map((shelf, index) => <GoodLink key={`shelf${index}`} titleText={shelf} classes="latoR grGreen"/>)}
-            </td>
-            {/* <td>
-                {props.dateRead}
-            </td>
-            <td>
-                {props.dateAdded}
-            </td> */}
             <td>
                 <BookReviewModal
                     type="link"
@@ -56,7 +58,6 @@ export default function MyBooksTableRow (props) {
                     author={props.authorName}
                     book={book}
                 ></BookReviewModal>
-                {/* <GoodLink titleText="view" classes="latoR grGreen"></GoodLink> */}
             </td>
             <td>
                 <div onClick={props.onRemove}>

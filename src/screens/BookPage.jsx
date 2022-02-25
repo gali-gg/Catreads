@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import {default as allBooks} from "../data/books.js";
 import {default as allGenres} from "../data/genres.js";
-import { Container, Rating, Stack, Divider } from "@mui/material";
+import { Container, Rating, Stack, Divider, Modal, Paper } from "@mui/material";
 import styles from "./bookPageStyles.module.css";
 import "../assets/components/styles.css";
 import { useEffect, useState } from "react";
@@ -12,7 +12,18 @@ import { formatNumber, getRatingsStats } from "../utility.js";
 import { useDispatch, useSelector } from "react-redux";
 import { loadBookAction } from "../redux/actions/openBookAction.js";
 import GoodReviewsSection from "../assets/components/GoodReviewsSection.jsx";
-import BookReviewComment from "../assets/components/BookReviewComment.jsx";
+import {v4 as uuidv4} from "uuid";
+import GoodGreenButton from "../assets/components/GoodGreenButton.jsx";
+
+const paperStyle = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  padding: "20px",
+  boxSizing: "border-box",
+  width: "fit-content"
+};
 
 export default function BookPage(props) {
   const params = useParams();
@@ -54,6 +65,10 @@ export default function BookPage(props) {
   const [descClass, setDescClass] = useState(styles.description);
   const [showMore, setShowMore] = useState("more");
 
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   const handleShowMore = () => {
     if (descClass) {
       setDescClass("");
@@ -66,115 +81,143 @@ export default function BookPage(props) {
 
   return (
     <>
-    {bookIsLoaded && <Container maxWidth="lg" sx={{ mt: 2, mb: 5 }}>
-    <Stack direction="row" spacing={5}>
-      <main className={styles.main}>
-        <Stack direction="row" spacing={3}>
-          <div>
-            <img
-              className={styles.cover}
-              src={book.cover}
-              alt={`${book.title}-cover`}
-            />
-          </div>
+      {bookIsLoaded && (
+        <Container maxWidth="lg" sx={{ mt: 2, mb: 5 }}>
+          <Stack direction="row" spacing={5}>
+            <main className={styles.main}>
+              <Stack direction="row" spacing={3} className={styles.topSection}>
+                <div className={styles.bookCoverContainer}>
+                  <img
+                    className={styles.cover}
+                    src={book.cover}
+                    alt={`${book.title}-cover`}
+                    onClick={handleOpen}
+                    title="Enlarge cover"
+                  />
+                  <Modal
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                  >
+                    <Paper style={paperStyle}>
+                    <img
+                    src={book.cover}
+                    alt={`${book.title}-cover`}
+                    />
+                    </Paper>
 
-          <Stack>
-            <h1 className="meriR" style={{ fontSize: "1.5em" }}>
-              {book.title}
-            </h1>
-            <div>
+                  </Modal>
+                  <GoodGreenButton
+                    bookUuid={book.uuid}
+                    styled={true}
+                  ></GoodGreenButton>
+                </div>
 
-              <GoodLink
-                titleText={`by ${book.author.name}`}
-                classes={`${styles.authorName} meriR grBrown`}
-              ></GoodLink>
-              <Stack
-                direction="row"
-                gap={1}
-                divider={<span>•</span>}
-                className={`grGrey f-08`}
-              >
-                <Rating
-                  precision={0.5}
-                  name="read-only"
-                  size="small"
-                  value={ratingStats.rating}
-                  readOnly
-                />
-                {ratingStats.rating}
-                <GoodLink
-                  classes="latoR grGreen"
-                  titleText={`${formatNumber(ratingStats.ratingsCount)} ratings`}
-                ></GoodLink>
-                <GoodLink
-                  classes="latoR grGreen"
-                  titleText={`${formatNumber(ratingStats.reviewsCount)} reviews`}
-                ></GoodLink>
+                <Stack>
+                  <h1 className="meriR" style={{ fontSize: "1.5em" }}>
+                    {book.title}
+                  </h1>
+                  <div>
+                    <GoodLink
+                      titleText={`by ${book.author.name}`}
+                      classes={`${styles.authorName} meriR grBrown`}
+                    ></GoodLink>
+                    <Stack
+                      direction="row"
+                      gap={1}
+                      divider={<span>•</span>}
+                      className={`grGrey f-08`}
+                    >
+                      <Rating
+                        precision={0.5}
+                        name="read-only"
+                        size="small"
+                        value={ratingStats.rating}
+                        readOnly
+                      />
+                      {ratingStats.rating}
+                      <GoodLink
+                        classes="latoR grGreen"
+                        titleText={`${formatNumber(
+                          ratingStats.ratingsCount
+                        )} ratings`}
+                      ></GoodLink>
+                      <GoodLink
+                        classes="latoR grGreen"
+                        titleText={`${formatNumber(
+                          ratingStats.reviewsCount
+                        )} reviews`}
+                      ></GoodLink>
+                    </Stack>
+                    <span className={`${descClass} meriR f-1`}>
+                      {book.description}
+                    </span>
+                    <GoodLink
+                      onClick={handleShowMore}
+                      titleText={showMore}
+                      classes="meriR grGreen"
+                    ></GoodLink>
+                    <Divider></Divider>
+                    <span className="latoB grBrown f-09">GET A COPY</span>
+                    <Stack direction="row" gap={1} className={styles.buttons}>
+                      <GoodButton title="Amazon"></GoodButton>
+                      <GoodButton title="Online Stores"></GoodButton>
+                      <GoodButton title="Libraries"></GoodButton>
+                    </Stack>
+                    <Divider></Divider>
+                    <span className="latoR grGrey f-09">
+                      Published{" "}
+                      {`${book.published?.month} ${book.published?.day} ${book.published?.year}` ||
+                        "n/a"}{" "}
+                      by {book.published?.publisher || "Unknown"}
+                    </span>
+                  </div>
+                </Stack>
               </Stack>
-              <span className={`${descClass} meriR f-1`}>
-                {book.description}
-              </span>
-              <GoodLink
-                onClick={handleShowMore}
-                titleText={showMore}
-                classes="meriR grGreen"
-              ></GoodLink>
-              <Divider></Divider>
-              <span className="latoB grBrown f-09">GET A COPY</span>
-              <Stack direction="row" gap={1}>
-                <GoodButton title="Amazon"></GoodButton>
-                <GoodButton title="Online Stores"></GoodButton>
-                <GoodButton title="Libraries"></GoodButton>
+
+              <Stack>
+                <span className="latoB grBrown f-09">COMMUNITY REVIEWS</span>
+                <Divider></Divider>
+                <GoodReviewsSection reviews={reviews}></GoodReviewsSection>
               </Stack>
-              <Divider></Divider>
-              <span className="latoR grGrey f-09">
-                Published {(`${book.published?.month} ${book.published?.day} ${book.published?.year}`) || "n/a"} by{" "}
-                {book.published?.publisher || "Unknown"}
-              </span>
-            </div>
-          </Stack>
-        </Stack>
-
-        <Stack>
-          <span className="latoB grBrown f-09">COMMUNITY REVIEWS</span>
-          <Divider></Divider>
-          {/* {reviews.map(review => <BookReviewComment rating={userRating} review={review} name="Test" avatar="https://images.gr-assets.com/users/1307934801p2/3978225.jpg"></BookReviewComment>)} */}
-          <GoodReviewsSection reviews={reviews}></GoodReviewsSection>
-
-        </Stack>
-
-      </main>
-      <aside className={styles.aside}>
-          <Stack gap={3}>
-          <div>
-          <span className="latoB grBrown f-09">GENRES</span>
-          <Divider></Divider>
-          {selectedBookGenres.map((genre, index) => {
-            if (index < selectedBookGenres.length - 1) {
-              return (
-                <>
-                  <GoodLink key={"bookgenre" + index}
-                    titleText={genre.genre}
-                    classes="grGreen latoR"
-                  ></GoodLink>
+            </main>
+            <aside className={styles.aside}>
+              <Stack gap={3}>
+                <div>
+                  <span className="latoB grBrown f-09">GENRES</span>
                   <Divider></Divider>
-                </>
-              );
-            } else if (index === selectedBookGenres.length - 1) {
-              return (
-                <GoodLink key={"bookgenre" + index}
-                  titleText={genre.genre}
-                  classes="grGreen latoR"
-                ></GoodLink>
-              );
-            }
-          })}
-        </div>
-          <AuthorInfoBox author={book.author}></AuthorInfoBox>
+                  {selectedBookGenres.map((genre, index) => {
+                    if (index < selectedBookGenres.length - 1) {
+                      return (
+                        <>
+                          <GoodLink
+                            key={"bookgenre" + uuidv4()}
+                            titleText={genre.genre}
+                            classes="grGreen latoR"
+                            to={`/genres/${genre.genre}`}
+                          ></GoodLink>
+                          <Divider></Divider>
+                        </>
+                      );
+                    } else if (index === selectedBookGenres.length - 1) {
+                      return (
+                        <GoodLink
+                          key={"bookgenre" + uuidv4()}
+                          titleText={genre.genre}
+                          classes="grGreen latoR"
+                          to={`/genres/${genre.genre}`}
+                        ></GoodLink>
+                      );
+                    }
+                  })}
+                </div>
+                <AuthorInfoBox author={book.author}></AuthorInfoBox>
+              </Stack>
+            </aside>
           </Stack>
-      </aside>
-    </Stack>
-  </Container> }
-  </>
+        </Container>
+      )}
+    </>
   );
 }

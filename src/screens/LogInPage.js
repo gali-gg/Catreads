@@ -3,19 +3,16 @@ import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
 import Stack from '@mui/material/Stack';
-import { userManager } from "../model/UserManagerService";
 import { useState } from 'react';
 import styles from "./loginRegister.module.css";
 import GoodReadsLogo from "../assets/components/GoodReadsLogo";
 import GoodLink from "../assets/components/GoodLink";
 import "../assets/components/styles.css";
 import FooterCopy from "../assets/components/FooterCopy";
-import Container from '@mui/material/Container';
 import GoodButton from "../assets/components/GoodButton";
 import SocialLoginButton from "../assets/components/SocialLoginButton";
-import { getFromStorageAndParse } from "../utility";
+import { getFromStorageAndParse, setStorage } from "../utility";
 import { useDispatch } from "react-redux";
 import { loginAction } from "../redux/actions/userAction";
 import { useNavigate } from "react-router-dom";
@@ -38,12 +35,12 @@ export default function LogInPage(props) {
   const handleLogAttempt = () => {
     if(EmailValidator.validate(email)){
       let users = getFromStorageAndParse("users");
-      console.log(users);
       const authenticate =  (email, password) => users.some(user => user.email === email && user.password === password);
 
       if(authenticate(email, password)){
         setEmailErrorIsVisible(false);
         let user = users.find(user => user.email === email);
+        setStorage("loggedUser", user.id);
         dispatch(loginAction(user));
         dispatch(loadAllBooksAction());
         dispatch(loadGenresAction());
