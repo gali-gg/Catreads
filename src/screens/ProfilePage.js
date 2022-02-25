@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import SideMenuEl from "../assets/components/SideMenuEl";
 import { useState } from "react";
 import ProfileModal from "../assets/components/ProfileModal";
+import SideMenulist from "../assets/components/SideMenuList";
 
 
 const useStyles = makeStyles({
@@ -75,7 +76,7 @@ export default function ProfilePage() {
   })
 
   let favouriteGenres = user.favouriteGenres.map(genre => {
-    return { title: genres.find(g => g.uuid === genre).genre }
+    return genres.filter(g => g.uuid === genre)[0].genre
   })
 
   const handleOpenModal = () => {
@@ -214,11 +215,8 @@ export default function ProfilePage() {
           divider={true}
           hrefs={["Go to Your 2021 Year in Books"]}
         />
-        <SideMenuEl
-          title="favourite genres"
-          divider={false}
-          status={favouriteGenres}
-        />
+        <SideMenulist title="Favourite genres" link="" hrefs={favouriteGenres} />
+
       </Stack>
     </Stack>
 

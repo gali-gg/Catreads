@@ -26,9 +26,11 @@ const useStyles = makeStyles({
         background: "#F4F1EA",
         padding: "5px 20px",
         color: "#333",
+        borderRadius: "3px",
         textTransform: "none",
         "&:hover":{
-            background: "#ede6d6"
+            background: "#ede6d6",
+            cursor: "pointer"
         }
     }
 });
