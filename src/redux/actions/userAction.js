@@ -16,7 +16,9 @@ export const loginAction = (user) => {
             name: user.details.names,
             avatar: user.avatar,
             favouriteGenres: user.favouriteGenres,
-            ratedBooks: user.ratedBooks
+            ratedBooks: user.ratedBooks,
+            joined: user.joined,
+            location: user.location
         }
     }
 }

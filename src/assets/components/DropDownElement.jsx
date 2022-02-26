@@ -4,8 +4,9 @@ import Title from './Title';
 import { makeStyles } from '@mui/styles';
 import { Stack } from '@mui/material';
 import "./css/styles.css";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import * as userAction from "../../redux/actions/userAction"
+import { getFromStorageAndParse, setStorage } from '../../utility';
 
 const useStyles = makeStyles({
     container: {
@@ -29,11 +30,22 @@ const useStyles = makeStyles({
 
 export default function BoxFlex(props) {
     let bgColor = props.bgColor;
+    const user = useSelector(state => state.userData);
+    const allUsers = getFromStorageAndParse("users");
     const classes = useStyles();
     const dispatch = useDispatch();
 
     const handleAction = (action) => {
         dispatch(userAction.logoutAction);
+        
+        let newUsers = allUsers.map(someUser => {
+            let newUser = someUser;
+            if(someUser.id === user.id){
+                newUser ={...someUser, ...user};
+            }
+            return newUser;
+        })
+        setStorage("users", JSON.stringify(newUsers));
         localStorage.removeItem("loggedUser");
     }
     return (

@@ -22,7 +22,9 @@ export const userReducer = (state = INITIAL_STATE, action) => {
                 name: action.payload.name,
                 avatar: action.payload.avatar,
                 favouriteGenres: action.payload.favouriteGenres,
-                ratedBooks: action.payload.ratedBooks
+                ratedBooks: action.payload.ratedBooks,
+                joined : action.payload.joined,
+                location: action.payload.location,
             }
         case LOGOUT:
             return {
@@ -32,7 +34,9 @@ export const userReducer = (state = INITIAL_STATE, action) => {
                 name: null,
                 avatar: null,
                 favouriteGenres: [],
-                ratedBooks: []
+                ratedBooks: [],
+                joined : null,
+                location: null,
             }
         case CHANGE_NAME:
             return {

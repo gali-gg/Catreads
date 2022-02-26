@@ -111,8 +111,8 @@ export default function ProfilePage() {
             <Divider />
             <table>
               <tbody>
-                <ProfileListEl title="Details" location={true} />
-                <ProfileListEl title="Joined" date={true} />
+                <ProfileListEl title="Details" location={user.location} />
+                <ProfileListEl title="Joined" joined={user.joined} />
               </tbody>
             </table>
           </Stack>
