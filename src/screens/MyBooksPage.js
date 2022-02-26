@@ -4,7 +4,7 @@ import "../assets/components/css/styles.css";
 import GoodButton from "../assets/components/GoodButton";
 import styles from "./cssModules/myBooksStyles.module.css"
 import MyBooksTable from "../assets/components/MyBooksTable";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { debounce, getBookReviews, getRatingsStats } from "../utility";
 import icon from "../assets/images/search-icon-small.png";
 import { useSelector } from "react-redux";
@@ -12,25 +12,17 @@ import _ from "lodash";
 import AddShelfInput from "./AddShelfInput";
 
 export default function MyBooksPage () {
+    const fontSize = "1em";
+    const authors = useSelector(state => state.authors.authors);
+    const userID = useSelector (state => state.userData.id);
     const shelves = useSelector(state => state.shelves);
 
-    let userShelves;
-
-    for (let shelf in shelves) {
-        if (shelf === "userShelves") {
-          if (shelves[shelf].length > 0) {
-            userShelves = shelves[shelf].map(userShelf => {
-              return { name: userShelf.name, books: userShelf.books }
-            });
-          }
-        }
-    }
+    let userShelves = shelves.userShelves;
 
     let allBooks = useSelector(state => {
         let {userShelves, ...regularShelves} = state.shelves;
 
         let allBooks = [];
-
         for (let key in regularShelves) {
             allBooks.push(...regularShelves[key].books);
         }
@@ -44,38 +36,40 @@ export default function MyBooksPage () {
 
     });
 
+    const initialShelvesSelection = {
+        all: true,
+        wantToRead: false,
+        currentlyReading: false,
+        read: false
+    }
+
+    useEffect(() => {
+        shelves.userShelves.forEach(shelf => {
+            initialShelvesSelection[shelf.name] = false;
+        });
+    }, [shelves]);
+
+    const [isSelected, setIsSelected] = useState(initialShelvesSelection);
+    const [sortBy, setSortBy] = useState("title");
+    const [ascending, setAscending] = useState(false);
+    const [userShelfSelected, setUserShelfSelected] = useState(false);
+    const [addShelfOpen, setAddShelfOpen] = useState(false);
+    const [shelfName, setShelfName] = useState("All");
     const [listBooks, setListBooks] = useState(allBooks);
+    const [isSearching, setIsSearching] = useState(false);
 
     function getSelectedBooks(isSelectedObj) {
         let books;
-        if (isSelectedObj.all) {
-            books = allBooks;
-        } else if (isSelectedObj.wantToRead) {
-            books = getAllBooksFromShelf("wantToRead");
-        } else if (isSelectedObj.currentlyReading) {
-            books = getAllBooksFromShelf("currentlyReading");
-        } else if (isSelectedObj.read) {
-            books = getAllBooksFromShelf("read");
-        }
 
+        for (let key in isSelectedObj){
+            if(isSelectedObj[key]){
+                books = getAllBooksFromShelf(key, userShelfSelected);
+                break;
+            }
+        }
         return books || [];
     }
 
-    function getSelectedShelfName (isSelectedObj) {
-        let shelfName;
-        if (isSelectedObj.all) {
-            shelfName = "All";
-        } else if (isSelectedObj.wantToRead) {
-            shelfName = "Want to Read";
-        } else if (isSelectedObj.currentlyReading) {
-            shelfName = "Currently Reading";
-        } else if (isSelectedObj.read) {
-            shelfName = "Read";
-        }
-        return shelfName;
-    }
-
-    const [isSearching, setIsSearching] = useState(false);
     const handleSearch = debounce((e) => {
         setIsSearching(true);
         let booksToSearch = getSelectedBooks(isSelected);
@@ -89,7 +83,10 @@ export default function MyBooksPage () {
     }, 300);
 
     const handleDisplayShelf = (e) => {
-        setUserShelfSelected(false);
+        let shelfName = e.target.id;
+        if(!shelves[shelfName] && shelfName !== "all"){
+            setUserShelfSelected(true);
+        }
         let isSelectedCopy = {
             ...isSelected
         };
@@ -100,26 +97,23 @@ export default function MyBooksPage () {
             }
         }
 
-        let keyName = e.target.id.slice(1);
-        isSelectedCopy[keyName] = true;
+        isSelectedCopy[shelfName] = true;
 
         setIsSelected(isSelectedCopy);
-        setShelfName(getSelectedShelfName(isSelectedCopy));
+        setShelfName(shelfName);
     }
 
-    const [isSelected, setIsSelected] = useState({
-        all: true,
-        wantToRead: false,
-        currentlyReading: false,
-        read: false
-    });
-
-    const [shelfName, setShelfName] = useState("All");
-
-    const fontSize = "1em";
-
-    const getAllBooksFromShelf = ((shelfName) => {
+    const getAllBooksFromShelf = ((shelfName, isUserShelf) => {
         if(shelves && allBooks){
+            if(shelfName === "all"){
+                return allBooks;
+            }
+            if(isUserShelf){
+                let books = userShelves.find(shelf => shelf.name === shelfName).books;
+                return books.map(shelfBook => {
+                    return allBooks.find(book => book.uuid === shelfBook);
+                  });
+            }
           return shelves[shelfName].books.map(shelfBook => {
             return allBooks.find(book => book.uuid === shelfBook);
           });
@@ -128,23 +122,9 @@ export default function MyBooksPage () {
         }
     });
 
-    const [addShelfOpen, setAddShelfOpen] = useState(false);
     const handleAddShelfClick = () => {
         setAddShelfOpen(true);
     }
-
-    const [userShelfSelected, setUserShelfSelected] = useState(false);
-
-    const handleDisplayUserShelfBooks = (e) => {
-        setUserShelfSelected(true);
-        let shelfName = e.target.id;
-
-        let bookIDs = userShelves.find(shelf => shelf.name === shelfName).books;
-        let books = bookIDs.map(bookID => allBooks.find(book => book.uuid === bookID));
-        setListBooks(books);
-    }
-
-    const [ascending, setAscending] = useState(false);
 
     const handlePickAscending= () => {
         setAscending(true);
@@ -154,14 +134,10 @@ export default function MyBooksPage () {
         setAscending(false);
     }
 
-    const [sortBy, setSortBy] = useState("title");
-
     const handleSortByChange = (e) => {
         setSortBy(e.target.value);
     }
 
-    const authors = useSelector(state => state.authors.authors);
-    const userID = useSelector (state => state.userData.id);
     function sortBooks (booksArr, sortBy = "title", ascending = false){
         //sortBy value can be "title", "author", "rating", "userRating"
         let books = [...booksArr];
@@ -185,7 +161,6 @@ export default function MyBooksPage () {
             });
         }
         else if (sortBy === "rating"){
-
             books.sort((bookA, bookB) => {
                 if(ascending){
                     return getRatingsStats(bookA.uuid).rating - getRatingsStats(bookB.uuid).rating;
@@ -194,7 +169,6 @@ export default function MyBooksPage () {
             });
         }
         else if (sortBy === "userRating") {
-
             books.sort((bookA, bookB) => {
                 let bookAuserReview = getBookReviews(bookA.uuid).find(review => review.senderID === userID) || {rating: 0};
                 let bookBuserReview = getBookReviews(bookB.uuid).find(review => review.senderID === userID) || {rating: 0};
@@ -205,7 +179,6 @@ export default function MyBooksPage () {
                 return bookBuserReview.rating - bookAuserReview.rating
             })
         }
-
         return books;
     }
 
@@ -238,13 +211,13 @@ export default function MyBooksPage () {
             <div className={styles.mainContent}>
                 <ul className={styles.sideList}>
                     <li><GoodLink size={fontSize} titleText="Bookshelves" classes="latoB grBrown"></GoodLink></li>
-                    <li><GoodLink size={fontSize} titleText={`All (${allBooks.length})`} classes={`latoR ${isSelected.all ? "grGrey" : "grGreen"}`} id="lall" onClick={handleDisplayShelf}></GoodLink></li>
-                    <li><GoodLink size={fontSize} titleText="Read" classes={`latoR ${isSelected.read ? "grGrey" : "grGreen"}`} id="lread" onClick={handleDisplayShelf}></GoodLink></li>
-                    <li><GoodLink size={fontSize} titleText="Currently Reading" classes={`latoR ${isSelected.currentlyReading ? "grGrey" : "grGreen"}`} id="lcurrentlyReading" onClick={handleDisplayShelf}></GoodLink></li>
-                    <li><GoodLink size={fontSize} titleText="Want to Read" classes={`latoR ${isSelected.wantToRead ? "grGrey" : "grGreen"}`} id="lwantToRead" onClick={handleDisplayShelf}></GoodLink></li>
+                    <li><GoodLink size={fontSize} titleText={`All (${allBooks.length})`} classes={`latoR ${isSelected.all ? "grGrey" : "grGreen"}`} id="all" onClick={handleDisplayShelf}></GoodLink></li>
+                    <li><GoodLink size={fontSize} titleText={`Read (${shelves.read.books.length})`} classes={`latoR ${isSelected.read ? "grGrey" : "grGreen"}`} id="read" onClick={handleDisplayShelf}></GoodLink></li>
+                    <li><GoodLink size={fontSize} titleText={`Currently Reading (${shelves.currentlyReading.books.length})`} classes={`latoR ${isSelected.currentlyReading ? "grGrey" : "grGreen"}`} id="currentlyReading" onClick={handleDisplayShelf}></GoodLink></li>
+                    <li><GoodLink size={fontSize} titleText={`Want to Read (${shelves.wantToRead.books.length})`} classes={`latoR ${isSelected.wantToRead ? "grGrey" : "grGreen"}`} id="wantToRead" onClick={handleDisplayShelf}></GoodLink></li>
 
                     {userShelves && <><hr></hr>
-                           { userShelves.map(shelf => <><GoodLink key={shelf.name} titleText={shelf.name} classes="latoR grGreen f-1" id={shelf.name} onClick={handleDisplayUserShelfBooks}></GoodLink><br></br></>)}</>
+                           { userShelves.map(shelf => <><GoodLink key={shelf.name} titleText={`${shelf.name} (${shelf.books.length})`} classes={`latoR f-1 ${shelfName === shelf.name ? "grGrey" : "grGreen"}`} id={shelf.name} onClick={handleDisplayShelf}></GoodLink><br></br></>)}</>
                     }
                     <hr></hr>
                     <GoodButton title="Add shelf" padding="5px 15px" fontSize="12px" style={{height: "30px"}} onClick={handleAddShelfClick}></GoodButton>
