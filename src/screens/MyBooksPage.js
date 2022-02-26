@@ -216,7 +216,7 @@ export default function MyBooksPage () {
                     <li><GoodLink size={fontSize} titleText={`Currently Reading (${shelves.currentlyReading.books.length})`} classes={`latoR ${isSelected.currentlyReading ? "grGrey" : "grGreen"}`} id="currentlyReading" onClick={handleDisplayShelf}></GoodLink></li>
                     <li><GoodLink size={fontSize} titleText={`Want to Read (${shelves.wantToRead.books.length})`} classes={`latoR ${isSelected.wantToRead ? "grGrey" : "grGreen"}`} id="wantToRead" onClick={handleDisplayShelf}></GoodLink></li>
 
-                    {userShelves && <><hr></hr>
+                    {userShelves.length > 0 && <><hr></hr>
                            { userShelves.map(shelf => <><GoodLink key={shelf.name} titleText={`${shelf.name} (${shelf.books.length})`} classes={`latoR f-1 ${shelfName === shelf.name ? "grGrey" : "grGreen"}`} id={shelf.name} onClick={handleDisplayShelf}></GoodLink><br></br></>)}</>
                     }
                     <hr></hr>
