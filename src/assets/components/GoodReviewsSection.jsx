@@ -6,6 +6,7 @@ import BookReviewComment from "./BookReviewComment";
 import "./css/styles.css";
 import { getFromStorageAndParse } from "../../utility";
 import { useNavigate } from "react-router-dom";
+import moment from "moment";
 
 export default function GoodReviewsSection(props) {
   const navigate = useNavigate();
@@ -21,6 +22,8 @@ export default function GoodReviewsSection(props) {
     }
   });
 
+  const sortedReviews = [...props.reviews].sort((review1, review2) => moment(review2.date).valueOf() - moment(review1.date).valueOf());
+
   const getUser = (senderID) => {
     let users = getFromStorageAndParse("users");
     return users.find(user => user.id === senderID);
@@ -35,7 +38,7 @@ export default function GoodReviewsSection(props) {
       <Stack direction="row" gap={2}>
         <img src={userPhoto} alt="user-avatar" width="70px"></img>
         <div>
-          <div className={`latoR f-1 grBrown`} style={{marginBottom: "5px"}}>
+          <div className={`latoR f-1 grBrown`} style={{ marginBottom: "5px" }}>
             <GoodLink
               classes="latoR grGreen"
               size="1.1em"
@@ -58,8 +61,14 @@ export default function GoodReviewsSection(props) {
         </div>
       </Stack>
       <Stack>
-        {[...props.reviews].map(review => <BookReviewComment key={review.id} review={review} name={getUser(review.senderID).details.names.first}
-        avatar={getUser(review.senderID).avatar}></BookReviewComment>)}
+        {sortedReviews.map((review) => (
+          <BookReviewComment
+            key={review.id}
+            review={review}
+            name={getUser(review.senderID).details.names.first}
+            avatar={getUser(review.senderID).avatar}
+          ></BookReviewComment>
+        ))}
       </Stack>
     </>
   );
