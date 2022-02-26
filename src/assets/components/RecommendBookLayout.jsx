@@ -57,24 +57,23 @@ export default function RecommendBookLayout(props) {
     const classes = useStyles();
     let authors = useSelector(state => state.authors.authors);
     const [author, setAuthor] = useState(null);
-    const bookReviews = useSelector(state => state.reviews.reviews.filter(review => review.bookID === props.book.uuid));
-    let bookRating = getRatingsStats(bookReviews);
+    let bookRating = getRatingsStats(props.book.uuid);
 
     useEffect(() => {
        if(authors.length > 0){
         setAuthor(authors.filter(author => author.uuid === props.book.author)[0].name);
        }
     }, [authors, props.book.author]);
-    
+
     return (
         <>
             <Title title={props.title} className={`${classes.title} latoB grBrown f-09`}></Title>
             <p></p>
             <Stack direction="row" spacing={2}>
-                <img 
+                <img
                     title={props.book.title}
-                    onClick={() => navigate(`/books/${props.book.uuid}`)} 
-                    src={props.book.cover} alt={`${props.book.title}-img`} 
+                    onClick={() => navigate(`/books/${props.book.uuid}`)}
+                    src={props.book.cover} alt={`${props.book.title}-img`}
                     className={classes.cover}
                 />
                 <Stack direction="row">

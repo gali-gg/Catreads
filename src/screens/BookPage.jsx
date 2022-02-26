@@ -41,7 +41,7 @@ export default function BookPage(props) {
     return state.reviews.reviews.filter(review => review.bookID === bookId);
   });
 
-  const ratingStats = getRatingsStats(reviews);
+  const ratingStats = getRatingsStats(bookObj.uuid);
 
   const userID = useSelector(state => state.userData.id);
 
