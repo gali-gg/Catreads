@@ -53,7 +53,7 @@ function getRatingsStats (bookID) {
     })
     let rating;
     if(ratingsCount){
-        rating =  Math.round( (ratingsTotal / reviewsCount) * 100 + Number.EPSILON ) / 100;
+        rating =  Math.round( (ratingsTotal / ratingsCount) * 100 + Number.EPSILON ) / 100;
     }
     else {
         rating = 0;
