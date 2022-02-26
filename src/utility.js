@@ -1,4 +1,5 @@
 import _ from "lodash";
+import store from "./redux/store";
 
 function getFromStorageAndParse (key) {
     return JSON.parse(localStorage.getItem(key));
@@ -35,9 +36,11 @@ function formatNumber (number) {
     return revNumArrJoinedDeep.join(",");
 }
 
-function getRatingsStats (bookReviews) {
+function getRatingsStats (bookID) {
     let reviewsCount = 0;
     let ratingsTotal = 0;
+
+    let bookReviews = getBookReviews(bookID);
 
     let ratingsCount = bookReviews.length;
 
@@ -58,4 +61,12 @@ function getRatingsStats (bookReviews) {
     return {rating, reviewsCount, ratingsCount}
 }
 
-export {getFromStorageAndParse, setStorage, debounce, formatNumber, getRatingsStats};
+store.subscribe(getBookReviews);
+
+function getBookReviews (bookID) {
+    let allReviews = store.getState().reviews.reviews;
+
+    return allReviews.filter(review => review.bookID === bookID);
+}
+
+export {getFromStorageAndParse, setStorage, debounce, formatNumber, getRatingsStats, getBookReviews};

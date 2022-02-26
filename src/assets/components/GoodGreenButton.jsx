@@ -67,7 +67,7 @@ export default function GoodGreenButton(props) {
             if (shelf === "userShelves") {
                 continue;
             }
-            else if (shelves[shelf].books.some(book => book === props.bookUuid)) {
+            if (!isUserShelf && shelves[shelf].books.some(book => book === props.bookUuid)) {
                 dispatch(removeBookFromShelf(false, shelves[shelf].name, props.bookUuid))
             }
         }

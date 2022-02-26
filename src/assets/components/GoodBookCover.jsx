@@ -7,8 +7,7 @@ import {useSelector} from "react-redux";
 import styles from "./css-modules/goodBookCoverStyles.module.css"
 
 export default function GoodBookCover(props) {
-  let bookReviews = useSelector(state => state.reviews.reviews.filter(review => review.bookID === props.book.uuid));
-  let bookRating = getRatingsStats(bookReviews);
+  let bookRating = getRatingsStats(props.book.uuid);
   let authorName = useSelector(state => state.authors.authors.find(author => author.uuid === props.book.author).name);
   return (
     <Tippy

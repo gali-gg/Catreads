@@ -13,15 +13,7 @@ export default function MyBooksTableRow (props) {
     const navigate = useNavigate()
     const book = props.book;
 
-    let bookAvgRating = useSelector(state => {
-        let reviews = state.reviews.reviews.filter(review => review.bookID === book.uuid);
-        if(reviews.length > 0){
-            return getRatingsStats(reviews).rating;
-        }
-        else {
-            return 0;
-        }
-    });
+    let bookAvgRating = getRatingsStats(props.book.uuid).rating;
 
     let userRating = useSelector(state =>  {
         if(state.reviews.reviews.length){

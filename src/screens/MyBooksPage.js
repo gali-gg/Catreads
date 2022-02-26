@@ -5,7 +5,7 @@ import GoodButton from "../assets/components/GoodButton";
 import styles from "./cssModules/myBooksStyles.module.css"
 import MyBooksTable from "../assets/components/MyBooksTable";
 import { useState } from "react";
-import { debounce } from "../utility";
+import { debounce, getBookReviews, getRatingsStats } from "../utility";
 import icon from "../assets/images/search-icon-small.png";
 import { useSelector } from "react-redux";
 import _ from "lodash";
@@ -41,6 +41,7 @@ export default function MyBooksPage () {
 
         let allUserBooks = allBooks.map(bookID => state.books.books.find(book => bookID === book.uuid));
         return _.uniqBy(allUserBooks, "uuid");
+
     });
 
     const [listBooks, setListBooks] = useState(allBooks);
@@ -138,8 +139,74 @@ export default function MyBooksPage () {
         setUserShelfSelected(true);
         let shelfName = e.target.id;
 
-        let books = userShelves.find(shelf => shelf.name === shelfName).books;
+        let bookIDs = userShelves.find(shelf => shelf.name === shelfName).books;
+        let books = bookIDs.map(bookID => allBooks.find(book => book.uuid === bookID));
         setListBooks(books);
+    }
+
+    const [ascending, setAscending] = useState(false);
+
+    const handlePickAscending= () => {
+        setAscending(true);
+    }
+
+    const handlePickDescending= () => {
+        setAscending(false);
+    }
+
+    const [sortBy, setSortBy] = useState("title");
+
+    const handleSortByChange = (e) => {
+        setSortBy(e.target.value);
+    }
+
+    const authors = useSelector(state => state.authors.authors);
+    const userID = useSelector (state => state.userData.id);
+    function sortBooks (booksArr, sortBy = "title", ascending = false){
+        //sortBy value can be "title", "author", "rating", "userRating"
+        let books = [...booksArr];
+
+        if(sortBy === "title"){
+            if(ascending) {
+                return books.sort((bookA, bookB) => bookA.title.localeCompare(bookB.title));
+            }
+            return books.sort((bookA, bookB) => bookB.title.localeCompare(bookA.title));
+        }
+
+        else if (sortBy === "author") {
+            books.sort((bookA, bookB) => {
+                let bookAauthor = authors.find(author => author.uuid === bookA.author).name;
+                let bookBauthor = authors.find(author => author.uuid === bookB.author).name;
+
+                if(ascending) {
+                    return bookAauthor.localeCompare(bookBauthor);
+                }
+                return bookBauthor.localeCompare(bookAauthor);
+            });
+        }
+        else if (sortBy === "rating"){
+
+            books.sort((bookA, bookB) => {
+                if(ascending){
+                    return getRatingsStats(bookA.uuid).rating - getRatingsStats(bookB.uuid).rating;
+                }
+                return getRatingsStats(bookB.uuid).rating - getRatingsStats(bookA.uuid).rating;
+            });
+        }
+        else if (sortBy === "userRating") {
+
+            books.sort((bookA, bookB) => {
+                let bookAuserReview = getBookReviews(bookA.uuid).find(review => review.senderID === userID) || {rating: 0};
+                let bookBuserReview = getBookReviews(bookB.uuid).find(review => review.senderID === userID) || {rating: 0};
+
+                if(ascending) {
+                    return bookAuserReview.rating - bookBuserReview.rating
+                }
+                return bookBuserReview.rating - bookAuserReview.rating
+            })
+        }
+
+        return books;
     }
 
     return (
@@ -147,14 +214,24 @@ export default function MyBooksPage () {
             <div className={styles.pageHeading}>
                 <GoodLink size="1.5em" titleText="My Books" classes="meriB grGreen"></GoodLink>
                 <div className={styles.headingSide}>
-                <div className={styles.searchBox}>
-                <input className={styles.searchInput} type="search" placeholder="Search books" onInput={handleSearch}/>
-                <img className={styles.searchImg} src={icon} alt=""/>
-                </div>
-                <GoodLink titleText="Batch Edit" classes="latoR grGreen"></GoodLink>
-                <GoodLink titleText="Settings" classes="latoR grGreen" ></GoodLink>
-                <GoodLink titleText="Stats" classes="latoR grGreen"></GoodLink>
-                <GoodLink titleText="Print" classes="latoR grGreen"></GoodLink>
+                    Sort by:
+                    <select value={sortBy} onChange={handleSortByChange}>
+                        <option value="title">Title</option>
+                        <option value="author">Author</option>
+                        <option value="rating">Average rating</option>
+                        <option value="userRating">My rating</option>
+                    </select>
+                    <GoodLink titleText="▲" titleInfo="Sort ascending" classes={`latoR f-1 ${ascending ? "grBrown" : "grLight"}`} onClick={handlePickAscending}></GoodLink>
+                    <GoodLink titleText="▼" titleInfo="Sort descending" classes={`latoR f-1 ${ascending ? "grLight" : "grBrown"}`} onClick={handlePickDescending}></GoodLink>
+
+                    <div className={styles.searchBox}>
+                    <input className={styles.searchInput} type="search" placeholder="Search books" onInput={handleSearch}/>
+                    <img className={styles.searchImg} src={icon} alt=""/>
+                    </div>
+                    <GoodLink titleText="Batch Edit" classes="latoR grGreen"></GoodLink>
+                    <GoodLink titleText="Settings" classes="latoR grGreen" ></GoodLink>
+                    <GoodLink titleText="Stats" classes="latoR grGreen"></GoodLink>
+                    <GoodLink titleText="Print" classes="latoR grGreen"></GoodLink>
                 </div>
             </div>
             <hr></hr>
@@ -167,7 +244,7 @@ export default function MyBooksPage () {
                     <li><GoodLink size={fontSize} titleText="Want to Read" classes={`latoR ${isSelected.wantToRead ? "grGrey" : "grGreen"}`} id="lwantToRead" onClick={handleDisplayShelf}></GoodLink></li>
 
                     {userShelves && <><hr></hr>
-                           { userShelves.map(shelf => <><GoodLink titleText={shelf.name} classes="latoR grGreen f-1" id={shelf.name} onClick={handleDisplayUserShelfBooks}></GoodLink><br></br></>)}</>
+                           { userShelves.map(shelf => <><GoodLink key={shelf.name} titleText={shelf.name} classes="latoR grGreen f-1" id={shelf.name} onClick={handleDisplayUserShelfBooks}></GoodLink><br></br></>)}</>
                     }
                     <hr></hr>
                     <GoodButton title="Add shelf" padding="5px 15px" fontSize="12px" style={{height: "30px"}} onClick={handleAddShelfClick}></GoodButton>
@@ -191,8 +268,8 @@ export default function MyBooksPage () {
                     <li><GoodLink size={fontSize} titleText="Widgets" classes="latoR grGreen"></GoodLink></li>
                     <li><GoodLink size={fontSize} titleText="Import and export" classes="latoR grGreen"></GoodLink></li>
                 </ul>
-                {!userShelfSelected && <MyBooksTable books={isSearching ? listBooks : getSelectedBooks(isSelected)} shelfName={shelfName}></MyBooksTable>}
-                {userShelfSelected && <MyBooksTable books={listBooks} shelfName={shelfName}></MyBooksTable>}
+                {!userShelfSelected && <MyBooksTable books={isSearching ? sortBooks(listBooks, sortBy, ascending) : sortBooks(getSelectedBooks(isSelected), sortBy, ascending)} shelfName={shelfName}></MyBooksTable>}
+                {userShelfSelected && <MyBooksTable books={sortBooks(listBooks, sortBy, ascending)} shelfName={shelfName}></MyBooksTable>}
                 </div>
                 </Container>
     )
