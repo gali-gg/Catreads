@@ -84,7 +84,6 @@ export default function GenresPage() {
     allAuthors = authors.filter(author => {
       return author.genres.some(g => g === genreObj.uuid);
     });
-    console.log(genreObj)
   }
 
   const [text, setText] = useState(null);

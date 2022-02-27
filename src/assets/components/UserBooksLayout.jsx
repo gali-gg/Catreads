@@ -71,10 +71,7 @@ export default function UserBooksLayout(props) {
 
     const [author, setAuthor] = useState(null);
     useEffect(() => {
-        console.log(props.book);
-        setAuthor(getAuthorName(props.book.author))
-        console.log(author);
-
+        setAuthor(getAuthorName(props.book.author));
     }, [props.book])
 
     const handleClose = () => {

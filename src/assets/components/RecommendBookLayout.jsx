@@ -88,7 +88,7 @@ export default function RecommendBookLayout(props) {
                             <span className={classes.littleRatingText}>{bookRating.rating}</span>
                         </div>
 
-                        <button className={`${classes.button} latoR f-09`} onClick={props.handleClick} disableRipple>
+                        <button className={`${classes.button} latoR f-09`} onClick={props.handleClick}>
                             Want to Read
                         </button>
                     </div>

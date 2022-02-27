@@ -10,7 +10,7 @@ import UserBooksLayout from "../assets/components/UserBooksLayout";
 import SideMenuImageEl from "../assets/components/SideMenuImageEl";
 import { useNavigate } from "react-router-dom";
 import SideMenuEl from "../assets/components/SideMenuEl";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ProfileModal from "../assets/components/ProfileModal";
 import SideMenulist from "../assets/components/SideMenuList";
 import { getAllBooksFromShelf, getFavouriteGenres } from "../utility";
@@ -47,10 +47,16 @@ export default function ProfilePage() {
   const navigate = useNavigate();
   const user = useSelector(state => state.userData);
   const shelves = useSelector(state => state.shelves);
+  const allBooks = useSelector(state => state.books.books);
   const userShelves = useSelector(state => state.shelves.userShelves);
   const shelvesNames = [];
   let userShelvesNames = [];
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [avgRating, setAvgRating] = useState(0);
+  const [reviewsCount, setReviewsCount] = useState(0);
+  const reviews = useSelector(state => {
+    return state.reviews.reviews.filter(review => review.senderID === user.id);
+  });
 
   for (let shelf in shelves) {
     if (shelf === "userShelves") {
@@ -71,6 +77,32 @@ export default function ProfilePage() {
     setIsModalOpen(false);
   }
 
+  function findBookByID(bookID) {
+    if (allBooks) {
+      return allBooks.filter(book => book.uuid === bookID)[0];
+    }
+  }
+
+  useEffect(() => {
+    let allRatings = 0;
+    let allRatingsCount = 0;
+    let allReviews = 0;
+    reviews.forEach(review => {
+      if (review.rating !== 0) {
+        if (review.body.length > 0) {
+          allReviews += 1;
+        }
+        allRatings += review.rating;
+        allRatingsCount += 1;
+      } else if (review.body.length > 0) {
+        allReviews += 1;
+      }
+    });
+    let avg = allRatingsCount === 0 ? 0 : allRatings / allRatingsCount;
+    setAvgRating(avg);
+    setReviewsCount(allReviews);
+  }, [reviews]);
+
   return (
     <Stack direction="row" className={classes.container} spacing={3}>
       <Stack spacing={4} sx={{ minWidth: "700px" }}>
@@ -78,10 +110,12 @@ export default function ProfilePage() {
           <Stack justifyContent="center" alignItems="center">
             <img src={user.avatar} alt="user-avatar" className={classes.avatar} />
             <Stack direction="row" alignItems="center" justifyContent="center" spacing={1}>
-              <GoodLink titleText="23 ratings" classes="latoR grGreen"></GoodLink>
-              <GoodLink titleText="(5.00 avg)" classes="latoR grGreen"></GoodLink>
+              <GoodLink
+                titleText={`${reviews && reviews.length} ${reviews.length > 1 ? "ratings" : "rating"}`}
+                classes="latoR grGreen" />
+              <GoodLink titleText={`(${avgRating.toFixed(2)} avg)`} classes="latoR grGreen" />
             </Stack>
-            <GoodLink titleText="0 reviews" classes="latoR grGreen"></GoodLink>
+            <GoodLink titleText={`${reviewsCount} reviews`} classes="latoR grGreen" />
           </Stack>
           <Stack style={{ width: "100%" }}>
             <Stack direction="row" justifyContent="flex-start" alignItems="center" spacing={1}>
@@ -91,7 +125,7 @@ export default function ProfilePage() {
               <GoodLink titleText="(edit profile)" classes={`${classes.littleLink} grGreen latoB`} onClick={handleOpenModal} />
             </Stack>
             <Dialog open={isModalOpen} onClose={handleCloseModal}>
-              <ProfileModal onClose={handleCloseModal}></ProfileModal>
+              <ProfileModal onClose={handleCloseModal} />
             </Dialog>
             <Divider />
             <table>
@@ -188,6 +222,27 @@ export default function ProfilePage() {
                   />)
               )
             )}
+          {reviews && reviews.map(review => {
+            let book = findBookByID(review.bookID)
+            if (review.rating > 0) {
+              return (
+                <UserBooksLayout
+                  key={`${book.uuid}-ub`}
+                  doing={`Rated a book with ${review.rating} stars`}
+                  book={book}
+                />
+              );
+            } else {
+              return (
+                <UserBooksLayout
+                  key={`${book.uuid}-ub`}
+                  doing={`Added review for`}
+                  book={book}
+                />
+              );
+            }
+          }
+          )}
         </Stack>
       </Stack>
       <Stack sx={{ width: "300px" }}>
