@@ -15,7 +15,7 @@ export default function MyBooksPage () {
     const fontSize = "1em";
     const authors = useSelector(state => state.authors.authors);
     const userID = useSelector (state => state.userData.id);
-    const shelves = useSelector(state => state.shelves);
+    const shelves = useSelector(state => state.shelves, _.isEqual);
 
     let userShelves = shelves.userShelves;
 
@@ -83,6 +83,7 @@ export default function MyBooksPage () {
     }, 300);
 
     const handleDisplayShelf = (e) => {
+        setUserShelfSelected(false);
         let shelfName = e.target.id;
         if(!shelves[shelfName] && shelfName !== "all"){
             setUserShelfSelected(true);
@@ -217,7 +218,7 @@ export default function MyBooksPage () {
                     <li><GoodLink size={fontSize} titleText={`Want to Read (${shelves.wantToRead.books.length})`} classes={`latoR ${isSelected.wantToRead ? "grGrey" : "grGreen"}`} id="wantToRead" onClick={handleDisplayShelf}></GoodLink></li>
 
                     {userShelves.length > 0 && <><hr></hr>
-                           { userShelves.map(shelf => <><GoodLink key={shelf.name} titleText={`${shelf.name} (${shelf.books.length})`} classes={`latoR f-1 ${shelfName === shelf.name ? "grGrey" : "grGreen"}`} id={shelf.name} onClick={handleDisplayShelf}></GoodLink><br></br></>)}</>
+                           { userShelves.map(shelf => <div key={shelf.name}><GoodLink titleText={`${shelf.name} (${shelf.books.length})`} classes={`latoR f-1 ${shelfName === shelf.name ? "grGrey" : "grGreen"}`} id={shelf.name} onClick={handleDisplayShelf}></GoodLink><br></br></div>)}</>
                     }
                     <hr></hr>
                     <GoodButton title="Add shelf" padding="5px 15px" fontSize="12px" style={{height: "30px"}} onClick={handleAddShelfClick}></GoodButton>
@@ -242,7 +243,7 @@ export default function MyBooksPage () {
                     <li><GoodLink size={fontSize} titleText="Import and export" classes="latoR grGreen"></GoodLink></li>
                 </ul>
                 {!userShelfSelected && <MyBooksTable books={isSearching ? sortBooks(listBooks, sortBy, ascending) : sortBooks(getSelectedBooks(isSelected), sortBy, ascending)} shelfName={shelfName}></MyBooksTable>}
-                {userShelfSelected && <MyBooksTable books={sortBooks(listBooks, sortBy, ascending)} shelfName={shelfName}></MyBooksTable>}
+                {userShelfSelected && <MyBooksTable books={sortBooks(getSelectedBooks(isSelected), sortBy, ascending)} shelfName={shelfName}></MyBooksTable>}
                 </div>
                 </Container>
     )

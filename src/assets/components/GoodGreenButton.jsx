@@ -6,6 +6,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { styled } from "@mui/styles";
+import _ from "lodash";
 
 const GoodSelect = styled(Select)(() => ({
     height: "35px",
@@ -16,7 +17,8 @@ const GoodSelect = styled(Select)(() => ({
     background: "#409D69",
     "&:hover": {
         background: "#3d9363"
-    }
+    },
+    minWidth: "160px",
 }));
 
 const GoodMenuItem = styled(MenuItem)(() => ({
@@ -32,9 +34,11 @@ const GoodMenuItem = styled(MenuItem)(() => ({
 
 
 export default function GoodGreenButton(props) {
-    const shelves = useSelector(state => state.shelves);
-    const userShelves = useSelector(state => state.shelves.userShelves);
+    const shelves = useSelector(state => state.shelves, _.isEqual);
+    const userShelves = useSelector(state => state.shelves.userShelves, _.isEqual);
     const dispatch = useDispatch();
+
+    const [choosenName, setChoosenName] = React.useState("Add to shelf");
 
     const shelvesNames = [];
     let userShelvesNames = [];
@@ -48,14 +52,48 @@ export default function GoodGreenButton(props) {
             }
             continue;
         }
-        shelvesNames.push({ name: shelves[shelf].name, key: shelf })
+
+        shelvesNames.push({ name: shelves[shelf].name, key: shelf });
     }
 
+    React.useEffect(() => {
+        let shelfName = "Add to shelf";
+        shelvesNames.forEach(shelf => {
+            if(shelfName !== "Add to shelf"){
+                return;
+            }
 
-    const [choosenName, setChoosenName] = React.useState(shelvesNames[0].name);
+            if(shelves[shelf.key].books.some(bookID => bookID === props.bookUuid)){
+                shelfName = shelves[shelf.key].name;
+            }
+        });
+
+        if(shelfName !== "Add to shelf"){
+            setChoosenName(shelfName);
+            return;
+        }
+
+        shelves.userShelves.forEach(shelf => {
+            if(shelfName !== "Add to shelf"){
+                return;
+            }
+
+            if(shelf.books.some(bookID => bookID === props.bookUuid)){
+                shelfName = shelf.name;
+            }
+        });
+
+        setChoosenName(shelfName);
+
+    }, [shelves, userShelves, props.bookUuid]);
 
     const handleChange = (event) => {
         let choosenShelf = event.target.value;
+
+        if(choosenShelf === "Add to shelf"){
+            return;
+        }
+
         let isUserShelf = false;
         setChoosenName(choosenShelf);
 
@@ -85,6 +123,9 @@ export default function GoodGreenButton(props) {
                     onChange={handleChange}
                     inputProps={{ 'aria-label': 'Without label' }}
                 >
+                    <GoodMenuItem key="null-option" value="Add to shelf">
+                        Add to shelf
+                    </GoodMenuItem>
                     {shelvesNames.map(shelfName =>
                         <GoodMenuItem key={shelfName.name} value={shelfName.name}>
                             {shelfName.name}
