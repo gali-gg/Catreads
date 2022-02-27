@@ -242,8 +242,7 @@ export default function MyBooksPage () {
                     <li><GoodLink size={fontSize} titleText="Widgets" classes="latoR grGreen"></GoodLink></li>
                     <li><GoodLink size={fontSize} titleText="Import and export" classes="latoR grGreen"></GoodLink></li>
                 </ul>
-                {!userShelfSelected && <MyBooksTable books={isSearching ? sortBooks(listBooks, sortBy, ascending) : sortBooks(getSelectedBooks(isSelected), sortBy, ascending)} shelfName={shelfName}></MyBooksTable>}
-                {userShelfSelected && <MyBooksTable books={sortBooks(getSelectedBooks(isSelected), sortBy, ascending)} shelfName={shelfName}></MyBooksTable>}
+                <MyBooksTable books={isSearching ? sortBooks(listBooks, sortBy, ascending) : sortBooks(getSelectedBooks(isSelected), sortBy, ascending)} shelfName={shelfName} isUserShelf={userShelfSelected}></MyBooksTable>
                 </div>
                 </Container>
     )

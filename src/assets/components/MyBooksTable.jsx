@@ -6,7 +6,16 @@ import { removeBookFromShelf } from "../../redux/actions/shelfAction";
 
 export default function MyBooksTable (props) {
     let userID = useSelector(state => state.userData.id);
-    let authors = useSelector(state => state.authors.authors)
+    let authors = useSelector(state => state.authors.authors);
+
+    const isUserShelf = props.isUserShelf;
+
+    const shelves = {
+        wantToRead: "Want to Read",
+        currentlyReading: "Currently Reading",
+        read: "Read"
+    }
+
     const dispatch = useDispatch();
     return (
         <div style={{minWidth: "900px", textAlign: "center"}}>
@@ -42,12 +51,13 @@ export default function MyBooksTable (props) {
                     userID={userID}
                     shelves={["to-read", "best-books"]}
                     onRemove={() => {
+                        console.log(isUserShelf, props.shelfName);
                         if(props.shelfName === "All"){
                             dispatch(removeBookFromShelf(false, "Want to Read", book.uuid));
                             dispatch(removeBookFromShelf(false, "Currently Reading", book.uuid));
                             dispatch(removeBookFromShelf(false, "Read", book.uuid));
                         } else {
-                            dispatch(removeBookFromShelf(false, props.shelfName, book.uuid));
+                            dispatch(removeBookFromShelf(isUserShelf, shelves[props.shelfName] || props.shelfName, book.uuid));
                         }
                     }}
                 ></MyBooksTableRow>
