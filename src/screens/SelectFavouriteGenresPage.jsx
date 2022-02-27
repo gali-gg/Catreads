@@ -17,6 +17,7 @@ export default function SelectFavouriteGenresPage(props) {
   let dispatch = useDispatch();
   let navigate = useNavigate();
   let allGenres = useSelector((state) => state.genres.genres);
+  let currentUser = useSelector((state) => state.userData);
 
   useEffect(() => {
     if (allGenres.length > 0) {
@@ -58,7 +59,6 @@ export default function SelectFavouriteGenresPage(props) {
         selectedGenres.push(Number(key));
       }
     }
-    console.log(selectedGenres);
 
     const users = getFromStorageAndParse("users");
     const user = new User(
@@ -68,6 +68,9 @@ export default function SelectFavouriteGenresPage(props) {
       null,
       selectedGenres
     );
+    user.location = currentUser.location;
+    user.joined = currentUser.joined;
+
     users.push(user);
     setStorage("users", users);
     setStorage("loggedUser", user.id);

@@ -22,11 +22,14 @@ const useStyles = makeStyles({
         alignItems: "flex-start",
     },
     button: {
+        padding:"8px 5px",
+        border: "none",
+        borderRadius: "3px",
         background: "#409D69",
         color: "white",
         textAlign: "left",
         textTransform: "none",
-        width: "75%",
+        width: "120px",
         "&:hover": {
             background: "#3D9363",
             cursor: "pointer",
@@ -85,9 +88,9 @@ export default function RecommendBookLayout(props) {
                             <span className={classes.littleRatingText}>{bookRating.rating}</span>
                         </div>
 
-                        <Button className={classes.button} onClick={props.handleClick} disableRipple>
+                        <button className={`${classes.button} latoR f-09`} onClick={props.handleClick} disableRipple>
                             Want to Read
-                        </Button>
+                        </button>
                     </div>
                     <img
                         onClick={props.handleNewBook}
