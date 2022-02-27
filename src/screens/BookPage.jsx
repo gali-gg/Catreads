@@ -43,8 +43,6 @@ export default function BookPage(props) {
 
   const ratingStats = getRatingsStats(bookObj.uuid);
 
-  const userID = useSelector(state => state.userData.id);
-
   bookObj.similarBooks.forEach(id => {
     let book = allBooks.find((book) => book.uuid === id);
     similarBooksArr.push(book);
@@ -188,28 +186,16 @@ export default function BookPage(props) {
                   <span className="latoB grBrown f-09">GENRES</span>
                   <Divider></Divider>
                   {selectedBookGenres.map((genre, index) => {
-                    if (index < selectedBookGenres.length - 1) {
                       return (
-                        <>
+                        <div key={uuidv4()}>
                           <GoodLink
-                            key={"bookgenre" + uuidv4()}
                             titleText={genre.genre}
                             classes="grGreen latoR"
                             to={`/genres/${genre.genre}`}
                           ></GoodLink>
-                          <Divider></Divider>
-                        </>
+                          {index !== selectedBookGenres.length - 1 ? <Divider></Divider> : ""}
+                        </div>
                       );
-                    } else if (index === selectedBookGenres.length - 1) {
-                      return (
-                        <GoodLink
-                          key={"bookgenre" + uuidv4()}
-                          titleText={genre.genre}
-                          classes="grGreen latoR"
-                          to={`/genres/${genre.genre}`}
-                        ></GoodLink>
-                      );
-                    }
                   })}
                 </div>
                 <AuthorInfoBox author={book.author}></AuthorInfoBox>
