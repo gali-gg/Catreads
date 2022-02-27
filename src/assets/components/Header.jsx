@@ -29,7 +29,7 @@ export const Header = function Header (props){
                     <DropDownMenu title="Community" hrefs={communityHrefs}></DropDownMenu>
                 </Stack>
                 <SearchBox></SearchBox>
-                <ul>
+                <Stack direction="row">
                     <NavButton src="https://s.gr-assets.com/assets/layout/header/icn_nav_notifications.svg"></NavButton>
                     <NavButton src="https://s.gr-assets.com/assets/layout/header/icn_nav_discussions.svg"></NavButton>
                     <NavButton src="https://s.gr-assets.com/assets/layout/header/icn_nav_msgs.svg"></NavButton>
@@ -42,7 +42,7 @@ export const Header = function Header (props){
                         side="right"
                     >
                     </DropDownMenu>
-                </ul>
+                </Stack>
             </Stack>
         )
     }
