@@ -1,6 +1,4 @@
-import * as React from 'react';
 import { makeStyles } from '@mui/styles';
-import Button from '@mui/material/Button';
 import "./css/styles.css";
 
 const useStyles = makeStyles({
@@ -19,7 +17,7 @@ const useStyles = makeStyles({
     },
     icon: {
         height: "30px",
-        padding: "0 10px",
+        margin: "0 10px",
         border: "none",
         borderRadius: "25px",
         background: "none",

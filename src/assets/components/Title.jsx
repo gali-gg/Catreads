@@ -20,7 +20,7 @@ export default function Title(props){
         <span 
             onClick={props.onClick}
             className={`${props.className || classes.title}`} 
-            style={{color: props.color}}
+            style={{color: props.color, fontSize: props.fontSize || "0.9em"}}
         >{props.title}</span>
     );
 }

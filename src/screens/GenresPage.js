@@ -8,6 +8,7 @@ import SideMenulist from '../assets/components/SideMenuList';
 import { v4 as uuidv4 } from 'uuid';
 import { useSelector } from 'react-redux';
 import GenreTitle from '../assets/components/GenreTitle';
+import { getAllGenresBooks, getFavouriteGenres } from '../utility';
 
 const useStyles = makeStyles({
   bigTitle: {
@@ -54,10 +55,10 @@ const useStyles = makeStyles({
     borderRadius: "3px",
     border: "1px solid #ddd"
   },
-  optionsContainer:{
+  optionsContainer: {
     borderBottom: "1px solid #ddd",
     padding: "7px 0",
-    "&:hover":{
+    "&:hover": {
       background: "#eee",
       cursor: "pointer"
     }
@@ -75,14 +76,15 @@ export default function GenresPage() {
   const allGenres = genres.map(genre => genre.genre);
   const firstHalfGenres = allGenres.slice(0, Math.floor(allGenres.length / 2));
   const secondHalfGenres = allGenres.slice(Math.round(allGenres.length / 2), allGenres.length - 1);
-  const [favouriteGenres, setFavouriteGenres] = useState(null);
   let genreObj = genres.filter(g => g.genre === params.gname)[0];
   let allAuthors;
 
-  if(genreObj){
+
+  if (genreObj) {
     allAuthors = authors.filter(author => {
       return author.genres.some(g => g === genreObj.uuid);
     });
+    console.log(genreObj)
   }
 
   const [text, setText] = useState(null);
@@ -103,12 +105,6 @@ export default function GenresPage() {
     }
   }, [params.gname]);
 
-  React.useEffect(() => {
-    setFavouriteGenres(user.favouriteGenres.map(genre => {
-      return genres.filter(g => g.uuid === genre)[0].genre
-    }))
-  }, [genres, user]);
-
   const genreBooks = (genre) => {
     let genreBooksData = allBooks.filter(book => {
       return book.genres.some(someGenre => someGenre === genre.uuid);
@@ -116,12 +112,6 @@ export default function GenresPage() {
     let randomNum = Math.ceil(Math.random() * (genreBooksData.length - 5));
 
     return genreBooksData.length > 5 ? genreBooksData.slice(randomNum, randomNum + 5) : false;
-  }
-
-  function getAllGenresBooks(genre) {
-    return allBooks.filter(book => {
-      return book.genres.some(someGenre => someGenre === genreObj.uuid);
-    });
   }
 
   return (
@@ -149,7 +139,7 @@ export default function GenresPage() {
                     <GenreContainer
                       key={uuidv4()}
                       genre={`${params.gname} books`}
-                      books={getAllGenresBooks(params.gname)}
+                      books={getAllGenresBooks(genreObj)}
                       coverHeight="220px"
                       navigate={false}
                     />}
@@ -220,8 +210,8 @@ export default function GenresPage() {
               </Stack>
             }
 
-            {!params.gname && favouriteGenres &&
-              <SideMenulist title="My favourite genres" link="edit" hrefs={favouriteGenres} />
+            {!params.gname &&
+              <SideMenulist title="My favourite genres" link="edit" hrefs={getFavouriteGenres(user)} />
             }
             <SideMenulist
               title="Browse"

@@ -56,7 +56,12 @@ export default function BoxFlex(props) {
             spacing={2}
             className={classes.container}
         >
-            {props.userName && <Title title={props.userName} className={`${classes.title} latoB grBrown`}></Title>}
+            {props.title && 
+                <Title 
+                    title={props.title} 
+                    className={`${classes.title} latoB grBrown`} 
+                    fontSize={props.titleSize} 
+                />}
             {props.hrefs.map(link => {
                 if (link.dispatch) {
                     return (

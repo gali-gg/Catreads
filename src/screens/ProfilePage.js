@@ -13,6 +13,7 @@ import SideMenuEl from "../assets/components/SideMenuEl";
 import { useState } from "react";
 import ProfileModal from "../assets/components/ProfileModal";
 import SideMenulist from "../assets/components/SideMenuList";
+import { getAllBooksFromShelf, getFavouriteGenres } from "../utility";
 
 
 const useStyles = makeStyles({
@@ -45,10 +46,8 @@ export default function ProfilePage() {
   const classes = useStyles();
   const navigate = useNavigate();
   const user = useSelector(state => state.userData);
-  const genres = useSelector(state => state.genres.genres);
   const shelves = useSelector(state => state.shelves);
   const userShelves = useSelector(state => state.shelves.userShelves);
-  const allBooks = useSelector(state => state.books.books);
   const shelvesNames = [];
   let userShelvesNames = [];
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -64,20 +63,6 @@ export default function ProfilePage() {
     }
     shelvesNames.push({ name: shelves[shelf].name, key: shelf })
   }
-
-  const getAllBooksFromShelf = ((shelfName) => {
-    if (shelves) {
-      return shelves[shelfName].books.map(shelfBook => {
-        return allBooks.filter(book => book.uuid === shelfBook)[0]
-      });
-    } else {
-      return [];
-    }
-  })
-
-  let favouriteGenres = user.favouriteGenres.map(genre => {
-    return genres.filter(g => g.uuid === genre)[0].genre
-  })
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -120,7 +105,7 @@ export default function ProfilePage() {
         <Stack spacing={1} >
           <GenreTitle title={`${user.name.first}\`s favourite books`} ></GenreTitle>
           <Stack direction="row" spacing={1}>
-            {getAllBooksFromShelf("read").map(book =>
+            {getAllBooksFromShelf("read", false).map(book =>
               <img
                 src={book.cover}
                 alt={book.title}
@@ -167,7 +152,7 @@ export default function ProfilePage() {
 
         <Stack spacing={1}>
           <GenreTitle title={`${user.name.first} is currently reading`} ></GenreTitle>
-          {getAllBooksFromShelf("currentlyReading").map(book =>
+          {getAllBooksFromShelf("currentlyReading", false).map(book =>
             <UserBooksLayout
               key={`${book.uuid}-cr`}
               doing="is currently reading"
@@ -178,20 +163,31 @@ export default function ProfilePage() {
 
         <Stack spacing={1}>
           <GenreTitle title={`${user.name.first} recent updates`} ></GenreTitle>
-          {getAllBooksFromShelf("read").map(book =>
+          {getAllBooksFromShelf("read", false).map(book =>
             <UserBooksLayout
               key={`${book.uuid}-r`}
               doing="has read"
               book={book}
             />
           )}
-          {shelves && getAllBooksFromShelf("wantToRead").map(book =>
+          {shelves && getAllBooksFromShelf("wantToRead", false).map(book =>
             <UserBooksLayout
               key={`${book.uuid}-wr`}
               doing="wants to read"
               book={book}
             />
           )}
+          {shelves && shelves.userShelves.length > 0 &&
+            shelves.userShelves.map(userShelf =>
+              getAllBooksFromShelf(userShelf.name, true).map(books =>
+                books.map(book =>
+                  <UserBooksLayout
+                    key={`${book.uuid}-ub`}
+                    doing={`Add to shelf ${userShelf.name}`}
+                    book={book}
+                  />)
+              )
+            )}
         </Stack>
       </Stack>
       <Stack sx={{ width: "300px" }}>
@@ -215,7 +211,7 @@ export default function ProfilePage() {
           divider={true}
           hrefs={["Go to Your 2021 Year in Books"]}
         />
-        <SideMenulist title="Favourite genres" link="" hrefs={favouriteGenres} />
+        <SideMenulist title="Favourite genres" link="" hrefs={getFavouriteGenres(user)} />
 
       </Stack>
     </Stack>

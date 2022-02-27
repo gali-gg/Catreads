@@ -1,5 +1,4 @@
 import * as React from 'react';
-import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import DropDownElement from './DropDownElement';
 import { makeStyles } from '@mui/styles';
@@ -7,35 +6,41 @@ import { Stack } from '@mui/material';
 import SubDownMenu from './SubDownMenu';
 import "./css/styles.css";
 import { useSelector } from 'react-redux';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
 const useStyles = makeStyles({
   notClickedButton: {
+    border:"none",
+    display: "flex",
+    alignItems: "center",
     fontSize: "1em",
     borderRadius: 0,
     background: "none",
     color: "#382110",
     textTransform: "none",
-    padding: '11px 5px',
+    padding: '13px 5px',
         '&:hover': {
             background: "#382110",
             color: "white"
         },
   },
   clickedButton: {
+    border:"none",
+    display: "flex",
+    alignItems: "center",
     fontSize: "1em",
     background: "#382110",
     color: "white",
     borderRadius: 0,
     textTransform: "none",
-    padding: '11px 5px',
+    padding: '13px 5px',
   },
   icon:{
     height: 30,
-    width: 30,
     objectFit: "cover",
     border: "none",
     borderRadius: "25px",
-    padding: 0,
+    margin: "0 10px",
     background: "none"
   },
 });
@@ -59,28 +64,39 @@ export default function BasicMenu(props) {
 
   React.useEffect(() => {
     if(genres.length > 0 && user){
-      setFavGenres(user.favouriteGenres.map( genre => {
+      let allFavouriteGenres = user.favouriteGenres.map( genre => {
         let name = genres.find(g => g.uuid === genre).genre;
         return {
           title: name, 
           href: `/genres/${name}`}
-      }))
+      });
+      allFavouriteGenres.push({
+        title: "All genres",
+         href: `/genres`
+        });
+      setFavGenres(allFavouriteGenres);
     }
   }, [genres, user]);
 
   return (
     <>
-        <Button
+        <button
           className = {`${anchorEl ? classes.clickedButton :  classes.notClickedButton} latoR`}
           id="basic-button"
           aria-controls={open ? 'basic-menu' : undefined}
           aria-haspopup="true"
           aria-expanded={open ? 'true' : undefined}
           onClick={handleClick}
-          disableRipple
         >
-          {props.title  || (<img src={props.src} className={classes.icon} alt="img"></img>)}
-        </Button>
+          {props.title ? 
+            <>
+              {props.title} 
+              <ArrowDropDownIcon />
+            </>  
+            :
+            (<img src={props.src} className={classes.icon} alt="header-icon" />)}
+          
+        </button>
 
       <Menu
         style={{padding:0}}
@@ -100,13 +116,19 @@ export default function BasicMenu(props) {
           horizontal: side ,
         }}
       >
-        <Stack direction={props.hrefsSecond ? "column" : "row"} wrap="flexWrap">
-            <DropDownElement hrefs={props.hrefs} userName={props.userName}/>
+        <Stack direction={props.hrefsSecond ? "column" : "row"} flexWrap="wrap">
+            <DropDownElement hrefs={props.hrefs} title={props.userName} titleSize={"1em"}/>
             {props.hrefsLeftSide && user && genres && favGenres &&(
-              <SubDownMenu orientation="vertical" bgColor="#F6F6F6" hrefs={favGenres} />
+              <SubDownMenu 
+                orientation="vertical" 
+                bgColor="#F6F6F6" 
+                hrefs={favGenres}  
+                title="Favourite genres" 
+                titleSize={"0.8em"}
+              />
             )}
             {props.hrefsSecond && (
-              <SubDownMenu hrefs={props.hrefsSecond} />
+              <SubDownMenu hrefs={props.hrefsSecond}/>
             )}
         </Stack>
       </Menu>

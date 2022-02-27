@@ -45,6 +45,7 @@ export default function ErrorPage() {
   let chance = Math.floor(Math.random() * errorQuotes.length);
   const [error, setError] = useState(null);
   useEffect(() => setError(errorQuotes[chance]), []);
+  
   return error &&
     <Container maxWidth="md" className={classes.mainContainer}>
       <Stack direction="row"  justifyContent="center" sx={{ height:"80vh"}} alignItems="center" spacing={10}>

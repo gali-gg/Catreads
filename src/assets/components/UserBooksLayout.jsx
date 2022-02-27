@@ -6,10 +6,10 @@ import "./css/styles.css";
 import Title from "./Title";
 import StyledRouterLink from "./StyledRouterLink";
 import X from "../images/X.png";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import BookReviewModal from "./BookReviewModal";
-import { getRatingsStats } from "../../utility";
+import { getAuthorName, getRatingsStats } from "../../utility";
 
 const useStyles = makeStyles({
     subContainer: {
@@ -69,7 +69,13 @@ export default function UserBooksLayout(props) {
         }
     }
 
-    let author = authors.filter(author => author.uuid === props.book.author)[0];
+    const [author, setAuthor] = useState(null);
+    useEffect(() => {
+        console.log(props.book);
+        setAuthor(getAuthorName(props.book.author))
+        console.log(author);
+
+    }, [props.book])
 
     const handleClose = () => {
         setIsClosed(true)
@@ -99,7 +105,7 @@ export default function UserBooksLayout(props) {
                     className={`${classes.pointer} meriB grBrown`}
                     onClick={() => navigate(`/books/${props.book.uuid}`)}
                 />
-                <span className="meriR f-075">by {author.name}</span>
+                <span className="meriR f-075">by {author && author.name}</span>
                 <Stack direction="row" spacing={1} alignItems="center">
                     <span className="latoR f-08 grBrouwn">bookshelves: </span>
                     {bookShelves.map(bShelf =>
@@ -115,7 +121,7 @@ export default function UserBooksLayout(props) {
             </Stack>
             <Stack alignItems="center" gap={0.5}>
                 <GoodGreenButton styled={true} bookUuid={props.book.uuid}></GoodGreenButton>
-                <BookReviewModal type="link" clickTitle="Rate this book" cover={props.book.cover} title={props.book.title} author={author.name} book={props.book} rating={bookRating.rating} className="f-08 latoR grGrey"></BookReviewModal>
+                <BookReviewModal type="link" clickTitle="Rate this book" cover={props.book.cover} title={props.book.title} author={author && author.name} book={props.book} rating={bookRating.rating} className="f-08 latoR grGrey"></BookReviewModal>
             </Stack>
             <img src={X} alt="close-icon" width="10" height="10" onClick={handleClose} className={classes.X} />
         </Stack>

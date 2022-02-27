@@ -56,8 +56,6 @@ export default function Previews(props) {
         }
     });
 
-    
-
     const thumbs = files.map(file => (
         <div style={thumb} key={file.name}>
             <div style={thumbInner}>
@@ -70,7 +68,7 @@ export default function Previews(props) {
     ));
 
     useEffect(() => {
-        if(files.length > 0 && props.isSubmit){
+        if (files.length > 0 && props.isSubmit) {
             dispatch(changeAvatarAction(URL.createObjectURL(files[0])));
         }
         // Make sure to revoke the data uris to avoid memory leaks
@@ -78,7 +76,6 @@ export default function Previews(props) {
     }, [files, props.isSubmit]);
 
     return (
-        
         <section className="container">
             <div style={dropzone} {...getRootProps({ className: 'dropzone' })}>
                 <input {...getInputProps()} />
