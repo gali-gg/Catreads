@@ -13,6 +13,9 @@ import { Provider } from 'react-redux';
 import store from './redux/store';
 import { getFromStorageAndParse, setStorage } from './utility';
 import User from './model/UserService';
+import {PersistGate} from "redux-persist/integration/react";
+import {persistor} from "./redux/store";
+import CircularProgress from '@mui/material/CircularProgress';
 
 let users=[];
 if(localStorage.users){
@@ -29,11 +32,13 @@ else {
 
 ReactDOM.render(
   <Provider store={store}>
+    <PersistGate persistor={persistor} loader={<CircularProgress color="inherit" />}>
     <React.StrictMode>
       <BrowserRouter>
         <App />
       </BrowserRouter>
     </React.StrictMode>
+    </PersistGate>
   </Provider>,
   document.getElementById('root')
 );
