@@ -36,23 +36,6 @@
        "commentsByFriends":[
 
        ],
-       "bookshelves":{
-          "allBooks":[
-
-          ],
-          "read":[
-
-          ],
-          "currentlyReading":[
-
-          ],
-          "wantToRead":[
-
-          ]
-       },
-       "messages":[
-
-       ],
        "joined":1645915510357,
        "location":"Muncie, Indiana"
     },
@@ -93,20 +76,6 @@
        "commentsByFriends":[
 
        ],
-       "bookshelves":{
-          "allBooks":[
-
-          ],
-          "read":[
-
-          ],
-          "currentlyReading":[
-
-          ],
-          "wantToRead":[
-
-          ]
-       },
        "messages":[
 
        ],
@@ -150,20 +119,6 @@
        "commentsByFriends":[
 
        ],
-       "bookshelves":{
-          "allBooks":[
-
-          ],
-          "read":[
-
-          ],
-          "currentlyReading":[
-
-          ],
-          "wantToRead":[
-
-          ]
-       },
        "messages":[
 
        ],
@@ -207,20 +162,6 @@
        "commentsByFriends":[
 
        ],
-       "bookshelves":{
-          "allBooks":[
-
-          ],
-          "read":[
-
-          ],
-          "currentlyReading":[
-
-          ],
-          "wantToRead":[
-
-          ]
-       },
        "messages":[
 
        ],
@@ -264,20 +205,6 @@
        "commentsByFriends":[
 
        ],
-       "bookshelves":{
-          "allBooks":[
-
-          ],
-          "read":[
-
-          ],
-          "currentlyReading":[
-
-          ],
-          "wantToRead":[
-
-          ]
-       },
        "messages":[
 
        ],
@@ -321,20 +248,6 @@
        "commentsByFriends":[
 
        ],
-       "bookshelves":{
-          "allBooks":[
-
-          ],
-          "read":[
-
-          ],
-          "currentlyReading":[
-
-          ],
-          "wantToRead":[
-
-          ]
-       },
        "messages":[
 
        ],
@@ -378,20 +291,6 @@
        "commentsByFriends":[
 
        ],
-       "bookshelves":{
-          "allBooks":[
-
-          ],
-          "read":[
-
-          ],
-          "currentlyReading":[
-
-          ],
-          "wantToRead":[
-
-          ]
-       },
        "messages":[
 
        ],
@@ -435,20 +334,6 @@
        "commentsByFriends":[
 
        ],
-       "bookshelves":{
-          "allBooks":[
-
-          ],
-          "read":[
-
-          ],
-          "currentlyReading":[
-
-          ],
-          "wantToRead":[
-
-          ]
-       },
        "messages":[
 
        ],
@@ -492,20 +377,6 @@
        "commentsByFriends":[
 
        ],
-       "bookshelves":{
-          "allBooks":[
-
-          ],
-          "read":[
-
-          ],
-          "currentlyReading":[
-
-          ],
-          "wantToRead":[
-
-          ]
-       },
        "messages":[
 
        ],
@@ -549,20 +420,6 @@
        "commentsByFriends":[
 
        ],
-       "bookshelves":{
-          "allBooks":[
-
-          ],
-          "read":[
-
-          ],
-          "currentlyReading":[
-
-          ],
-          "wantToRead":[
-
-          ]
-       },
        "messages":[
 
        ],
@@ -570,4 +427,3 @@
        "location":"Monstropolis"
     }
  ]
- 

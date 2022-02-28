@@ -7,6 +7,8 @@ import "./css/styles.css";
 import { useDispatch, useSelector } from 'react-redux';
 import * as userAction from "../../redux/actions/userAction"
 import { getFromStorageAndParse, setStorage } from '../../utility';
+import { clearShelvesAction } from '../../redux/actions/shelfAction';
+import { useNavigate } from 'react-router-dom';
 
 const useStyles = makeStyles({
     container: {
@@ -33,14 +35,17 @@ export default function BoxFlex(props) {
     const allUsers = getFromStorageAndParse("users");
     const classes = useStyles();
     const dispatch = useDispatch();
+    const shelves = useSelector(state => state.shelves);
+    const navigate = useNavigate();
 
     const handleAction = (action) => {
+        dispatch(clearShelvesAction());
         dispatch(userAction.logoutAction);
-
+        navigate("/");
         let newUsers = allUsers.map(someUser => {
             let newUser = someUser;
             if(someUser.id === user.id){
-                newUser ={...someUser, ...user};
+                newUser ={...someUser, ...user, shelves: shelves};
             }
             return newUser;
         })

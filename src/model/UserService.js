@@ -26,12 +26,6 @@ export default class User {
         this.groups = [];
         this.friends = [];
         this.commentsByFriends = [];
-        this.bookshelves = {
-            allBooks: [],
-            read: [],
-            currentlyReading: [],
-            wantToRead: []
-        }
         this.messages = [];
     }
 }

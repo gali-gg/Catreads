@@ -1,4 +1,4 @@
-import { ADD_BOOK_TO_SHELF, ADD_SHELF, DELETE_SHELF, REMOVE_BOOK_FROM_SHELF } from '../actions/shelfAction';
+import { ADD_BOOK_TO_SHELF, ADD_SHELF, DELETE_SHELF, REMOVE_BOOK_FROM_SHELF, LOAD_SHELVES, CLEAR_SHELVES } from '../actions/shelfAction';
 import _ from "lodash";
 
 const INITIAL_STATE = {
@@ -19,6 +19,16 @@ const INITIAL_STATE = {
 
 export const shelfReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
+        case LOAD_SHELVES:
+            if(action.payload){
+                return {
+                    ...state,
+                    ...action.payload
+                }
+            }
+            return {
+                ...state
+            }
         case ADD_SHELF:
             return {
                 ...state,
@@ -70,6 +80,11 @@ export const shelfReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state
             };
+
+        case CLEAR_SHELVES:
+            return {
+                ...INITIAL_STATE
+            }
         default: return state;
     }
 };

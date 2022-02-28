@@ -2,6 +2,8 @@ export const ADD_SHELF = "ADD_SHELF";
 export const DELETE_SHELF = "DELETE_SHELF";
 export const ADD_BOOK_TO_SHELF = "ADD_BOOK_TO_SHELF";
 export const REMOVE_BOOK_FROM_SHELF = "REMOVE_BOOK_FROM_SHELF";
+export const LOAD_SHELVES = "LOAD_SHELVES";
+export const CLEAR_SHELVES = "CLEAR_SHELVES";
 
 export const addBookToShelf = (isUserShelf, name, uuid) => {
     return {
@@ -40,5 +42,18 @@ export const deleteShelf = (name) => {
         payload: {
             name: name,
         }
+    }
+}
+
+export const loadShelvesAction = (shelvesObj) => {
+    return {
+        type: LOAD_SHELVES,
+        payload: shelvesObj
+    }
+}
+
+export const clearShelvesAction = () => {
+    return {
+        type: CLEAR_SHELVES
     }
 }

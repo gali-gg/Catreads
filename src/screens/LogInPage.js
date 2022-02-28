@@ -21,6 +21,7 @@ import { loadGenresAction } from "../redux/actions/allGenresAction";
 import { loadAuthorsAction } from "../redux/actions/allAuthorsAction";
 import * as EmailValidator from 'email-validator';
 import { loadFakeReviewsAction } from "../redux/actions/reviewsActions";
+import { loadShelvesAction } from "../redux/actions/shelfAction";
 
 export default function LogInPage(props) {
   const [email, setEmail] = useState("");
@@ -42,6 +43,9 @@ export default function LogInPage(props) {
         let user = users.find(user => user.email === email);
         setStorage("loggedUser", user.id);
         dispatch(loginAction(user));
+        if(user.shelves){
+          dispatch(loadShelvesAction(user.shelves));
+        }
         dispatch(loadAllBooksAction());
         dispatch(loadGenresAction());
         dispatch(loadAuthorsAction());
