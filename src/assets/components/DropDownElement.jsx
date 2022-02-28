@@ -19,7 +19,6 @@ const useStyles = makeStyles({
         textTransform: "none",
         '&:hover': {
             textDecoration: "underline",
-            cursor: "pointer"
         },
     },
     title: {
@@ -37,7 +36,7 @@ export default function BoxFlex(props) {
 
     const handleAction = (action) => {
         dispatch(userAction.logoutAction);
-        
+
         let newUsers = allUsers.map(someUser => {
             let newUser = someUser;
             if(someUser.id === user.id){
@@ -56,11 +55,11 @@ export default function BoxFlex(props) {
             spacing={2}
             className={classes.container}
         >
-            {props.title && 
-                <Title 
-                    title={props.title} 
-                    className={`${classes.title} latoB grBrown`} 
-                    fontSize={props.titleSize} 
+            {props.title &&
+                <Title
+                    title={props.title}
+                    className={`${classes.title} latoB grBrown`}
+                    fontSize={props.titleSize}
                 />}
             {props.hrefs.map(link => {
                 if (link.dispatch) {

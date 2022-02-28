@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addBookToShelf } from "../../redux/actions/shelfAction";
 import { addReviewAction } from "../../redux/actions/reviewsActions";
 import {v4 as uuidv4} from "uuid";
+import GoodGreenButton from "./GoodGreenButton";
 
 const paperStyle = {
   position: "absolute",
@@ -137,13 +138,8 @@ export default function BookReviewModal(props) {
               </div>
 
               <div style={dFlex}>
-                Bookshelves/tags:
-                <select onChange={handleSelectShelf}>
-                        <option value="">Add to shelf</option>
-                        <option value={"Read"}>Read</option>
-                        <option value={"Currently Reading"}>Currently reading</option>
-                        <option value={"Want to Read"}>Want to read</option>
-                </select>
+                Bookshelves:
+                <GoodGreenButton bookUuid={props.book.uuid} styled={false}></GoodGreenButton>
               </div>
             </div>
 

@@ -8,17 +8,23 @@ const useStyles = makeStyles({
     link: {
         textDecoration: 'inherit',
         color : "inherit",
-        textTransform: "none"
+        textTransform: "none",
+        cursor: "pointer"
+    },
+    disabled: {
+        cursor: "not-allowed"
     }
 });
 
+
+//props.href-> classes.disabled
 export default function StyledRouterLink(props){
     const classes = useStyles();
 
     return(
-        <Link 
-            className={`${props.className || classes.link} latoR`}
-            to={props.href} onClick={props.onClick}
+        <Link
+            className={`${props.className } latoR ${(props.href ? classes.link : classes.disabled)} `}
+            to={props.href || "#"} onClick={props.onClick}
         >
             {props.title}
         </Link>
