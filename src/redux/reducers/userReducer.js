@@ -18,7 +18,6 @@ export const userReducer = (state = INITIAL_STATE, action) => {
         case LOGIN:
             let newLikedReviews = [];
             if(action.payload.likedReviews){
-                console.log(action.payload.likedReviews);
                 newLikedReviews = action.payload.likedReviews;
             }
 
