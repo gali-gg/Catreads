@@ -43,6 +43,26 @@ const boxStyles = {
   justifyContent: "space-between"
 }
 
+const paperStyles = {
+  paddingTop: 3,
+  paddingBottom: 3,
+  paddingLeft: 5,
+  paddingRight: 5,
+  width: "600px",
+  boxSizing: "border-box"
+}
+
+const boxStyles = {
+  display: "flex",
+  flexWrap: "wrap",
+  "& > :not(style)": {
+    m: "auto",
+    mt: "20px",
+    mb: 5
+  },
+  justifyContent: "space-between"
+}
+
 export default function LogInPage(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
