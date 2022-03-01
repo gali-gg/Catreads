@@ -1,0 +1,429 @@
+[
+    {
+       "id":"69897d2e-1428-4c06-9d1a-98a897e4c552",
+       "email":"garfield@cat.com",
+       "password":"garfield",
+       "avatar":"https://pbs.twimg.com/profile_images/886921400048533504/vn68rG49_400x400.jpg",
+       "details":{
+          "birthday":null,
+          "names":{
+             "first":"Garfield",
+             "middle":null,
+             "last":null
+          },
+          "age":null,
+          "gender":null,
+          "country":null,
+          "website":null
+       },
+       "favouriteGenres":[
+          1,
+          6,
+          12
+       ],
+       "ratedBooks":[
+
+       ],
+       "savedQuotes":[
+
+       ],
+       "groups":[
+
+       ],
+       "friends":[
+
+       ],
+       "commentsByFriends":[
+
+       ],
+       "joined":1645915510357,
+       "location":"Muncie, Indiana"
+    },
+    {
+       "id":"38afb478-b4c5-46b8-b7db-d1f1549f4d64",
+       "email":"hannahM@hanna.bg",
+       "password":"hannah",
+       "avatar":"https://i.pinimg.com/originals/dd/6b/b0/dd6bb071eae879937498be7645fa8c10.jpg",
+       "details":{
+          "birthday":null,
+          "names":{
+             "first":"Hannah",
+             "middle":null,
+             "last":"Montana"
+          },
+          "age":null,
+          "gender":null,
+          "country":null,
+          "website":null
+       },
+       "favouriteGenres":[
+          13,
+          11,
+          9
+       ],
+       "ratedBooks":[
+
+       ],
+       "savedQuotes":[
+
+       ],
+       "groups":[
+
+       ],
+       "friends":[
+
+       ],
+       "commentsByFriends":[
+
+       ],
+       "messages":[
+
+       ],
+       "joined":1645815510357,
+       "location":"Montana, Bulgaria"
+    },
+    {
+       "id":"9e76fca1-8bb1-4243-bf03-6a328e080380",
+       "email":"frodoB@bagend.com",
+       "password":"frodo",
+       "avatar":"https://i.pinimg.com/280x280_RS/e3/26/2a/e3262afc8ea44b52d98a0603acea682e.jpg",
+       "details":{
+          "birthday":null,
+          "names":{
+             "first":"Frodo",
+             "middle":null,
+             "last":"Baggins"
+          },
+          "age":null,
+          "gender":null,
+          "country":null,
+          "website":null
+       },
+       "favouriteGenres":[
+          18,
+          6,
+          2
+       ],
+       "ratedBooks":[
+
+       ],
+       "savedQuotes":[
+
+       ],
+       "groups":[
+
+       ],
+       "friends":[
+
+       ],
+       "commentsByFriends":[
+
+       ],
+       "messages":[
+
+       ],
+       "joined":1645515260357,
+       "location":"The Shire"
+    },
+    {
+       "id":"521bf441-fd28-4c81-890d-8f55bb82e5d3",
+       "email":"princeHarry@royal.co.uk",
+       "password":"prince",
+       "avatar":"https://i.guim.co.uk/img/static/sys-images/Media/Pix/pictures/2003/09/03/Prince-HarryPA1.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=018fc6ad006682c0ee5b85c3fa38d9ae",
+       "details":{
+          "birthday":null,
+          "names":{
+             "first":"prince-Harry",
+             "middle":"Henry",
+             "last":"Charles Albert David Duke of Sussex."
+          },
+          "age":null,
+          "gender":null,
+          "country":null,
+          "website":null
+       },
+       "favouriteGenres":[
+          17,
+          20,
+          8
+       ],
+       "ratedBooks":[
+
+       ],
+       "savedQuotes":[
+
+       ],
+       "groups":[
+
+       ],
+       "friends":[
+
+       ],
+       "commentsByFriends":[
+
+       ],
+       "messages":[
+
+       ],
+       "joined":1645619260339,
+       "location":"Windsor, London, England"
+    },
+    {
+       "id":"b084cefc-d3cd-442e-9539-9d6d398ef676",
+       "email":"theRock@bigMan.com",
+       "password":"rock",
+       "avatar":"https://i.redd.it/pexc95zfsmg51.jpg",
+       "details":{
+          "birthday":null,
+          "names":{
+             "first":"Dwayne",
+             "middle":"Johnson",
+             "last":"the Rock"
+          },
+          "age":null,
+          "gender":null,
+          "country":null,
+          "website":null
+       },
+       "favouriteGenres":[
+          16,
+          7,
+          3
+       ],
+       "ratedBooks":[
+
+       ],
+       "savedQuotes":[
+
+       ],
+       "groups":[
+
+       ],
+       "friends":[
+
+       ],
+       "commentsByFriends":[
+
+       ],
+       "messages":[
+
+       ],
+       "joined":1645709260364,
+       "location":"Los Angeles, California"
+    },
+    {
+       "id":"b7c0cbdd-a5d2-49ab-83f6-9356e8ff1447",
+       "email":"krasi@stoev.bg",
+       "password":"krasi",
+       "avatar":"https://media-exp1.licdn.com/dms/image/C4D03AQHl-7Lq2QEtZw/profile-displayphoto-shrink_200_200/0/1517371092266?e=1648080000&v=beta&t=wIhDRDxEO5BfFa-PvAjj7HpTVRL8ejAu7Zd7R9luh8U",
+       "details":{
+          "birthday":null,
+          "names":{
+             "first":"Krasimir",
+             "middle":null,
+             "last":"Stoev"
+          },
+          "age":null,
+          "gender":null,
+          "country":null,
+          "website":null
+       },
+       "favouriteGenres":[
+          13,
+          15,
+          10
+       ],
+       "ratedBooks":[
+
+       ],
+       "savedQuotes":[
+
+       ],
+       "groups":[
+
+       ],
+       "friends":[
+
+       ],
+       "commentsByFriends":[
+
+       ],
+       "messages":[
+
+       ],
+       "joined":1645808440382,
+       "location":"Sofia, Bulgaria"
+    },
+    {
+       "id":"6c3c950b-d7e9-46de-93e4-35f0b5663654",
+       "email":"peppa@pig.com",
+       "password":"peppa",
+       "avatar":"https://pbs.twimg.com/profile_images/737786856150990848/MlwDGKIE_400x400.jpg",
+       "details":{
+          "birthday":null,
+          "names":{
+             "first":"Peppa",
+             "middle":null,
+             "last":"Pig"
+          },
+          "age":null,
+          "gender":null,
+          "country":null,
+          "website":null
+       },
+       "favouriteGenres":[
+          17,
+          15,
+          7
+       ],
+       "ratedBooks":[
+
+       ],
+       "savedQuotes":[
+
+       ],
+       "groups":[
+
+       ],
+       "friends":[
+
+       ],
+       "commentsByFriends":[
+
+       ],
+       "messages":[
+
+       ],
+       "joined":1645806440544,
+       "location":"England"
+    },
+    {
+       "id":"2122cbe6-e298-4aaa-914b-cad9a9a47d51",
+       "email":"kermit@frog.com",
+       "password":"kermit",
+       "avatar":"https://pbs.twimg.com/profile_images/614617043120226305/vk_Sl22e_400x400.jpg",
+       "details":{
+          "birthday":null,
+          "names":{
+             "first":"Kermit",
+             "middle":"the",
+             "last":"Frog"
+          },
+          "age":null,
+          "gender":null,
+          "country":null,
+          "website":null
+       },
+       "favouriteGenres":[
+          5,
+          4,
+          13
+       ],
+       "ratedBooks":[
+
+       ],
+       "savedQuotes":[
+
+       ],
+       "groups":[
+
+       ],
+       "friends":[
+
+       ],
+       "commentsByFriends":[
+
+       ],
+       "messages":[
+
+       ],
+       "joined":1645726440624,
+       "location":"Hollywood, Florida"
+    },
+    {
+       "id":"56f25830-a99a-42c9-8e7d-0ba3530e6808",
+       "email":"spiderman@spider.com",
+       "password":"spiderman",
+       "avatar":"https://i.pinimg.com/474x/c2/4b/93/c24b93d9ca0b94291368cacded0d73f1.jpg",
+       "details":{
+          "birthday":null,
+          "names":{
+             "first":"Peter",
+             "middle":null,
+             "last":"Parker"
+          },
+          "age":null,
+          "gender":null,
+          "country":null,
+          "website":null
+       },
+       "favouriteGenres":[
+          2,
+          8,
+          11
+       ],
+       "ratedBooks":[
+
+       ],
+       "savedQuotes":[
+
+       ],
+       "groups":[
+
+       ],
+       "friends":[
+
+       ],
+       "commentsByFriends":[
+
+       ],
+       "messages":[
+
+       ],
+       "joined":1645726436245,
+       "location":"New York, New York"
+    },
+    {
+       "id":"b673f58e-63dd-4ad6-be55-a3e30e832b14",
+       "email":"mike@wazowski.com",
+       "password":"mike",
+       "avatar":"https://i.pinimg.com/originals/65/48/14/654814aec020fc1625f8d10e8f7f9d7c.png",
+       "details":{
+          "birthday":null,
+          "names":{
+             "first":"Mike",
+             "middle":null,
+             "last":"Wazowski"
+          },
+          "age":null,
+          "gender":null,
+          "country":null,
+          "website":null
+       },
+       "favouriteGenres":[
+          3,
+          14,
+          19
+       ],
+       "ratedBooks":[
+
+       ],
+       "savedQuotes":[
+
+       ],
+       "groups":[
+
+       ],
+       "friends":[
+
+       ],
+       "commentsByFriends":[
+
+       ],
+       "messages":[
+
+       ],
+       "joined":1645726426042,
+       "location":"Monstropolis"
+    }
+ ]

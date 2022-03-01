@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.css": "/Catreads/static/css/main.ed2180ae.css",
+    "main.js": "/Catreads/static/js/main.7d49d553.js",
+    "static/media/landing-discover.png": "/Catreads/static/media/landing-discover.b16d6637147bdac3308e.png",
+    "static/media/landing-page-hero-image.png": "/Catreads/static/media/landing-page-hero-image.682ac7558883659b2b00.png",
+    "static/media/merriweather-italic.woff2": "/Catreads/static/media/merriweather-italic.edbfb3187021695cd543.woff2",
+    "static/media/merriweather-bold.woff2": "/Catreads/static/media/merriweather-bold.c7573c1430c9b7fea2ac.woff2",
+    "static/media/LatoLatin-Italic.woff2": "/Catreads/static/media/LatoLatin-Italic.1bc6c436a84acdf2b502.woff2",
+    "static/media/merriweather-regular.woff2": "/Catreads/static/media/merriweather-regular.2cd2a17c3287918b6d3e.woff2",
+    "static/media/LatoLatin-Bold.woff2": "/Catreads/static/media/LatoLatin-Bold.b4fe4204d19d86376b18.woff2",
+    "static/media/LatoLatin-Regular.woff2": "/Catreads/static/media/LatoLatin-Regular.f42ffe0a26eed80e72e2.woff2",
+    "static/media/goodreads_logo.svg": "/Catreads/static/media/goodreads_logo.1f08bf79bfb9eb64ae017e43f57f2509.svg",
+    "static/media/amazon_logo.svg": "/Catreads/static/media/amazon_logo.2f80fda68f8ddea5455c.svg",
+    "static/media/facebook_logo.svg": "/Catreads/static/media/facebook_logo.da9809742727f561a234.svg",
+    "static/media/google_logo.svg": "/Catreads/static/media/google_logo.1cb403a4e9d9ac4bc39c.svg",
+    "static/media/icon_settings.svg": "/Catreads/static/media/icon_settings.7edde4165330c5d27b5d95e16a485006.svg",
+    "static/media/apple_logo.svg": "/Catreads/static/media/apple_logo.d86ddd663df76124c704.svg",
+    "index.html": "/Catreads/index.html",
+    "static/media/icn_nav_search.svg": "/Catreads/static/media/icn_nav_search.aef30d93c9a2b5b66c760fd8afc84352.svg",
+    "static/media/icon_caret_right.svg": "/Catreads/static/media/icon_caret_right.9ba069de78fbbfe3ed7b5f1c062822de.svg",
+    "main.ed2180ae.css.map": "/Catreads/static/css/main.ed2180ae.css.map",
+    "main.7d49d553.js.map": "/Catreads/static/js/main.7d49d553.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ed2180ae.css",
+    "static/js/main.7d49d553.js"
+  ]
+}
