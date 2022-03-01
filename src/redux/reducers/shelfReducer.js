@@ -83,8 +83,9 @@ export const shelfReducer = (state = INITIAL_STATE, action) => {
 
         case CLEAR_SHELVES:
             return {
+                ...state,
                 ...INITIAL_STATE
-            }
+            };
         default: return state;
     }
 };

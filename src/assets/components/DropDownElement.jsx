@@ -45,7 +45,8 @@ export default function BoxFlex(props) {
         let newUsers = allUsers.map(someUser => {
             let newUser = someUser;
             if(someUser.id === user.id){
-                newUser ={...someUser, ...user, shelves: shelves};
+                let {logged, id, name, ...restUser} = user;
+                newUser ={...someUser, ...restUser, shelves: shelves, details: {...someUser.details, names: {...name}}};
             }
             return newUser;
         })
