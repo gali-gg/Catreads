@@ -47,12 +47,25 @@ const img = {
 export default function Previews(props) {
     const dispatch = useDispatch()
     const [files, setFiles] = useState([]);
+    const [imageSource, setImageSource] = useState(null);
     const { getRootProps, getInputProps } = useDropzone({
         accept: 'image/*',
         onDrop: acceptedFiles => {
             setFiles(acceptedFiles.map(file => Object.assign(file, {
                 preview: URL.createObjectURL(file)
             })));
+
+            let formData = new FormData();
+            formData.append("file", acceptedFiles[0]);
+            formData.append("upload_preset", "goodreads_images");
+
+            fetch(`https://api.cloudinary.com/v1_1/dsjpepzqk/image/upload`, {
+                method: "POST",
+                body: formData
+            })
+            .then(resp => resp.json())
+            .then(data => setImageSource(data.secure_url));
+
         }
     });
 
@@ -62,15 +75,17 @@ export default function Previews(props) {
                 <img
                     src={URL.createObjectURL(file)}
                     style={img}
+                    alt="thumbnail"
                 />
             </div>
         </div>
     ));
 
     useEffect(() => {
-        if (files.length > 0 && props.isSubmit) {
-            dispatch(changeAvatarAction(URL.createObjectURL(files[0])));
+        if (imageSource) {
+            dispatch(changeAvatarAction(imageSource));
         }
+        setImageSource(null);
         // Make sure to revoke the data uris to avoid memory leaks
         files.forEach(file => URL.revokeObjectURL(file.preview));
     }, [files, props.isSubmit]);

@@ -54,7 +54,7 @@ export default function MyBooksPage () {
     const [ascending, setAscending] = useState(false);
     const [userShelfSelected, setUserShelfSelected] = useState(false);
     const [addShelfOpen, setAddShelfOpen] = useState(false);
-    const [shelfName, setShelfName] = useState("All");
+    const [shelfName, setShelfName] = useState("all");
     const [listBooks, setListBooks] = useState(allBooks);
     const [isSearching, setIsSearching] = useState(false);
 

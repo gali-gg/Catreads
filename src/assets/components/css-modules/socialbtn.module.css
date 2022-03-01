@@ -22,17 +22,17 @@
 }
 
 .appleIcon{
-    width: 31px;
-    height: 31px;
+    width: 21px;
+    height: 21px;
     background-image: url("../../images/apple_logo.svg");
-    background-size: contain;
+    background-position: center;
 }
 
 .googleIcon {
-    width: 24px;
-    height: 24px;
+    width: 21px;
+    height: 21px;
     background-image: url("../../images/google_logo.svg");
-    background-size: contain;
+    background-position: center;
 }
 
 .amazonIcon {
