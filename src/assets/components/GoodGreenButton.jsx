@@ -86,7 +86,7 @@ export default function GoodGreenButton(props) {
 
         setChoosenName(shelfName);
 
-    }, [shelves, userShelves, props.bookUuid]);
+    }, [shelves, userShelves, props.bookUuid, shelvesNames]);
 
     const handleChange = (event) => {
         let choosenShelf = event.target.value;

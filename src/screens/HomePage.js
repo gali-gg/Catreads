@@ -15,6 +15,7 @@ import { addBookToShelf } from '../redux/actions/shelfAction';
 import SideMenuImagesMosaic from '../assets/components/SideMenuImagesMosaic';
 import { PostsLayout } from '../assets/components/PostsLayout';
 import { addBookToShelfActivity } from '../redux/actions/activitiesAction';
+import _ from "lodash";
 
 const useStyles = makeStyles({
     main: {
@@ -36,7 +37,7 @@ const useStyles = makeStyles({
 
 export default function HomePage() {
     const dispatch = useDispatch();
-    const shelves = useSelector(state => state.shelves);
+    const shelves = useSelector(state => state.shelves, _.isEqual);
     let allBooks = useSelector(state => state.books.books);
 
     let shelvesStatus = [];
@@ -60,20 +61,14 @@ export default function HomePage() {
     };
 
     const chooseBook = () => {
-        if (allBooks.length > 0) {
-            let book = allBooks[Math.ceil(Math.random() * allBooks.length - 1)];
-            if (shelves.wantToRead.books.some(readBook => readBook === book.uuid)) {
-                if (numBooks === allBooks.length) {
-                    return;
-                }
-                return chooseBook();
-            }
-            setNumBooks(numBooks + 1);
-            return book;
-        }
+        let notWantBooks = allBooks.filter(book => {
+            return !shelves.wantToRead.books.some(someBook => someBook === book.uuid)
+        });
+        let book = notWantBooks[Math.ceil(Math.random() * notWantBooks.length - 1)];
+        return book;
     };
+    
     const [book, setBook] = useState(null);
-    const [numBooks, setNumBooks] = useState(0);
 
     useEffect(() => {
         setBook(chooseBook())
