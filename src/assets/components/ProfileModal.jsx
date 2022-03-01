@@ -18,17 +18,17 @@ const useStyles = makeStyles({
         borderRadius: "3px",
         padding: "5px"
     },
-    error:{
+    error: {
         color: "red",
     },
-    button:{
+    button: {
         border: "1px solid #D6D0C4",
         background: "#F4F1EA",
         padding: "5px 20px",
         color: "#333",
         borderRadius: "3px",
         textTransform: "none",
-        "&:hover":{
+        "&:hover": {
             background: "#ede6d6",
             cursor: "pointer"
         }
@@ -41,14 +41,15 @@ export default function ProfileModal(props) {
 
     const dispatch = useDispatch();
     const [firstName, setFirstName] = React.useState(userName.first);
-    const [middleName, setMiddleName] = React.useState(userName.middle);
-    const [lastName, setLastName] = React.useState(userName.last);
+    const [middleName, setMiddleName] = React.useState(userName.middle || undefined);
+    const [lastName, setLastName] = React.useState(userName.last || undefined);
+    const [aboutMe, setAboutMe] = React.useState(null);
     const [isNameErrorShow, setIsNameErrorShow] = React.useState(false);
     const [errorMessage, setErrorMessage] = React.useState(null);
     const [isSubmit, setIsSubmit] = React.useState(false);
-    
+
     const submitForm = () => {
-        if(firstName){
+        if (firstName) {
             if (firstName.length > 2) {
                 setIsNameErrorShow(false);
                 setIsSubmit(true);
@@ -58,7 +59,7 @@ export default function ProfileModal(props) {
                 setErrorMessage("First name shoud be at least 3 characters!");
                 setIsNameErrorShow(true);
             }
-        }else{
+        } else {
             setErrorMessage("First name is required field!");
             setIsNameErrorShow(true);
         }
@@ -104,7 +105,7 @@ export default function ProfileModal(props) {
                     <DropPreview isSubmit={isSubmit}></DropPreview>
                 </Stack>
             </DialogContent>
-            <DialogActions sx={{margin:"auto"}}>
+            <DialogActions sx={{ margin: "auto" }}>
                 <Button className={`${classes.button} latoR`} onClick={props.onClose} disableRipple>Cancel</Button>
                 <Button className={`${classes.button} latoR`} onClick={submitForm} disableRipple>Submit</Button>
             </DialogActions>

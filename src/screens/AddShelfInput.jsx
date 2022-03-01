@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { addShelfActivity } from "../redux/actions/activitiesAction";
 import { addShelf } from "../redux/actions/shelfAction";
 
 export default function AddShelfInput (props) {
@@ -16,6 +17,7 @@ export default function AddShelfInput (props) {
         let shelfName = inputValue.trim()
         if(shelfName){
             dispatch(addShelf(shelfName));
+            dispatch(addShelfActivity(shelfName));
             setInputValue("");
         }
     }

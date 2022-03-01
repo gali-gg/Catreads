@@ -1,4 +1,4 @@
-import { Divider, Paper} from "@mui/material";
+import { Divider, Paper } from "@mui/material";
 import Modal from "@mui/material/Modal";
 import { useEffect, useState } from "react";
 import GoodButton from "./GoodButton";
@@ -9,8 +9,9 @@ import x from "../images/X.png";
 import { useDispatch, useSelector } from "react-redux";
 import { addBookToShelf } from "../../redux/actions/shelfAction";
 import { addReviewAction } from "../../redux/actions/reviewsActions";
-import {v4 as uuidv4} from "uuid";
+import { v4 as uuidv4 } from "uuid";
 import GoodGreenButton from "./GoodGreenButton";
+import { addBookToShelfActivity, addRatingActivity, addReviewActivity } from "../../redux/actions/activitiesAction";
 
 const paperStyle = {
   position: "absolute",
@@ -39,9 +40,9 @@ const sectionStyle = {
 };
 
 const dFlex = {
-    display: "flex",
-    gap: "5px",
-    alignItems: "center"
+  display: "flex",
+  gap: "5px",
+  alignItems: "center"
 };
 
 export default function BookReviewModal(props) {
@@ -50,15 +51,15 @@ export default function BookReviewModal(props) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
-      setRating(0);
-      setOpen(false);
-    };
+    setRating(0);
+    setOpen(false);
+  };
 
   let initialRating = props.rating ?? 0;
 
-    useEffect(() => {
-      setRating(props.rating);
-    }, [props.rating])
+  useEffect(() => {
+    setRating(props.rating);
+  }, [props.rating])
 
   const [rating, setRating] = useState(initialRating);
   const handleClearRating = () => {
@@ -69,11 +70,11 @@ export default function BookReviewModal(props) {
     setRating(ratingValue);
   }
 
-  const[shelfName, setShelfName] = useState("");
+  const [shelfName, setShelfName] = useState("");
   const handleSelectShelf = (e) => {
     let name = e.target.value;
     setShelfName(name);
-}
+  }
 
   const [reviewBody, setReviewBody] = useState("");
   const handleReviewBodyInput = (e) => {
@@ -81,10 +82,16 @@ export default function BookReviewModal(props) {
   }
 
   const handlePostReview = () => {
-    if(shelfName){
+    if (shelfName) {
       dispatch(addBookToShelf(false, shelfName, props.book));
+      dispatch(addBookToShelfActivity(shelfName, props.book));
     }
     dispatch(addReviewAction(uuidv4(), userID, props.book.uuid, rating, reviewBody));
+    dispatch(addRatingActivity(rating, userID, props.book.uuid));
+
+    if (reviewBody.length > 0) {
+      dispatch(addReviewActivity(reviewBody, userID, props.book.uuid));
+    }
     handleClose();
   }
 
@@ -130,11 +137,11 @@ export default function BookReviewModal(props) {
             </div>
             <Divider></Divider>
             <div style={sectionStyle}>
-              <div style={{...dFlex, marginBottom: "10px"}}>
+              <div style={{ ...dFlex, marginBottom: "10px" }}>
                 My rating:
                 <GoodRating size="small" rating={rating} onRating={handleChangeRating}></GoodRating>
                 {/* <Rating></Rating> */}
-                <span className="grGrey f-08 latoR" style={{cursor: "pointer"}} onClick={handleClearRating}>Clear</span>
+                <span className="grGrey f-08 latoR" style={{ cursor: "pointer" }} onClick={handleClearRating}>Clear</span>
               </div>
 
               <div style={dFlex}>

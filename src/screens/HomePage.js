@@ -14,6 +14,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { addBookToShelf } from '../redux/actions/shelfAction';
 import SideMenuImagesMosaic from '../assets/components/SideMenuImagesMosaic';
 import { PostsLayout } from '../assets/components/PostsLayout';
+import { addBookToShelfActivity } from '../redux/actions/activitiesAction';
 
 const useStyles = makeStyles({
     main: {
@@ -42,6 +43,8 @@ export default function HomePage() {
 
     const handleAddBookToShelfWantToRead = (book) => {
         dispatch(addBookToShelf(false, "Want to Read", book.uuid));
+        dispatch(addBookToShelfActivity("Want to Read", book.uuid));
+
         setBook(chooseBook());
     };
 

@@ -8,6 +8,7 @@ import { reviewsReducer } from './reducers/reviewsReducer';
 import { allGenresReducer } from './reducers/allGenresReducer';
 import { allAuthorsReducer } from './reducers/allAuthorsReducer';
 import { allBooksReducer } from './reducers/allBooksReducer';
+import { activitiesReducer } from './reducers/activitiesReducer';
 
 const rootReducer = combineReducers({
     userData : userReducer,
@@ -16,7 +17,8 @@ const rootReducer = combineReducers({
     reviews: reviewsReducer,
     genres: allGenresReducer,
     authors: allAuthorsReducer,
-    books: allBooksReducer
+    books: allBooksReducer,
+    activities: activitiesReducer
 });
 
 const store = createStore(
