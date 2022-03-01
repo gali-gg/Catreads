@@ -98,13 +98,6 @@ export default function ProfilePage() {
     }
   }
 
-  /*const handleReviewsClick = () => {
-    if (activities) {
-      let uniqReviewsActivities = [...activities.reviewsActivity.map(someActivity => someActivity)];
-      setAllActivities(_.uniqBy(uniqReviewsActivities, "uuid").sort((e1, e2) => e2.date - e1.date));
-    }
-  }*/
-
   const handleAllClick = () => {
     if (activities) {
       loadAllHistory()
