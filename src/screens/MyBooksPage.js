@@ -233,7 +233,7 @@ export default function MyBooksPage () {
 
                     <li><GoodLink size={fontSize} titleText="Add books" classes="latoB grBrown"></GoodLink></li>
 
-                    <li><GoodLink size={fontSize} to="/recommendations" titleText="Recommendations" classes="latoR grGreen"></GoodLink></li>
+                    <li><GoodLink size={fontSize} titleText="Recommendations" classes="latoR grGreen"></GoodLink></li>
                     <li><GoodLink size={fontSize} titleText="Explore" classes="latoR grGreen"></GoodLink></li>
 
                     <li><GoodLink size={fontSize} titleText="Tools" classes="latoB grBrown"></GoodLink></li>
