@@ -195,8 +195,16 @@ export default function MyBooksPage () {
                         <option value="rating">Average rating</option>
                         <option value="userRating">My rating</option>
                     </select>
-                    <GoodLink titleText="▲" titleInfo="Sort ascending" classes={`latoR f-1 ${ascending ? "grBrown" : "grLight"}`} onClick={handlePickAscending}></GoodLink>
-                    <GoodLink titleText="▼" titleInfo="Sort descending" classes={`latoR f-1 ${ascending ? "grLight" : "grBrown"}`} onClick={handlePickDescending}></GoodLink>
+
+                    <GoodLink titleText="▲"
+                    titleInfo="Sort ascending"
+                    classes={`latoR f-1 ${ascending ? "grBrown" : "grLight"}`}
+                    onClick={handlePickAscending}/>
+
+                    <GoodLink titleText="▼"
+                    titleInfo="Sort descending"
+                    classes={`latoR f-1 ${ascending ? "grLight" : "grBrown"}`}
+                    onClick={handlePickDescending}/>
 
                     <div className={styles.searchBox}>
                     <input className={styles.searchInput} type="search" placeholder="Search books" onInput={handleSearch}/>
@@ -211,19 +219,65 @@ export default function MyBooksPage () {
             <hr></hr>
             <div className={styles.mainContent}>
                 <ul className={styles.sideList}>
-                    <li><GoodLink size={fontSize} titleText="Bookshelves" classes="latoB grBrown"></GoodLink></li>
-                    <li><GoodLink size={fontSize} titleText={`All (${allBooks.length})`} classes={`latoR ${isSelected.all ? "grGrey" : "grGreen"}`} id="all" onClick={handleDisplayShelf}></GoodLink></li>
-                    <li><GoodLink size={fontSize} titleText={`Read (${shelves.read.books.length})`} classes={`latoR ${isSelected.read ? "grGrey" : "grGreen"}`} id="read" onClick={handleDisplayShelf}></GoodLink></li>
-                    <li><GoodLink size={fontSize} titleText={`Currently Reading (${shelves.currentlyReading.books.length})`} classes={`latoR ${isSelected.currentlyReading ? "grGrey" : "grGreen"}`} id="currentlyReading" onClick={handleDisplayShelf}></GoodLink></li>
-                    <li><GoodLink size={fontSize} titleText={`Want to Read (${shelves.wantToRead.books.length})`} classes={`latoR ${isSelected.wantToRead ? "grGrey" : "grGreen"}`} id="wantToRead" onClick={handleDisplayShelf}></GoodLink></li>
+                    <li>
+                        <GoodLink size={fontSize}
+                            titleText="Bookshelves"
+                            classes="latoB grBrown"
+                        />
+                    </li>
+                    <li>
+                        <GoodLink size={fontSize}
+                            titleText={`All (${allBooks.length})`}
+                            classes={`latoR ${isSelected.all ? "grGrey" : "grGreen"}`}
+                            id="all"
+                            onClick={handleDisplayShelf}
+                        />
+                    </li>
+                    <li>
+                        <GoodLink size={fontSize}
+                            titleText={`Read (${shelves.read.books.length})`}
+                            classes={`latoR ${isSelected.read ? "grGrey" : "grGreen"}`}
+                            id="read" onClick={handleDisplayShelf}
+                        />
+                    </li>
+                    <li>
+                        <GoodLink
+                            size={fontSize}
+                            titleText={`Currently Reading (${shelves.currentlyReading.books.length})`}
+                            classes={`latoR ${isSelected.currentlyReading ? "grGrey" : "grGreen"}`} id="currentlyReading"
+                            onClick={handleDisplayShelf}
+                        />
+                    </li>
+                    <li>
+                        <GoodLink size={fontSize}
+                            titleText={`Want to Read (${shelves.wantToRead.books.length})`}
+                            classes={`latoR ${isSelected.wantToRead ? "grGrey" : "grGreen"}`}
+                            id="wantToRead"
+                            onClick={handleDisplayShelf}
+                        />
+                    </li>
 
                     {userShelves.length > 0 && <><hr></hr>
-                           { userShelves.map(shelf => <div key={shelf.name}><GoodLink titleText={`${shelf.name} (${shelf.books.length})`} classes={`latoR f-1 ${shelfName === shelf.name ? "grGrey" : "grGreen"}`} id={shelf.name} onClick={handleDisplayShelf}></GoodLink><br></br></div>)}</>
+                           { userShelves.map(shelf => <div key={shelf.name}>
+                               <GoodLink titleText={`${shelf.name} (${shelf.books.length})`}
+                               classes={`latoR f-1 ${shelfName === shelf.name ? "grGrey" : "grGreen"}`}
+                               id={shelf.name}
+                               onClick={handleDisplayShelf}/>
+                               <br/>
+                            </div>)}
+                            </>
                     }
                     <hr></hr>
-                    <GoodButton title="Add shelf" padding="5px 15px" fontSize="12px" style={{height: "30px"}} onClick={handleAddShelfClick}></GoodButton>
+                    <GoodButton
+                        title="Add shelf"
+                        padding="5px 15px"
+                        fontSize="12px"
+                        style={{height: "30px"}}
+                        onClick={handleAddShelfClick}
+                    />
                     {addShelfOpen && <AddShelfInput/>}
                     <hr></hr>
+
                     <li><GoodLink size={fontSize} titleText="Your reading activity" classes="latoB grBrown"></GoodLink></li>
                     <li><GoodLink size={fontSize} titleText="Review Drafts" classes="latoR grGreen"></GoodLink></li>
                     <li><GoodLink size={fontSize} titleText="Kindle Notes & Highlights" classes="latoR grGreen"></GoodLink></li>
@@ -242,7 +296,11 @@ export default function MyBooksPage () {
                     <li><GoodLink size={fontSize} titleText="Widgets" classes="latoR grGreen"></GoodLink></li>
                     <li><GoodLink size={fontSize} titleText="Import and export" classes="latoR grGreen"></GoodLink></li>
                 </ul>
-                <MyBooksTable books={isSearching ? sortBooks(listBooks, sortBy, ascending) : sortBooks(getSelectedBooks(isSelected), sortBy, ascending)} shelfName={shelfName} isUserShelf={userShelfSelected}></MyBooksTable>
+                <MyBooksTable
+                    books={isSearching ? sortBooks(listBooks, sortBy, ascending) : sortBooks(getSelectedBooks(isSelected), sortBy, ascending)}
+                    shelfName={shelfName}
+                    isUserShelf={userShelfSelected}
+                />
                 </div>
                 </Container>
     )
