@@ -7,7 +7,7 @@ import Title from "./Title";
 const useStyles = makeStyles({
     title: {
         textTransform: "uppercase",
-        "&:hover":{
+        "&:hover": {
             textDecoration: "underline",
             cursor: "pointer"
         }
@@ -15,23 +15,23 @@ const useStyles = makeStyles({
     divider: {
         margin: "5px 0 5px 0",
     }
-  });
+});
 
-export default function GenreTitle(props){
+export default function GenreTitle(props) {
     const classes = useStyles();
 
-    return(
+    return (
         <>
-            <Stack 
-                direction="row" 
+            <Stack
+                direction="row"
                 justifyContent="flex-start"
-                alignItems="center" 
+                alignItems="center"
                 spacing={props.together ? 1 : 16}
             >
-                <Title title={props.title} className={`${classes.title} latoB f-08 grBrown`} onClick={props.onClick}/>
-                {props.link && <GoodLink classes="latoR grGrey f-08" titleText={props.link} to={props.to || ""}/>}
+                <Title title={props.title} className={`${classes.title} latoB f-08 grBrown`} onClick={props.onClick} />
+                {props.link && <GoodLink classes="latoR grGrey f-08" titleText={props.link} to={props.to || ""} />}
             </Stack>
-            <Divider className={classes.divider}/>
+            <Divider className={classes.divider} />
         </>
     )
 }

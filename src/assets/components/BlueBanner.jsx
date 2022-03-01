@@ -1,17 +1,22 @@
 import blueBanner from "../images/blue-banner.jpg";
 import Stack from '@mui/material/Stack';
+import { makeStyles } from '@mui/styles';
 
 
-export default function BlueBanner(){
+const useStyles = makeStyles({
+    banner: {
+        background: "#B7BFFD",
+        justifyContent:"center",
+        alignItems:"center"
+    }
+});
+
+export default function BlueBanner() {
+    const classes = useStyles();
+
     return (
-        <Stack 
-            justifyContent="center" 
-            alignItems="center" 
-            sx={{
-                bgcolor:"#B7BFFD", 
-                cursor:"pointer"
-            }}>
-                <img height={40} src={blueBanner} alt="blue-banner" />
+        <Stack className={classes.banner}>
+            <img height={40} src={blueBanner} alt="blue-banner" />
         </Stack>
     )
 }

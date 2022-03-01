@@ -61,7 +61,7 @@ export default function SideMenuImagesMosaic(props){
                 titleText={props.href}
                 to={props.to}
             />
-            <Divider></Divider>
+            <Divider />
         </>
     )
 }

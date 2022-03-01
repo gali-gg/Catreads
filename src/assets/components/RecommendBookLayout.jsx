@@ -2,7 +2,7 @@ import Stack from '@mui/material/Stack';
 import "./css/styles.css";
 import GoodLink from './GoodLink';
 import { makeStyles } from '@mui/styles';
-import { Button, Divider, Rating } from '@mui/material';
+import { Divider, Rating } from '@mui/material';
 import IconCaretRight from "../images/icon_caret_right.svg";
 import Title from './Title';
 import { useNavigate } from 'react-router-dom';
@@ -14,6 +14,7 @@ import { getRatingsStats } from '../../utility';
 const useStyles = makeStyles({
     title: {
         textTransform: "uppercase",
+        marginBottom: "15px"
     },
     container: {
         display: "flex",
@@ -22,7 +23,7 @@ const useStyles = makeStyles({
         alignItems: "flex-start",
     },
     button: {
-        padding:"8px 5px",
+        padding: "8px 5px",
         border: "none",
         borderRadius: "3px",
         background: "#409D69",
@@ -47,9 +48,9 @@ const useStyles = makeStyles({
         fontSize: "0.8em",
         color: "grey"
     },
-    cover:{
+    cover: {
         width: "100px",
-        "&:hover":{
+        "&:hover": {
             cursor: "pointer"
         }
     }
@@ -63,20 +64,20 @@ export default function RecommendBookLayout(props) {
     let bookRating = getRatingsStats(props.book.uuid);
 
     useEffect(() => {
-       if(authors.length > 0){
-        setAuthor(authors.filter(author => author.uuid === props.book.author)[0].name);
-       }
+        if (authors.length > 0) {
+            setAuthor(authors.filter(author => author.uuid === props.book.author)[0].name);
+        }
     }, [authors, props.book.author]);
 
     return (
         <>
-            <Title title={props.title} className={`${classes.title} latoB grBrown f-09`}></Title>
-            <p></p>
+            <Title title={props.title} className={`${classes.title} latoB grBrown f-09`} />
             <Stack direction="row" spacing={2}>
                 <img
                     title={props.book.title}
                     onClick={() => navigate(`/books/${props.book.uuid}`)}
-                    src={props.book.cover} alt={`${props.book.title}-img`}
+                    src={props.book.cover}
+                    alt={`${props.book.title}-img`}
                     className={classes.cover}
                 />
                 <Stack direction="row">
@@ -94,7 +95,8 @@ export default function RecommendBookLayout(props) {
                     </div>
                     <img
                         onClick={props.handleNewBook}
-                        width="15px" src={IconCaretRight}
+                        width="15px"
+                        src={IconCaretRight}
                         alt="icon-right"
                         style={{ cursor: "pointer" }}
                     />
@@ -104,7 +106,7 @@ export default function RecommendBookLayout(props) {
                 {props.book.description.substring(0, 150)}
                 ...<GoodLink titleText="Continue Reading" to={`/books/${props.book.uuid}`} classes="grGreen latoR f-09" />
             </p>
-            <Divider sx={{ p: "5px 0" }} />
+            <Divider />
         </>
     );
 }

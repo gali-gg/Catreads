@@ -7,7 +7,7 @@ import "./css/styles.css";
 const useStyles = makeStyles({
     link: {
         textDecoration: 'inherit',
-        color : "inherit",
+        color: "inherit",
         textTransform: "none",
         cursor: "pointer"
     },
@@ -16,14 +16,12 @@ const useStyles = makeStyles({
     }
 });
 
-
-//props.href-> classes.disabled
-export default function StyledRouterLink(props){
+export default function StyledRouterLink(props) {
     const classes = useStyles();
 
-    return(
+    return (
         <Link
-            className={`${props.className } latoR ${(props.href ? classes.link : classes.disabled)} `}
+            className={`${props.className} latoR ${(props.href ? classes.link : classes.disabled)} `}
             to={props.href || "#"} onClick={props.onClick}
         >
             {props.title}

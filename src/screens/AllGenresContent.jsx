@@ -64,7 +64,7 @@ export default function AllGenresContent(props) {
         setGenresResults(newGenresResults);
     }, 500);
 
-   
+
 
     if (props.sideMenu) {
         return (
@@ -105,7 +105,7 @@ export default function AllGenresContent(props) {
                     <button className={`${classes.button} latoR f-09 grBrown`}>Find Genre</button>
                 </Stack>
 
-                    <GenreContainer navigate={true} genres={genres}/>
+                <GenreContainer navigate={true} genres={genres} />
             </Stack>
         )
     }

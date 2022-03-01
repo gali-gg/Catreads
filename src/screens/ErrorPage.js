@@ -3,13 +3,13 @@ import "../assets/components/css/styles.css";
 import { makeStyles } from '@mui/styles';
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {errorQuotes} from "../data/errorQuotes";
+import { errorQuotes } from "../data/errorQuotes";
 
 
 const useStyles = makeStyles({
-  mainContainer:{
+  mainContainer: {
     minHeight: "100vh",
-    padding:"30px 0",
+    padding: "30px 0",
   },
   button: {
     border: "1px solid #D6D0C4",
@@ -45,22 +45,22 @@ export default function ErrorPage() {
   let chance = Math.floor(Math.random() * errorQuotes.length);
   const [error, setError] = useState(null);
   useEffect(() => setError(errorQuotes[chance]), []);
-  
+
   return error &&
     <Container maxWidth="md" className={classes.mainContainer}>
-      <Stack direction="row"  justifyContent="center" sx={{ height:"80vh"}} alignItems="center" spacing={10}>
-        <Stack justifyContent="center" width="350px" alignItems="center"  spacing={2}>
+      <Stack direction="row" justifyContent="center" sx={{ height: "80vh" }} alignItems="center" spacing={10}>
+        <Stack justifyContent="center" width="350px" alignItems="center" spacing={2}>
           <span className="latoR grBrown f-1" key={error.title}>
             {error.title}
           </span>
           <span className="meriR grGrey f-09">
-            {error.body.split("\n").map(text => <span key={text}>{text}<br/></span>)}
+            {error.body.split("\n").map(text => <span key={text}>{text}<br /></span>)}
           </span>
           <span className="meriR grGrey f-09">
             — {error.author}, <em>{error.book}</em>
           </span>
-          <button 
-            className={`${classes.button} latoR f-1`} 
+          <button
+            className={`${classes.button} latoR f-1`}
             onClick={() => navigate(`/`)}
           >
             Back to Goodreads homepage

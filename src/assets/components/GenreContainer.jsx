@@ -6,7 +6,6 @@ import GenreTitle from "./GenreTitle";
 import GoodBookCover from "./GoodBookCover";
 import "./css/styles.css";
 import { useSelector } from "react-redux";
-import _ from "lodash";
 
 
 const useStyles = makeStyles({
@@ -24,7 +23,7 @@ export const GenreContainer = React.memo((props) => {
     const classes = useStyles();
     const navigate = useNavigate();
     const allBooks = useSelector(state => state.books.books);
-    
+
 
     function genreBooks(genre) {
         let genreBooksData = allBooks.filter(book => {

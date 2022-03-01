@@ -32,6 +32,10 @@ const useStyles = makeStyles({
             background: "#ede6d6",
             cursor: "pointer"
         }
+    },
+    inputsContainer:{
+        padding: "10px 0",
+        width: "200px"
     }
 });
 
@@ -43,7 +47,6 @@ export default function ProfileModal(props) {
     const [firstName, setFirstName] = React.useState(userName.first);
     const [middleName, setMiddleName] = React.useState(userName.middle || undefined);
     const [lastName, setLastName] = React.useState(userName.last || undefined);
-    const [aboutMe, setAboutMe] = React.useState(null);
     const [isNameErrorShow, setIsNameErrorShow] = React.useState(false);
     const [errorMessage, setErrorMessage] = React.useState(null);
     const [isSubmit, setIsSubmit] = React.useState(false);
@@ -72,7 +75,7 @@ export default function ProfileModal(props) {
                     Change you name
                 </DialogContentText>
                 <Stack direction="row" spacing={4} alignItems="center">
-                    <Stack direction="column" spacing={1} padding="10px 0" wrap="FlexWrap" sx={{ width: "200px" }}>
+                    <Stack direction="column" spacing={1}  flexWrap="wrap" className={classes.inputsContainer} >
                         {isNameErrorShow && <span className={`${classes.error} latoB`}>{errorMessage}</span>}
                         <label className="grGrey latoR f-09">
                             First Name :
@@ -102,7 +105,7 @@ export default function ProfileModal(props) {
                             onChange={(ev) => setLastName(ev.target.value.trim())}
                         ></input>
                     </Stack>
-                    <DropPreview isSubmit={isSubmit}></DropPreview>
+                    <DropPreview isSubmit={isSubmit}/>
                 </Stack>
             </DialogContent>
             <DialogActions sx={{ margin: "auto" }}>

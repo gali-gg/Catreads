@@ -40,7 +40,7 @@ export default function BoxFlex(props) {
     const userActivity = useSelector(state => state.activities);
     const navigate = useNavigate();
 
-    const handleAction = (action) => {
+    const handleAction = () => {
         dispatch(userAction.logoutAction);
         navigate("/");
         let newUsers = allUsers.map(someUser => {
@@ -57,7 +57,7 @@ export default function BoxFlex(props) {
     }
     return (
         <Stack
-            wrap="flexWrap"
+            flexWrap="wrap"
             direction="column"
             sx={{ background: bgColor }}
             spacing={2}
@@ -75,7 +75,7 @@ export default function BoxFlex(props) {
                         <span
                             key={link.title}
                             className={`${classes.link} latoR`}
-                            onClick={() => handleAction(link.action)}
+                            onClick={() => handleAction()}
                         >
                             {link.title}
                         </span>

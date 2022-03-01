@@ -18,7 +18,8 @@ const dropzone = {
     padding: "20px",
     cursor: "pointer",
     borderRadius: "3px"
-}
+};
+
 const thumb = {
     margin: "auto",
     display: 'inline-flex',
@@ -63,8 +64,8 @@ export default function Previews(props) {
                 method: "POST",
                 body: formData
             })
-            .then(resp => resp.json())
-            .then(data => setImageSource(data.secure_url));
+                .then(resp => resp.json())
+                .then(data => setImageSource(data.secure_url));
 
         }
     });
@@ -86,9 +87,8 @@ export default function Previews(props) {
             dispatch(changeAvatarAction(imageSource));
         }
         setImageSource(null);
-        // Make sure to revoke the data uris to avoid memory leaks
         files.forEach(file => URL.revokeObjectURL(file.preview));
-    }, [files, props.isSubmit]);
+    }, [files, props.isSubmit, dispatch, imageSource]);
 
     return (
         <section className="container">

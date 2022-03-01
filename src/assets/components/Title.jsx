@@ -3,7 +3,7 @@ import "./css/styles.css";
 
 const useStyles = makeStyles({
     title: {
-        display : "inline-block",
+        display: "inline-block",
         fontSize: "0.9em",
         textTransform: "uppercase",
         margin: "5px 0",
@@ -13,14 +13,14 @@ const useStyles = makeStyles({
 });
 
 
-export default function Title(props){
+export default function Title(props) {
     const classes = useStyles();
 
     return (
-        <span 
+        <span
             onClick={props.onClick}
-            className={`${props.className || classes.title}`} 
-            style={{color: props.color, fontSize: props.fontSize || "0.9em"}}
+            className={`${props.className || classes.title}`}
+            style={{ color: props.color, fontSize: props.fontSize || "0.9em" }}
         >{props.title}</span>
     );
 }

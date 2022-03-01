@@ -9,14 +9,14 @@ import Title from './Title';
 import { useSelector } from 'react-redux';
 
 const BorderLinearProgress = styled(LinearProgress)(() => ({
-  height: "12px",
-  width: "70px",
-  [`&.${linearProgressClasses.colorPrimary}`]: {
-    backgroundColor: "#D6D0C4",
-  },
-  [`& .${linearProgressClasses.bar}`]: {
-    backgroundColor: "#927F64",
-  },
+    height: "12px",
+    width: "70px",
+    [`&.${linearProgressClasses.colorPrimary}`]: {
+        backgroundColor: "#D6D0C4",
+    },
+    [`& .${linearProgressClasses.bar}`]: {
+        backgroundColor: "#927F64",
+    },
 }));
 
 const ColorButton = styled(Button)(() => ({
@@ -27,14 +27,17 @@ const ColorButton = styled(Button)(() => ({
     textTransform: "none",
     width: "100%",
     '&:hover': {
-      cursor: "pointer",
-      backgroundColor: "#fcd567",
+        cursor: "pointer",
+        backgroundColor: "#fcd567",
     },
-  }));
+}));
 
 const useStyles = makeStyles({
+    mainContainer: {
+        paddingBottom: "10px",
+    },
     container: {
-        padding: "0"
+        padding: "0",
     },
     span: {
         fontSize: "2.3em",
@@ -51,43 +54,43 @@ const useStyles = makeStyles({
         fontSize: "1.1em",
         color: "white"
     },
-    challengeContainer:{
+    challengeContainer: {
         height: "15px",
         width: "70%",
     },
-    bookNumber:{
+    bookNumber: {
         fontSize: "1.6em",
         pading: 0,
         margin: 0
     },
-    status:{
+    status: {
         fontSize: "0.9em",
     },
-    littleText:{
+    littleText: {
         fontSize: "0.8em"
     },
-    statistica:{
+    statistica: {
         color: "white",
         fontSize: "0.9em",
         paddingBottom: "30px"
     }
 });
 
-export default function SideMenuImageEl(props){
+export default function SideMenuImageEl(props) {
     const classes = useStyles();
 
     const shelves = useSelector(state => state.shelves);
     let readBooks = shelves.read.books.length;
-    let percentOfCompletedChallenge = readBooks > 10 ? 100 : Math.ceil(readBooks/10*100);
+    let percentOfCompletedChallenge = readBooks > 10 ? 100 : Math.ceil(readBooks / 10 * 100);
 
     return (
         <>
-            <Title title={props.bigTitle} color="#382110"></Title>
-    
-            <Stack direction={props.direction} spacing={2} sx={{pb:"10px"}}> 
-                <Stack 
-                    direction="column" 
-                    justifyContent="center" 
+            <Title title={props.bigTitle} color="#382110" />
+
+            <Stack direction={props.direction} spacing={2} className={classes.mainContainer}>
+                <Stack
+                    direction="column"
+                    justifyContent="center"
                     alignItems="center"
                     className={classes.container}
                     style={{
@@ -98,64 +101,62 @@ export default function SideMenuImageEl(props){
                     <span className={`${classes.span} latoB`}>
                         {props.title}
                     </span>
-                    <img 
-                        height={props.imgHeight} 
-                        width={props.imgWeight} 
-                        src={props.imgSrc} 
+                    <img
+                        height={props.imgHeight}
+                        width={props.imgWeight}
+                        src={props.imgSrc}
                         alt={`${props.title}-img`}
                     />
                     {props.subTitle && (<span className={`${classes.subSpan} latoB`}>{props.subTitle}</span>)}
-                    
-                    {props.subSubTitle && (
-                    <Stack 
-                        spacing={2}
-                        direction={props.direction}
-                        alignItems="flex-start"
-                        sx={{width:"80%"}}
-                    >
-                        {props.subSubTitle && (
-                            <span className={`${classes.subSubSpan} meriB`}>
-                                {props.subSubTitle}
-                            </span>
-                        )}
-                        <ColorButton className={"latoB"} disableRipple> 
-                            {props.button}
-                        </ColorButton>
 
-                        <span className={`${classes.statistica} latoR`}>
+                    {props.subSubTitle && (
+                        <Stack
+                            spacing={2}
+                            direction={props.direction}
+                            alignItems="flex-start"
+                            sx={{ width: "80%" }}
+                        >
+                            {props.subSubTitle && (
+                                <span className={`${classes.subSubSpan} meriB`}>
+                                    {props.subSubTitle}
+                                </span>
+                            )}
+                            <ColorButton className={"latoB"} disableRipple>
+                                {props.button}
+                            </ColorButton>
+
+                            <span className={`${classes.statistica} latoR`}>
                                 {props.status}
                             </span>
-                    </Stack>
-                )}
+                        </Stack>
+                    )}
 
                 </Stack>
 
                 {props.textStaus && (
                     <Stack>
                         <span className={`${classes.bookNumber} latoB`}>{readBooks}</span>
-                        <GoodLink 
+                        <GoodLink
                             titleText={"books completed"}
                             classes={"grBrown latoR"}
                         />
                         <span className={`${classes.littleText} latoR grGrey`}>{readBooks} book ahead of schedule</span>
-                        <Stack 
+                        <Stack
                             direction="row"
-                            justifyContent="center" 
+                            justifyContent="center"
                             alignItems="center"
                             spacing={1}
                         >
-                            <BorderLinearProgress variant="determinate" value={readBooks*10} />
+                            <BorderLinearProgress variant="determinate" value={readBooks * 10} />
                             <span className={`${classes.status} latoR grBrown`}>{readBooks}/10 ({percentOfCompletedChallenge}%)</span>
                         </Stack>
-                        <GoodLink 
+                        <GoodLink
                             size="0.9em"
                             classes={"grGreen latoR"}
                             titleText="View Challenge"
                         />
                     </Stack>
                 )}
-
-                
             </Stack>
             <Divider />
         </>

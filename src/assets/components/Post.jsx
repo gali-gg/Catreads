@@ -7,6 +7,9 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 const useStyles = makeStyles({
+    mainContainer:{
+        border: "1px solid #ddd",
+    },
     container: {
         borderBottom: "1px solid #ddd",
         background: "white",
@@ -26,9 +29,6 @@ const useStyles = makeStyles({
         left: "-25px",
         border: "1px solid #ddd"
     },
-    link: {
-        paddingLeft: "10px",
-    },
     userAvatar: {
         height: "35px",
         width: "35px",
@@ -41,6 +41,9 @@ const useStyles = makeStyles({
         height: "22px",
         border: "1px solid #ddd",
         borderRadius: "3px"
+    },
+    commentContainer:{
+        padding: "10px"
     }
 });
 
@@ -70,7 +73,7 @@ export default function Post(props) {
     const classes = useStyles();
 
     return author && (
-        <Stack sx={{ border: "1px solid #ddd" }}>
+        <Stack className={classes.mainContainer}>
             <Stack direction="column" className={classes.container} spacing={1}>
                 <img src={author.profileImage} alt={`${props.title}-img`} className={classes.authorImg} />
                 <Stack justifyContent="space-between" direction="row" alignItems="center">
@@ -85,10 +88,10 @@ export default function Post(props) {
                 </Stack>
             </Stack>
             <Stack className={classes.likesContainer} spacing={0}>
-                <GoodLink titleText={likes + " likes"} classes={`${classes.link} grBrown latoR f-09`}></GoodLink>
-                <Divider></Divider>
+                <GoodLink titleText={likes + " likes"} classes={`grBrown latoR f-09`} />
+                <Divider />
                 <Stack
-                    sx={{ p: "10px" }}
+                    className={classes.commentContainer}
                     spacing={1}
                     direction="row"
                     justifyContent="center"

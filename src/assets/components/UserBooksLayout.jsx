@@ -14,9 +14,9 @@ import Moment from "react-moment";
 
 
 const useStyles = makeStyles({
-    container:{
+    container: {
         borderBottom: "1px solid #ddd",
-        padding:"5px 0",
+        padding: "5px 0",
         width: "720px",
     },
     subContainer: {
@@ -46,7 +46,7 @@ const useStyles = makeStyles({
             cursor: "pointer"
         }
     },
-    pointer:{
+    pointer: {
         cursor: "pointer"
     }
 });

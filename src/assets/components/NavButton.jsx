@@ -31,7 +31,7 @@ export default function NavButton(props) {
     return (
         <button className={`${classes.button} latoR`} onClick={props.onClick}>
             {props.children}
-            {props.src && <img className={classes.icon} src={props.src} alt="icons"></img>}
+            {props.src && <img className={classes.icon} src={props.src} alt="icons" />}
         </button>
     );
 }

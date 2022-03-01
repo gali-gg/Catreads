@@ -7,7 +7,7 @@ import serachIcon from "../images/icn_nav_search.svg";
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { makeStyles } from '@mui/styles';
-import {useState} from "react";
+import { useState } from "react";
 
 
 
@@ -41,7 +41,7 @@ export default function CustomInputAutocomplete(props) {
 
   const handleSearchInput = debounce((event) => {
     let searchString = event.target.value.toLowerCase().trim();
-    if(!searchString){
+    if (!searchString) {
       setBookresults([]);
       return;
     }
@@ -99,7 +99,8 @@ export default function CustomInputAutocomplete(props) {
               className="latoB f-1"
               {...params.inputProps}
               onInput={(event) => {
-                handleSearchInput(event)}}
+                handleSearchInput(event)
+              }}
             />
             <img src={serachIcon} className={classes.searchIcon} alt="search-icon" />
           </Stack>

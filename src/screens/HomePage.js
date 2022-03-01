@@ -1,5 +1,5 @@
 import { makeStyles } from '@mui/styles';
-import React, { useState , useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import Stack from '@mui/material/Stack';
 import Container from '@mui/material/Container';
 import SideMenuEl from '../assets/components/SideMenuEl';
@@ -20,13 +20,24 @@ const useStyles = makeStyles({
     main: {
         background: "#F9F7F4",
         paddingTop: "10px"
+    },
+    leftSideMenu: {
+        paddingRight: "5px",
+        width: "25%"
+    },
+    rightSideMenu: {
+        width: "29%",
+        marginLeft: "25px"
+    },
+    settingsContainer:{
+        paddingLeft: "25px"
     }
 });
 
 export default function HomePage() {
     const dispatch = useDispatch();
     const shelves = useSelector(state => state.shelves);
-    let allBooks = useSelector(state =>state.books.books);
+    let allBooks = useSelector(state => state.books.books);
 
     let shelvesStatus = [];
     for (let shelf in shelves) {
@@ -49,25 +60,25 @@ export default function HomePage() {
     };
 
     const chooseBook = () => {
-        if(allBooks.length > 0){
+        if (allBooks.length > 0) {
             let book = allBooks[Math.ceil(Math.random() * allBooks.length - 1)];
             if (shelves.wantToRead.books.some(readBook => readBook === book.uuid)) {
-                if(numBooks === allBooks.length){
+                if (numBooks === allBooks.length) {
                     return;
                 }
                 return chooseBook();
             }
-            setNumBooks(numBooks+1);
+            setNumBooks(numBooks + 1);
             return book;
         }
     };
     const [book, setBook] = useState(null);
     const [numBooks, setNumBooks] = useState(0);
 
-    useEffect(() =>{
+    useEffect(() => {
         setBook(chooseBook())
     }, [allBooks]);
-    
+
     const handleNewBook = () => {
         setBook(chooseBook());
     }
@@ -77,8 +88,8 @@ export default function HomePage() {
     return (
         <div className={classes.main}>
             <Container sx={{ maxWidth: "1220px" }} style={{ padding: 0 }}>
-                <Stack direction="row" style={{ padding: 0 }}>
-                    <Stack style={{ paddingRight: "5px", width: "25%" }}>
+                <Stack direction="row" >
+                    <Stack className={classes.leftSideMenu}>
                         <SideMenuEl
                             title="currently reading"
                             imgSrc="https://s.gr-assets.com/assets/react_components/currently_reading/icn_default_CR_ltrail-16f28d39654104ceb329648a474943eb.svg"
@@ -128,17 +139,17 @@ export default function HomePage() {
                             title="Celebrate Romance Week on Goodreads!"
                             subTitle="Be our Valentine with these sweet and sexy reads."
                         />
-                        <Stack style={{ paddingLeft: "25px" }} direction="row" justifyContent="space-between" alignItems="center">
+                        <Stack className={classes.settingsContainer} direction="row" justifyContent="space-between" alignItems="center">
                             <Title title="Updates" className="grBlack text-upper f-095 latoB" />
                             <Stack direction="row" alignItems="center" sx={{ gap: "3px" }}>
                                 <img src={settingsIcon} height="15" alt="settings-icon" />
                                 <GoodLink titleText="Customize" classes="grGrey f-095" />
                             </Stack>
                         </Stack>
-                        <PostsLayout style={{ zIndex: 1000 }} />
+                        <PostsLayout/>
                     </Stack>
 
-                    <Stack sx={{ width: "29%", ml: "25px" }}>
+                    <Stack className={classes.rightSideMenu}>
                         <SideMenuImageEl
                             color="#32362D"
                             width="300px"
@@ -152,13 +163,13 @@ export default function HomePage() {
                             status="4,756,261 Votes Cast"
                         />
                         {book && <RecommendBookLayout
-                                    title="Recommendation"
-                                    handleNewBook={handleNewBook}
-                                    book={book}
-                                    handleClick={() => handleAddBookToShelfWantToRead(book)}
-                                />
+                            title="Recommendation"
+                            handleNewBook={handleNewBook}
+                            book={book}
+                            handleClick={() => handleAddBookToShelfWantToRead(book)}
+                        />
                         }
-                        <Footer direction="row" width="100%" titleColor="#382110"></Footer>
+                        <Footer direction="row" width="100%" titleColor="#382110" />
                     </Stack>
                 </Stack>
             </Container>
