@@ -1,7 +1,5 @@
 # Goodreads by Galya and Mirela
 
----
-
 This project is aiming to be a Goodreads copy website where users can find books,
 add them to their shelves, write and like reviews and edit their profiles and see their activity.
 
