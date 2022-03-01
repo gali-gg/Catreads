@@ -99,6 +99,7 @@ export default function BookPageContent (props) {
                     <img
                     src={book.cover}
                     alt={`${book.title}-cover`}
+                    className={styles.largeCover}
                     />
                     </Paper>
 

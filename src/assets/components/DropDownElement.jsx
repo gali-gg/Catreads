@@ -54,7 +54,6 @@ export default function BoxFlex(props) {
         setStorage("users", JSON.stringify(newUsers));
         dispatch(clearShelvesAction());
         dispatch(clearActivitiesAction());
-        localStorage.removeItem("loggedUser");
     }
     return (
         <Stack

@@ -8,9 +8,6 @@
     align-items: center;
     gap: 10px;
     padding: 10px 12px;
-}
-
-.btn:hover {
     cursor: pointer;
 }
 
@@ -79,4 +76,8 @@
 
 .regular:hover {
     background-color: #58371F;
+}
+
+.disabled {
+    cursor: not-allowed;
 }

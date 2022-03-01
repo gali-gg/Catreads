@@ -7,6 +7,8 @@ export const REMOVE_FAVE_GENRE = "REMOVE_FAVE_GENRE";
 export const RATE_BOOK = "RATE_BOOK";
 export const ADD_JOINED_DATE = "ADD_JOINED_DATE";
 export const ADD_LOCATION = "ADD_LOCATION";
+export const ADD_LIKED_REVIEW = "ADD_LIKED_REVIEW";
+export const REMOVE_LIKED_REVIEW = "REMOVE_LIKED_REVIEW";
 
 export const loginAction = (user) => {
     return {
@@ -18,7 +20,8 @@ export const loginAction = (user) => {
             favouriteGenres: user.favouriteGenres,
             ratedBooks: user.ratedBooks,
             joined: user.joined,
-            location: user.location
+            location: user.location,
+            likedReviews: user.likedReviews
         }
     }
 }
@@ -83,5 +86,19 @@ export const addLocation = () => {
                 payload: `${data.city}, ${data.country_name}`
             });
           })
+    }
+}
+
+export const addLikedReviewAction = (reviewID) => {
+    return {
+        type: ADD_LIKED_REVIEW,
+        payload: reviewID
+    }
+}
+
+export const removeLikedReviewAction = (reviewID) => {
+    return {
+        type: REMOVE_LIKED_REVIEW,
+        payload: reviewID
     }
 }

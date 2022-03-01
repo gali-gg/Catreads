@@ -7,11 +7,10 @@ import GoodRating from "./GoodRating";
 import "./css/styles.css";
 import x from "../images/X.png";
 import { useDispatch, useSelector } from "react-redux";
-import { addBookToShelf } from "../../redux/actions/shelfAction";
 import { addReviewAction } from "../../redux/actions/reviewsActions";
 import { v4 as uuidv4 } from "uuid";
 import GoodGreenButton from "./GoodGreenButton";
-import { addBookToShelfActivity, addRatingActivity, addReviewActivity } from "../../redux/actions/activitiesAction";
+import { addRatingActivity, addReviewActivity } from "../../redux/actions/activitiesAction";
 
 const paperStyle = {
   position: "absolute",
@@ -70,22 +69,12 @@ export default function BookReviewModal(props) {
     setRating(ratingValue);
   }
 
-  const [shelfName, setShelfName] = useState("");
-  const handleSelectShelf = (e) => {
-    let name = e.target.value;
-    setShelfName(name);
-  }
-
   const [reviewBody, setReviewBody] = useState("");
   const handleReviewBodyInput = (e) => {
     setReviewBody(e.target.value);
   }
 
   const handlePostReview = () => {
-    if (shelfName) {
-      dispatch(addBookToShelf(false, shelfName, props.book));
-      dispatch(addBookToShelfActivity(shelfName, props.book));
-    }
     dispatch(addReviewAction(uuidv4(), userID, props.book.uuid, rating, reviewBody));
     dispatch(addRatingActivity(rating, userID, props.book.uuid));
 
@@ -140,7 +129,6 @@ export default function BookReviewModal(props) {
               <div style={{ ...dFlex, marginBottom: "10px" }}>
                 My rating:
                 <GoodRating size="small" rating={rating} onRating={handleChangeRating}></GoodRating>
-                {/* <Rating></Rating> */}
                 <span className="grGrey f-08 latoR" style={{ cursor: "pointer" }} onClick={handleClearRating}>Clear</span>
               </div>
 

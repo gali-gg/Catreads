@@ -6,6 +6,7 @@ import moment from "moment";
 import {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {likeReviewAction, dislikeReviewAction, removeReviewAction} from "../../redux/actions/reviewsActions";
+import { addLikedReviewAction, removeLikedReviewAction } from "../../redux/actions/userAction";
 
 export default function BookReviewComment(props) {
   const dispatch = useDispatch();
@@ -16,15 +17,18 @@ export default function BookReviewComment(props) {
   let reviewBody = props.review.body;
   let date = props.review.date;
   let numberOfLikes = props.review.likes;
+  let liked = useSelector(state => state.userData.likedReviews.some(reviewID => reviewID === props.review.id));
 
-  const [isLiked, setIsLiked] = useState(false);
+  const [isLiked, setIsLiked] = useState(liked);
 
   const handleLike = () => {
       if(!isLiked){
+        dispatch(addLikedReviewAction(props.review.id));
         dispatch(likeReviewAction(props.review.id));
         setIsLiked(!isLiked);
       }
       else {
+        dispatch(removeLikedReviewAction(props.review.id));
         dispatch(dislikeReviewAction(props.review.id));
         setIsLiked(!isLiked);
       }

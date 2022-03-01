@@ -40,19 +40,17 @@ const paperStyles = {
 };
 
 export default function RegisterPage(props) {
+  const dispatch = useDispatch();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const [emailErrorIsVisible, setEmailErrorIsVisible] = useState(false);
   const [passwordErrorIsVisible, setPasswordErrorIsVisible] = useState(false);
-  const [emailTakenErrorIsVisible, setEmailTakenErrorIsVisible] =
-    useState(false);
+  const [emailTakenErrorIsVisible, setEmailTakenErrorIsVisible] = useState(false);
   const [nameErrorIsVisible, setNameErrorisVisible] = useState(false);
 
   const [canRegister, setCanRegister] = useState(false);
-
-  const dispatch = useDispatch();
 
   const handleRegAttempt = () => {
     setPasswordErrorIsVisible(false);
@@ -153,7 +151,7 @@ export default function RegisterPage(props) {
                         Name
                       </Typography>
                       <TextField
-                        id="outlined-basic"
+                        id="outlined-basic3"
                         variant="outlined"
                         size="small"
                         placeholder="Name"
@@ -172,7 +170,7 @@ export default function RegisterPage(props) {
                         Email address
                       </Typography>
                       <TextField
-                        id="outlined-basic"
+                        id="outlined-basic4"
                         variant="outlined"
                         type="email"
                         size="small"
@@ -192,7 +190,7 @@ export default function RegisterPage(props) {
                         Password
                       </Typography>
                       <TextField
-                        id="outlined-basic"
+                        id="outlined-basic5"
                         variant="outlined"
                         size="small"
                         type="password"

@@ -51,3 +51,8 @@ h1 {
 .buttons {
     margin: 5px 0 7px 0;
 }
+
+.largeCover {
+    max-height: 80vh;
+    max-width: 80vw;
+}

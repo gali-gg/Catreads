@@ -19,24 +19,21 @@ export default function SelectFavouriteGenresPage(props) {
   let allGenres = useSelector((state) => state.genres.genres);
   let currentUser = useSelector((state) => state.userData);
 
+  let userNames = props.userDetails.name;
+
+  const [genres, setGenres] = useState(null);
+  const [checkState, setCheckState] = useState(null);
+  const [numberSelectedGenres, setNumberSelectedGenres] = useState(0);
+
   useEffect(() => {
     if (allGenres.length > 0) {
       setGenres(allGenres);
-      let genresIDs = [
-        1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
-        21,
-      ];
+      let genresIDs = allGenres.map(genre => genre.uuid);
       let checkObj = {};
       genresIDs.forEach((id) => (checkObj[id] = false));
       setCheckState(checkObj);
     }
   }, [allGenres]);
-
-  const [genres, setGenres] = useState(null);
-
-  const [checkState, setCheckState] = useState(null);
-
-  const [numberSelectedGenres, setNumberSelectedGenres] = useState(0);
 
   const handleCheck = (event) => {
     setCheckState({
@@ -49,7 +46,6 @@ export default function SelectFavouriteGenresPage(props) {
       setNumberSelectedGenres(numberSelectedGenres - 1);
     }
   };
-  let userNames = props.userDetails.name;
 
   const handleSubmit = () => {
     let selectedGenres = [];
@@ -73,7 +69,6 @@ export default function SelectFavouriteGenresPage(props) {
 
     users.push(user);
     setStorage("users", users);
-    setStorage("loggedUser", user.id);
     dispatch(loginAction(user));
     dispatch(loadAllBooksAction());
     dispatch(loadGenresAction());

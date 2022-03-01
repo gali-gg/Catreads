@@ -45,15 +45,14 @@ const boxStyles = {
 }
 
 export default function LogInPage(props) {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const [emailErrorIsVisible, setEmailErrorIsVisible] = useState(false);
-  const [credentialsErrorIsVisible, setCredentialsErrorIsVisible] =
-    useState(false);
-
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const [credentialsErrorIsVisible, setCredentialsErrorIsVisible] = useState(false);
 
   const handleLogAttempt = () => {
     if (EmailValidator.validate(email)) {
@@ -66,7 +65,6 @@ export default function LogInPage(props) {
       if (authenticate(email, password)) {
         setEmailErrorIsVisible(false);
         let user = users.find((user) => user.email === email);
-        setStorage("loggedUser", user.id);
         dispatch(loginAction(user));
         if(user.shelves){
           dispatch(loadShelvesAction(user.shelves));
@@ -136,7 +134,7 @@ export default function LogInPage(props) {
                     Email address
                   </Typography>
                   <TextField
-                    id="outlined-basic"
+                    id="outlined-basic1"
                     type="email"
                     variant="outlined"
                     size="small"
@@ -156,7 +154,7 @@ export default function LogInPage(props) {
                     Password
                   </Typography>
                   <TextField
-                    id="outlined-basic"
+                    id="outlined-basic2"
                     variant="outlined"
                     size="small"
                     type="password"
