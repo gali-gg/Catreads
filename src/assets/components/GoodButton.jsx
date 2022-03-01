@@ -16,7 +16,10 @@ export default function GoodButton (props) {
         buttonStyles=styles.buttonNormal;
     }
     return (
-        <button disabled={props.disabled || false} onClick={props.onClick} className={`${buttonStyles} ${props.className} ${!props.onClick ? classes.disabled : ""}`} style={{...props.style, fontSize: props.fontSize, padding: props.padding || "8px 12px"}}>
+        <button disabled={props.disabled || false}
+            onClick={props.onClick}
+            className={`${buttonStyles} ${props.className} ${!props.onClick ? classes.disabled : ""}`}
+            style={{...props.style, fontSize: props.fontSize, padding: props.padding || "8px 12px"}}>
               {props.title}
         </button>
     );

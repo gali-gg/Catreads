@@ -2,7 +2,6 @@ import GoodLink from "./GoodLink"
 import styles from "./css-modules/bookHoverInfo.module.css"
 import { useState } from "react";
 import { Rating } from "@mui/material";
-import { formatNumber } from "../../utility";
 import GoodGreenButton from "./GoodGreenButton"
 import { useNavigate } from "react-router-dom";
 
@@ -39,7 +38,7 @@ export default function BookHoverInfo (props) {
                 <div className={`${styles.top} grGrey f-08`}>
                     <Rating precision={0.5} name="read-only" size="small" value={props.rating} readOnly />
                     {props.rating} avg rating - &nbsp;
-                    {formatNumber(props.ratingsCount)} ratings - published&nbsp;
+                    {props.ratingsCount} ratings - published&nbsp;
                     {props.published || "n/a"}
                 </div>
 

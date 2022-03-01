@@ -26,20 +26,18 @@ export default function BookPageContent (props) {
   const dispatch = useDispatch();
   const allGenres = useSelector(state => state.genres.genres);
   const allBooks = useSelector(state => state.books.books);
+  const ratingStats = getRatingsStats(props.bookObj.uuid);
+  const reviews = useSelector(state => {
+    return state.reviews.reviews.filter(review => review.bookID === props.bookId);
+  });
 
   const authorObj = useSelector(state => {
     if(props.bookObj){
       return state.authors.authors.find(author => author.uuid === props.bookObj.author);
     }
   });
+
   const similarBooksArr = [];
-
-  const reviews = useSelector(state => {
-    return state.reviews.reviews.filter(review => review.bookID === props.bookId);
-  });
-
-  const ratingStats = getRatingsStats(props.bookObj.uuid);
-
   props.bookObj.similarBooks.forEach(id => {
     let book = allBooks.find((book) => book.uuid === id);
     similarBooksArr.push(book);
@@ -55,7 +53,6 @@ export default function BookPageContent (props) {
   }, [props.bookObj, authorObj, dispatch]);
 
   const book = useSelector(state => state.openBook);
-  const bookIsLoaded = useSelector(state => state.openBook.loaded);
 
   const [descClass, setDescClass] = useState(styles.description);
   const [showMore, setShowMore] = useState("more");
@@ -76,7 +73,7 @@ export default function BookPageContent (props) {
 
   return (
     <>
-      {bookIsLoaded && (
+      {book && (
         <Container maxWidth="lg" sx={{ mt: 2, mb: 5 }}>
           <Stack direction="row" spacing={5}>
             <main className={styles.main}>

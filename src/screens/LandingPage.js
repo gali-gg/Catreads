@@ -70,12 +70,12 @@ export default function LandingPage() {
 
               <div className={styles.loginBottom}>
                 <p className={`${styles.legal} latoR grGrey`}>
-                  By creating an account, you agree to the Goodreads
+                  By creating an account, you agree to the Goodreads{" "}
                   <GoodLink
                     titleText="Terms of Service"
                     classes={`${styles.goodlink} latoR grGreen`}
-                  />
-                  and
+                  />{" "}
+                  and{" "}
                   <GoodLink
                     titleText="Privacy Policy"
                     classes={`${styles.goodlink} latoR grGreen`}

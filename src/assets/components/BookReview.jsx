@@ -1,7 +1,6 @@
 import { Rating } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { removeReviewAction } from "../../redux/actions/reviewsActions";
-import GoodRating from "./GoodRating";
 
 export default function BookReview (props){
     const dispatch = useDispatch();

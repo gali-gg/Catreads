@@ -13,7 +13,13 @@ export default function GoodLink (props) {
     const classes = useStyles();
     return(
         <RouterLink to={props.to || ""}>
-            <Link component="button" underline="hover" className={`${props.classes} ${!props.to && !props.onClick ? classes.disabled : ""}`} fontSize={props.size} onClick={props.onClick} style={{...props.style}} title={props.titleInfo} id={props.id}>
+            <Link component="button" underline="hover"
+                className={`${props.classes} ${!props.to && !props.onClick ? classes.disabled : ""}`}
+                fontSize={props.size}
+                onClick={props.onClick}
+                style={{...props.style}}
+                title={props.titleInfo}
+                id={props.id}>
                 {props.titleText}
             </Link>
         </RouterLink>

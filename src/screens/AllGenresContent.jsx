@@ -64,7 +64,7 @@ export default function AllGenresContent(props) {
         setGenresResults(newGenresResults);
     }, 500);
 
-   
+
 
     if (props.sideMenu) {
         return (
