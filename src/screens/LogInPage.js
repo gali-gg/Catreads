@@ -23,24 +23,48 @@ import * as EmailValidator from 'email-validator';
 import { loadFakeReviewsAction } from "../redux/actions/reviewsActions";
 import { loadShelvesAction } from "../redux/actions/shelfAction";
 
+const paperStyles = {
+  paddingTop: 3,
+  paddingBottom: 3,
+  paddingLeft: 5,
+  paddingRight: 5,
+  width: "600px",
+  boxSizing: "border-box"
+}
+
+const boxStyles = {
+  display: "flex",
+  flexWrap: "wrap",
+  "& > :not(style)": {
+    m: "auto",
+    mt: "20px",
+    mb: 5
+  },
+  justifyContent: "space-between"
+}
+
 export default function LogInPage(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  //need to add error component
+
   const [emailErrorIsVisible, setEmailErrorIsVisible] = useState(false);
-  const [credentialsErrorIsVisible, setCredentialsErrorIsVisible] = useState(false);
+  const [credentialsErrorIsVisible, setCredentialsErrorIsVisible] =
+    useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleLogAttempt = () => {
-    if(EmailValidator.validate(email)){
+    if (EmailValidator.validate(email)) {
       let users = getFromStorageAndParse("users");
-      const authenticate =  (email, password) => users.some(user => user.email === email && user.password === password);
+      const authenticate = (email, password) =>
+        users.some(
+          (user) => user.email === email && user.password === password
+        );
 
-      if(authenticate(email, password)){
+      if (authenticate(email, password)) {
         setEmailErrorIsVisible(false);
-        let user = users.find(user => user.email === email);
+        let user = users.find((user) => user.email === email);
         setStorage("loggedUser", user.id);
         dispatch(loginAction(user));
         if(user.shelves){
@@ -51,80 +75,118 @@ export default function LogInPage(props) {
         dispatch(loadAuthorsAction());
         dispatch(loadFakeReviewsAction());
         navigate("/");
-      }
-      else {
+      } else {
         setEmailErrorIsVisible(false);
         setCredentialsErrorIsVisible(true);
       }
-    }
-    else {
+    } else {
       setEmailErrorIsVisible(true);
       setCredentialsErrorIsVisible(false);
     }
-  }
+  };
 
   const handleEmailInput = (e) => {
     setEmail(e.target.value.trim());
-  }
+  };
 
   const handlePasswordInput = (e) => {
     setPassword(e.target.value.trim());
-  }
+  };
 
   return (
     <div className={styles.signUpBackground}>
       <GoodReadsLogo className={styles.logo} height="30px" />
-      <Box
-        sx={{
-          display: "flex",
-          flexWrap: "wrap",
-          "& > :not(style)": {
-            m: "auto",
-            mt: "20px",
-            mb: 5
-          },
-          justifyContent: "space-between"
-        }}
-      >
-        <Paper elevation={2} sx={{paddingTop: 3, paddingBottom: 3, paddingLeft: 5, paddingRight: 5, width: "600px", boxSizing: "border-box"}}>
-        <Stack spacing={2} sx={{alignItems: "center"}}>
-        <Typography variant="h6" gutterBottom component="div" className="meriB grBrown" textAlign="center">
+      <Box sx={boxStyles}>
+        <Paper elevation={2} sx={paperStyles}>
+          <Stack spacing={2} sx={{ alignItems: "center" }}>
+            <Typography
+              variant="h6"
+              gutterBottom
+              component="div"
+              className="meriB grBrown"
+              textAlign="center"
+            >
               Sign in to GoodReads
-         </Typography>
-          <Stack spacing={2} >
-            <SocialLoginButton type="facebook"/>
-            <SocialLoginButton type="amazon"/>
-            <SocialLoginButton type="apple"/>
-            <SocialLoginButton type="google"/>
-          </Stack>
-          <form id="login-form">
-          <Stack spacing={1}>
-              {emailErrorIsVisible && <p className={styles.error}>Please enter a valid email!</p>}
-              {credentialsErrorIsVisible && <p className={styles.error}>Wrong email/password!</p>}
-            <div>
-            <Typography variant="subtitle2" gutterBottom component="div" className="latoB grBlack">
-              Email address
             </Typography>
-            <TextField id="outlined-basic" type="email" variant="outlined" size="small" placeholder="you@yours.com" value={email} onInput={handleEmailInput} style={{width: "300px"}}/>
-            </div>
-            <div>
-            <Typography variant="subtitle2" gutterBottom component="div" className="latoB grBlack">
-              Password
-            </Typography>
-            <TextField id="outlined-basic" variant="outlined" size="small" type="password" value={password} onInput={handlePasswordInput} style={{width: "300px"}}/>
-            </div>
-          </Stack>
-          </form>
-          <Box>
-            <GoodButton title="Sign in" onClick={handleLogAttempt} padding="12px 24px" style={{marginRight: "20px"}}/>
-            <GoodLink titleText="Forgot password" classes="latoR grGreen" size="13px" />
+            <Stack spacing={2}>
+              <SocialLoginButton type="facebook" />
+              <SocialLoginButton type="amazon" />
+              <SocialLoginButton type="apple" />
+              <SocialLoginButton type="google" />
+            </Stack>
+            <form id="login-form">
+              <Stack spacing={1}>
+                {emailErrorIsVisible && (
+                  <p className={styles.error}>Please enter a valid email!</p>
+                )}
+                {credentialsErrorIsVisible && (
+                  <p className={styles.error}>Wrong email/password!</p>
+                )}
+                <div>
+                  <Typography
+                    variant="subtitle2"
+                    gutterBottom
+                    component="div"
+                    className="latoB grBlack"
+                  >
+                    Email address
+                  </Typography>
+                  <TextField
+                    id="outlined-basic"
+                    type="email"
+                    variant="outlined"
+                    size="small"
+                    placeholder="you@yours.com"
+                    value={email}
+                    onInput={handleEmailInput}
+                    className={styles.textField}
+                  />
+                </div>
+                <div>
+                  <Typography
+                    variant="subtitle2"
+                    gutterBottom
+                    component="div"
+                    className="latoB grBlack"
+                  >
+                    Password
+                  </Typography>
+                  <TextField
+                    id="outlined-basic"
+                    variant="outlined"
+                    size="small"
+                    type="password"
+                    value={password}
+                    onInput={handlePasswordInput}
+                    className={styles.textField}
+                  />
+                </div>
+              </Stack>
+            </form>
+            <Box>
+              <GoodButton
+                title="Sign in"
+                onClick={handleLogAttempt}
+                padding="12px 24px"
+                style={{ marginRight: "20px" }}
+              />
+              <GoodLink
+                titleText="Forgot password"
+                classes="latoR grGreen"
+                size="13px"
+              />
             </Box>
-            <Box sx={{textAlign: "center"}}>
-            <span className="latoR grBlack" style={{fontSize: "12px", marginRight: "10px"}}>
-              Not a memeber?
-            </span>
-            <GoodLink titleText="Sign up" classes="latoR grGreen" size="12px" to="/sign-up" />
-          </Box>
+            <Box sx={{ textAlign: "center" }}>
+              <span className={`${styles.notMember} latoR grBlack`}>
+                Not a member?
+              </span>
+              <GoodLink
+                titleText="Sign up"
+                classes="latoR grGreen"
+                size="12px"
+                to="/sign-up"
+              />
+            </Box>
           </Stack>
         </Paper>
       </Box>
@@ -132,8 +194,7 @@ export default function LogInPage(props) {
         <Box className={styles.footerText}>
           <FooterCopy />
         </Box>
-        <div className={styles.footerBackground} style={{padding: 0}}>
-          </div>
+        <div className={styles.footerBackground} style={{ padding: 0 }}></div>
       </div>
     </div>
   );

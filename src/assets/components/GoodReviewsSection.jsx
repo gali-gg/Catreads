@@ -65,7 +65,7 @@ export default function GoodReviewsSection(props) {
           <BookReviewComment
             key={review.id}
             review={review}
-            name={getUser(review.senderID).details.names.first}
+            name={review.senderID === user.id ? user.name.first :getUser(review.senderID).details.names.first}
             avatar={review.senderID === user.id ? user.avatar : getUser(review.senderID).avatar}
           ></BookReviewComment>
         ))}

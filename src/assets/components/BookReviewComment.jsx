@@ -4,12 +4,12 @@ import styles from "./css-modules/bookReviewComment.module.css";
 import "./css/styles.css";
 import moment from "moment";
 import {useState} from "react";
-import {useDispatch} from "react-redux";
-import {likeReviewAction, dislikeReviewAction} from "../../redux/actions/reviewsActions";
+import {useDispatch, useSelector} from "react-redux";
+import {likeReviewAction, dislikeReviewAction, removeReviewAction} from "../../redux/actions/reviewsActions";
 
 export default function BookReviewComment(props) {
   const dispatch = useDispatch();
-
+  const userID = useSelector(state => state.userData.id);
   let name = props.name;
   let avatar = props.avatar;
   let rating = props.review.rating;
@@ -28,6 +28,10 @@ export default function BookReviewComment(props) {
         dispatch(dislikeReviewAction(props.review.id));
         setIsLiked(!isLiked);
       }
+  }
+
+  const handleRemove = () => {
+    dispatch(removeReviewAction(props.review.id));
   }
 
   return (
@@ -59,7 +63,8 @@ export default function BookReviewComment(props) {
           <div className={styles.reviewBody}>{reviewBody}</div>
           <Stack gap={1} direction="row" divider={<span>•</span>} className="grGrey" sx={{alignItems: "center"}}>
           <p className={`${styles.likes} latoR grGreen f-09`}>{numberOfLikes} Likes</p>
-          <GoodLink titleText={isLiked ? "dislike" : "like"} classes="grGreen latoR f-09" onClick={handleLike}></GoodLink>
+          {props.review.senderID !== userID && <GoodLink titleText={isLiked ? "dislike" : "like"} classes="grGreen latoR f-09" onClick={handleLike}></GoodLink>}
+          {props.review.senderID === userID && <GoodLink titleText="remove" classes="grGreen latoR f-09" onClick={handleRemove}></GoodLink>}
         </Stack>
         </div>
       </div>

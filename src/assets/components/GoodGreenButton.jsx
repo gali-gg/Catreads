@@ -7,6 +7,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { styled } from "@mui/styles";
 import _ from "lodash";
+import { addBookToShelfActivity } from "../../redux/actions/activitiesAction";
 
 const GoodSelect = styled(Select)(() => ({
     height: "35px",
@@ -111,6 +112,8 @@ export default function GoodGreenButton(props) {
         }
 
         dispatch(addBookToShelf(isUserShelf, choosenShelf, props.bookUuid));
+        dispatch(addBookToShelfActivity(choosenShelf, props.bookUuid));
+
     };
 
 

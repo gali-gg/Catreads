@@ -10,6 +10,7 @@ import { allAuthorsReducer } from './reducers/allAuthorsReducer';
 import { allBooksReducer } from './reducers/allBooksReducer';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import { activitiesReducer } from './reducers/activitiesReducer';
 
 const rootReducer = combineReducers({
     userData : userReducer,
@@ -18,7 +19,8 @@ const rootReducer = combineReducers({
     reviews: reviewsReducer,
     genres: allGenresReducer,
     authors: allAuthorsReducer,
-    books: allBooksReducer
+    books: allBooksReducer,
+    activities: activitiesReducer
 });
 
 const persistConfig = {

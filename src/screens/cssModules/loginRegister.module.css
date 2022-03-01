@@ -31,3 +31,17 @@
     color: red;
     font-family: "Lato Bold";
 }
+
+.notMember {
+    font-size: 12px;
+    margin-right: 10px;
+}
+
+.textField {
+    width: 300px;
+}
+
+.terms {
+    font-size: 12px;
+    text-align: center;
+}

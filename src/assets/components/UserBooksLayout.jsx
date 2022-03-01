@@ -10,8 +10,15 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import BookReviewModal from "./BookReviewModal";
 import { getAuthorName, getRatingsStats } from "../../utility";
+import Moment from "react-moment";
+
 
 const useStyles = makeStyles({
+    container:{
+        borderBottom: "1px solid #ddd",
+        padding:"5px 0",
+        width: "720px",
+    },
     subContainer: {
         width: "350px",
         gap: "5px"
@@ -50,7 +57,6 @@ export default function UserBooksLayout(props) {
     const classes = useStyles();
     const user = useSelector(state => state.userData);
     const shelves = useSelector(state => state.shelves);
-    const authors = useSelector(state => state.authors.authors);
     let bookShelves = [];
     let bookReviews = useSelector(state => state.reviews.reviews.filter(review => review.bookID === props.book.uuid));
     let bookRating = getRatingsStats(bookReviews);
@@ -65,7 +71,7 @@ export default function UserBooksLayout(props) {
             continue;
         }
         if (shelves[shelf].books.some(book => book === props.book.uuid)) {
-            bookShelves.push(shelf);
+            bookShelves.push(shelves[shelf].name);
         }
     }
 
@@ -79,7 +85,7 @@ export default function UserBooksLayout(props) {
     }
 
     return !isClosed && (
-        <Stack direction="row" spacing={3} flexWrap="wrap" borderBottom="1px solid #ddd" padding="5px 0">
+        <Stack direction="row" spacing={3} flexWrap="wrap" justifyContent="space-between" className={classes.container}>
             <img
                 src={props.book.cover}
                 alt={props.book.title}
@@ -114,7 +120,9 @@ export default function UserBooksLayout(props) {
                         />
                     )}
                 </Stack>
-                <span className={`${classes.spanDate} latoR grGrey f-1`}>Feb 21, 2022 12:43AM </span>
+                <span className={`${classes.spanDate} latoR grGrey f-1`}>
+                    <Moment format="D MMM, YYYY HH:mm A">{props.date}</Moment>
+                </span>
             </Stack>
             <Stack alignItems="center" gap={0.5}>
                 <GoodGreenButton styled={true} bookUuid={props.book.uuid}></GoodGreenButton>
