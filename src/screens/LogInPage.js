@@ -22,26 +22,7 @@ import { loadAuthorsAction } from "../redux/actions/allAuthorsAction";
 import * as EmailValidator from 'email-validator';
 import { loadFakeReviewsAction } from "../redux/actions/reviewsActions";
 import { loadShelvesAction } from "../redux/actions/shelfAction";
-
-const paperStyles = {
-  paddingTop: 3,
-  paddingBottom: 3,
-  paddingLeft: 5,
-  paddingRight: 5,
-  width: "600px",
-  boxSizing: "border-box"
-}
-
-const boxStyles = {
-  display: "flex",
-  flexWrap: "wrap",
-  "& > :not(style)": {
-    m: "auto",
-    mt: "20px",
-    mb: 5
-  },
-  justifyContent: "space-between"
-}
+import { loadActivitiesAction } from "../redux/actions/activitiesAction";
 
 const paperStyles = {
   paddingTop: 3,
@@ -89,6 +70,9 @@ export default function LogInPage(props) {
         dispatch(loginAction(user));
         if(user.shelves){
           dispatch(loadShelvesAction(user.shelves));
+        }
+        if(user.activities){
+          dispatch(loadActivitiesAction(user.activities));
         }
         dispatch(loadAllBooksAction());
         dispatch(loadGenresAction());

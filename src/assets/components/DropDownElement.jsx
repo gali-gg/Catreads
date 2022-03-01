@@ -9,6 +9,7 @@ import * as userAction from "../../redux/actions/userAction"
 import { getFromStorageAndParse, setStorage } from '../../utility';
 import { clearShelvesAction } from '../../redux/actions/shelfAction';
 import { useNavigate } from 'react-router-dom';
+import { clearActivitiesAction } from '../../redux/actions/activitiesAction';
 
 const useStyles = makeStyles({
     container: {
@@ -36,21 +37,23 @@ export default function BoxFlex(props) {
     const classes = useStyles();
     const dispatch = useDispatch();
     const shelves = useSelector(state => state.shelves);
+    const userActivity = useSelector(state => state.activities);
     const navigate = useNavigate();
 
     const handleAction = (action) => {
-        dispatch(clearShelvesAction());
         dispatch(userAction.logoutAction);
         navigate("/");
         let newUsers = allUsers.map(someUser => {
             let newUser = someUser;
             if(someUser.id === user.id){
                 let {logged, id, name, ...restUser} = user;
-                newUser ={...someUser, ...restUser, shelves: shelves, details: {...someUser.details, names: {...name}}};
+                newUser ={...someUser, ...restUser, shelves: shelves, details: {...someUser.details, names: {...name}}, activities: userActivity};
             }
             return newUser;
         })
         setStorage("users", JSON.stringify(newUsers));
+        dispatch(clearShelvesAction());
+        dispatch(clearActivitiesAction());
         localStorage.removeItem("loggedUser");
     }
     return (

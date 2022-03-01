@@ -76,13 +76,12 @@ export default function GenresPage() {
   const allGenres = genres.map(genre => genre.genre);
   const firstHalfGenres = allGenres.slice(0, Math.floor(allGenres.length / 2));
   const secondHalfGenres = allGenres.slice(Math.round(allGenres.length / 2), allGenres.length - 1);
-  let genreObj = genres.filter(g => g.genre === params.gname)[0];
+  let genreObj = genres.filter(genre => genre.genre === params.gname)[0];
   let allAuthors;
-
 
   if (genreObj) {
     allAuthors = authors.filter(author => {
-      return author.genres.some(g => g === genreObj.uuid);
+      return author.genres.some(genre => genre === genreObj.uuid);
     });
   }
 

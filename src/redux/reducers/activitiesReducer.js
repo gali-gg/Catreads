@@ -1,4 +1,4 @@
-import { ADD_BOOK_TO_SHELF_ACTIVITY, ADD_RATING_ACTIVITY, ADD_REVIEW_ACTIVITY, ADD_SHELF_ACTIVITY } from "../actions/activitiesAction";
+import { ADD_BOOK_TO_SHELF_ACTIVITY, ADD_RATING_ACTIVITY, ADD_REVIEW_ACTIVITY, ADD_SHELF_ACTIVITY, CLEAR_ACTIVITIES, LOAD_ACTIVITIES } from "../actions/activitiesAction";
 
 const INITIAL_STATE = {
     ratingsActivity: [],
@@ -28,6 +28,16 @@ export const activitiesReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 addBookToShelfActivity: [...state.addBookToShelfActivity, action.payload]
+            }
+        case LOAD_ACTIVITIES:
+            return {
+                ...state,
+                ...action.payload
+            }
+        case CLEAR_ACTIVITIES:
+            return {
+                ...state,
+                ...INITIAL_STATE
             }
         default:
             return state;
