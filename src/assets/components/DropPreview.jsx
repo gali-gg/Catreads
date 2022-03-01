@@ -48,7 +48,6 @@ const img = {
 export default function Previews(props) {
     const dispatch = useDispatch()
     const [files, setFiles] = useState([]);
-    const [imageSource, setImageSource] = useState(null);
     const { getRootProps, getInputProps } = useDropzone({
         accept: 'image/*',
         onDrop: acceptedFiles => {
@@ -64,9 +63,10 @@ export default function Previews(props) {
                 method: "POST",
                 body: formData
             })
-                .then(resp => resp.json())
-                .then(data => setImageSource(data.secure_url));
-
+            .then(resp => resp.json())
+            .then(data => {
+                dispatch(changeAvatarAction(data.secure_url));
+            });
         }
     });
 
@@ -83,12 +83,8 @@ export default function Previews(props) {
     ));
 
     useEffect(() => {
-        if (imageSource) {
-            dispatch(changeAvatarAction(imageSource));
-        }
-        setImageSource(null);
         files.forEach(file => URL.revokeObjectURL(file.preview));
-    }, [files, props.isSubmit, dispatch, imageSource]);
+    }, [files, props.isSubmit, dispatch]);
 
     return (
         <section className="container">
